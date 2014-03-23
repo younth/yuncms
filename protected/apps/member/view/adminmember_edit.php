@@ -6,12 +6,12 @@
 <link href="__PUBLIC__/admin/css/back.css" type=text/css rel=stylesheet>
 <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
 <script type="text/javascript" src="__PUBLIC__/admin/js/common.js"></script>
-<title>编辑会员</title>
+<title>{$t_name}会员</title>
 </head>
 <body>
 <div class="contener">
 <div class="list_head_m">
-		<div class="list_head_ml">你当前的位置：【编辑会员】</div>
+		<div class="list_head_ml">你当前的位置：【{$t_name}会员】</div>
 		<div class="list_head_mr"></div>
 		</div>
 
@@ -20,7 +20,7 @@
 			<form action="" method="post" id="info" name="info">
             <tr>
                <td align="right">用户名：</td>
-               <td>{$info['uname']}</td>
+               <td><input type='text' value='{$info['uname']}' name='uname'/></td>
                <td class="inputhelp"></td>
             </tr>
             <tr>
@@ -53,6 +53,7 @@
                <td><input type="text" name="qq" value="{$info['qq']}"></td>
                <td class="inputhelp"></td>
             </tr>
+            <?php if($action!="add") {?>
             <tr>
                <td align="right">注册时间：</td>
                <td>{date($info['ctime'],Y-m-d H:i:s)}</td>
@@ -63,6 +64,7 @@
                <td>{date($info['lasttime'],Y-m-d H:i:s)}</td>
                <td class="inputhelp"></td>
             </tr>
+            <?php }?>
             <tr>
                <td align="right">是否激活：</td>
                <td>
@@ -73,7 +75,7 @@
             </tr>
 			<tr>
 				<td width="200">&nbsp;</td>
-				<td align="left" colspan="2"><input type="hidden" name="id" value="{$info['id']}"> <input type="submit" value="修改" class="btn btn-primary btn-small"></td>
+				<td align="left" colspan="2"><input type="hidden" name="id" value="{$info['id']}"> <input type="submit" value="{$t_name}" class="btn btn-primary btn-small"></td>
 			</tr>
 			</form>
 		</table>

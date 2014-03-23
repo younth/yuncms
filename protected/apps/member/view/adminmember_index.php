@@ -74,8 +74,7 @@ $(function ($) {
 <div class="contener">
 <div class="list_head_m">
            <div class="list_head_ml">你当前的位置：【会员列表】</div>
-           <div class="list_head_mr">
-           </div>
+          <div class="list_head_mr"><a href="{url('adminmember/add')}" class="add">新增</a></div>
         </div>
          <table width="100%" border="0" cellpadding="0" cellspacing="1"   class="all_cont" >
          <tr>
@@ -106,7 +105,7 @@ $(function ($) {
           <?php 
               if(!empty($list)){
                    foreach($list as $vo){
-                     $book.='<tr id="'.$vo['id'].'"><td align="center"><input type="checkbox" name="delid[]" value="'.$vo['id'].'" /></td><td align="center">'.$vo['uname'].'</td><td align="center">'.$vo['name'].'</td><td align="center">'.$vo['regip'].'</td>';
+                     $book.='<tr id="'.$vo['id'].'"><td align="center"><input type="checkbox" name="delid[]" value="'.$vo['id'].'" /></td><td align="center">'.$vo['uname'].'</td><td align="center">'.$vo['group_name'].'</td><td align="center">'.$vo['regip'].'</td>';
                      $book.='<td align="center">'.date('Y/m/d H:m:s',$vo['ctime']).'</td><td align="center">'.$vo['lastip'].'</td>'; 
 					 $book.='<td align="center">'.date('Y/m/d H:m:s',$vo['lasttime']).'</td><td>';
                      $book.=$vo['is_active']?'<div class="lock">冻结</div>':'<div class="unlock">激活</div>';
