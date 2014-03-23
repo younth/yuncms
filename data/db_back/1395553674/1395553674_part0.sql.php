@@ -1,6 +1,6 @@
 <?php exit;?>DROP TABLE IF EXISTS cms_admin
 CREATE TABLE `cms_admin` (  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,  `groupid` tinyint(4) NOT NULL DEFAULT '1',  `username` char(10) NOT NULL,  `password` char(32) NOT NULL,  `realname` char(10) NOT NULL,  `lastlogin_time` int(10) unsigned NOT NULL,  `lastlogin_ip` char(15) NOT NULL,  `iflock` tinyint(1) unsigned NOT NULL DEFAULT '0',  PRIMARY KEY (`id`),  UNIQUE KEY `usename` (`username`),  KEY `groupid` (`groupid`)) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='管理员信息表';
-INSERT INTO cms_admin VALUES('1','1','admin','168a73655bfecefdb15b14984dd2ad60','王洋','1395543037','unknown','0')
+INSERT INTO cms_admin VALUES('1','1','admin','168a73655bfecefdb15b14984dd2ad60','王洋','1395553602','unknown','0')
 INSERT INTO cms_admin VALUES('8','3','test','168a73655bfecefdb15b14984dd2ad60','测试','0','','0')
 DROP TABLE IF EXISTS cms_company
 CREATE TABLE `cms_company` (  `id` int(11) NOT NULL AUTO_INCREMENT,  `email` varchar(50) NOT NULL COMMENT '公司邮箱',  `password` varchar(50) NOT NULL,  `name` varchar(100) NOT NULL COMMENT '公司名称',  `quality` varchar(100) NOT NULL COMMENT '公司性质',  `scale` varchar(100) NOT NULL COMMENT '公司规模',  `sort` varchar(100) NOT NULL COMMENT '所属行业',  `address` varchar(100) NOT NULL COMMENT '地址',  `websites` varchar(100) NOT NULL COMMENT '网址',  `introduce` text NOT NULL COMMENT '简介',  `ctime` int(11) NOT NULL COMMENT '注册时间',  `regip` varchar(16) NOT NULL COMMENT 'IP',  `lasttime` int(11) NOT NULL COMMENT '最后登陆时间',  `lastip` varchar(16) NOT NULL COMMENT '最后登陆IP',  `license` varchar(100) NOT NULL COMMENT '公司营业执照',  `is_active` tinyint(2) NOT NULL DEFAULT '0' COMMENT '是否激活',  PRIMARY KEY (`id`)) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -8,7 +8,7 @@ INSERT INTO cms_company VALUES('1','yunstudio2012@qq.com','d707c24bd27660ca7d658
 DROP TABLE IF EXISTS cms_fragment
 CREATE TABLE `cms_fragment` (  `id` int(10) NOT NULL AUTO_INCREMENT,  `title` varchar(255) NOT NULL,  `sign` varchar(255) NOT NULL COMMENT '前台调用标记',  `content` text NOT NULL,  PRIMARY KEY (`id`)) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 INSERT INTO cms_fragment VALUES('1','右侧公告信息','announce','<p>\r\n	本站为Yuncms的默认演示模板，Yuncms是一款基于PHP+MYSQL构建的高效网站管理系统。 后台地址请在网址后面加上/index.php?yun=admin进入。 后台的用户名:admin;密码:123456，请进入后修改默认密码。\r\n</p>\r\n<p>\r\n	<img src=\"/yuncms/upload/fragment/image/20140224/20140224192956_37828.jpg\" width=\"100\" height=\"120\" alt=\"\" /> \r\n</p>')
-INSERT INTO cms_fragment VALUES('5','test','test','test')
+INSERT INTO cms_fragment VALUES('5','test','test','test<img src=\"/Yuncms/upload/fragment/image/20140323/20140323130433_10554.jpg\" alt=\"\" />')
 DROP TABLE IF EXISTS cms_group
 CREATE TABLE `cms_group` (  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,  `name` varchar(255) NOT NULL,  `power` varchar(1000) NOT NULL,  PRIMARY KEY (`id`)) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 INSERT INTO cms_group VALUES('1','超级管理员','-1')

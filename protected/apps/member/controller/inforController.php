@@ -44,14 +44,6 @@ class inforController extends commonController
            else $this->error('密码修改失败~');
         }
       }
-      public function rmb()
-      {
-        $auth=$this->auth;
-        $id=$auth['id'];
-        $info=model('member')->find("id='{$id}'","rmb,crmb");
-        $info['rrmb']=$info['rmb']-$info['crmb'];
-        $this->info=$info;
-        $this->display();
-      }
+    
 }
 ?>
