@@ -303,6 +303,7 @@ CREATE TABLE IF NOT EXISTS `yun_news` (
   `ispass` tinyint(1) NOT NULL,
   `origin` varchar(30) NOT NULL COMMENT '来源',
   `addtime` int(11) NOT NULL,
+  `extfield` int(10) NOT NULL DEFAULT '0' COMMENT '拓展字段',
   PRIMARY KEY (`id`),
   FULLTEXT KEY `sort` (`sort`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
@@ -311,8 +312,8 @@ CREATE TABLE IF NOT EXISTS `yun_news` (
 -- 转存表中的数据 `yun_news`
 --
 
-INSERT INTO `yun_news` (`id`, `sort`, `account`, `title`, `places`, `color`, `picture`, `keywords`, `description`, `content`, `method`, `tpcontent`, `norder`, `recmd`, `hits`, `ispass`, `origin`, `addtime`) VALUES
-(23, ',000000,100028,100036', 'admin', '激情', '100', '#E53333', '20140309/thumb_20140309144706_30440.jpg', '哈哈', '哈哈', '哈', 'news/content', 'news_content', 0, 0, 30, 1, '原创', 1394346935),
+INSERT INTO `yun_news` (`id`, `sort`, `account`, `title`, `places`, `color`, `picture`, `keywords`, `description`, `content`, `method`, `tpcontent`, `norder`, `recmd`, `hits`, `ispass`, `origin`, `addtime`, `extfield`) VALUES
+(23, ',000000,100028,100036', 'admin', '激情', '100', '#E53333', '20140309/thumb_20140309144706_30440.jpg', '哈哈', '哈哈', '哈', 'news/content', 'news_content', 0, 0, 30, 1, '原创', 1394346935, 0),
 (24, ',000000,100028,100036', 'admin', '果敢', '100', '#00D5FF', '20140309/thumb_thumb_20140309144918_26526.jpg', '果敢', '果敢', '果敢<img src="/yuncms/upload/news/image/20140309/20140309151316_19060.jpg" alt="" /><img src="/yuncms/upload/news/image/20140309/20140309151316_71083.jpg" alt="" />', 'news/content', 'news_content', 0, 0, 31, 1, '果敢', 1394347730, 0),
 (25, ',000000,100028,100036', 'admin', '执着', '100', '', '20140309/thumb_thumb_20140309183130_90592.jpg', '执着', '执着', '执着', 'news/content', 'news_content', 0, 0, 31, 1, '原创', 1394361075, 0),
 (26, ',000000,100028,100036', 'admin', '超越', '100', '#B8D100', '20140309/thumb_20140309183155_88695.jpg', '超越', '超越', '超越', 'news/content', 'news_content', 0, 0, 30, 1, '原创', 1394361101, 0);
