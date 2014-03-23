@@ -1,0 +1,446 @@
+@charset "utf-8";
+/* CSS Document */
+html{
+	color:#000;
+	background:#FFF;
+}
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+	margin:0;
+	padding:0;
+}
+a{ text-decoration:none}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset,
+img {
+	border:0;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+	font-style:normal;
+	font-weight:normal;
+}
+
+ol,
+ul {
+	list-style:none;
+}
+
+caption,
+th {
+	text-align:left;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+q:before,
+q:after {
+	content:'';
+}
+abbr,
+acronym {
+	border:0;
+	font-variant:normal;
+}
+/* to preserve line-height and selector appearance */
+sup {
+	vertical-align:text-top;
+}
+sub {
+	vertical-align:text-bottom;
+}
+input,
+textarea,
+select {
+	font-family:inherit;
+	font-size:inherit;
+	font-weight:inherit;
+}
+/*to enable resizing for IE*/
+input,
+textarea,
+select {
+	*font-size:100%;
+}
+/*because legend doesn't inherit in IE */
+legend {
+	color:#000;
+}
+/*字体*/
+body {
+	font:13px/1.231 arial,helvetica,clean,sans-serif;
+	*font-size:small; /* for IE */
+	*font:x-small; /* for IE in quirks mode */
+}
+
+/**
+ * Nudge down to get to 13px equivalent for these form elements
+ */ 
+select,
+input,
+button,
+textarea {
+	font:99% Microsoft YaHei,arial,helvetica,clean,sans-serif;
+}
+
+/**
+ * To help tables remember to inherit
+ */
+table {
+	font-size:inherit;
+	font:100%;
+}
+
+/**
+ * Bump up IE to get to 13px equivalent for these fixed-width elements
+ */
+pre,
+code,
+kbd,
+samp,
+tt {
+	font-family:monospace;
+	*font-size:108%;
+	line-height:100%;
+}
+/*网格*/
+.yuncms-g {
+    letter-spacing: -0.31em; /* webkit: collapse white-space between units */
+    *letter-spacing: normal; /* reset IE < 8 */
+    word-spacing: -0.43em; /* IE < 8 && gecko: collapse white-space between units */
+}
+
+.yuncms-u {
+    display: inline-block;
+    zoom: 1; *display: inline; /* IE < 8: fake inline-block */
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+}
+.yuncms-u-1,
+.yuncms-u-1-2,
+.yuncms-u-1-3,
+.yuncms-u-2-3,
+.yuncms-u-1-4,
+.yuncms-u-3-4,
+.yuncms-u-1-5,
+.yuncms-u-2-5,
+.yuncms-u-3-5,
+.yuncms-u-4-5,
+.yuncms-u-1-6,
+.yuncms-u-5-6,
+.yuncms-u-1-8,
+.yuncms-u-3-8,
+.yuncms-u-5-8,
+.yuncms-u-7-8,
+.yuncms-u-1-12,
+.yuncms-u-5-12,
+.yuncms-u-7-12,
+.yuncms-u-11-12,
+.yuncms-u-1-24,
+.yuncms-u-5-24,
+.yuncms-u-7-24,
+.yuncms-u-11-24,
+.yuncms-u-13-24,
+.yuncms-u-17-24,
+.yuncms-u-19-24,
+.yuncms-u-23-24 {
+    display: inline-block;
+    zoom: 1; *display: inline; /* IE < 8: fake inline-block */
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+}
+
+.yuncms-u-1 {
+    display: block;
+}
+
+.yuncms-u-1-2 {
+    width: 50%;
+}
+
+.yuncms-u-1-3 {
+    width: 33.33333%;
+}
+
+.yuncms-u-2-3 {
+    width: 66.66666%;
+}
+
+.yuncms-u-1-4 {
+    width: 25%;
+}
+
+.yuncms-u-3-4 {
+    width: 75%;
+}
+
+.yuncms-u-1-5 {
+    width: 20%;
+}
+
+.yuncms-u-2-5 {
+    width: 40%;
+}
+
+.yuncms-u-3-5 {
+    width: 60%;
+}
+
+.yuncms-u-4-5 {
+    width: 80%;
+}
+
+.yuncms-u-1-6 {
+    width: 16.656%;
+}
+
+.yuncms-u-5-6 {
+    width: 83.33%;
+}
+
+.yuncms-u-1-8 {
+    width: 12.5%;
+}
+
+.yuncms-u-3-8 {
+    width: 37.5%;
+}
+
+.yuncms-u-5-8 {
+    width: 62.5%;
+}
+
+.yuncms-u-7-8 {
+    width: 87.5%;
+}
+
+.yuncms-u-1-12 {
+    width: 8.3333%;
+}
+
+.yuncms-u-5-12 {
+    width: 41.6666%;
+}
+
+.yuncms-u-7-12 {
+    width: 58.3333%;
+}
+
+.yuncms-u-11-12 {
+    width: 91.6666%;
+}
+
+.yuncms-u-1-24 {
+    width: 4.1666%;
+}
+
+.yuncms-u-5-24 {
+    width: 20.8333%;
+}
+
+.yuncms-u-7-24 {
+    width: 29.1666%;
+}
+
+.yuncms-u-11-24 {
+    width: 45.8333%;
+}
+
+.yuncms-u-13-24 {
+    width: 54.1666%;
+}
+
+.yuncms-u-17-24 {
+    width: 70.8333%;
+}
+
+.yuncms-u-19-24 {
+    width: 79.1666%;
+}
+
+.yuncms-u-23-24 {
+    width: 95.8333%;
+}
+/*按钮*/
+/* YUI 3.8.1 (build 5795) Copyright 2013 Yahoo! Inc. http://yuilibrary.com/license/ */
+.yuncms-button {
+    /* Structure */
+    display: inline-block;
+    *display: inline; /*IE 6/7*/
+    zoom: 1;
+    font-size: 100%; 
+    *font-size: 90%; /*IE 6/7 - To reduce IE's oversized button text*/
+    *overflow: visible; /*IE 6/7 - Because of IE's overly large left/right padding on buttons */
+    padding: 0.4em 1em 0.45em;
+    line-height: normal;
+    white-space: nowrap;
+    vertical-align: baseline;
+    text-align: center;
+    cursor: pointer;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+
+    /* Presentation */
+    color: #444; /* rgba not supported (IE 8) */
+    color: rgba(0, 0, 0, 0.80); /* rgba supported */
+    *color: #444; /* IE 6 & 7 */
+    border: 1px solid #999;  /*IE 6/7/8*/
+    border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+    background-color: #E6E6E6;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80ffffff', endColorstr='#00ffffff', GradientType=0);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255,255,255, 0.30)), color-stop(40%, rgba(255,255,255, 0.15)), to(transparent));
+    background-image: -webkit-linear-gradient(rgba(255,255,255, 0.30), rgba(255,255,255, 0.15) 40%, transparent);
+    background-image: -moz-linear-gradient(top, rgba(255,255,255, 0.30), rgba(255,255,255, 0.15) 40%, transparent);
+    background-image: -ms-linear-gradient(rgba(255,255,255, 0.30), rgba(255,255,255, 0.15) 40%, transparent);
+    background-image: -o-linear-gradient(rgba(255,255,255, 0.30), rgba(255,255,255, 0.15) 40%, transparent);
+    background-image: linear-gradient(rgba(255,255,255, 0.30), rgba(255,255,255, 0.15) 40%, transparent);
+    text-decoration: none;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0, 0.25) inset, 0 2px 0 rgba(255,255,255, 0.30) inset, 0 1px 2px rgba(0,0,0, 0.15);
+    -moz-box-shadow: 0 0 0 1px rgba(0,0,0, 0.25) inset, 0 2px 0 rgba(255,255,255, 0.30) inset, 0 1px 2px rgba(0,0,0, 0.15);
+    box-shadow: 0 0 0 1px rgba(0,0,0, 0.25) inset, 0 2px 0 rgba(255,255,255, 0.30) inset, 0 1px 2px rgba(0,0,0, 0.15);
+
+    /* Transitions */
+    -webkit-transition: 0.1s linear -webkit-box-shadow;
+    -moz-transition: 0.1s linear -moz-box-shadow;
+    -ms-transition: 0.1s linear box-shadow;
+    -o-transition: 0.1s linear box-shadow;
+    transition: 0.1s linear box-shadow;
+}
+
+a.yuncms-button {
+    color: rgba(0,0,0, 0.80);
+    color: #444;
+    text-decoration:none;
+}
+
+.yuncms-button-hover,
+.yuncms-button:hover {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#26000000', GradientType=0);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.15)));
+    background-image: -webkit-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.15));
+    background-image: -moz-linear-gradient(top, transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.15));
+    background-image: -ms-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.15));
+    background-image: -o-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.15));
+    background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.15));
+}
+
+.yuncms-button-active,
+.yuncms-button:active {
+    border: inset 1px solid #999;  /*IE 6/7/8*/
+    border: none rgba(0, 0, 0, 0);  /*IE9 + everything else*/
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1A000000', endColorstr='#26000000', GradientType=0);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(0,0,0, 0.10)), to(rgba(0,0,0, 0.15)));
+    background-image: -webkit-linear-gradient(rgba(0,0,0, 0.10), rgba(0,0,0, 0.15));
+    background-image: -moz-linear-gradient(top, rgba(0,0,0, 0.10), rgba(0,0,0, 0.15));
+    background-image: -ms-linear-gradient(rgba(0,0,0, 0.10), rgba(0,0,0, 0.15));
+    background-image: -o-linear-gradient(rgba(0,0,0, 0.10), rgba(0,0,0, 0.15));
+    background-image: linear-gradient(rgba(0,0,0, 0.10), rgba(0,0,0, 0.15));
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0, 0.25) inset, 0 2px 4px rgba(0,0,0, 0.30) inset;
+    -moz-box-shadow: 0 0 0 1px rgba(0,0,0, 0.25) inset, 0 2px 4px rgba(0,0,0, 0.30) inset;
+    box-shadow: 0 0 0 1px rgba(0,0,0, 0.25) inset, 0 2px 4px rgba(0,0,0, 0.30) inset;
+}
+
+.yuncms-button[disabled],
+.yuncms-button-disabled,
+.yuncms-button-disabled:hover,
+.yuncms-button-disabled:active {
+    cursor: default;
+    background-image: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    filter: alpha(opacity=55);
+    -khtml-opacity: 0.55;
+    -moz-opacity: 0.55;
+    opacity: 0.55;
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0, 0.25) inset;
+    -moz-box-shadow: 0 0 0 1px rgba(0,0,0, 0.25) inset;
+    box-shadow: 0 0 0 1px rgba(0,0,0, 0.25) inset;
+}
+
+/* Firefox: Get rid of the inner focus border */
+.yuncms-button::-moz-focus-inner{
+    padding: 0;
+    border: 0;
+}
+
+/* Firefox: Add a border around a focused button */
+.yuncms-button:-moz-focusring {
+    outline: thin dotted;
+}
+
+/* Sam */
+.yuncms-skin-sam .yuncms-button-primary,
+.yuncms-skin-sam .yuncms-button-selected {
+    background-color: #345FCB;
+    color: #fff;
+    -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25) inset, 0 2px 0 rgba(255, 255, 255, 0.17) inset, 0 1px 2px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25) inset, 0 2px 0 rgba(255, 255, 255, 0.17) inset, 0 1px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25) inset, 0 2px 0 rgba(255, 255, 255, 0.17) inset, 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+.yuncms-skin-sam .yuncms-button:-moz-focusring {
+    outline-color: rgba(0, 0, 0, 0.85);
+}
+
+/* Night */
+.yuncms-skin-night .yuncms-button {
+    border: 0px;
+    background-color: #343536;
+    color: #DCDCDC;
+    -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25) inset, 0 2px 0 rgba(255, 255, 255, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25) inset, 0 2px 0 rgba(255, 255, 255, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25) inset, 0 2px 0 rgba(255, 255, 255, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+.yuncms-skin-night .yuncms-button-primary,
+.yuncms-skin-night .yuncms-button-selected {
+    background-color: #747576;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.yuncms-skin-night .yuncms-button:-moz-focusring {
+    outline-color: rgba(255, 255, 255, 0.85);
+}

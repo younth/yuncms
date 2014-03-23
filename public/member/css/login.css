@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* CSS Document */
+body{ font-family:"微软雅黑"; background-color:#f1f1f1}
+.form_box th{ font-weight:500}
+.login_bg{ background:url(../images/login_bg.jpg) repeat-y; width:438px; height:300px; position:absolute; left:50%; top:50%; margin:-150px 0 0 -219px}
+.login_bg_top{background:url(../images/login_bg_top.jpg) top no-repeat;width:438px; height:13px}
+.login_con{height:274px;width:418px; padding-left:20px;}
+.login_banner{background:url(../images/login_banner.jpg) top left no-repeat; height:72px; line-height:72px; width:100%; text-align:right; margin-bottom:10px}
+.login_bg_bot{background:url(../images/login_bg_bot.jpg) bottom no-repeat; width:438px;height:13px}
+
+
+.reg_bg{ background:url(../images/login_bg.jpg) repeat-y; width:438px; height:346px; position:absolute; left:50%; top:50%; margin:-170px 0 0 -219px}
+.reg_con{height:320px;width:418px; padding-left:20px;}
