@@ -3,6 +3,7 @@
  * 前台会员后台的管理
  * */
 class adminmemberController extends appadminController{
+	
 	//会员列表
 	public function index()
 	{
@@ -29,11 +30,45 @@ class adminmemberController extends appadminController{
 		$this->page=$this->pageShow($count);
 		$this->display();
 	}
+    
+	//会员增加
+   public function add(){
+            if(!$this->isPost()){
+                $this->t_name="添加";
+                $group= model('memberGroup')->select("id !=1","id,group_name");
+                foreach ($group as $val) {
+                    $select.="<option value='{$val['id']}'>{$val['group_name']}</option>";
+			}
+                $this->select=$select;
+                $this->action="add";
+                $this->display('adminmember_edit');
+            }else{
+                $data=array();
+          
+                $data['uname']=$_POST['uname'];
+                $data['password']=$this->codepwd($_POST['password']);
+                $data['login']=$_POST['login'];
+                $data['tel']=$_POST['tel'];
+                $data['qq']=$_POST['qq'];
+                $data['is_active']=intval($_POST['is_active']);
+                $data['ctime']=  time();
+                $id=model('member')->insert($data);//插入到会员表，顺便获得插入的id
+                //更新到会员组，先插入会员记录，得到插入的id,才能更新会员组信息
+                $group['user_group_id']=intval($_POST['groupid']);
+                $group['uid']=$id;
+                if(model('member_group_link')->insert($group)){
+                    $this->success('添加成功！');
+                }else{
+                    $this->error('添加会员失败~~');
+                }
+             }
+        }
 
-	//会员修改
+    //会员修改
 	public function edit()
 	{
 		if(!$this->isPost()){
+            $this->t_name="编辑";
 			$id=$_GET['id'];
 			if(empty($id)) $this->error('参数错误');
 			$info=model('member')->find_link($id);//查找用户的信息,连表三次
@@ -55,7 +90,7 @@ class adminmemberController extends appadminController{
 			model('member_group_link')->update("uid='$id'",$groupid);
 			
 			if($_POST['password']!=$_POST['oldpassword']) $data['password']=$this->codepwd($_POST['password']);
-			//$data['nickname']=$_POST['nickname'];
+			$data['uname']=$_POST['uname'];
 			$data['login']=$_POST['login'];
 			$data['tel']=$_POST['tel'];
 			$data['qq']=$_POST['qq'];
