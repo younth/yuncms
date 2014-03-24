@@ -4,10 +4,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="__PUBLIC__/admin/css/back.css" type=text/css rel=stylesheet>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/highslide.css" />
 <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
 <script type="text/javascript" src="__PUBLIC__/admin/js/common.js"></script>
 <script type="text/javascript" src="__PUBLIC__/lhgcalendar/lhgcore.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/lhgcalendar/lhgcalendar.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/highslide.js"></script>
 <script type="text/javascript">
 J(function(){
     J('#starttime').calendar();
@@ -15,6 +17,12 @@ J(function(){
 });
 </script>
 <script language="javascript">
+//封面图效果
+hs.graphicsDir = "__PUBLIC__/images/graphics/";
+hs.showCredits = false;
+hs.outlineType = 'rounded-white';
+hs.restoreTitle = '关闭';
+
 function lock(obj){
 	     obj.click(function(){
 			var nowobj=$(this);
@@ -68,7 +76,7 @@ $(function ($) {
   
 </script>
 
-<title>会员列表</title>
+<title>企业列表</title>
 </head>
 <body>
 <div class="contener">
@@ -95,10 +103,10 @@ $(function ($) {
          <form action="{url('adminmember/del')}" method="post" onSubmit="return confirm('删除不可以恢复~确定要删除吗？');"> 
           <tr>
               <th align="center" width="147"><input type="checkbox" name="chkAll" value="checkbox" onClick="CheckAll(this.form)"/></th>
-              <th width="140">企业名</th>
-              <th width="274">类别</th>
+              <th width="147">企业名</th>
+              <th width="267">类别</th>
               <th width="171">注册时间</th>
-              <th width="122">上次登录IP</th>
+              <th width="122">营业执照</th>
               <th width="225">上次登录时间</th>
               <th width="233">管理选项</th>
           </tr>
@@ -113,8 +121,12 @@ $(function ($) {
                           foreach($sortid as $v){
                               $sortstr.=empty($sortname[$v])?'':$sortname[$v].'→';
                           }
-                     $book.='<tr id="'.$vo['id'].'"><td align="center"><input type="checkbox" name="delid[]" value="'.$vo['id'].'" /></td><td align="center">'.$vo['name'].'</td><td align="center">'.$sortstr.'</td>';
-                     $book.='<td align="center">'.date('Y/m/d H:m:s',$vo['ctime']).'</td><td align="center">'.$vo['lastip'].'</td>'; 
+						   
+                     $book.='<tr id="'.$vo['id'].'"><td align="center"><input type="checkbox" name="delid[]" value="'.$vo['id'].'" /></td><td align="center">'.$vo['name'];
+					 
+					 $book.='</td><td align="center">'.$sortstr.'</td>';
+                     $book.='<td align="center">'.date('Y/m/d H:m:s',$vo['ctime']).'</td><td align="center">'; 
+					 $book.= $vo['license']=='NoPic.gif'?'':'&nbsp;&nbsp;&nbsp;<a title="点击查看封面" href="'.$path.$vo['license'].'" onClick="return hs.expand(this)"><img src="'.$public.'/images/pic.png"></a></td>';
 					 $book.='<td align="center">'.date('Y/m/d H:m:s',$vo['lasttime']).'</td><td>';
                      $book.=$vo['is_active']?'<div class="lock">冻结</div>':'<div class="unlock">激活</div>';
 					 

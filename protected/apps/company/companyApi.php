@@ -14,9 +14,9 @@ class companyApi extends baseApi{
 		return array(
               array('name'=>'行业管理','url'=>url('admin/sort/index')),
 			  array('name'=>'企业管理','url'=>url('company/admincompany/index')),
-			 array('name'=>'待激活用户','url'=>url('company/admincompany/active')),
+			  array('name'=>'待激活企业','url'=>url('company/admincompany/active')),
+			  array('name'=>'群发私信','url'=>url('company/admincompany/send_allmsg')),
 			 array('name'=>'群发邮件','url'=>url('company/admincompany/sendAll')),
-			array('name'=>'群发私信','url'=>url('company/admincompany/send_allmsg')),
 			);
   } 
   

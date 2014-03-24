@@ -31,7 +31,7 @@ class admincompanyController extends appadminController{
 		$count=model('company')->companycount($keyword,$starttime,$endtime);//总条数要结合keyword查询
 		//构造where条件直接查询
 		$where=model('company')->company_search($keyword,$starttime,$endtime,$limit);//在模型里面对检索条件进行处理
-		$list=model('company')->select($where,'id,name,sort,ctime,lasttime,is_active');//检索出符合条件的企业
+		$list=model('company')->select($where,'id,name,sort,ctime,lasttime,is_active,license');//检索出符合条件的企业
 		//print_r($list);
 		
 		$where="type=".$this->sorttype;
@@ -49,6 +49,8 @@ class admincompanyController extends appadminController{
 		//print_r($sortname);
 		$this->list=$list;
 		$this->page=$this->pageShow($count);
+		$this->public=__PUBLIC__.'/admin';//app路径
+		$this->path=__ROOT__.'/upload/license/image/';
 		$this->display();
 	}
 
