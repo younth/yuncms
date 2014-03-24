@@ -105,9 +105,9 @@ $(function ($) {
               <th align="center" width="147"><input type="checkbox" name="chkAll" value="checkbox" onClick="CheckAll(this.form)"/></th>
               <th width="147">企业名</th>
               <th width="267">类别</th>
-              <th width="171">注册时间</th>
+              <th width="171">加盟时间</th>
               <th width="122">营业执照</th>
-              <th width="225">上次登录时间</th>
+              <th width="225">粉丝数</th>
               <th width="233">管理选项</th>
           </tr>
           <?php 
@@ -117,17 +117,18 @@ $(function ($) {
 						//	echo $string;
                           $sortid=explode(',',$string);
 						   //print_r($sortid);
+						   //统计会员数量
                           $sortstr='';
                           foreach($sortid as $v){
                               $sortstr.=empty($sortname[$v])?'':$sortname[$v].'→';
                           }
 						   
                      $book.='<tr id="'.$vo['id'].'"><td align="center"><input type="checkbox" name="delid[]" value="'.$vo['id'].'" /></td><td align="center">'.$vo['name'];
-					 
+					  $book.= $vo['license']=='NoPic.gif'?'':'&nbsp;&nbsp;&nbsp;<a title="点击查看logo" href="'.$path.$vo['logo'].'" onClick="return hs.expand(this)"><img src="'.$public.'/images/pic.png"></a></td>';
 					 $book.='</td><td align="center">'.$sortstr.'</td>';
                      $book.='<td align="center">'.date('Y/m/d H:m:s',$vo['ctime']).'</td><td align="center">'; 
 					 $book.= $vo['license']=='NoPic.gif'?'':'&nbsp;&nbsp;&nbsp;<a title="点击查看封面" href="'.$path.$vo['license'].'" onClick="return hs.expand(this)"><img src="'.$public.'/images/pic.png"></a></td>';
-					 $book.='<td align="center">'.date('Y/m/d H:m:s',$vo['lasttime']).'</td><td>';
+					 $book.='<td align="center">'.$vo['fans_count'].'</td><td>';
                      $book.=$vo['is_active']?'<div class="lock">冻结</div>':'<div class="unlock">激活</div>';
 					 
                      $book.='<a href="'.url('adminmember/edit',array('id'=>$vo['id'])).'" class="edt">编辑</a><div class="del">删除</div><a href="'.url('adminmember/sendemail',array('id'=>$vo['id'])).'" class="edt">发邮件</a><a href="'.url('adminmember/sendmsg',array('id'=>$vo['id'])).'" class="edt">发私信</a></td></tr>';

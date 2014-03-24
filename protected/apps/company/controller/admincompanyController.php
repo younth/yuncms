@@ -31,9 +31,14 @@ class admincompanyController extends appadminController{
 		$count=model('company')->companycount($keyword,$starttime,$endtime);//总条数要结合keyword查询
 		//构造where条件直接查询
 		$where=model('company')->company_search($keyword,$starttime,$endtime,$limit);//在模型里面对检索条件进行处理
-		$list=model('company')->select($where,'id,name,sort,ctime,lasttime,is_active,license');//检索出符合条件的企业
-		//print_r($list);
+		$list=model('company')->select($where,'id,name,sort,ctime,lasttime,is_active,license,logo');//检索出符合条件的企业
 		
+		//给二维数组增加一个字段，统计出企业的粉丝数
+		foreach ($list as  $row=>$v)
+		{
+			$list[$row]['fans_count']=model('company_fans')->fanscount($v['id']);
+		}
+		//print_r($list);
 		$where="type=".$this->sorttype;
 		$sortlist=model('sort')->select($where,'id,name,deep,path,norder,type');
 		
@@ -41,11 +46,13 @@ class admincompanyController extends appadminController{
 			$sortlist=re_sort($sortlist);//无限分类重排序
 			$sortname=array();
 			//循环生成栏目选项
-			foreach($sortlist as $vo){
-                $sortname[$vo['id']]=$vo['name'];//分类的id=>分类名
+			foreach($sortlist as $vol){
+                $sortname[$vol['id']]=$vol['name'];//分类的id=>分类名
             }
             $this->sortname=$sortname;
 		}
+		//计算粉丝总数
+		
 		//print_r($sortname);
 		$this->list=$list;
 		$this->page=$this->pageShow($count);
