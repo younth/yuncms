@@ -69,5 +69,6 @@ class memberModel extends baseModel{
 	}
 	
 	
+	//前台和用户登录
 }
 ?>

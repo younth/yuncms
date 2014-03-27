@@ -105,10 +105,16 @@ class adminmemberController extends appadminController{
 	public function del()
 	{
 		if(!$this->isPost()){
+			//注意同时删除会员组信息，三方登录信息，登录日志，member  member_login  member_group_link   login_logs
 			$id=intval($_GET['id']);
 			if(empty($id)) {echo '您没有选择~';exit();}
 			if(model('member')->delete("id='$id'"))
-			echo 1;
+			{
+				model('member_login')->delete("mid='$id'");
+				model('member_group_link')->delete("uid='$id'");
+				model('login_logs')->delete("uid='$id' AND type=1");
+				echo 1;
+			}
 			else echo '删除失败~';
 		}else{
 			if(empty($_POST['delid'])) $this->error('您没有选择~');
@@ -151,7 +157,7 @@ class adminmemberController extends appadminController{
 		      	$data['body'] = $_POST['body'];
 		      }
 		      $data['ctime']=time();
-		      Email::init($config['EMAIL']);//初始化配置
+		      Email::init($config['EMAIL']);//初始化邮箱配置
 		      $re=Email::send($data['email'], $data['title'], $data['body']);
 		      if($re)
 		      {

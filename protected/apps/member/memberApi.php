@@ -36,6 +36,8 @@ class memberApi extends baseApi{
         $auth['uname']=$memberinfo[1];//账号
         $auth['lasttime']=$memberinfo[2];//上次登录时间
         $auth['groupid']=$memberinfo[3];//会员组id
+        $auth['login_email']=$memberinfo[4];//会员email
+        $auth['is_active']=$memberinfo[5];//会员email
         $group_id=$auth['groupid'];
      }
       $notallow=model('memberGroup')->find("id={$group_id}");//会员组信息
