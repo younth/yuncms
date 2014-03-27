@@ -2,8 +2,9 @@
 return array (
   'REWRITE' => 
   array (
-    '<c>/<a>-<id>-<page>-<keywords>-<type>.html' => 'default/<c>/<a>',
-    '<c>/<a>-<id>-<page>-<keywords>.html' => 'default/<c>/<a>',
+    'index/search-<keywords>-<type>-<page>.html' => 'default/index/search',
+    'index/search-<keywords>-<type>.html' => 'default/index/search',
+    '<c>/<a>-<id>-<page>-<exsort>.html' => 'default/<c>/<a>',
     '<c>/<a>-<id>-<page>.html' => 'default/<c>/<a>',
     'index.html' => 'default/index/index',
     '<c>/<a>-<id>.html' => 'default/<c>/<a>',
@@ -110,4 +111,5 @@ return array (
   'allowType' => 'jpg,bmp,gif,png,flv,mp4,mp3,wma,mp4,7z,zip,rar,ppt,txt,pdf,xls,doc,swf,wmv,avi,rmvb,rm',
   'sina_wb_akey' => '3226403690',
   'sina_wb_skey' => 'b476ab21cd1b75152fd2d90e63ce31e5',
+		
 );

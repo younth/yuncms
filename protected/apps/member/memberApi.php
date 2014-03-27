@@ -12,37 +12,38 @@ class memberApi extends baseApi{
   //获取会员管理模块后台管理的栏目
   public function getadminMenu(){
 		return array(
-              array('name'=>'会员组管理','url'=>url('member/admingroup/index')),
-			  array('name'=>'会员管理','url'=>url('member/adminmember/index')),
+              array('name'=>'会员组列表','url'=>url('member/admingroup/index')),
+			  array('name'=>'会员列表','url'=>url('member/adminmember/index')),
 			  array('name'=>'待激活用户','url'=>url('member/adminmember/active')),
 			  array('name'=>'群发邮件','url'=>url('member/adminmember/sendAll')),
 			  array('name'=>'群发私信','url'=>url('member/adminmember/send_allmsg')),
 			  array('name'=>'标签管理','url'=>url('admin/sort/index')),
+			 array('name'=>'动态管理','url'=>url('admin/adminmember/index')),
+			 array('name'=>'评论管理','url'=>url('admin/adminmember/index')),
+			 array('name'=>'私信管理','url'=>url('admin/adminmember/index')),
+			array('name'=>'积分配置','url'=>url('admin/adminmember/index')),
 			);
   } 
   
   //会员的权限检测，返回1没有权限，返回2未登陆有权限，返回数组登陆有权限
   public function powerCheck(){
-		 $cookie_auth=get_cookie('auth');//读取cookie的值，登陆的什么时候存入的cookie
-	//echo $cookie_auth;
-	
-     if(empty($cookie_auth)) $group_id=1;//未登录组
+	 $cookie_auth=get_cookie('auth');//读取cookie的值，登陆的时候存入的cookie
+     if(empty($cookie_auth)) $group_id=1;//1代表未登录组
      else{
-        $memberinfo=explode('\t',$cookie_auth); //分隔数组
+        $memberinfo=explode('\t',$cookie_auth); //分割数组
         //print_r($memberinfo);
         $auth['id']=$memberinfo[0];//会员的id
-        $auth['groupid']=$memberinfo[1];//会员组id
-        $auth['uname']=$memberinfo[2];//账号
-        //$auth['nickname']=empty($memberinfo[3])?'未知':$memberinfo[3];//昵称
-        $auth['lastip']=$memberinfo[4];//IP
-
+        $auth['uname']=$memberinfo[1];//账号
+        $auth['lasttime']=$memberinfo[2];//上次登录时间
+        $auth['groupid']=$memberinfo[3];//会员组id
         $group_id=$auth['groupid'];
      }
-      $notallow=model('memberGroup')->find("id={$group_id}");
+      $notallow=model('memberGroup')->find("id={$group_id}");//会员组信息
+      //print_r($notallow);
       if(empty($notallow['notallow'])) return $group_id==1?2:$auth;
       else{
         $flog=2;
-        $rules=explode('|',$notallow['notallow']);
+        $rules=explode('|',$notallow['notallow']);//对会员权限的处理
         foreach ($rules as $rule) {
           $power=explode(',',$rule);
           //R匹配

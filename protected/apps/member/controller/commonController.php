@@ -4,6 +4,7 @@
  * */
 class commonController extends memberController {
 	protected $layout = 'layout';//开启基本布局
+	
 	public function __construct()
 	{
 		parent::__construct();

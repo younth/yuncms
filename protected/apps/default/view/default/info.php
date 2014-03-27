@@ -1,4 +1,5 @@
 <?php return array (
-  'name' => '默认模板',
+  'name' => '首页',
   'author' => '王洋',
-); ?>
+); 
+?>

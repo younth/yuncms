@@ -541,7 +541,7 @@ function set_cookie($var, $value = '', $time = 0)
 //获取cookie
 function get_cookie($var) 
 {
-		$var = config('COOKIE_PRE').$var;
+		$var = config('COOKIE_PRE').$var;//获取cookie前缀
 		return isset($_COOKIE[$var]) ? cp_decode($_COOKIE[$var]) : '';
 }
 

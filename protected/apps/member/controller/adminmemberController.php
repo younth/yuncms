@@ -47,7 +47,7 @@ class adminmemberController extends appadminController{
           
                 $data['uname']=$_POST['uname'];
                 $data['password']=$this->codepwd($_POST['password']);
-                $data['login']=$_POST['login'];
+                $data['login_email']=$_POST['login_email'];
                 $data['tel']=$_POST['tel'];
                 $data['qq']=$_POST['qq'];
                 $data['is_active']=intval($_POST['is_active']);
@@ -91,7 +91,7 @@ class adminmemberController extends appadminController{
 			
 			if($_POST['password']!=$_POST['oldpassword']) $data['password']=$this->codepwd($_POST['password']);
 			$data['uname']=$_POST['uname'];
-			$data['login']=$_POST['login'];
+			$data['login_email']=$_POST['login_email'];
 			$data['tel']=$_POST['tel'];
 			$data['qq']=$_POST['qq'];
 			$data['is_active']=intval($_POST['is_active']);
@@ -142,7 +142,7 @@ class adminmemberController extends appadminController{
 		      $config=require(BASE_PATH.'/config.php');//后台部分配置固定，需要重加载配置
 		      $data=array();
 		      $data['uid']=$info['id'];
-		      $data['email']=$info['login'];//收信人
+		      $data['email']=$info['login_email'];//收信人
 		      $data['title']=$_POST['title'];//主题
 		       //内容
 		      if (get_magic_quotes_gpc()) {
@@ -232,7 +232,7 @@ class adminmemberController extends appadminController{
 				if($groupid==0) $info=model('member')->find_link($val['id']);
 				else $info=model('member')->find_link($val['uid']);
 				$data['uid']=$info['id'];
-				$data['email']=$info['login'];//收信人
+				$data['email']=$info['login_email'];//收信人
 				$re=Email::send($data['email'], $data['title'], $data['body']);
 				//写入邮件记录
 				$send_result= model('notify_email')->insert($data);

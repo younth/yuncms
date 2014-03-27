@@ -40,7 +40,7 @@
             
             <tr>
                <td align="right">邮箱：</td>
-               <td><input type="text" name="login" value="{$info['login']}"></td>
+               <td><input type="text" name="login_email" value="{$info['login_email']}"></td>
                <td class="inputhelp"></td>
             </tr>
             <tr>

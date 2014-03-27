@@ -76,8 +76,8 @@ class indexController extends commonController
 		
 		$menu=Array(
 		   Array('title'=>'管理首页','channels' => Array($root['set'],$root['admin'],$root['dbback'])),//默认显示菜单
-		   Array('title'=>'结构管理','channels' => Array($root['sort'],$root['place'],$root['files'])),
-		   Array('title'=>'内容管理','channels' => Array($root['news'],$root['fragment'],$root['link'])),
+		   Array('title'=>'结构管理','channels' => Array($root['sort'],$root['place'],$root['files'],$root['task'])),
+		   Array('title'=>'内容管理','channels' => Array($root['news'],$root['fragment'],$root['link'],$root['feedback'])),
 		   Array('title'=>'会员管理','channels' => Array()),
 		   Array('title'=>'拓展应用','channels' => Array()),
 		);

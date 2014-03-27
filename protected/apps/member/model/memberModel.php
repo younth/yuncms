@@ -63,10 +63,12 @@ class memberModel extends baseModel{
 	public function find_link($id)
 	{
 		//构造三表联合查询
-		$sql="SELECT {$this->prefix}member.id,{$this->prefix}member_group_link.user_group_id,{$this->prefix}member.uname,{$this->prefix}member.password,{$this->prefix}member.tel,{$this->prefix}member.ctime,{$this->prefix}member.lasttime,{$this->prefix}member.is_active,{$this->prefix}member.login,{$this->prefix}member.qq FROM {$this->prefix}member left outer join ({$this->prefix}member_group,{$this->prefix}member_group_link) on ({$this->prefix}member_group_link.uid={$this->prefix}member.id AND {$this->prefix}member_group_link.user_group_id={$this->prefix}member_group.id)  WHERE  {$this->prefix}member.id={$id} ";
+		$sql="SELECT {$this->prefix}member.id,{$this->prefix}member_group_link.user_group_id,{$this->prefix}member.uname,{$this->prefix}member.password,{$this->prefix}member.tel,{$this->prefix}member.ctime,{$this->prefix}member.lasttime,{$this->prefix}member.is_active,{$this->prefix}member.login_email,{$this->prefix}member.qq FROM {$this->prefix}member left outer join ({$this->prefix}member_group,{$this->prefix}member_group_link) on ({$this->prefix}member_group_link.uid={$this->prefix}member.id AND {$this->prefix}member_group_link.user_group_id={$this->prefix}member_group.id)  WHERE  {$this->prefix}member.id={$id} ";
 		$user= $this->model->query($sql);
 		return $user[0];//$user是二维数组，应该返回一维数组显示会员信息
 	}
 	
+	
+	//前台和用户登录
 }
 ?>
