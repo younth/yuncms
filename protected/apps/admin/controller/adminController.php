@@ -31,7 +31,7 @@ class adminController extends commonController
 			$grouplist=model('group')->select('','id,name','id');//用户组
 			$this->grouplist=$grouplist;
 			$this->t_name="增加";
-			$this->display("admin_adminedit");
+			$this->display("admin/adminedit");
 		}else{
 			//提交添加管理员
 			if(empty($_POST['username'])||empty($_POST['rpassword'])) $this->error('信息没有填写完整!');

@@ -11,4 +11,3 @@ class commonController extends memberController {
 		@session_start();//开启session
 	}
 }
-?>

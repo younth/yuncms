@@ -26,4 +26,3 @@ class indexController extends commonController
 
     
 }
-?>

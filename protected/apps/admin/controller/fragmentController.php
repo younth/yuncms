@@ -24,7 +24,7 @@ class fragmentController extends commonController
 	{
 		if(!$this->isPost()){
 			$this->t_name="添加";
-			$this->display("fragment_edit");
+			$this->display("fragment/edit");
 		}else{
 			if(empty($_POST['content'])||empty($_POST['sign']))$this->error('请填写完整的信息~');
 			$data=array();

@@ -73,5 +73,28 @@ class model{
 		$this->model->cache($time);
 		return $this;
 	}
-	
+        
+        //with关联查询，将关联表的数据存入子数组中，先试试吧
+        //注：目的是把关联的表的数据存入结果的子数组中，多对一用find，一对多和多对多用select      
+        //属于，多对一,一个字段的关联
+        public function withBelong($withTable= '',$withField='',$condition='', $field = '', $order = '', $limit = ''){
+            $result=$this->model->table($this->table, $this->ignoreTablePrefix)->field($field)->where($condition)->order($order)->limit($limit)->select();
+            $resultWith=$this->model->table($withTable, $this->ignoreTablePrefix)->field($field)->where($withField=$result[$withField])->order($order)->limit($limit)->find();
+            for($i=0;$i<count($result);$i++){
+                $result[$i]=  array_merge($result[$i],array($withTable=>$resultWith));
+            }
+            return $result;
+        }
+        
+        //属于，多对一,多个字段的关联
+         public function withMoreBelong($with=array(array('withTable'=>'','withField'=>'')),$condition='', $field = '', $order = '', $limit = ''){
+             $result=$this->model->table($this->table, $this->ignoreTablePrefix)->field($field)->where($condition)->order($order)->limit($limit)->select();
+             for($i=0;$i<count($with);$i++){
+                $resultWith=$this->model->table($with[$i]['withTable'], $this->ignoreTablePrefix)->field($field)->where($with[$i]['withField']=$result[$with[$i]['withField']])->order($order)->limit($limit)->find();
+                for($j=0;$j<count($result);$j++){
+                  $result[$j]=  array_merge($result[$j],array($with[$i]['withTable']=>$resultWith));
+               }
+            }
+            return $result;
+         }
 }

@@ -340,3 +340,9 @@ function dobadword($str)
 	$str = strtr($str, $newbadword);
 	return $str;
 }
+
+//会员密码加密
+function codepwd($password)
+{
+	return md5(substr(md5($password),7,-7));
+}

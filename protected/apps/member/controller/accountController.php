@@ -121,8 +121,8 @@ class accountController extends commonController
             	$uname=$data['uname'];//收信人name
             	$url=url('account/active',array('verify'=>urlencode($token)));//url传参数问题的解决办法
             	$verify_url=$config['siteurl'].$url;//邮箱验证的url
-            	$emailbody=$uname."你好！<br/>点击以下链接完成邮箱验证并激活在91频道的帐号：​<br/><a href='{$verify_url}'>{$verify_url}</a>";//注册邮箱的内容
-            	$emailbody.="<br/>如无法点击，请将链接拷贝到浏览器地址栏中直接访问。";
+            	$emailbody=$uname."你好！<br/><br/>点击以下链接完成邮箱验证并激活在91频道的帐号：​<br/><a href='{$verify_url}'>{$verify_url}</a>";//注册邮箱的内容
+            	$emailbody.="<br/><span style='font-size:14px;color:#999999'>如无法点击，请将链接拷贝到浏览器地址栏中直接访问。</span>";
             	$re=Email::send($smtpemailto, $emailsubject, $emailbody);
                 $cookie_auth = $id.'\t'.$data['uname'].'\t'.$data['lasttime'].'\t'.$grouplink['user_group_id'].'\t'.$data['login_email'].'\t'.$data['is_active'];
                if(set_cookie('auth',$cookie_auth,0)&&$re) $this->redirect(url('member/account/regsucceed'));
@@ -266,8 +266,8 @@ class accountController extends commonController
       			$uname=$acc['uname'];//收信人name
       			$url=url('account/resetpassword',array('verify'=>urlencode($token)));//url传参数问题的解决办法
       			$verify_url=$config['siteurl'].$url;//邮箱验证的url
-      			$emailbody=$uname."你好！<br/>点击以下链接并根据页面提示完成密码重设：​<br/><a href='{$verify_url}'>{$verify_url}</a>";//注册邮箱的内容
-      			$emailbody.="<br/>如无法点击，请将链接拷贝到浏览器地址栏中直接访问。";
+      			$emailbody=$uname."你好！<br/><br/>点击以下链接并根据页面提示完成密码重设：​<br/><a href='{$verify_url}'>{$verify_url}</a>";//注册邮箱的内容
+      			$emailbody.="<br/><span style='font-size:14px;color:#999999'>如无法点击，请将链接拷贝到浏览器地址栏中直接访问。</span>";
       			$re=Email::send($smtpemailto, $emailsubject, $emailbody);
       			//这里不能设置cookie登陆,需要重新设置密码
       			//$cookie_auth = $acc['id'].'\t'.$acc['uname'].'\t'.$acc['lasttime'].'\t'.$grouplink['user_group_id'].'\t'.$acc['login_email'].'\t'.$acc['is_active'];
@@ -275,7 +275,7 @@ class accountController extends commonController
       				$this->member_email=$login_email;
       				$emailArr = explode("@",$login_email);//获得邮箱服务器
       				$this->login_email="http://mail.".$emailArr[1];//登录邮箱的地址
-      				$this->display("account_sendpassword");
+      				$this->display("account/sendpassword");
       			}
       		}
       	}
@@ -292,6 +292,7 @@ class accountController extends commonController
       {
       	$verify = stripslashes(trim($_GET['verify']));//激活码，对比用户的激活码
       	$re=model('member_login')->find("token='{$verify}'");//验证用户的登陆token
+      	if(empty($re)) $this->error('该邮箱尚未激活，现在激活');
       	if(!$this->isPost()){
       		$this->display();
       	}else{
@@ -306,4 +307,3 @@ class accountController extends commonController
       	
       }
 }
-?>

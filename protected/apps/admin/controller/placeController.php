@@ -26,7 +26,7 @@ class placeController extends commonController
 		if(!$this->isPost())
 		{
 			$this->t_name="添加";
-			$this->display("place_placeedit");
+			$this->display("place/placeedit");
 		}
 		else{
 			if(empty($_POST['name'])) $this->error('必须填写位置名称~');

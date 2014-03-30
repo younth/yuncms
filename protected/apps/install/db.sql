@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 03 月 25 日 06:37
+-- 生成日期: 2014 年 03 月 30 日 10:04
 -- 服务器版本: 5.1.41
 -- PHP 版本: 5.3.1
 
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `cms_admin` (
 --
 
 INSERT INTO `cms_admin` (`id`, `groupid`, `username`, `password`, `realname`, `lastlogin_time`, `lastlogin_ip`, `iflock`) VALUES
-(1, 1, 'admin', '168a73655bfecefdb15b14984dd2ad60', '王洋', 1395648005, 'unknown', 0),
+(1, 1, 'admin', '168a73655bfecefdb15b14984dd2ad60', '王洋', 1396168086, 'unknown', 0),
 (8, 3, 'test', '168a73655bfecefdb15b14984dd2ad60', '测试', 0, '', 0);
 
 -- --------------------------------------------------------
@@ -138,8 +138,10 @@ CREATE TABLE IF NOT EXISTS `cms_company_recruit` (
 
 CREATE TABLE IF NOT EXISTS `cms_feed` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` char(50) NOT NULL COMMENT '类型',
   `mid` int(11) NOT NULL COMMENT '会员id',
   `comment_count` int(11) NOT NULL COMMENT '评论数',
+  `repost_count` int(11) NOT NULL COMMENT '转发数',
   `ctime` int(11) NOT NULL COMMENT '发布时间',
   `is_repost` tinyint(2) NOT NULL COMMENT '是否转发,0否1是',
   `is_audit` int(11) NOT NULL COMMENT '是否审核,0否1是',
@@ -160,16 +162,21 @@ CREATE TABLE IF NOT EXISTS `cms_feed` (
 
 CREATE TABLE IF NOT EXISTS `cms_feedback` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL COMMENT '标题',
   `content` text NOT NULL,
   `email` varchar(100) NOT NULL,
-  `picture` varchar(200) NOT NULL,
+  `ctime` int(11) NOT NULL,
+  `is_read` tinyint(2) NOT NULL COMMENT '是否已读',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `cms_feedback`
 --
 
+INSERT INTO `cms_feedback` (`id`, `title`, `content`, `email`, `ctime`, `is_read`) VALUES
+(2, '测试留言', '留言测试啊', 'yunstudio2012@qq.com', 0, 1),
+(3, '测试留言2', '测试留言2', 'yunstudio2012@qq.com', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -297,15 +304,31 @@ CREATE TABLE IF NOT EXISTS `cms_login_logs` (
   `type` tinyint(2) NOT NULL COMMENT '1：会员2：企业',
   `uid` int(11) NOT NULL COMMENT '登陆者id,包括会员和企业',
   `ip` varchar(15) NOT NULL COMMENT '登陆ip',
-  `place` varchar(100) NOT NULL COMMENT '登陆地点',
   `ctime` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- 转存表中的数据 `cms_login_logs`
 --
 
+INSERT INTO `cms_login_logs` (`id`, `type`, `uid`, `ip`, `ctime`) VALUES
+(1, 1, 1, 'unknown', 1395761877),
+(2, 1, 1, 'unknown', 1395764787),
+(3, 1, 1, 'unknown', 1395765079),
+(4, 1, 1, 'unknown', 1395765243),
+(5, 1, 1, 'unknown', 1395799315),
+(6, 1, 1, 'unknown', 1395799511),
+(7, 1, 1, 'unknown', 1395799519),
+(8, 1, 1, 'unknown', 1395800568),
+(9, 1, 1, 'unknown', 1395800859),
+(10, 1, 1, 'unknown', 1395801469),
+(11, 1, 1, 'unknown', 1396102157),
+(12, 1, 1, 'unknown', 1396146553),
+(13, 1, 1, 'unknown', 1396157713),
+(14, 1, 1, 'unknown', 1396157792),
+(15, 1, 1, 'unknown', 1396158018),
+(16, 1, 1, 'unknown', 1396161875);
 
 -- --------------------------------------------------------
 
@@ -315,12 +338,12 @@ CREATE TABLE IF NOT EXISTS `cms_login_logs` (
 
 CREATE TABLE IF NOT EXISTS `cms_member` (
   `id` int(20) NOT NULL AUTO_INCREMENT,
-  `login` varchar(30) NOT NULL COMMENT '登陆邮箱',
+  `login_email` varchar(30) NOT NULL COMMENT '登陆邮箱',
   `password` varchar(60) NOT NULL,
   `sex` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1男2女',
   `location` varchar(80) NOT NULL DEFAULT '0' COMMENT '籍贯',
   `school` varchar(50) NOT NULL,
-  `major` int(50) NOT NULL COMMENT '专业',
+  `major` varchar(50) NOT NULL COMMENT '专业',
   `uname` varchar(30) NOT NULL COMMENT '用户名',
   `tel` varchar(15) NOT NULL,
   `qq` varchar(20) NOT NULL,
@@ -328,7 +351,7 @@ CREATE TABLE IF NOT EXISTS `cms_member` (
   `ctime` int(11) NOT NULL,
   `regip` varchar(16) NOT NULL,
   `lasttime` int(11) NOT NULL,
-  `lastip` varchar(16) NOT NULL,
+  `lastip` varchar(15) NOT NULL,
   `is_active` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否激活',
   `is_init` tinyint(1) NOT NULL COMMENT '是否初始化用户资料',
   `last_feed_id` int(11) NOT NULL COMMENT '最后发表心情id',
@@ -340,15 +363,15 @@ CREATE TABLE IF NOT EXISTS `cms_member` (
 -- 转存表中的数据 `cms_member`
 --
 
-INSERT INTO `cms_member` (`id`, `login`, `password`, `sex`, `location`, `school`, `major`, `uname`, `tel`, `qq`, `tag`, `ctime`, `regip`, `lasttime`, `lastip`, `is_active`, `is_init`, `last_feed_id`, `last_feed_time`) VALUES
-(1, 'yunstudio2012@qq.com', 'd707c24bd27660ca7d65870027fb9218', 1, '3774', '会员演示', 0, '王洋', '13638816362', '404133749', '', 1372135503, '', 1394343731, 'unknown', 1, 0, 0, 0),
-(2, 'yunstudio2013@qq.com', '663d82c90c57ffa5005b4a1a0911b391', 2, '0', '', 0, '张旭', '', '', '', 1372135503, 'unknown', 1372135503, 'unknown', 1, 0, 0, 0),
-(3, 'tianyufang@qq.com', 'd707c24bd27660ca7d65870027fb9218', 1, '0', '', 0, '田玉方', '', '', '', 1373010733, 'unknown', 1373619128, 'unknown', 1, 0, 0, 0),
-(5, '1161499602@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', 0, '蒲精', '', '1161499602', '', 1395580185, '', 0, '', 0, 0, 0, 0),
-(6, '1095620719@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', 0, '唐娜', '', '', '', 1395581194, '', 0, '', 1, 0, 0, 0),
-(7, '1103349641@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', 0, '赵杰', '', '', '', 1395581233, '', 0, '', 1, 0, 0, 0),
-(8, '113771910@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', 0, '田书记', '', '', '', 1395581267, '', 0, '', 1, 0, 0, 0),
-(9, '1085195131@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', 0, '易武', '', '', '', 1395635403, '', 0, '', 1, 0, 0, 0);
+INSERT INTO `cms_member` (`id`, `login_email`, `password`, `sex`, `location`, `school`, `major`, `uname`, `tel`, `qq`, `tag`, `ctime`, `regip`, `lasttime`, `lastip`, `is_active`, `is_init`, `last_feed_id`, `last_feed_time`) VALUES
+(1, 'yunstudio2012@qq.com', 'd707c24bd27660ca7d65870027fb9218', 1, '3774', '会员演示', '0', '王洋', '13638816362', '404133749', '', 1372135503, '', 1396161875, '', 1, 0, 0, 0),
+(2, 'yunstudio2013@qq.com', '663d82c90c57ffa5005b4a1a0911b391', 2, '0', '', '0', '张旭', '', '', '', 1372135503, 'unknown', 1372135503, '', 1, 0, 0, 0),
+(3, 'tianyufang@qq.com', 'd707c24bd27660ca7d65870027fb9218', 1, '0', '', '0', '田玉方', '', '', '', 1373010733, 'unknown', 1373619128, '', 1, 0, 0, 0),
+(5, '1161499602@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', '0', '蒲精', '', '1161499602', '', 1395580185, '', 0, '', 0, 0, 0, 0),
+(6, '1095620719@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', '0', '唐娜', '', '', '', 1395581194, '', 0, '', 1, 0, 0, 0),
+(7, '1103349641@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', '0', '赵杰', '', '', '', 1395581233, '', 0, '', 1, 0, 0, 0),
+(8, '113771910@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', '0', '田书记', '', '', '', 1395581267, '', 0, '', 1, 0, 0, 0),
+(9, '1085195131@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', '0', '易武', '', '', '', 1395635403, '', 0, '', 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -464,9 +487,9 @@ CREATE TABLE IF NOT EXISTS `cms_member_group` (
 --
 
 INSERT INTO `cms_member_group` (`id`, `group_name`, `notallow`, `user_group_icon`) VALUES
-(2, '普通会员', 'yun', '05.gif'),
+(6, '普通会员', 'yun', '05.gif'),
 (4, '超级会员', '', '03.gif'),
-(7, '新手上路', '', '02.gif'),
+(2, '新手上路', '', '02.gif'),
 (8, '高级会员', '', '07.gif'),
 (10, '测试分组', '', '0');
 
@@ -515,29 +538,6 @@ CREATE TABLE IF NOT EXISTS `cms_member_login` (
 
 --
 -- 转存表中的数据 `cms_member_login`
---
-
-
--- --------------------------------------------------------
-
---
--- 表的结构 `cms_member_task`
---
-
-CREATE TABLE IF NOT EXISTS `cms_member_task` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `mid` int(11) NOT NULL COMMENT '用户id',
-  `type` tinyint(2) NOT NULL COMMENT '任务类型，1基本2特定',
-  `task_id` int(11) NOT NULL COMMENT '任务id',
-  `is_receive` tinyint(2) NOT NULL COMMENT '是否领取,0否1是',
-  `receive_time` int(11) NOT NULL COMMENT '领取时间',
-  `is_achieve` tinyint(2) NOT NULL COMMENT '任务状态，1完成0未完成',
-  `achieve_time` int(11) NOT NULL COMMENT '完成时间',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `cms_member_task`
 --
 
 
@@ -619,7 +619,7 @@ CREATE TABLE IF NOT EXISTS `cms_method` (
   `ifmenu` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否菜单显示',
   PRIMARY KEY (`id`),
   KEY `pid` (`pid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=336 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=343 ;
 
 --
 -- 转存表中的数据 `cms_method`
@@ -712,7 +712,14 @@ INSERT INTO `cms_method` (`id`, `rootid`, `pid`, `operate`, `name`, `ifmenu`) VA
 (332, 283, 283, 'adminmember/active', '待激活用户', 0),
 (333, 283, 283, 'adminmember/sendAll', '群发邮件', 0),
 (334, 283, 283, 'adminmember/send_allmsg', '群发私信', 0),
-(277, 0, 0, 'company', '企业管理', 1);
+(277, 0, 0, 'company', '企业管理', 1),
+(336, 336, 0, 'feedback', '反馈管理', 1),
+(337, 336, 336, 'index', '反馈列表', 1),
+(338, 336, 336, 'unread', '未读反馈', 1),
+(339, 339, 0, 'task', '任务管理', 1),
+(340, 339, 339, 'index', '基本任务', 1),
+(341, 339, 339, 'add', '增加基本任务', 1),
+(342, 339, 339, 'custom', '企业特定任务', 1);
 
 -- --------------------------------------------------------
 
@@ -920,14 +927,15 @@ CREATE TABLE IF NOT EXISTS `cms_task_base` (
   `endtime` int(11) NOT NULL COMMENT '任务结束时间',
   `ctime` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- 转存表中的数据 `cms_task_base`
 --
 
 INSERT INTO `cms_task_base` (`id`, `goal`, `name`, `content`, `reminder`, `way`, `gold`, `score`, `starttime`, `endtime`, `ctime`) VALUES
-(1, '考察应聘者对公司的熟知度', '测试任务', '了解公司概况、主要业务、企业文化、社会评价等', '可从公司网站、主流媒体报道、公司其他宣传材料获取有关信息', '完成问卷、500字左右关于对公司认知的文章，题目自拟。参考题目：我眼中的##公司', 2, 0, 0, 0, 0);
+(1, '考察应聘者对公司的熟知度', '测试任务', '了解公司概况、主要业务、企业文化、社会评价等', '可从公司网站、主流媒体报道、公司其他宣传材料获取有关信息', '完成问卷、500字左右关于对公司认知的文章，题目自拟。参考题目：我眼中的##公司', 2, 0, 0, 0, 0),
+(2, '  考察应聘者对公司的熟知度ha ', '测试任务', '了解公司概况、主要业务、企业文化、社会评价等', '  可从公司网站、主流媒体报道、公司其他宣传材料获取有关信息', '', 0, 0, 0, 0, 1396173458);
 
 -- --------------------------------------------------------
 
@@ -947,10 +955,54 @@ CREATE TABLE IF NOT EXISTS `cms_task_custom` (
   `endtime` int(11) NOT NULL COMMENT '结束时间',
   `ctime` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 转存表中的数据 `cms_task_custom`
+--
+
+INSERT INTO `cms_task_custom` (`id`, `cid`, `recruit_id`, `name`, `content`, `gold`, `score`, `starttime`, `endtime`, `ctime`) VALUES
+(1, 1, 2, '前端工程师', '精通js', 5, 2, 1393927072, 1394791074, 1396173475);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `cms_task_member`
+--
+
+CREATE TABLE IF NOT EXISTS `cms_task_member` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mid` int(11) NOT NULL COMMENT '用户id',
+  `type` tinyint(2) NOT NULL COMMENT '任务类型，1基本2特定',
+  `task_id` int(11) NOT NULL COMMENT '任务id',
+  `is_receive` tinyint(2) NOT NULL COMMENT '是否领取,0否1是',
+  `receive_time` int(11) NOT NULL COMMENT '领取时间',
+  `is_achieve` tinyint(2) NOT NULL COMMENT '任务状态，1完成0未完成',
+  `achieve_time` int(11) NOT NULL COMMENT '完成时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `cms_task_member`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `cms_task_system`
+--
+
+CREATE TABLE IF NOT EXISTS `cms_task_system` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL COMMENT '积分动作',
+  `alias` varchar(50) NOT NULL COMMENT '积分名称',
+  `gold` int(11) NOT NULL COMMENT '91币值',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `cms_task_system`
 --
 
 

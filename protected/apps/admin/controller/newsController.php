@@ -216,7 +216,7 @@ class newsController extends commonController
 			$this->path=__ROOT__.'/upload/news/image/';
 			$this->public=__PUBLICAPP__;
 			$this->t_name="编辑";
-			$this->display("news_add");//与编辑用同一个模板
+			$this->display("news/add");//与编辑用同一个模板
 		}else{
 			if(empty($_POST['sort'])||empty($_POST['title']))
 			$this->error('请填写完整的信息~');

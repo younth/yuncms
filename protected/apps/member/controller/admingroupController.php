@@ -22,7 +22,7 @@ class admingroupController extends appadminController{
 	{
 		if(!$this->isPost()){
 			$this->t_name="添加";
-			$this->display("admingroup_edit");//添加修改用同一个页面
+			$this->display("admingroup/edit");//添加修改用同一个页面
 		}else{
 			$data=array();
 			$data['group_name']=trim($_POST['gname']);

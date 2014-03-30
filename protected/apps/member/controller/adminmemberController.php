@@ -41,7 +41,7 @@ class adminmemberController extends appadminController{
 			}
                 $this->select=$select;
                 $this->action="add";
-                $this->display('adminmember_edit');
+                $this->display('adminmember/edit');
             }else{
                 $data=array();
           
@@ -195,7 +195,7 @@ class adminmemberController extends appadminController{
 		
 		$this->list=$list;
 		$this->page=$this->pageShow($count);
-		$this->display("adminmember_index");
+		$this->display("adminmember/index");
 	}
 	
 	//群发邮件
@@ -257,7 +257,7 @@ class adminmemberController extends appadminController{
 		
 		if(!$this->isPost()){
 			$this->t_name="私信";
-			$this->display('adminmember_sendemail');
+			$this->display('adminmember/sendemail');
 		}else{
 			//处理私信
 			$data=array();
@@ -291,7 +291,7 @@ class adminmemberController extends appadminController{
 			$this->select=$select;
 			//选择发送的组名
 			$this->t_name="私信";
-			$this->display('adminmember_sendall');
+			$this->display('adminmember/sendall');
 		}
 		else {
 			//群发私信的处理

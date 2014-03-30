@@ -37,7 +37,7 @@ class linkController extends commonController
 	{
 		if(!$this->isPost()){
 			$this->t_name="增加";
-			$this->display("link_edit");//与编辑用同一个模板
+			$this->display("link/edit");//与编辑用同一个模板
 		}else{
 			if(empty($_POST['url'])||empty($_POST['webname']))
 			$this->error('请填写完整的信息~');

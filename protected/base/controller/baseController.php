@@ -40,9 +40,5 @@ class baseController extends controller{
 		}	
 	}
 
-	//会员密码加密
-     protected  function codepwd($password)
-      {
-          return md5(substr(md5($password),7,-7));
-      }
+	
 }

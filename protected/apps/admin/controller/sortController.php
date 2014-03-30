@@ -152,7 +152,7 @@ class sortController extends commonController
             
 			$this->md=self::$sort[$type]['mark'];//不同的类型标志  news
 			$this->url=url('sort');//路径：/yuncms/index.php?yun=admin/sort
-			$this->display('sort_newsadd');
+			$this->display('sort/newsadd');
 		}else{
 			//提交增加资讯栏目
 			if(empty($_POST['sortname']) || empty($_POST['tplist'])) $this->error('请填写完整栏目信息！');
@@ -270,7 +270,7 @@ class sortController extends commonController
 
 			$this->md=self::$sort[$type]['mark'];
 			$this->url=url('sort');
-			$this->display('sort_pageadd');
+			$this->display('sort/pageadd');
 		}else{
 			// print_r($_POST);exit();
 			if(empty($_POST['sortname']) || empty($_POST['method'])||empty($_POST['content']) || empty($_POST['tplist'])) $this->error('请填写完整栏目信息！');
@@ -399,7 +399,7 @@ class sortController extends commonController
 				}
 
 			$this->url=url('sort');
-			$this->display('sort_pluginadd');
+			$this->display('sort/pluginadd');
 		}else{
 			if(empty($_POST['sortname']) || empty($_POST['method'])) $this->error('请填写完整栏目信息！');
 			$data=array();
@@ -570,7 +570,7 @@ class sortController extends commonController
 				$this->list=$list;
 			}
 			$this->url=url('sort');
-			$this->display('sort_linkadd');
+			$this->display('sort/linkadd');
 		}else{
 			if(empty($_POST['sortname'])) $this->error('请填写完整栏目信息！');
 			$data=array();

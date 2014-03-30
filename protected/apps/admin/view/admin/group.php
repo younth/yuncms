@@ -3,9 +3,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="__PUBLICAPP__/css/back.css" type=text/css rel=stylesheet>
-<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
-<script type="text/javascript" src="__PUBLICAPP__/js/common.js"></script>
+<link href="../__PUBLICAPP__/css/back.css" type=text/css rel=stylesheet>
+<script type="text/javascript" src="../__PUBLIC__/js/jquery.js"></script>
+<script type="text/javascript" src="../__PUBLICAPP__/js/common.js"></script>
 <script language="javascript">
   $(function ($) { 
 
