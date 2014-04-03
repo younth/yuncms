@@ -18,7 +18,7 @@ class memberApi extends baseApi{
 			  array('name'=>'群发邮件','url'=>url('member/adminmember/sendAll')),
 			  array('name'=>'群发私信','url'=>url('member/adminmember/send_allmsg')),
 			  array('name'=>'标签管理','url'=>url('admin/sort/index')),
-			 array('name'=>'动态管理','url'=>url('admin/adminmember/index')),
+			 array('name'=>'动态管理','url'=>url('member/adminfeed/index')),
 			 array('name'=>'评论管理','url'=>url('admin/adminmember/index')),
 			 array('name'=>'私信管理','url'=>url('admin/adminmember/index')),
 			array('name'=>'积分配置','url'=>url('admin/adminmember/index')),

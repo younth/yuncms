@@ -551,11 +551,11 @@ class sortController extends commonController
 	
 	//单页编辑器上传
 	public function PageUploadJson(){
-		$this->EditUploadJson('pages');
+		EditUploadJson('pages');
 	}
 	//单页编辑器文件管理
 	public function PageFileManagerJson(){
-		$this->EditFileManagerJson('pages');
+		EditFileManagerJson('pages');
 	}
 	
 	//添加自定义栏目

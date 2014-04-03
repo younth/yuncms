@@ -29,7 +29,7 @@
                          $cont.='<td align="center">'.$vo['title'].'</td>';
                          $cont.= '<td align="center">'.$vo['email'].'</td>';
                          $cont.= '<td align="center">'.date("Y-m-d H:i:s",$vo['addtime']).'</td>'; 
-                         $cont.='<td align="center"><a href="'.url('feedback/read',array('id'=>$vo['id'])).'" class="edt">查看</a><div class="del">删除</div></td></tr>';
+                         $cont.='<td align="center"><a href="'.url('feedback/read',array('id'=>$vo['id'])).'" class="edt">查看</a><div class="del">删除</div><a href="'.url('feedback/sendemail',array('email'=>$vo['email'],'id'=>$vo['id'])).'" class="edt">邮件回复</a></td></tr>';
                       }
                     echo $cont;
                 }

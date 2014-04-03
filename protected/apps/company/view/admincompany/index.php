@@ -27,7 +27,7 @@ function lock(obj){
 	     obj.click(function(){
 			var nowobj=$(this);
 			var id=nowobj.parent().parent().attr('id');
-			$.post("{url('adminmember/lock')}", {id:id,is_active:0},
+			$.post("{url('admincompany/lock')}", {id:id,is_active:0},
    				function(data){
 					if(data==1){
                       nowobj.html("激活");
@@ -44,7 +44,7 @@ function unlock(obj){
 			var nowobj=$(this);
 			var id=nowobj.parent().parent().attr('id');
 			
-			$.post("{url('adminmember/lock')}", {id:id,is_active:1},
+			$.post("{url('admincompany/lock')}", {id:id,is_active:1},
    				function(data){
 					if(data==1){
                       nowobj.html("冻结");
@@ -64,7 +64,7 @@ $(function ($) {
 			if(confirm('删除将不可恢复~')){
 			var delobj=$(this).parent().parent();
 			var id=delobj.attr('id');
-			$.get("{url('adminmember/del')}", {id:id},
+			$.get("{url('admincompany/del')}", {id:id},
    				function(data){
 					if(data==1){
                       delobj.remove();
@@ -124,14 +124,14 @@ $(function ($) {
                           }
 						   
                      $book.='<tr id="'.$vo['id'].'"><td align="center"><input type="checkbox" name="delid[]" value="'.$vo['id'].'" /></td><td align="center">'.$vo['name'];
-					  $book.= $vo['license']=='NoPic.gif'?'':'&nbsp;&nbsp;&nbsp;<a title="点击查看logo" href="'.$path.$vo['logo'].'" onClick="return hs.expand(this)"><img src="'.$public.'/images/pic.png"></a></td>';
+					  $book.= $vo['logo']=='NoPic.gif'?'':'&nbsp;&nbsp;&nbsp;<a title="点击查看logo" href="'.$path.$vo['logo'].'" onClick="return hs.expand(this)"><img src="'.$public.'/images/pic.png"></a></td>';
 					 $book.='</td><td align="center">'.$sortstr.'</td>';
                      $book.='<td align="center">'.date('Y/m/d H:m:s',$vo['ctime']).'</td><td align="center">'; 
 					 $book.= $vo['license']=='NoPic.gif'?'':'&nbsp;&nbsp;&nbsp;<a title="点击查看封面" href="'.$path.$vo['license'].'" onClick="return hs.expand(this)"><img src="'.$public.'/images/pic.png"></a></td>';
 					 $book.='<td align="center">'.$vo['fans_count'].'</td><td>';
                      $book.=$vo['is_active']?'<div class="lock">冻结</div>':'<div class="unlock">激活</div>';
 					 
-                     $book.='<a href="'.url('adminmember/edit',array('id'=>$vo['id'])).'" class="edt">编辑</a><div class="del">删除</div><a href="'.url('adminmember/sendemail',array('id'=>$vo['id'])).'" class="edt">发邮件</a><a href="'.url('adminmember/sendmsg',array('id'=>$vo['id'])).'" class="edt">发私信</a></td></tr>';
+                     $book.='<a href="'.url('admincompany/edit',array('id'=>$vo['id'])).'" class="edt">编辑</a><div class="del">删除</div><a href="'.url('admincompany/sendemail',array('id'=>$vo['id'])).'" class="edt">发邮件</a><a href="'.url('admincompany/sendmsg',array('id'=>$vo['id'])).'" class="edt">发私信</a></td></tr>';
                     } 
                    echo $book;
                }               

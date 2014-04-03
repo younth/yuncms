@@ -62,7 +62,7 @@ $(function ($) {
           </tr>
           <tr>
             <td align="right">内容：</td>
-            <td align="left" colspan="2"><textarea name="body" style=" width:38%;height:200px;visibility:hidden;" id="content"></textarea></td>
+            <td align="left" colspan="2"><textarea name="body" style=" width:48%;height:280px;visibility:hidden;" id="content"></textarea></td>
           </tr>
           <tr>
             <td></td>

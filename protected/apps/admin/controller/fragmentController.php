@@ -98,11 +98,11 @@ class fragmentController extends commonController
 	
 	/*编辑器上传管理，自定义编辑器，方便管理文件 */
 	public function UploadJson(){
-		$this->EditUploadJson('fragment');
+		EditUploadJson('fragment');
 	}
 	
 	//编辑器文件管理
 	public function FileManagerJson(){
-		$this->EditFileManagerJson('fragment');
+		EditFileManagerJson('fragment');
 	}
 }

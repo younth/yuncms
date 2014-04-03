@@ -41,7 +41,7 @@
             <tr>
             <td align="right"  width="10%">任务内容:</td>
                <td  align="left">
-               <textarea name="content" rows="3" cols="70">{$result['content']}</textarea>
+               <textarea name="content" rows="5" cols="70">{$result['content']}</textarea>
                </td>
             </tr>
             <tr>

@@ -19,7 +19,7 @@ class linkController extends commonController
 	
 	public function index()
 	{
-		$listRows=10;//每页显示的信息条数
+		$listRows=12;//每页显示的信息条数
 		$url=url('link/index',array('page'=>'{page}'));
 	    $limit=$this->pageLimit($url,$listRows);
 		$count=model('link')->count();
@@ -39,7 +39,7 @@ class linkController extends commonController
 			$this->t_name="增加";
 			$this->display("link/edit");//与编辑用同一个模板
 		}else{
-			if(empty($_POST['url'])||empty($_POST['webname']))
+			if(empty($_POST['webname']))
 			$this->error('请填写完整的信息~');
 			$data=array();
 			$data['type']=$_POST['type'];
@@ -85,7 +85,7 @@ class linkController extends commonController
 			$this->display();
 		}else{
 			//提交修改
-			if(empty($_POST['url'])||empty($_POST['webname']))
+			if(empty($_POST['webname']))
 			$this->error('请填写完整的信息~');
 			$data=array();
 			$data['type']=$_POST['type'];
@@ -158,12 +158,12 @@ class linkController extends commonController
 	//编辑器上传
 	public function UploadJson(){
 		//上传到news目录下面
-		$this->EditUploadJson('links');
+		EditUploadJson('links');
 	}
 	
 	//编辑器文件管理
 	public function FileManagerJson(){
-		$this->EditFileManagerJson('links');
+		EditFileManagerJson('links');
 	}
 	
 }

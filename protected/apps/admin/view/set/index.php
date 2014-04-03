@@ -61,7 +61,7 @@ $.jqtab("#tabs","#tab_conbox","click");
 			<tr>
 				<td align="right">网站地址：</td>
 				<td><input class="regular-text" type='text' value="{$config['siteurl']}" name="siteurl" id="siteurl" /></td>
-				<td class="inputhelp"></td>
+				<td class="inputhelp">最后面不要有/</td>
 			</tr>
 			<tr>
 				<td align="right">网站关键词：</td>
@@ -74,13 +74,13 @@ $.jqtab("#tabs","#tab_conbox","click");
 				<td class="inputhelp"></td>
 			</tr>
             <tr>
-				<td align="right">联系电话：</td>
-				<td><input class="regular-text" type='text' value="{$config['telephone']}" name="telephone" id="telephone" /></td>
+				<td align="right">版权所有：</td>
+				<td><input class="regular-text" type='text' value="{$config['copyright']}" name="copyright" id="copyright" /></td>
 				<td class="inputhelp"></td>
 			</tr>
             <tr>
-				<td align="right">QQ：</td>
-				<td><input class="regular-text" type='text' value="{$config['QQ']}" name="QQ" id="QQ" /></td>
+				<td align="right">公网安备：</td>
+				<td><input class="regular-text" type='text' value="{$config['beian']}" name="beian" id="beian" /></td>
 				<td class="inputhelp">多个QQ号用半角,隔开</td>
 			</tr>
 			<tr>

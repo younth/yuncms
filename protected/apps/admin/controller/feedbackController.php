@@ -46,23 +46,17 @@ class feedbackController extends commonController
         $id=intval($_GET['id']);
         if(empty($id)) $this->error('参数错误');
             $info=model('feedback')->find("id='$id'");//当前新闻的相关信息
-//            dump($info);
-//            return;
         $this->info=$info;
-        if(empty($this->info))
-            $data['is_read']='1';
-        if(!model('feedback')->update("id='{$id}'",$data))
-            $this->error('查看留言失败~');
         $this->display();
     }
     
     //显示未读留言信息列表
-    public function unread()
+    public function unreply()
     {
         $listRows=10;//每页显示的信息条数
-        $url=url('feedback/unread',array('page'=>'{page}'));
-        $where="is_read=0";
-        $sortlist=model('feedback')->select($where); //0表示查询未读留言
+        $url=url('feedback/unreply',array('page'=>'{page}'));
+        $where="is_reply=0";
+        $sortlist=model('feedback')->select($where); //表示查询未读留言
         $limit=$this->pageLimit($url,$listRows);
         $count=model('feedback')->count();
         $this->list=$sortlist;
@@ -70,5 +64,45 @@ class feedbackController extends commonController
         $this->t_name='未读';
         $this->page=$this->pageShow($count);
         $this->display('feedback/index');
+    }
+    
+    //邮件回复
+    public function sendemail()
+    {
+    	$email=$_GET['email'];
+    	$id=intval($_GET['id']);
+    	if(empty($email)) $this->error('参数错误');
+    	if(!$this->isPost()){
+    		$this->t_name='邮件';
+    		$this->display();
+    	}else {
+    		$config=require(BASE_PATH.'/config.php');//后台部分配置固定，需要重加载配置
+    		$data=array();
+    		$feedback=array();
+    		$data['uid']=-1;//代表系统管理员
+    		$data['type']=-1;
+    		$data['email']=$email;//收信人
+    		$data['title']=$_POST['title'];//主题
+    		//内容
+    		if (get_magic_quotes_gpc()) {
+    			$data['body'] = stripslashes($_POST['body']);
+    		} else {
+    			$data['body'] = $_POST['body'];
+    		}
+    		$data['ctime']=time();
+    		Email::init($config['EMAIL']);//初始化邮箱配置
+    		$re=Email::send($data['email'], $data['title'], $data['body']);
+    		if($re)
+    		{
+    			//写入系统邮件记录
+    			if(model('notify_email')->insert($data)){
+    				$feedback['is_reply']=1;//标志已经回复
+    				model('feedback')->update("id='$id'",$feedback);
+    				$this->success("邮件回复成功！",url('feedback/index'));
+    			}
+    		}
+    		else $this->error("邮件发送失败~");
+    	}
+    	
     }
 }

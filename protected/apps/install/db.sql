@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 03 月 30 日 10:04
+-- 生成日期: 2014 年 04 月 03 日 13:51
 -- 服务器版本: 5.1.41
 -- PHP 版本: 5.3.1
 
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `cms_admin` (
 --
 
 INSERT INTO `cms_admin` (`id`, `groupid`, `username`, `password`, `realname`, `lastlogin_time`, `lastlogin_ip`, `iflock`) VALUES
-(1, 1, 'admin', '168a73655bfecefdb15b14984dd2ad60', '王洋', 1396168086, 'unknown', 0),
+(1, 1, 'admin', '168a73655bfecefdb15b14984dd2ad60', '王洋', 1396523744, 'unknown', 0),
 (8, 3, 'test', '168a73655bfecefdb15b14984dd2ad60', '测试', 0, '', 0);
 
 -- --------------------------------------------------------
@@ -55,12 +55,13 @@ INSERT INTO `cms_admin` (`id`, `groupid`, `username`, `password`, `realname`, `l
 
 CREATE TABLE IF NOT EXISTS `cms_company` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(50) NOT NULL COMMENT '公司邮箱',
+  `login_email` varchar(50) NOT NULL COMMENT '公司邮箱',
   `password` varchar(50) NOT NULL,
   `name` varchar(100) NOT NULL COMMENT '公司名称',
   `logo` varchar(100) NOT NULL COMMENT '公司logo',
   `quality` varchar(100) NOT NULL COMMENT '公司性质',
   `scale` varchar(100) NOT NULL COMMENT '公司规模',
+  `phone` varchar(30) NOT NULL COMMENT '公司电话',
   `sort` varchar(100) NOT NULL COMMENT '所属行业',
   `address` varchar(100) NOT NULL COMMENT '地址',
   `websites` varchar(100) NOT NULL COMMENT '网址',
@@ -71,15 +72,17 @@ CREATE TABLE IF NOT EXISTS `cms_company` (
   `lastip` varchar(16) NOT NULL COMMENT '最后登陆IP',
   `license` varchar(100) NOT NULL COMMENT '公司营业执照',
   `is_active` tinyint(2) NOT NULL DEFAULT '0' COMMENT '是否激活',
+  `is_init` tinyint(2) NOT NULL COMMENT '是否完善资料',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `cms_company`
 --
 
-INSERT INTO `cms_company` (`id`, `email`, `password`, `name`, `logo`, `quality`, `scale`, `sort`, `address`, `websites`, `introduce`, `ctime`, `regip`, `lasttime`, `lastip`, `license`, `is_active`) VALUES
-(1, 'yunstudio2012@qq.com', 'd707c24bd27660ca7d65870027fb9218', '云作坊', '20140309/yunstudio.png', '国企', '100人', ',000000,100039,100040,100051', '长沙理工大学', 'http://ww.yunstudio.net/', '云作坊，很牛B。', 0, '', 1372135503, '', '20140309/thumb_20140309144706_30440.png', 0);
+INSERT INTO `cms_company` (`id`, `login_email`, `password`, `name`, `logo`, `quality`, `scale`, `phone`, `sort`, `address`, `websites`, `introduce`, `ctime`, `regip`, `lasttime`, `lastip`, `license`, `is_active`, `is_init`) VALUES
+(1, '862820606@qq.com', 'd707c24bd27660ca7d65870027fb9218', '云作坊', '20140403/20140403213316_13924.png', '国企', '100人', '0731-89676708', ',000000,100039,100040,100051', '长沙理工大学', 'http://ww.yunstudio.net/', ' 云作坊，很牛B。', 0, '', 1396494403, '', 'NoPic.gif', 1, 0),
+(5, '1@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '企业', '20140403/20140403212752_42453.jpg', '', '', '', ',000000,100039,100040,100052', '长沙理工大学创业园305', 'www.yunstudio.net', '  你好', 1396525138, 'unknown', 1396525138, 'unknown', 'NoPic.gif', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -147,12 +150,14 @@ CREATE TABLE IF NOT EXISTS `cms_feed` (
   `is_audit` int(11) NOT NULL COMMENT '是否审核,0否1是',
   `feed_content` text NOT NULL COMMENT '心情内容',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- 转存表中的数据 `cms_feed`
 --
 
+INSERT INTO `cms_feed` (`id`, `type`, `mid`, `comment_count`, `repost_count`, `ctime`, `is_repost`, `is_audit`, `feed_content`) VALUES
+(1, 'post', 1, 2, 3, 0, 1, 1, '112');
 
 -- --------------------------------------------------------
 
@@ -166,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `cms_feedback` (
   `content` text NOT NULL,
   `email` varchar(100) NOT NULL,
   `ctime` int(11) NOT NULL,
-  `is_read` tinyint(2) NOT NULL COMMENT '是否已读',
+  `is_reply` tinyint(2) NOT NULL COMMENT '是否已读',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
@@ -174,9 +179,9 @@ CREATE TABLE IF NOT EXISTS `cms_feedback` (
 -- 转存表中的数据 `cms_feedback`
 --
 
-INSERT INTO `cms_feedback` (`id`, `title`, `content`, `email`, `ctime`, `is_read`) VALUES
+INSERT INTO `cms_feedback` (`id`, `title`, `content`, `email`, `ctime`, `is_reply`) VALUES
 (2, '测试留言', '留言测试啊', 'yunstudio2012@qq.com', 0, 1),
-(3, '测试留言2', '测试留言2', 'yunstudio2012@qq.com', 0, 0);
+(3, '测试留言2', '测试留言2', 'yunstudio2012@qq.com', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -232,15 +237,17 @@ CREATE TABLE IF NOT EXISTS `cms_fragment` (
   `sign` varchar(255) NOT NULL COMMENT '前台调用标记',
   `content` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `cms_fragment`
 --
 
 INSERT INTO `cms_fragment` (`id`, `title`, `sign`, `content`) VALUES
-(1, '右侧公告信息', 'announce', '<p>\r\n	本站为Yuncms的默认演示模板，Yuncms是一款基于PHP+MYSQL构建的高效网站管理系统。 后台地址请在网址后面加上/index.php?yun=admin进入。 后台的用户名:admin;密码:123456，请进入后修改默认密码。\r\n</p>\r\n<p>\r\n	<img src="/yuncms/upload/fragment/image/20140224/20140224192956_37828.jpg" width="100" height="120" alt="" /> \r\n</p>'),
-(5, 'test', 'test', 'test<img src="/Yuncms/upload/fragment/image/20140323/20140323130433_10554.jpg" alt="" />');
+(2, '精英人脉圈', 'adtwo', '<span style="white-space:normal;">迅速拓展圈子，打响个人品牌。</span>\r\n<p>\r\n</p>'),
+(1, '认证真实度', 'adone', '真实头像+高完整度档案+站内外好友确认，身份可信度多重保证'),
+(3, '猎头/HR', 'adthree', '无需专门制作、投递简历，与人才需求方基于信任成为深交'),
+(4, '职业/商业机会', 'adfour', '50%+对接中层管理者、20%+与企业家和高管交流的机会。');
 
 -- --------------------------------------------------------
 
@@ -282,16 +289,28 @@ CREATE TABLE IF NOT EXISTS `cms_link` (
   `info` varchar(300) NOT NULL COMMENT '介绍',
   `ispass` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- 转存表中的数据 `cms_link`
 --
 
 INSERT INTO `cms_link` (`id`, `type`, `norder`, `name`, `url`, `picture`, `logourl`, `siteowner`, `info`, `ispass`) VALUES
-(2, 2, 0, '云作坊', 'http://www.yunstudio.net', '20140319/20140319011136_36106.jpg', '', '云作坊', '', 1),
+(2, 1, 0, '云作坊', 'http://www.yunstudio.net', '20140319/20140319011136_36106.jpg', '', '云作坊', '', 1),
 (6, 1, 0, '科技交流平台', 'http://www.kjjlpt.com', '20140319/20140319010853_28083.png', '', '', '', 1),
-(8, 2, 0, 'yuncms', 'http://cms.yunstudio.net', '20140319/20140319012016_73229.png', '', '王洋', '', 1);
+(8, 1, 0, 'yuncms', 'http://cms.yunstudio.net', '20140319/20140319012016_73229.png', '', '王洋', '', 1),
+(9, 1, 0, '中公公务员网', 'http://www.offcn.com/', 'youlink.gif', '', '', '', 1),
+(10, 1, 0, '职场问答', 'http://www.kjjlpt.com', 'youlink.gif', '', '', '', 1),
+(11, 1, 0, '长理掌上通', 'http://www.kjjlpt.com', 'youlink.gif', '', '', '', 1),
+(12, 1, 0, '长沙理工大学', 'http://www.csust.edu.cn/pub/cslgdx/index', 'youlink.gif', '', '', '', 1),
+(13, 2, 2, '百度', '', '20140403/20140403094445_90947.jpg', '', '蒲精  UI设计师', '91频道是个能提供给大家提供企业粘合度的大学生交友平台！', 1),
+(14, 2, 10, '腾讯', '', '20140403/20140403100400_51336.jpg', '', '王洋  系统架构师', '91频道提供给你不一样的舞台！', 1),
+(15, 2, 3, '长沙理工大学', '', '20140403/20140403095346_92158.jpg', '', '田向阳   书记', '在91频道结识的好友都是专业背景、职业履历近似的，大 家讨论的话题很对工作很有帮助，由此也建立起高度互信 的关系。', 1),
+(16, 2, 4, '易迅网', '', '20140403/20140403101059_24268.jpg', 'http://www.kjjlpt.com/face/customavatars/000/00/15', '田玉方 资深设计师', '目前的岗位要求需要我更好地提升自己，在91频道可以有的放矢看到很多精英教育资讯展 示，我还获得了优惠的机会！', 1),
+(17, 3, 0, '中山大学', '', '20140403/20140403101235_16240.jpg', '', '', '', 1),
+(18, 3, 0, '武汉大学', '', '20140403/20140403101442_49092.jpg', '', '', '', 1),
+(19, 3, 0, '清华大学', '', '20140403/20140403101501_57974.jpg', '', '', '', 1),
+(20, 3, 1, '南京航天航空大学', '', '20140403/20140403101546_20277.jpg', '', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -306,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `cms_login_logs` (
   `ip` varchar(15) NOT NULL COMMENT '登陆ip',
   `ctime` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
 
 --
 -- 转存表中的数据 `cms_login_logs`
@@ -328,7 +347,34 @@ INSERT INTO `cms_login_logs` (`id`, `type`, `uid`, `ip`, `ctime`) VALUES
 (13, 1, 1, 'unknown', 1396157713),
 (14, 1, 1, 'unknown', 1396157792),
 (15, 1, 1, 'unknown', 1396158018),
-(16, 1, 1, 'unknown', 1396161875);
+(16, 1, 1, 'unknown', 1396161875),
+(17, 1, 1, 'unknown', 1396229371),
+(18, 1, 1, 'unknown', 0),
+(19, 1, 1, 'unknown', 1396238260),
+(20, 1, 1, 'unknown', 1396238282),
+(21, 1, 1, 'unknown', 1396238415),
+(22, 1, 1, 'unknown', 1396238496),
+(23, 1, 1, 'unknown', 1396238532),
+(24, 1, 1, 'unknown', 1396240201),
+(25, 1, 1, 'unknown', 1396250457),
+(26, 1, 1, 'unknown', 1396267409),
+(27, 1, 1, 'unknown', 1396269864),
+(28, 2, 2, 'unknown', 1396270676),
+(29, 2, 2, 'unknown', 1396270845),
+(30, 1, 1, 'unknown', 1396271609),
+(31, 2, 2, 'unknown', 1396271626),
+(32, 2, 2, 'unknown', 1396271970),
+(33, 2, 2, 'unknown', 1396272001),
+(34, 2, 2, 'unknown', 1396272009),
+(35, 2, 2, 'unknown', 1396272302),
+(36, 2, 2, 'unknown', 1396272379),
+(37, 2, 2, 'unknown', 1396272555),
+(38, 1, 1, 'unknown', 1396273873),
+(41, 2, 1, 'unknown', 1396279358),
+(40, 1, 1, 'unknown', 1396278486),
+(42, 2, 1, 'unknown', 1396352645),
+(43, 2, 1, 'unknown', 1396366757),
+(44, 2, 1, 'unknown', 1396494403);
 
 -- --------------------------------------------------------
 
@@ -343,7 +389,7 @@ CREATE TABLE IF NOT EXISTS `cms_member` (
   `sex` tinyint(1) NOT NULL DEFAULT '0' COMMENT '1男2女',
   `location` varchar(80) NOT NULL DEFAULT '0' COMMENT '籍贯',
   `school` varchar(50) NOT NULL,
-  `major` varchar(50) NOT NULL COMMENT '专业',
+  `major` int(50) NOT NULL COMMENT '专业',
   `uname` varchar(30) NOT NULL COMMENT '用户名',
   `tel` varchar(15) NOT NULL,
   `qq` varchar(20) NOT NULL,
@@ -352,26 +398,32 @@ CREATE TABLE IF NOT EXISTS `cms_member` (
   `regip` varchar(16) NOT NULL,
   `lasttime` int(11) NOT NULL,
   `lastip` varchar(15) NOT NULL,
-  `is_active` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否激活',
+  `is_active` tinyint(1) NOT NULL COMMENT '是否激活',
   `is_init` tinyint(1) NOT NULL COMMENT '是否初始化用户资料',
   `last_feed_id` int(11) NOT NULL COMMENT '最后发表心情id',
   `last_feed_time` int(11) NOT NULL COMMENT '最后发表心情时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=42 ;
 
 --
 -- 转存表中的数据 `cms_member`
 --
 
 INSERT INTO `cms_member` (`id`, `login_email`, `password`, `sex`, `location`, `school`, `major`, `uname`, `tel`, `qq`, `tag`, `ctime`, `regip`, `lasttime`, `lastip`, `is_active`, `is_init`, `last_feed_id`, `last_feed_time`) VALUES
-(1, 'yunstudio2012@qq.com', 'd707c24bd27660ca7d65870027fb9218', 1, '3774', '会员演示', '0', '王洋', '13638816362', '404133749', '', 1372135503, '', 1396161875, '', 1, 0, 0, 0),
-(2, 'yunstudio2013@qq.com', '663d82c90c57ffa5005b4a1a0911b391', 2, '0', '', '0', '张旭', '', '', '', 1372135503, 'unknown', 1372135503, '', 1, 0, 0, 0),
-(3, 'tianyufang@qq.com', 'd707c24bd27660ca7d65870027fb9218', 1, '0', '', '0', '田玉方', '', '', '', 1373010733, 'unknown', 1373619128, '', 1, 0, 0, 0),
-(5, '1161499602@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', '0', '蒲精', '', '1161499602', '', 1395580185, '', 0, '', 0, 0, 0, 0),
-(6, '1095620719@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', '0', '唐娜', '', '', '', 1395581194, '', 0, '', 1, 0, 0, 0),
-(7, '1103349641@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', '0', '赵杰', '', '', '', 1395581233, '', 0, '', 1, 0, 0, 0),
-(8, '113771910@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', '0', '田书记', '', '', '', 1395581267, '', 0, '', 1, 0, 0, 0),
-(9, '1085195131@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', '0', '易武', '', '', '', 1395635403, '', 0, '', 1, 0, 0, 0);
+(1, 'yunstudio2012@qq.com', 'd707c24bd27660ca7d65870027fb9218', 1, '3774', '会员演示', 0, 'admin', '13638816362', '404133749', '', 1372135503, '', 1396278486, '', 1, 0, 0, 0),
+(33, '825075713@qq.com', '92ce4c1797018ae7f5562d6d682358c5', 0, '0', '', 0, '王洋', '14789998264', '', '', 1396279141, '', 0, '', 1, 0, 0, 0),
+(5, '1161499602@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', 0, '蒲精', '', '1161499602', '', 1395580185, '', 0, '', 1, 0, 0, 0),
+(6, '1095620719@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', 0, '唐娜', '', '', '', 1395581194, '', 0, '', 1, 0, 0, 0),
+(7, '1103349641@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', 0, '赵杰', '', '', '', 1395581233, '', 0, '', 1, 0, 0, 0),
+(8, '113771910@qq.com', 'd707c24bd27660ca7d65870027fb9218', 0, '0', '', 0, '田书记', '', '', '', 1395581267, '', 0, '', 1, 0, 0, 0),
+(34, '454545@qq.com', 'e4df60eb031ce566119660fe103e35d2', 0, '0', '', 0, '蒲精', '', '', '', 1396507283, 'unknown', 1396507283, 'unknown', 0, 0, 0, 0),
+(35, '45454@qq.com', 'aa5b64077da5afc9261768919c0e6a91', 0, '0', '', 0, '王洋', '', '', '', 1396507353, 'unknown', 1396507353, 'unknown', 0, 0, 0, 0),
+(36, '46546@qq.com', '74cee31e7ded50fd3efbc07559e8e18f', 0, '0', '', 0, '王洋', '', '', '', 1396507491, 'unknown', 1396507491, 'unknown', 0, 0, 0, 0),
+(37, '4674967@qq.com', 'd07de8a8f8c6e2470e302b73ff51a6eb', 0, '0', '', 0, '646', '', '', '', 1396507752, 'unknown', 1396507752, 'unknown', 0, 0, 0, 0),
+(38, '487468@qq.com', '18b29ef4ad722fff68f385fa0fc4b806', 0, '0', '', 0, '王洋', '', '', '', 1396509473, 'unknown', 1396509473, 'unknown', 0, 0, 0, 0),
+(39, '474646468@qq.com', '778c6a8f012823ebb8690eb099729046', 0, '0', '', 0, '王洋', '', '', '', 1396510083, 'unknown', 1396510083, 'unknown', 0, 0, 0, 0),
+(40, '1@qq.com', '599e70cfbde412a061ce3ec1dc26c42d', 0, '0', '', 0, '你妹', '', '', '', 1396510215, 'unknown', 1396510215, 'unknown', 0, 0, 0, 0),
+(41, '2@qq.com', 'b7b18e7ad6f7a7f0e1c27e051cfb2c31', 0, '0', '', 0, 'fds', '', '', '', 1396510338, 'unknown', 1396510338, 'unknown', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -504,7 +556,7 @@ CREATE TABLE IF NOT EXISTS `cms_member_group_link` (
   `uid` int(11) NOT NULL COMMENT '会员id',
   `user_group_id` int(11) NOT NULL COMMENT '会员组id',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- 转存表中的数据 `cms_member_group_link`
@@ -513,12 +565,19 @@ CREATE TABLE IF NOT EXISTS `cms_member_group_link` (
 INSERT INTO `cms_member_group_link` (`id`, `uid`, `user_group_id`) VALUES
 (1, 1, 4),
 (2, 2, 7),
-(3, 3, 7),
-(4, 5, 8),
+(9, 33, 2),
+(4, 5, 2),
 (5, 6, 2),
 (6, 7, 2),
 (7, 8, 2),
-(8, 9, 7);
+(10, 34, 2),
+(11, 35, 2),
+(12, 36, 2),
+(13, 37, 2),
+(14, 38, 2),
+(15, 39, 2),
+(16, 40, 2),
+(17, 41, 2);
 
 -- --------------------------------------------------------
 
@@ -528,18 +587,30 @@ INSERT INTO `cms_member_group_link` (`id`, `uid`, `user_group_id`) VALUES
 
 CREATE TABLE IF NOT EXISTS `cms_member_login` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` tinyint(2) NOT NULL COMMENT '1是学生2是企业',
   `mid` int(11) NOT NULL COMMENT '会员id',
   `weibo_key` varchar(100) NOT NULL COMMENT '微博key',
   `token` varchar(50) NOT NULL COMMENT '账号激活码',
-  `token_exptime` int(10) NOT NULL COMMENT '激活码有效期',
-  `type` varchar(30) NOT NULL COMMENT '登陆方式',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
 
 --
 -- 转存表中的数据 `cms_member_login`
 --
 
+INSERT INTO `cms_member_login` (`id`, `type`, `mid`, `weibo_key`, `token`) VALUES
+(6, 1, 1, '2.0013nXHC08XTmOad0f0ea1aeS92HDD', ''),
+(28, 1, 34, '', '4f841e6731e00c00306b070f183c58f8'),
+(29, 1, 35, '', 'ce9dd3f2d80e6955d3e732915f00d992'),
+(27, 2, 4, '', '870a83659c581c8675ac7da91a3ba794'),
+(30, 1, 36, '', '3017210f049e5153c10f1a1788f76561'),
+(31, 1, 37, '', '709a01e425cabca6d0f6b7c983e7fa52'),
+(32, 1, 38, '', '32d7582269e37e8afdafc9deab8a9758'),
+(33, 1, 39, '', '84abf35bff3a04a854cbece00450a1fe'),
+(34, 1, 40, '', 'b576c6d37bff966f74caa11ae6621f11'),
+(35, 1, 41, '', 'a0b2b06e136830f69d8d2511727c6fde'),
+(36, 2, 5, '', '5e6d055cff851ae9a62d754cdf990fe8'),
+(37, 2, 6, '', 'ef9246f8e9630b64f4d87db154c24f17');
 
 -- --------------------------------------------------------
 
@@ -715,7 +786,7 @@ INSERT INTO `cms_method` (`id`, `rootid`, `pid`, `operate`, `name`, `ifmenu`) VA
 (277, 0, 0, 'company', '企业管理', 1),
 (336, 336, 0, 'feedback', '反馈管理', 1),
 (337, 336, 336, 'index', '反馈列表', 1),
-(338, 336, 336, 'unread', '未读反馈', 1),
+(338, 336, 336, 'unreply', '未处理反馈', 1),
 (339, 339, 0, 'task', '任务管理', 1),
 (340, 339, 339, 'index', '基本任务', 1),
 (341, 339, 339, 'add', '增加基本任务', 1),
@@ -768,25 +839,44 @@ INSERT INTO `cms_news` (`id`, `sort`, `account`, `title`, `places`, `color`, `pi
 
 CREATE TABLE IF NOT EXISTS `cms_notify_email` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
+  `type` tinyint(4) NOT NULL COMMENT '1会员2企业-1系统',
   `uid` int(10) NOT NULL,
   `email` varchar(250) NOT NULL,
   `title` varchar(250) NOT NULL,
   `body` text NOT NULL,
   `ctime` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
 -- 转存表中的数据 `cms_notify_email`
 --
 
-INSERT INTO `cms_notify_email` (`id`, `uid`, `email`, `title`, `body`, `ctime`) VALUES
-(1, 3, 'yunstudio2012@qq.com', 'why', '怎么啦<img src="http://localhost/Yuncms/public/kindeditor/plugins/emoticons/images/5.gif" border="0" alt="" />', 1395242900),
-(2, 2, '862820606@qq.com', '群发测试', '群发测试', 1395305979),
-(3, 3, 'yunstudio2012@qq.com', '群发测试', '群发测试', 1395305979),
-(4, 1, '862820606@qq.com', '所有人', '所有人', 1395308667),
-(5, 2, '862820606@qq.com', '所有人', '所有人', 1395308667),
-(6, 3, 'yunstudio2012@qq.com', '所有人', '所有人', 1395308667);
+INSERT INTO `cms_notify_email` (`id`, `type`, `uid`, `email`, `title`, `body`, `ctime`) VALUES
+(1, 0, 3, 'yunstudio2012@qq.com', 'why', '怎么啦<img src="http://localhost/Yuncms/public/kindeditor/plugins/emoticons/images/5.gif" border="0" alt="" />', 1395242900),
+(2, 0, 2, '862820606@qq.com', '群发测试', '群发测试', 1395305979),
+(3, 0, 3, 'yunstudio2012@qq.com', '群发测试', '群发测试', 1395305979),
+(4, 0, 1, '862820606@qq.com', '所有人', '所有人', 1395308667),
+(5, 0, 2, '862820606@qq.com', '所有人', '所有人', 1395308667),
+(6, 0, 3, 'yunstudio2012@qq.com', '所有人', '所有人', 1395308667),
+(7, 0, 1, 'yunstudio2012@qq.com', '下周任务', '<p>\r\n	&nbsp; &nbsp; <span style="font-size:14px;">本周主要让后台新加入的两个成员了解后台开发，<span style="font-size:14px;line-height:21px;">现在已经基本熟悉，</span>同时前端开发正式开始，下周的任务主要是：</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">1.赵杰：编写home模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">2.唐娜：个人档案模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">3.张旭：跟上我们开发的节奏，美工及前端的其他成员由其负责安排工作</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">4.每个成员多交流，下周希望项目进展快一点，大家加油！</span>\r\n</p>', 1396184203),
+(8, 0, 3, 'tianyufang@qq.com', '下周任务', '<p>\r\n	&nbsp; &nbsp; <span style="font-size:14px;">本周主要让后台新加入的两个成员了解后台开发，<span style="font-size:14px;line-height:21px;">现在已经基本熟悉，</span>同时前端开发正式开始，下周的任务主要是：</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">1.赵杰：编写home模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">2.唐娜：个人档案模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">3.张旭：跟上我们开发的节奏，美工及前端的其他成员由其负责安排工作</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">4.每个成员多交流，下周希望项目进展快一点，大家加油！</span>\r\n</p>', 1396184203),
+(9, 0, 5, '1161499602@qq.com', '下周任务', '<p>\r\n	&nbsp; &nbsp; <span style="font-size:14px;">本周主要让后台新加入的两个成员了解后台开发，<span style="font-size:14px;line-height:21px;">现在已经基本熟悉，</span>同时前端开发正式开始，下周的任务主要是：</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">1.赵杰：编写home模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">2.唐娜：个人档案模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">3.张旭：跟上我们开发的节奏，美工及前端的其他成员由其负责安排工作</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">4.每个成员多交流，下周希望项目进展快一点，大家加油！</span>\r\n</p>', 1396184203),
+(10, 0, 6, '1095620719@qq.com', '下周任务', '<p>\r\n	&nbsp; &nbsp; <span style="font-size:14px;">本周主要让后台新加入的两个成员了解后台开发，<span style="font-size:14px;line-height:21px;">现在已经基本熟悉，</span>同时前端开发正式开始，下周的任务主要是：</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">1.赵杰：编写home模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">2.唐娜：个人档案模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">3.张旭：跟上我们开发的节奏，美工及前端的其他成员由其负责安排工作</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">4.每个成员多交流，下周希望项目进展快一点，大家加油！</span>\r\n</p>', 1396184203),
+(11, 0, 7, '1103349641@qq.com', '下周任务', '<p>\r\n	&nbsp; &nbsp; <span style="font-size:14px;">本周主要让后台新加入的两个成员了解后台开发，<span style="font-size:14px;line-height:21px;">现在已经基本熟悉，</span>同时前端开发正式开始，下周的任务主要是：</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">1.赵杰：编写home模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">2.唐娜：个人档案模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">3.张旭：跟上我们开发的节奏，美工及前端的其他成员由其负责安排工作</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">4.每个成员多交流，下周希望项目进展快一点，大家加油！</span>\r\n</p>', 1396184203),
+(12, 0, 8, '113771910@qq.com', '下周任务', '<p>\r\n	&nbsp; &nbsp; <span style="font-size:14px;">本周主要让后台新加入的两个成员了解后台开发，<span style="font-size:14px;line-height:21px;">现在已经基本熟悉，</span>同时前端开发正式开始，下周的任务主要是：</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">1.赵杰：编写home模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">2.唐娜：个人档案模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">3.张旭：跟上我们开发的节奏，美工及前端的其他成员由其负责安排工作</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">4.每个成员多交流，下周希望项目进展快一点，大家加油！</span>\r\n</p>', 1396184203),
+(13, 0, 9, '1085195131@qq.com', '下周任务', '<p>\r\n	&nbsp; &nbsp; <span style="font-size:14px;">本周主要让后台新加入的两个成员了解后台开发，<span style="font-size:14px;line-height:21px;">现在已经基本熟悉，</span>同时前端开发正式开始，下周的任务主要是：</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">1.赵杰：编写home模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">2.唐娜：个人档案模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">3.张旭：跟上我们开发的节奏，美工及前端的其他成员由其负责安排工作</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">4.每个成员多交流，下周希望项目进展快一点，大家加油！</span>\r\n</p>', 1396184203),
+(14, 0, 28, '825075713@qq.com', '下周任务', '<p>\r\n	&nbsp; &nbsp; <span style="font-size:14px;">本周主要让后台新加入的两个成员了解后台开发，<span style="font-size:14px;line-height:21px;">现在已经基本熟悉，</span>同时前端开发正式开始，下周的任务主要是：</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">1.赵杰：编写home模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">2.唐娜：个人档案模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">3.张旭：跟上我们开发的节奏，美工及前端的其他成员由其负责安排工作</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">4.每个成员多交流，下周希望项目进展快一点，大家加油！</span>\r\n</p>', 1396184203),
+(15, 0, 31, 'sunscheung@163.com', '下周任务', '<p>\r\n	&nbsp; &nbsp; <span style="font-size:14px;">本周主要让后台新加入的两个成员了解后台开发，<span style="font-size:14px;line-height:21px;">现在已经基本熟悉，</span>同时前端开发正式开始，下周的任务主要是：</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">1.赵杰：编写home模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">2.唐娜：个人档案模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">3.张旭：跟上我们开发的节奏，美工及前端的其他成员由其负责安排工作</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">4.每个成员多交流，下周希望项目进展快一点，大家加油！</span>\r\n</p>', 1396184203),
+(16, 0, 32, '452563788@qq.com', '下周任务', '<p>\r\n	&nbsp; &nbsp; <span style="font-size:14px;">本周主要让后台新加入的两个成员了解后台开发，<span style="font-size:14px;line-height:21px;">现在已经基本熟悉，</span>同时前端开发正式开始，下周的任务主要是：</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">1.赵杰：编写home模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">2.唐娜：个人档案模块</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">3.张旭：跟上我们开发的节奏，美工及前端的其他成员由其负责安排工作</span>\r\n</p>\r\n<p>\r\n	<span style="font-size:14px;">4.每个成员多交流，下周希望项目进展快一点，大家加油！</span>\r\n</p>', 1396184203),
+(19, -1, -1, 'yunstudio2012@qq.com', '处理邮寄', '处理邮寄', 1396185180),
+(18, -1, -1, 'yunstudio2012@qq.com', '你好', '邮寄回复测试', 1396184356),
+(20, -1, -1, 'yunstudio2012@qq.com', '你好', '邮寄回复', 1396185325),
+(21, 0, 1, '862820606@qq.com', '你好', '年后', 1396532566),
+(22, 1, 1, '', '你好', '12', 1396532980),
+(23, 1, 5, '', '你好', '12', 1396532980),
+(24, 1, 1, '862820606@qq.com', 'ff', 'ff', 1396533006),
+(25, 1, 5, '1@qq.com', 'ff', 'ff', 1396533006);
 
 -- --------------------------------------------------------
 
@@ -878,7 +968,7 @@ CREATE TABLE IF NOT EXISTS `cms_sort` (
   `url` varchar(100) NOT NULL COMMENT '外部链接',
   PRIMARY KEY (`id`),
   FULLTEXT KEY `path` (`path`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=100054 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=100074 ;
 
 --
 -- 转存表中的数据 `cms_sort`
@@ -906,7 +996,27 @@ INSERT INTO `cms_sort` (`id`, `type`, `path`, `name`, `deep`, `norder`, `ifmenu`
 (100050, 5, ',000000,100039', '服务业', 2, 0, 0, '', '', '', '', ''),
 (100051, 5, ',000000,100039,100040', '计算机软件', 3, 0, 0, '', '', '', '', ''),
 (100052, 5, ',000000,100039,100040', '计算机硬件', 3, 0, 0, '', '', '', '', ''),
-(100053, 5, ',000000,100039,100040', '互联网', 3, 0, 0, '', '', '', '', '');
+(100053, 5, ',000000,100039,100040', '互联网', 3, 0, 0, '', '', '', '', ''),
+(100054, 5, ',000000', '公司性质', 1, 0, 0, '', '', '', '', ''),
+(100055, 5, ',000000,100054', '外资·合资', 2, 0, 0, '', '', '', '', ''),
+(100056, 5, ',000000,100054', '私营·股份制企业', 2, 0, 0, '', '', '', '', ''),
+(100057, 5, ',000000,100054', '国有企业', 2, 0, 0, '', '', '', '', ''),
+(100058, 5, ',000000,100054', '非营利·事业单位', 2, 0, 0, '', '', '', '', ''),
+(100059, 5, ',000000,100054', '其他', 2, 0, 0, '', '', '', '', ''),
+(100060, 5, ',000000', '公司规模', 1, 0, 0, '', '', '', '', ''),
+(100061, 5, ',000000,100060', '1 - 49人', 2, 0, 0, '', '', '', '', ''),
+(100062, 5, ',000000,100060', '50 - 99人', 2, 0, 0, '', '', '', '', ''),
+(100063, 5, ',000000,100060', '100 - 499人', 2, 0, 0, '', '', '', '', ''),
+(100064, 5, ',000000,100060', '500 - 999人', 2, 0, 0, '', '', '', '', ''),
+(100065, 5, ',000000,100060', '1000人以上', 2, 0, 0, '', '', '', '', ''),
+(100066, 5, ',000000', 'footer导航', 1, 0, 0, '', '', '', '', ''),
+(100067, 5, ',000000,100066', '关于91频道', 2, 0, 0, '', '', '', '', ''),
+(100068, 5, ',000000,100066', '联系我们', 2, 0, 0, '', '', '', '', 'http://wy.yunstudio.net'),
+(100069, 5, ',000000,100066', '对外合作', 2, 0, 0, '', '', '', '', ''),
+(100070, 5, ',000000,100066', '招贤纳士', 2, 0, 0, '', '', '', '', ''),
+(100071, 5, ',000000,100066', '服务条款', 2, 0, 0, '', '', '', '', ''),
+(100072, 5, ',000000,100066', '关注我们', 2, 0, 0, '', '', '', '', 'http://weibo.com/yunstudio2/'),
+(100073, 5, ',000000,100066', '问题建议', 2, 0, 0, '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -934,8 +1044,8 @@ CREATE TABLE IF NOT EXISTS `cms_task_base` (
 --
 
 INSERT INTO `cms_task_base` (`id`, `goal`, `name`, `content`, `reminder`, `way`, `gold`, `score`, `starttime`, `endtime`, `ctime`) VALUES
-(1, '考察应聘者对公司的熟知度', '测试任务', '了解公司概况、主要业务、企业文化、社会评价等', '可从公司网站、主流媒体报道、公司其他宣传材料获取有关信息', '完成问卷、500字左右关于对公司认知的文章，题目自拟。参考题目：我眼中的##公司', 2, 0, 0, 0, 0),
-(2, '  考察应聘者对公司的熟知度ha ', '测试任务', '了解公司概况、主要业务、企业文化、社会评价等', '  可从公司网站、主流媒体报道、公司其他宣传材料获取有关信息', '', 0, 0, 0, 0, 1396173458);
+(1, ' 考察应聘者对公司的熟知度', '测试任务', '了解公司概况、主要业务、企业文化、\r\n社会评价等', ' 可从公司网站、主流媒体报道、\r\n其他宣传材料获取有关信息', '', 2, 0, 0, 0, 1396185838),
+(2, '   考察应聘者对公司的熟知度ha ', '测试任务', '了解公司概况、主要业务、企业文化、社会评价等\r\n还有什么', '   可从公司网站、主流媒体报道、公司其他宣传材料获取有关信息', '', 0, 0, 0, 0, 1396185730);
 
 -- --------------------------------------------------------
 

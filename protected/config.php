@@ -2,13 +2,6 @@
 return array (
   'REWRITE' => 
   array (
-    'index/search-<keywords>-<type>-<page>.html' => 'default/index/search',
-    'index/search-<keywords>-<type>.html' => 'default/index/search',
-    '<c>/<a>-<id>-<page>-<exsort>.html' => 'default/<c>/<a>',
-    '<c>/<a>-<id>-<page>.html' => 'default/<c>/<a>',
-    'index.html' => 'default/index/index',
-    '<c>/<a>-<id>.html' => 'default/<c>/<a>',
-    '<c>/<a>.html' => 'default/<c>/<a>',
   ),
   'APP' => 
   array (
@@ -89,16 +82,16 @@ return array (
   'ver_name' => 'V2.0',
   'ht_name' => 'Yuncms内容管理系统',
   'ver_date' => '20130704',
-  'copyright' => 'Yunstudio',
-  'sitename' => 'Yuncms站群管理系统',
-  'siteurl' => 'http://cms.yunstudio.net/',
-  'keywords' => 'cms',
-  'description' => '建站系统',
+  'copyright' => ' Copyright © 2014　长沙云影网络科技有限公司',
+  'sitename' => '91频道 - 大学生一站式就业服务平台 ',
+  'siteurl' => 'http://cms.yunstudio.net',
+  'keywords' => '91,频道,网络社交,职业社交,大学生就业',
+  'description' => '91频道是中国最大的职业社交网站,在这里你不仅可以结交好友、维护人脉还可以通过人际网络获得更好的工作和商业机会',
   'telephone' => '14789998264',
-  'QQ' => 825075713,
+  'beian' => '湘公网安备110105002161号',
   'myemail' => 'yunstudio2012@qq.com',
   'address' => '长沙理工大学创业园305',
-  'icp' => '0',
+  'icp' => '湘ICP证050525号',
   'fileupSize' => 2000000,
   'imgupSize' => 1000000,
   'ifwatermark' => false,
@@ -111,5 +104,4 @@ return array (
   'allowType' => 'jpg,bmp,gif,png,flv,mp4,mp3,wma,mp4,7z,zip,rar,ppt,txt,pdf,xls,doc,swf,wmv,avi,rmvb,rm',
   'sina_wb_akey' => '3226403690',
   'sina_wb_skey' => 'b476ab21cd1b75152fd2d90e63ce31e5',
-		
 );

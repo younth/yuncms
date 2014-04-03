@@ -8,6 +8,7 @@ class settingController extends commonController
 {
 	public function index()
 	{
+		
 		$this->display('setting/avatar');
 	}
 	
@@ -19,8 +20,9 @@ class settingController extends commonController
 		//$face=CP_PATH.'ext/avatar/avatar.php';
 		//$this->face=$face;
 		//require(CP_PATH.'ext/avatar/avatar.php');//后台部分配置固定，需要重加载配置
-		
-		$this->display();
+		//$url="http://{$_SERVER['HTTP_HOST']}/avatar/avatar.php";//上传头像的url
+		$url='avatar/avatar.php';//用相对地址处理
+		$this->redirect($url);
 	}
 	
 	//密码修改
@@ -61,4 +63,3 @@ class settingController extends commonController
 		}
 	}
 }
-?>

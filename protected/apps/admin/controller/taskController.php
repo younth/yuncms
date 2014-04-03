@@ -30,7 +30,11 @@ class taskController extends commonController{
             $data=array();
             $data['name']=$_POST['name'];
             $data['goal']=$_POST['goal'];
-            $data['content']=$_POST['content'];
+	        if (get_magic_quotes_gpc()) {
+					$data['content'] = stripslashes($_POST['content']);
+				} else {
+					$data['content'] = $_POST['content'];
+				}
             $data['reminder']=$_POST['reminder'];
             $data['way']=$_POST['way'];
             $data['starttime']=intval(strtotime($_POST['starttime']));
@@ -62,7 +66,11 @@ class taskController extends commonController{
             $data=array();
             $data['name']=$_POST['name'];
             $data['goal']=$_POST['goal'];
-            $data['content']=$_POST['content'];
+	        if (get_magic_quotes_gpc()) {
+					$data['content'] = stripslashes($_POST['content']);
+				} else {
+					$data['content'] = $_POST['content'];
+				}
             $data['reminder']=$_POST['reminder'];
             $data['way']=$_POST['way'];
             $data['starttime']=intval(strtotime($_POST['starttime']));
@@ -122,7 +130,6 @@ class taskController extends commonController{
         if(!$this->isPost()){
             $result=  model('task_custom')->find('id= '.$id);
             $comlist=model('company')->select('','','ctime desc');
-//            dump($comlist);
             $this->h_name="编辑公司定制任务";
             $this->result=$result;
             $this->comlist=$comlist;
@@ -133,7 +140,11 @@ class taskController extends commonController{
             $data=array();
             $data['name']=$_POST['name'];
             $data['cid']=$_POST['com'];
-            $data['content']=$_POST['content'];
+	        if (get_magic_quotes_gpc()) {
+					$data['content'] = stripslashes($_POST['content']);
+				} else {
+					$data['content'] = $_POST['content'];
+				}
             $data['gold']=$_POST['gold'];
             $data['score']=$_POST['score'];
             $data['starttime']=intval(strtotime($_POST['starttime']));

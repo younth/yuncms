@@ -348,12 +348,12 @@ class newsController extends commonController
 	//编辑器上传
 	public function UploadJson(){
 		//上传到news目录下面
-		$this->EditUploadJson('news');
+		EditUploadJson('news');
 	}
 	
 	//编辑器文件管理
 	public function FileManagerJson(){
-		$this->EditFileManagerJson('news');
+		EditFileManagerJson('news');
 	}
 	
 }

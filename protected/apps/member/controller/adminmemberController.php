@@ -46,7 +46,7 @@ class adminmemberController extends appadminController{
                 $data=array();
           
                 $data['uname']=$_POST['uname'];
-                $data['password']=$this->codepwd($_POST['password']);
+                $data['password']=codepwd($_POST['password']);
                 $data['login_email']=$_POST['login_email'];
                 $data['tel']=$_POST['tel'];
                 $data['qq']=$_POST['qq'];
@@ -89,7 +89,7 @@ class adminmemberController extends appadminController{
 			$groupid['user_group_id']=intval($_POST['groupid']);
 			model('member_group_link')->update("uid='$id'",$groupid);
 			
-			if($_POST['password']!=$_POST['oldpassword']) $data['password']=$this->codepwd($_POST['password']);
+			if($_POST['password']!=$_POST['oldpassword']) $data['password']=codepwd($_POST['password']);
 			$data['uname']=$_POST['uname'];
 			$data['login_email']=$_POST['login_email'];
 			$data['tel']=$_POST['tel'];
@@ -150,6 +150,7 @@ class adminmemberController extends appadminController{
 		      $data['uid']=$info['id'];
 		      $data['email']=$info['login_email'];//收信人
 		      $data['title']=$_POST['title'];//主题
+		      $data['type']=1;
 		       //内容
 		      if (get_magic_quotes_gpc()) {
 		      	$data['body'] = stripslashes($_POST['body']);
@@ -238,6 +239,7 @@ class adminmemberController extends appadminController{
 				if($groupid==0) $info=model('member')->find_link($val['id']);
 				else $info=model('member')->find_link($val['uid']);
 				$data['uid']=$info['id'];
+				$data['type']=1;
 				$data['email']=$info['login_email'];//收信人
 				$re=Email::send($data['email'], $data['title'], $data['body']);
 				//写入邮件记录

@@ -19,7 +19,7 @@
     <table width="100%" border="0" cellpadding="0" cellspacing="1"   class="all_cont" style="text-align: center">
         <form action="{url('task/del')}" method="post" id="dos"  onSubmit="return confirm('执行后不可以恢复~确定要执行吗？');">
           <tr>
-              <th>序号<input style="color:#E2E2E2" type="checkbox" name="chkAll" value="checkbox" onClick="CheckAll(this.form)"/></th>
+              <th><input style="color:#E2E2E2" type="checkbox" name="chkAll" value="checkbox" onClick="CheckAll(this.form)"/></th>
               <th>任务目标</th>
               <th>任务名称</th>
               <th>需耗金币值</th>
@@ -30,7 +30,6 @@
           
           <?php 
                  if(!empty($result)){
-                     $i=1;
                       foreach($result as  $_v){
                           ?><tr>
                               <td><?php echo $i?><input type="checkbox" name="delid[]" value="{$_v['id']}" /></td>
@@ -38,15 +37,13 @@
                               <td><?php echo $_v['name']?></td>
                               <td><?php echo $_v['gold']?></td>
                               <td><?php echo $_v['score']?></td>
-<!--                              <td><?php echo date('Y-m-d H:i:s',$_v['starttime'])?></td>
-                              <td><?php echo date('Y-m-d H:i:s',$_v['endtime'])?></td>-->
                               <td><?php echo date('Y-m-d H:i:s',$_v['ctime'])?></td>
                               <td><a href="{url('task/edit',array('tid'=>$_v['id']))}">编辑</a>
                                   <a href="javascript:void(0)" id="del_<?php echo $_v['id'] ?>" onclick="del('<?php echo url('task/del') ?>','<?php echo $_v['id']?>')">删除</a>
                               </td>
                           </tr>
                              
-                             <?php $i++;
+                             <?php 
                        }
                      }
           ?>          

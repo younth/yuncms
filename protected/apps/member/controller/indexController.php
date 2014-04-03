@@ -11,16 +11,28 @@ class indexController extends commonController
 	    	//注意使用新闻微博登录没有存储本地cookie
 	    	$weibo_uid=$_SESSION['token']['access_token'];
 	    	$auth=$this->auth;//本地登录的cookie信息
+	    	//dump($auth);
 	    	if(empty($auth)&&empty($weibo_uid)) $this->redirect(url('member/account/login'));//未登录， 跳转到登录页面
 	    	if($weibo_uid)
 	    	{
 	    		//找出该微博key的用户
 	    		$acc=model("member_login")->member_weibo($weibo_uid);
 	    		if($acc) $this->uname=$acc['uname'];//绑定了，读出用户信息
+	    		//微博登陆存储session
+	    		$_SESSION['uid']=$acc['id'];
 	    	}
 	    	
-	    	if($auth&&$acc['is_active']=1) $this->uname=$auth['uname'];
-	    	
+	    	if($auth)
+	    	{
+	    		if($auth['is_active']==1) $this->uname=$auth['uname'];
+	    		else $this->error('账号未激活~',url('default/index/index'));
+	    	}
+	    	//输出会员的头像
+	    	require(ROOT_PATH.'/avatar/AvatarUploader.class.php');
+	    	$uid=$_SESSION['uid'];
+	    	$au = new AvatarUploader();
+	    	$urlAvatarBig = $au->getAvatar($uid,'big');
+	    	$this->photo=$urlAvatarBig;
         	$this->display();
 	    }
 

@@ -19,9 +19,9 @@ hs.showCredits = false;
   $(function ($) { 
    //表单验证
 	var items_array = [
-		{ name:"webname",min:3,max:30,simple:"站点名称",focusMsg:'3-30个字符'},
-		{ name:"url",type:'url',simple:"站点地址",focusMsg:'请输入合法的站点地址'}
-	];
+		{ name:"webname",min:2,max:30,simple:"站点名称",focusMsg:'2-30个字符'},
+/*		{ name:"url",type:'url',simple:"站点地址",focusMsg:'请输入合法的站点地址'}
+*/	];
 
 	$("#info").skygqCheckAjaxForm({
 		items			: items_array
@@ -65,8 +65,9 @@ hs.showCredits = false;
           <tr>
             <td align="right"  width="100">链接类型：</td>
             <td align="left">
-               <input name="type" type="radio" value="1" <?php echo $info['type']==1?"checked='checked'":NULL ?> />文字链接 &nbsp;
-               <input name="type" type="radio" value="2" <?php echo $info['type']==2?"checked='checked'":NULL ?> />图片链接 
+               <input name="type" type="radio" value="1" <?php echo $info['type']==1?"checked='checked'":NULL ?> />网站链接 &nbsp;
+               <input name="type" type="radio" value="2" <?php echo $info['type']==2?"checked='checked'":NULL ?> />加盟企业 &nbsp;
+               <input name="type" type="radio" value="3" <?php echo $info['type']==3?"checked='checked'":NULL ?> />入驻高校 
             </td>
             <td class="inputhelp"></td>
           </tr>
@@ -97,12 +98,12 @@ hs.showCredits = false;
           <tr>
             <td align="right">网站所有者：</td>
             <td align="left"><input name="siteowner" id="siteowner" type="text" value="{$info['siteowner']}" /></td>
-            <td class="inputhelp"></td>
+            <td class="inputhelp">对应加盟企业的是职位</td>
           </tr>
           <tr>
             <td align="right">网站简介：</td>
             <td align="left"><textarea name="info" id="info" cols="40" rows="5">{$info['info']}</textarea></td>
-            <td class="inputhelp"></td>
+            <td class="inputhelp">对应加盟企业的是简介或者评语</td>
           </tr>
           <tr>
             <td align="right">排序：</td>

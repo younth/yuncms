@@ -19,7 +19,7 @@
     <table width="100%" border="0" cellpadding="0" cellspacing="1"   class="all_cont" style="text-align: center">
         <form action="{url('task/delcustom')}" method="post" id="dos"  onSubmit="return confirm('执行后不可以恢复~确定要执行吗？');">
           <tr>
-              <th>序号<input style="color:#E2E2E2" type="checkbox" name="chkAll" value="checkbox" onClick="CheckAll(this.form)"/></th>
+              <th><input style="color:#E2E2E2" type="checkbox" name="chkAll" value="checkbox" onClick="CheckAll(this.form)"/></th>
               <th>任务企业</th>
               <th>任务名称</th>
               <th>需耗金币值</th>
@@ -29,7 +29,6 @@
           </tr>
           <?php 
                  if(!empty($result)){
-                     $i=1;
                       foreach($result as  $_v){
                           ?><tr>
                               <td><?php echo $i?><input type="checkbox" name="delid[]" value="{$_v['id']}" /></td>
@@ -45,7 +44,7 @@
                               </td>
                           </tr>
                              
-                             <?php $i++;
+                             <?php 
                        }
                      }
           ?>          

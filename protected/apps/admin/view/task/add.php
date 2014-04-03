@@ -31,19 +31,19 @@
             <tr>
             <td align="right"  width="10%">任务目标:</td>
                <td  align="left">
-                   <textarea  name="goal" rows="3" cols="70"> {$result['goal']}</textarea>
+                   <textarea  name="goal" rows="4" cols="70"> {$result['goal']}</textarea>
                </td>
             </tr>
             <tr>
             <td align="right"  width="10%">任务内容:</td>
                <td  align="left">
-               <textarea name="content" rows="3" cols="70">{$result['content']}</textarea>
+               <textarea name="content" rows="4" cols="70">{$result['content']}</textarea>
                </td>
             </tr>
             <tr>
             <td align="right"  width="10%">任务提示:</td>
                <td  align="left">
-               <textarea name="reminder" rows="3" cols="70"> {$result['reminder']}</textarea>
+               <textarea name="reminder" rows="4" cols="70"> {$result['reminder']}</textarea>
                </td>
             </tr>
             <tr>

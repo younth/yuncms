@@ -1,0 +1,197 @@
+@charset "utf-8";
+.dj-content-wrap {
+margin-top: 30px;
+padding-top: 16px;
+display:block;
+}
+.dj-content-inner {
+min-height: 520px;
+background-position: center 0;
+background-repeat: no-repeat;
+_height: 520px;
+}
+.dj-content-shadow {
+width: 960px;
+min-height: 400px;
+margin: 0 auto;
+border: 1px solid #ccc;
+background: #fff url("../images/welcome-bg.png") right bottom no-repeat;
+}
+
+.p-wrap {
+padding: 35px 60px 90px;
+height: auto;
+}
+
+.p-wrap h2 {
+font: 28px/34px 'microsoft yahei',tahoma;
+height: 34px;
+}
+
+.p-wrap h2 span {
+color: #ff8400;
+padding-left: 8px;
+font-size:18px;
+}
+
+.p-list {
+background: url("../images/welcome-list-bg.png") no-repeat;
+margin: 75px 0 60px;
+display: block;
+height:90px;
+}
+
+.clearfix {
+zoom: 1;
+display: block;
+clear: both;
+}
+
+.p-list li {
+float: left;
+padding: 0 45px 0 65px;
+width: 142px;
+height: 90px;
+}
+
+.p-list h5 {
+font: 18px/20px 'microsoft yahei',tahoma;
+padding-bottom: 10px;
+}
+
+.p-list p {
+color: #999;
+}
+.p-btn {
+margin-left: 65px;
+display: inline-block;
+margin-top:40px;
+}
+
+.dj-btn-xl {
+height: 40px;
+line-height: 40px;
+padding: 0 27px;
+font-size: 20px;
+font-family: 'microsoft yahei',tahoma,sans-serif;
+}
+.dj-btn-info {
+border: 1px solid #086b9d;
+background-color: #1b86bb;
+color: #fff;
+background-image: -webkit-linear-gradient(top,#1f92c8,#1980b4);
+background-image: -moz-linear-gradient(top,#1f92c8,#1980b4);
+background-image: -o-linear-gradient(top,#1f92c8,#1980b4);
+background-image: linear-gradient(to bottom,#1f92c8,#1980b4);
+}
+
+.p-hot-line {
+background: url("../images/welcome-hot-line-ico.png") 0 50% no-repeat;
+font: 18px/20px 'microsoft yahei',tahoma;
+padding-left: 39px;
+margin: 50px 0 0 65px;
+color: #b8d4e1;
+}
+
+
+
+/******下面开始为注册******/
+
+.i-title {
+margin-bottom: 40px;
+height: 22px;
+line-height: 22px;
+}
+.i-title h2 {
+padding-bottom: 10px;
+border-bottom: 1px solid #ccc;
+font-family: 'microsoft yahei',tahoma;
+font-size: 20px;
+line-height: 22px;
+}
+
+.i-title h2 i {
+margin-top: 6px;
+background: none repeat scroll 0 0 #f60;
+display: inline-block;
+font-size: 0;
+height: 19px;
+margin: 4px 7px 0 0;
+vertical-align: text-top;
+width: 4px;
+}
+
+.form-main {
+width: 610px;
+margin: auto;
+padding-bottom: 55px;
+}
+.p-form fieldset {
+line-height: 30px;
+border: none;
+margin-bottom: 40px;
+}
+table.dj-form-smart {
+border-collapse: collapse;
+}
+tbody {
+display: table-row-group;
+vertical-align: middle;
+border-color: inherit;
+}
+tr {
+display: table-row;
+vertical-align: inherit;
+border-color: inherit;
+}
+
+.dj-form-smart th {
+font-weight: normal;
+text-align: right;
+}
+
+.dj-form-smart td, .dj-form-smart th {
+font-family: 'tahoma','simsun';
+vertical-align: top;
+font-size: 14px;
+line-height: 30px;
+padding-bottom: 20px;
+}
+
+.p-form fieldset input {
+border: 1px solid;
+border-color: #c6c6c6 #eeeeee #eee #c6c6c6;
+background: #F9F9F9;
+height: 20px;
+line-height: 18px;
+padding: 6px;
+_margin: -1px 0;
+font-size: 14px;
+vertical-align: top;
+width: 364px;
+}
+
+.dj-form-smart th em {
+color: #f00;
+margin-right: 5px;
+font-family: 'simsun';
+}
+.J_form_button {
+background-color: #f36948;
+box-shadow: 1px 0 1px #dcdcdc;
+}
+
+.J_form_button:hover {
+background-color: #f57451;
+}
+
+.dj-btn-info:hover, .dj-btn-info:focus {
+border: 1px solid #046597;
+background-color: #1678ac;
+background-image: -webkit-linear-gradient(top,#1888bd,#1676ab);
+background-image: -moz-linear-gradient(top,#1888bd,#1676ab);
+background-image: -o-linear-gradient(top,#1888bd,#1676ab);
+background-image: linear-gradient(to bottom,#1888bd,#1676ab);
+text-decoration: none;
+color: #fff;
+}

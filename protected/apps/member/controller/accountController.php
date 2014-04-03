@@ -15,8 +15,8 @@ class accountController extends commonController
 		require(CP_PATH . 'ext/saetv2.ex.class.php');
 		$this->we_akey=$config['sina_wb_akey'];
 		$this->we_skey=$config['sina_wb_skey'];
-		$this->we_callback_url='http://cms.yunstudio.net/index.php?yun=member/account/weibo';//回调地址
-		
+		$this->we_callback_url=$config['siteurl'].'/index.php?yun=member/account/weibo';//回调地址
+		//$this->we_callback_url='http://cms.yunstudio.net/index.php?yun=member/account/weibo';//回调地址
 	}
 
       public function login()
@@ -37,14 +37,19 @@ class accountController extends commonController
         	//记住我，就存入cookie
        if(empty($_POST['login_email'])||empty($_POST['password'])) $this->error('请填写完整信息~');
             $login_email=in(trim($_POST['login_email']));
+            //判断是那个登陆
+            if(model('member')->find("login_email='{$login_email}'"))$type='member';
+            if(model('company')->find("login_email='{$login_email}'"))$type='company';
             $password=$_POST['password'];
             $cookietime=empty($_POST['cooktime'])?0:intval($_POST['cooktime']);//接收cookie
             //$_SERVER['HTTP_REFERER']为父级url
             $returnurl=empty($_POST['returnurl'])?$_SERVER['HTTP_REFERER']:$_POST['returnurl'];
             //判断登录的处理，单独用一个函数判断登录
-            if($this->_login($login_email,$password,$cookietime))
+            if($this->_login($login_email,$password,$cookietime,$type))
             {
-                $this->redirect($returnurl);//跳转到登陆前的url
+                //$this->redirect($returnurl);//跳转到登陆前的url
+                if($type=='member') $this->redirect(url('member/index/index'));//学生的首页
+                if($type=='company') $this->redirect(url('company/index/index'));//企业的首页
             }
             else $this->error('邮箱或密码错误，或者您的账户已被锁定');
         }
@@ -53,22 +58,46 @@ class accountController extends commonController
       //这个登陆验证函数，申明为protected
       protected function _login($login_email,$password,$cookietime=0)
       {
+      	 //将企业登陆于学生登陆一起判断,必须保证企业邮箱跟学生邮箱唯一，且不重复
           $acc=model('member')->find("login_email='{$login_email}'");
-          if($acc['password']!=$this->codepwd($password) || !$acc['is_active']) return false;
-          if($cookietime!=0) $cookietime=time()+$cookietime;//设置cookie
-          $log['ip'] = get_client_ip();
-          $data['lasttime']=$log['ctime']=time();
-          $log['uid']=$id=$acc['id'];
-          $log['type']=1;
-          model('member')->update("id='{$id}'",$data);
-          $grouplink=model("member_group_link")->find("uid='{$id}'");
-          //存入登录日志
-          model('login_logs')->insert($log);
-          
-          //登陆成功要设置cookie，然后保存到auth类里面，注意groupid的存放
-          $cookie_auth = $acc['id'].'\t'.$acc['uname'].'\t'.$acc['lasttime'].'\t'.$grouplink['user_group_id'].'\t'.$login_email.'\t'.$acc['is_active'];
-          if(set_cookie('auth',$cookie_auth,$cookietime)) return true;//设置cookie
-          return false;
+          $re=model('company')->find("login_email='{$login_email}'");
+          if($acc)
+          {
+          	//学生登陆
+          	if($acc['password']!=codepwd($password) || !$acc['is_active']) return false;
+          	if($cookietime!=0) $cookietime=time()+$cookietime;//设置cookie
+          	$log['ip'] = get_client_ip();
+          	$data['lasttime']=$log['ctime']=time();
+          	$log['uid']=$id=$acc['id'];
+          	$log['type']=1;
+          	model('member')->update("id='{$id}'",$data);
+          	$grouplink=model("member_group_link")->find("uid='{$id}'");
+          	//存入登录日志
+          	model('login_logs')->insert($log);
+          	$_SESSION['uid']=$acc['id'];
+          	//登陆成功要设置cookie，然后保存到auth类里面，注意groupid的存放
+          	$cookie_auth = $acc['id'].'\t'.$acc['uname'].'\t'.$acc['lasttime'].'\t'.$grouplink['user_group_id'].'\t'.$login_email.'\t'.$acc['is_active'];
+          	if(set_cookie('auth',$cookie_auth,$cookietime)) return true;//设置cookie
+          	else return false;
+          }elseif($re)
+          {
+          	//企业登陆
+          	if($re['password']!=codepwd($password) || !$re['is_active']) return false;
+          	$log['ip'] = get_client_ip();
+          	$data['lasttime']=$log['ctime']=time();
+          	$log['uid']=$id=$re['id'];
+          	$log['type']=2;//2是企业
+          	//存入登录日志
+          	model('login_logs')->insert($log);
+          	model('company')->update("id='{$id}'",$data);//更新登陆时间
+          	$_SESSION['company_id']=$re['id'];
+          	$_SESSION['name']=$re['name'];
+          	//dump($_SESSION);
+          	if($_SESSION['company_id']) return true;//设置cookie
+          	else return false;
+          }
+          else $this->error('没有该用户！');
+         
       }
 
       //用户退出
@@ -76,7 +105,9 @@ class accountController extends commonController
       {
       	  session_unset();//释放所有的session
           $url=empty($_GET['url'])?$_SERVER['HTTP_REFERER']:$_GET['url'];
-          if(set_cookie('auth','',time()-1)) $this->success('您已成功退出~',$url);//清除cookie
+          //if(set_cookie('auth','',time()-1)) $this->success('您已成功退出~',$url);//清除cookie
+          //退出跳转到首页
+          if(set_cookie('auth','',time()-1)) $this->success('您已成功退出~',url('default/index/index'));
           //清除session
       }
 
@@ -98,7 +129,7 @@ class accountController extends commonController
             if(!empty($acc['login_email'])) $this->error('该邮箱已被注册~');
             
             $data['uname']=in(trim($_POST['uname']));
-            $data['password']=$this->codepwd($_POST['password']);
+            $data['password']=codepwd($_POST['password']);
             $data['regip']=$data['lastip']=get_client_ip();
             $data['ctime']=$data['lasttime']=time();
             $data['is_active']=0;
@@ -110,8 +141,18 @@ class accountController extends commonController
             model('member_group_link')->insert($grouplink);
             //将token token_exptime写入member_login表
             $login['mid']=$id;
+            $login['type']=1;
             $login['token']=$token;//激活码
-            model('member_login')->insert($login);
+            $weibo_uid=$_SESSION['token']['access_token'];//存在微博key，则更新到这个微博记录
+            if($weibo_uid) model('member_login')->update("weibo_key='$weibo_uid'",$login);
+            else model('member_login')->insert($login);//不是微博，则插入记录
+            //微博账号有了则更新
+            //微博账号注册激活，则自动绑定账号,member_login有了用户记录
+      		
+      		$weibo['weibo_key']=$weibo_uid;//用户的id
+      		$weibo['type']=1;
+      		
+            
             if($id){
             	//下面处理邮箱
             	$config=require(BASE_PATH.'/config.php');//后台部分配置固定，需要重加载配置
@@ -141,7 +182,7 @@ class accountController extends commonController
       		$emailArr = explode("@",$member_email);//获得邮箱服务器
       		$this->login_email="http://mail.".$emailArr[1];//登录邮箱的地址
       		$this->member_email=$member_email;
-      		$this->display();
+      		$this->display('');
       	}
       	else $this->error("禁止访问~");
       	
@@ -190,19 +231,32 @@ class accountController extends commonController
 			setcookie( 'weibojs_'.$o->client_id, http_build_query($token) );
 			//授权成功，跳转页面，微博登陆成功，判断有没有绑定，没有则进行绑定，否则跳转到用户首页
 			$weibo_uid=$_SESSION['token']['access_token'];
-			if(model("member_login")->find("weibo_key='{$weibo_uid}'")) $this->redirect(url('member/index/index'));
-				else $this->redirect(url('member/account/loginbind'));
+			//绑定了直接登录。登陆过未绑定则注册
+			if(model("member_login")->find("weibo_key='{$weibo_uid}' AND mid<>''")) $this->redirect(url('member/index/index'));
+			//找不到该微博key,说明是第一次使用微博登陆，先将微博key写入member_login
+			elseif(model("member_login")->find("weibo_key='{$weibo_uid}' AND mid=''"))
+			{
+				//用微博登陆过，未注册，则进入注册
+				$this->redirect(url('member/account/openreg'));
+			}
+				else{
+					$data=array();
+					$data['weibo_key']=$weibo_uid;
+					model('member_login')->insert($data);//写入weibo_key
+					$this->redirect(url('member/account/loginbind'));
+				} //进行绑定
 		}
 		else $this->error('绑定失败~~~');
  	}
       
-      //使用微博登陆之后，如果有账号，则绑定，就是讲目前的账号写入一个weibo_key
+      //使用微博登陆之后，如果有账号，则绑定，就是将目前的账号写入一个weibo_key
       public function loginbind()
       {
       	if(!$this->isPost())
       	{
-      		//绑定登陆的页面，此时已经使用微博登陆了，获取微博信息
       		$weibo_uid=$_SESSION['token']['access_token'];
+      		//绑定登陆的页面，此时已经使用微博登陆了，获取微博信息
+      		if(empty($weibo_uid)) $this->redirect(url('default/index/index'));
       		$c = new SaeTClientV2($this->we_akey,$this->we_skey,$weibo_uid);
       		$ms  = $c->home_timeline(); // done
       		$uid_get = $c->get_uid();
@@ -222,26 +276,31 @@ class accountController extends commonController
       		if(empty($_POST['login_email'])||empty($_POST['password'])) $this->error('请填写完整信息~');
       		$login_email=in(trim($_POST['login_email']));
       		$password=$_POST['password'];
+      		$acc=model('member')->find("login_email='{$login_email}'");//确保微博登陆值针对学生用户
       		$cookietime=empty($_POST['cooktime'])?0:intval($_POST['cooktime']);//接收cookie
       		//判断登录的处理，单独用一个函数判断登录
-      		if($this->_login($login_email,$password,$cookietime))
-      		{
-      			//成功登陆，则写入微博Key
-      			$auth=$this->auth;//auth存放会员信息
-      			$data=array();
-      			$data['mid']=$auth['id'];
-      			$data['weibo_key']=$_SESSION['token']['access_token'];
-      			if(model('member_login')->insert($data)) $this->redirect(url('member/index/index'));
-      		}
-      		else $this->error('邮箱或密码错误，或者您的账户已被锁定');
+      		if($acc){
+      			if($this->_login($login_email,$password,$cookietime))
+      			{
+      				//成功登陆，则写入微博Key  auth传不过来
+      				$data=array();
+      				$data['mid']=$_SESSION['uid'];
+      				$data['type']=1;
+      				$weibo_uid=$_SESSION['token']['access_token'];
+      				if(model('member_login')->update("weibo_key='{$weibo_uid}'",$data)) $this->redirect(url('member/index/index'));
+      			}
+      			else $this->error('邮箱或密码错误，或者您的账户已被锁定');
+      		}else $this->error('用户不存在~');
       	}
       }
 
-      //新浪微博第一次登陆之后完善信息，这相当于注册
+      
+      //新浪微博第一次登陆之后完善信息，这相当于微博用户注册
       public function openreg()
       {
-      	
+      		$this->display();
       }
+      
       //找回密码
       public function lostpassword()
       {
@@ -253,32 +312,40 @@ class accountController extends commonController
       		if(empty($_POST['login_email'])) $this->error('请输入邮箱地址~');
       		$login_email=in(trim($_POST['login_email']));
       		//检查是否存在该邮箱
-      		$acc=model('member')->find("login_email='{$login_email}'");
+      		$acc=model('member')->find("login_email='{$login_email}'");//学生
+      		$re=model('company')->find("login_email='{$login_email}'");//企业
       		$grouplink=model("member_group_link")->find("uid='".$acc['id']."'");
-      		if(empty($acc)) $this->error('该邮箱尚未注册，现在去注册~','member/index/regist');
-      		else{
-      			//存在该邮件，构造url,发送邮件
+      		if(empty($acc)&&empty($re)) $this->error('该邮箱尚未注册，现在去注册~',url('member/account/regist'));
+      		//存在该邮件，构造url,发送邮件
+      		if($acc)
+      		{
+      			//学生
       			$token = md5($acc['uname'].$acc['password'].$acc['ctime']); //创建用于激活识别码
-      			$config=require(BASE_PATH.'/config.php');//后台部分配置固定，需要重加载配置
-      			Email::init($config['EMAIL']);//初始化邮箱配置
       			$smtpemailto=$acc['login_email'];//收信人邮箱
-      			$emailsubject="找回91频道密码";//注册邮箱的主题
       			$uname=$acc['uname'];//收信人name
-      			$url=url('account/resetpassword',array('verify'=>urlencode($token)));//url传参数问题的解决办法
-      			$verify_url=$config['siteurl'].$url;//邮箱验证的url
+      		}
+      		elseif($re)
+      		{
+      			//企业
+      			$token = md5($re['name'].$re['password'].$re['ctime']); //创建用于激活识别码
+      			$smtpemailto=$re['login_email'];//收信人邮箱
+      			$uname=$re['name'];//收信人name
+      		}
+	      		$emailsubject="找回91频道密码";//注册邮箱的主题
+	      		$config=require(BASE_PATH.'/config.php');//后台部分配置固定，需要重加载配置
+	      		Email::init($config['EMAIL']);//初始化邮箱配置
+      			$url=url('account/resetpassword',array('verify'=>urlencode($token)));//url传参数问题的解决办法,邮箱验证的url
+      			$verify_url=$config['siteurl'].$url;
       			$emailbody=$uname."你好！<br/><br/>点击以下链接并根据页面提示完成密码重设：​<br/><a href='{$verify_url}'>{$verify_url}</a>";//注册邮箱的内容
       			$emailbody.="<br/><span style='font-size:14px;color:#999999'>如无法点击，请将链接拷贝到浏览器地址栏中直接访问。</span>";
-      			$re=Email::send($smtpemailto, $emailsubject, $emailbody);
-      			//这里不能设置cookie登陆,需要重新设置密码
-      			//$cookie_auth = $acc['id'].'\t'.$acc['uname'].'\t'.$acc['lasttime'].'\t'.$grouplink['user_group_id'].'\t'.$acc['login_email'].'\t'.$acc['is_active'];
-      			if($re){
+      			$rel=Email::send($smtpemailto, $emailsubject, $emailbody);
+      			if($rel){
       				$this->member_email=$login_email;
       				$emailArr = explode("@",$login_email);//获得邮箱服务器
       				$this->login_email="http://mail.".$emailArr[1];//登录邮箱的地址
       				$this->display("account/sendpassword");
       			}
       		}
-      	}
       }
       
       //邮件发送成功
@@ -292,18 +359,27 @@ class accountController extends commonController
       {
       	$verify = stripslashes(trim($_GET['verify']));//激活码，对比用户的激活码
       	$re=model('member_login')->find("token='{$verify}'");//验证用户的登陆token
-      	if(empty($re)) $this->error('该邮箱尚未激活，现在激活');
+      	dump($re);return;
+      	if(empty($re)) $this->error('该邮箱尚未激活~');
       	if(!$this->isPost()){
       		$this->display();
       	}else{
       		//重新设置密码
       		if($_POST['password']!=$_POST['repassword']) $this->error('确认密码与新密码不符~');
-      		$data['password']=$this->codepwd($_POST['password']);
+      		$data['password']=codepwd($_POST['password']);
       		$id=$re['mid'];
-      		if(model('member')->update("id='{$id}'",$data)) $this->success('密码修改成功~',url('default/index/index'));
+      		if($re['type']==1) //学生
+      		{
+      			if(model('member')->update("id='{$id}'",$data)) $this->success('密码修改成功~',url('default/index/index'));
+      		}
+      		elseif($re['type']==2)//企业
+      		{
+      			if(model('company')->update("id='{$id}'",$data)) $this->success('密码修改成功~',url('default/index/index'));
+      		}
       		else $this->error('密码修改失败~');
       	}
      
       	
       }
+
 }

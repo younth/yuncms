@@ -43,15 +43,6 @@ function unlock(obj){
 }
 
 $(function ($) { 
-	//行颜色效果
-	$('.all_cont tr').hover(
-	function () {
-        $(this).children().css('background-color', '#f9f9f9');
-	},
-	function () {
-        $(this).children().css('background-color', '#fff');
-	}
-	);
 	//调用函数
 	lock($('.lock'));
 	unlock($('.unlock'));
@@ -82,20 +73,24 @@ $(function ($) {
          <form action="{url('link/del')}" method="post" onSubmit="return confirm('删除不可以恢复~确定要删除吗？');"> 
          <table width="100%" border="0" cellpadding="0" cellspacing="1"   class="all_cont">
           <tr>
-            <th width="70"><input type="checkbox" name="chkAll" value="checkbox" onClick="CheckAll(this.form)"/></th>
-            <th width="30%">网站LOGO</th>
-            <th width="10%">链接类型</th>
-            <th width="30%">网站名称</th>
-            <th width="10%">排序</th>
-            <th width="20%">操作</th>
+            <th width="213"><input type="checkbox" name="chkAll" value="checkbox" onClick="CheckAll(this.form)"/></th>
+            <!--<th width="30%">网站LOGO</th>-->
+            <th width="212">链接类型</th>
+            <th width="497">网站名称</th>
+            <th width="130">排序</th>
+            <th width="262">操作</th>
           </tr>
           <?php 
                  if(!empty($list)){
                       foreach($list as $vo){
                           $logo=empty($vo['picture'])?empty($vo['logourl'])?$public.'/images/youlink.gif':$vo['logourl']:$path.$vo['picture'];
                           $cont.= '<tr id="'.$vo['id'].'"><td align="center" width="70"><input type="checkbox" name="delid[]" value="'.$vo['id'].'"/></td>';
-                          $cont.= '<td align="center"><img src="'.$logo.'" border="0"></td><td align="center">';
-                          $cont.= ($vo['type']==1)?'文字链接':'图片链接';
+						  //<td align="center"><img src="'.$logo.'" border="0"></td>
+                          $cont.= '<td align="center">';
+						  if($vo['type']==1) $name='友情链接';
+						  elseif($vo['type']==2) $name='加盟企业';
+						  elseif($vo['type']==3) $name='入驻高校';
+                          $cont.= $name;
                           $cont.= '</td><td align="center"><a target="_blank" href="'.$vo['url'].'">'.$vo['name'].'</a></td>';
                           $cont.='<td align="center">'.$vo['norder'].'</td><td  width="130">';
                           $cont.=$vo['ispass']?'<div class="lock" >锁定</div>':'<div class="unlock">审核</div>';

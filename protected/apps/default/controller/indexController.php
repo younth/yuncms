@@ -23,15 +23,39 @@ class indexController extends commonController
 		$code_url = $o->getAuthorizeURL($this->we_callback_url);
 		$this->weibo_login=$code_url;
 		$weibo_uid=$_SESSION['token']['access_token'];
-		
+		//微博登陆
+		if($weibo_uid) $this->redirect(url('member/index/index'));//跳转到会员首页
 		$auth=$this->auth;//本地登录的cookie信息
 		//如果登陆了则跳转到首页,auth是存放用户信息的数组
+		//echo $_SESSION['company_id'];
+		if(!empty($_SESSION['company_id'])) $this->redirect(url('company/index/index'));
+		if($auth['is_active']==1) $this->redirect(url('member/index/index'));//未激活，跳转到会员首页
+		else {
+			$this->display();
+		}
+			
+	}
+	
+	public function login()
+	{
+		//新浪微博登陆url处理
+		$o = new SaeTOAuthV2( $this->we_akey , $this->we_skey );
+		$code_url = $o->getAuthorizeURL($this->we_callback_url);
+		$this->weibo_login=$code_url;
+		$weibo_uid=$_SESSION['token']['access_token'];
+		//微博登陆
+		if($weibo_uid) $this->redirect(url('member/index/index'));//跳转到会员首页
+		$auth=$this->auth;//本地登录的cookie信息
+		//如果登陆了则跳转到首页,auth是存放用户信息的数组
+		//echo $_SESSION['company_id'];
+		if(!empty($_SESSION['company_id'])) $this->redirect(url('company/index/index'));
 		if(!empty($auth)||!empty($weibo_uid)) $this->redirect(url('member/index/index'));//跳转到会员首页
 		else {
 			$this->display();
 		}
 			
 	}
+	
 	
 	//生成验证码
     public function verify()
