@@ -82,6 +82,7 @@ function html_out($str){
     $str = stripslashes($str);
 	return $str;
 }
+
 //去除html js标签
 function deletehtml($document) {
     $document = trim($document);
@@ -109,6 +110,7 @@ function deletehtml($document) {
                    );
     return @preg_replace ($search, $replace, $document);
 }
+
 // 获取客户端IP地址
 function get_client_ip(){
    if (getenv("HTTP_CLIENT_IP") && strcasecmp(getenv("HTTP_CLIENT_IP"), "unknown")){

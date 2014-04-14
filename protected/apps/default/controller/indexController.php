@@ -25,14 +25,13 @@ class indexController extends commonController
 		$weibo_uid=$_SESSION['token']['access_token'];
 		//微博登陆
 		if($weibo_uid) $this->redirect(url('member/index/index'));//跳转到会员首页
-		$auth=$this->auth;//本地登录的cookie信息
+		
+		if(!empty($_SESSION['company_id'])) $this->redirect(url('company/manage/index'));
 		//如果登陆了则跳转到首页,auth是存放用户信息的数组
-		//echo $_SESSION['company_id'];
-		if(!empty($_SESSION['company_id'])) $this->redirect(url('company/index/index'));
+		$auth=$this->auth;//本地登录的cookie信息
 		if($auth['is_active']==1) $this->redirect(url('member/index/index'));//未激活，跳转到会员首页
-		else {
-			$this->display();
-		}
+		
+		$this->display();
 			
 	}
 	

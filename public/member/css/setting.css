@@ -1,0 +1,321 @@
+@charset "utf-8";
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+ul:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+ul, ol, dl {
+    margin: 0;
+}
+.dj-account {
+    background: url("../images/bg.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    margin-bottom: -40px;
+    padding: 30px 0 40px;
+}
+
+
+.dj-account .dj-content-inner {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    position: relative;
+}
+
+.dj-account .dj-sub-title {
+    height: 16px;
+    left: 50%;
+    margin-left: -414px;
+    position: absolute;
+    top: 40px;
+    width: 70px;
+    z-index: 400;
+}
+
+
+.dj-account .dj-sub-title h2 {
+    background: url("../images/set-replace.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    font-size: 0;
+    height: 16px;
+    line-height: 0;
+    padding: 0;
+}
+
+.dj-account .dj-content-shadow {
+    box-shadow: 1px 3px 3px rgba(150, 152, 153, 0.3);
+}
+
+#content {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+	clear: both;
+    margin-left: auto;
+    margin-right: auto;
+    width: 960px;
+}
+
+
+#maincolumn {
+    float: none;
+    margin: 0;
+    width: 960px;
+}
+
+.dj-account #setting {
+    background: url("../images/set-aside-bg.png") repeat-y scroll 0 0 #FFFFFF;
+}
+
+#setting:after {
+    clear: both;
+    content: " ";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+
+.dj-account #navigation {
+    background: url("../images/set-aside-ico.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border-right: 1px solid #D9D9D9;
+    float: left;
+    height: auto !important;
+    overflow: visible;
+    padding-top: 100px;
+    width: 178px;
+    z-index: 20;
+}
+
+
+#content #navigation .tabs {
+    left: 120px;
+}
+
+ul:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+.dj-account .tabs ul {
+    margin-left: 22px;
+    padding-bottom: 80px;
+}
+
+
+.dj-account .tabs li {
+    background: url("../images/set-nav-list-bg.png") no-repeat scroll left bottom rgba(0, 0, 0, 0);
+    float: none;
+    height: 40px;
+    margin-right: 0;
+    position: relative;
+}
+
+.dj-account .tabs a {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #666666;
+    display: block;
+    height: 38px;
+    left: 0;
+    line-height: 38px;
+    padding: 0;
+    position: absolute;
+    text-indent: 44px;
+    top: 0;
+    width: 100%;
+	font-size: 14px;
+}
+
+.tabs span { font-size:14px;}
+.dj-account .tabs .selected a {
+    background: url("../images/set-nav-selected.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #666666;
+    font-weight: bold;
+    height: 45px;
+    line-height: 42px;
+    text-decoration: none;
+    top: -2px;
+    width: 156px;
+
+}
+
+.dj-account .tabs .selected a {
+    color: #666666;
+    font-weight: bold;
+    line-height: 42px;
+}
+
+
+.dj-account #setting .room {
+    border-left: 1px solid #D9D9D9;
+    margin-left: 178px;
+    padding: 42px 50px 60px;
+	background: none repeat scroll 0 0 #FFFFFF;
+}
+
+.clearfix {
+    display: block;
+}
+
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+
+.dj-account .set-title {
+    border-bottom: 1px solid #D4D4D4;
+    font: 18px/28px 'Microsoft Yahei','SimHei';
+    height: 28px;
+    margin-bottom: 20px;
+    padding-bottom: 6px;
+}
+
+#setting table {
+    margin: 0 auto 40px;
+}
+
+.reg-table th {
+    padding-right: 10px;
+    text-align: right;
+    width: 100px;
+	
+}
+
+
+.reg-table label {
+    font-size: 14px;
+	 font-style: normal;
+    font-weight: normal;
+}
+
+.reg-table th, .reg-table td {
+    font-size: 14px;
+    height: 50px;
+}
+
+#setting td {
+    padding: 4px 0;
+    vertical-align: top;
+}
+
+
+input.reg-input-wrap {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-color: #C6C6C6 #EEEEEE #EEEEEE #C6C6C6;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    color: #000000;
+    font-size: 14px;
+    height: 18px;
+    line-height: 18px;
+    overflow: hidden;
+    padding: 7px 10px;
+    vertical-align: middle;
+    width: 235px;
+}
+
+.reg-table .g9 {
+    font-size: 12px;
+    margin-left: 6px;
+	 color: #999999;
+}
+
+#reg-submit {
+    margin-top: 5px;
+}
+
+
+.p-btn {
+margin-left: 65px;
+display: inline-block;
+margin-top: 40px;
+}
+.dj-btn-xl {
+height: 40px;
+line-height: 40px;
+padding: 0 27px;
+font-size: 20px;
+font-family: 'microsoft yahei',tahoma,sans-serif;
+}
+
+.J_form_button {
+background-color: #f36948;
+box-shadow: 1px 0 1px #dcdcdc;
+}
+
+.J_form_button:hover {
+background-color: #f57451;
+}
+
+.dj-btn-info:hover, .dj-btn-info:focus {
+border: 1px solid #046597;
+background-color: #1678ac;
+background-image: -webkit-linear-gradient(top,#1888bd,#1676ab);
+background-image: -moz-linear-gradient(top,#1888bd,#1676ab);
+background-image: -o-linear-gradient(top,#1888bd,#1676ab);
+background-image: linear-gradient(to bottom,#1888bd,#1676ab);
+text-decoration: none;
+color: #fff;
+}
+
+.dj-btn-info {
+border: 1px solid #086b9d;
+background-color: #1b86bb;
+color: #fff;
+background-image: -webkit-linear-gradient(top,#1f92c8,#1980b4);
+background-image: -moz-linear-gradient(top,#1f92c8,#1980b4);
+background-image: -o-linear-gradient(top,#1f92c8,#1980b4);
+background-image: linear-gradient(to bottom,#1f92c8,#1980b4);
+}
+
+.email {
+width: 300px;
+word-wrap: break-word;
+font-size: 14px;
+margin-bottom:30px;
+}
+.set-account-tip {
+    background: none repeat scroll 0 0 #F4FBFF;
+    border: 1px solid #D0DDE4;
+    color: #666666;
+    height: 28px;
+    line-height: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.manage-panel .list li {
+    color: #666666;
+    font-family: Tahoma,'SimSun';
+    padding: 9px 0;
+}
+
+.manage-panel .social-network .ss-weibo {
+    background-position: 0 -94px;
+}
+
+.manage-panel .social-network .binding-btn, .manage-panel .social-network .binding-btn-no, .manage-panel .social-network .unbinding-btn {
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+    text-align: center;
+    top: 14px;
+}
+
+.dj-account .base-btn, .dj-account .base-btn b, .dj-account .binding-btn, .dj-account .binding-btn b, .dj-account .binding-btn-no, .dj-account .binding-btn-no b {
+    background-image: url("/up/register-new/i/bg_reg_btn2.png");
+    color: #333333;
+}

@@ -41,7 +41,6 @@
                </form>
             </div>
         </div>
-        <div class="ft"></div>
     </div>
 </div>
 <!-- content end -->

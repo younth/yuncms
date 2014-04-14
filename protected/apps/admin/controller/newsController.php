@@ -11,6 +11,7 @@ class newsController extends commonController
         $this->nopic='NoPic.gif';//默认封面
 		$this->sorttype=1;//1是资讯类型
 	}
+	
 	//列表
 	public function index()
 	{

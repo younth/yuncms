@@ -37,7 +37,9 @@ function updateavatar() {
 </script>
 
 <?php echo $urlCameraFlash ?>
-<hr>
+<br/><br/>
+<span style="font-family: \5FAE\8F6F\96C5\9ED1;font-size: 12px;">当前头像:</span>
+<br /><br/>
 <img src="<?php echo  $urlAvatarBig ?>">
 <img src="<?php echo  $urlAvatarMiddle ?>">
 <img src="<?php echo  $urlAvatarSmall ?>">

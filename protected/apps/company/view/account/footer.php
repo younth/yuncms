@@ -1,5 +1,5 @@
 <?php if(!defined('APP_NAME')) exit;?>
-  </div>
+
     <br /><br />
  <div class="footer_login_panel">
        <div class="friendlink" >

@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>企业注册--{$title}</title>
-<link href="__PUBLIC__/member/css/base.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/base.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="__PUBLIC__/member/css/account.css" rel="stylesheet" type="text/css">
 
 </head>

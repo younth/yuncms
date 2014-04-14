@@ -49,7 +49,7 @@ class accountController extends commonController
             {
                 //$this->redirect($returnurl);//跳转到登陆前的url
                 if($type=='member') $this->redirect(url('member/index/index'));//学生的首页
-                if($type=='company') $this->redirect(url('company/index/index'));//企业的首页
+                if($type=='company') $this->redirect(url('company/manage/index'));//企业的首页
             }
             else $this->error('邮箱或密码错误，或者您的账户已被锁定');
         }
@@ -61,6 +61,7 @@ class accountController extends commonController
       	 //将企业登陆于学生登陆一起判断,必须保证企业邮箱跟学生邮箱唯一，且不重复
           $acc=model('member')->find("login_email='{$login_email}'");
           $re=model('company')->find("login_email='{$login_email}'");
+          //dump($re);
           if($acc)
           {
           	//学生登陆
@@ -82,7 +83,7 @@ class accountController extends commonController
           }elseif($re)
           {
           	//企业登陆
-          	if($re['password']!=codepwd($password) || !$re['is_active']) return false;
+          	if($re['password']!=codepwd($password) || $re['is_active']==0) return false;
           	$log['ip'] = get_client_ip();
           	$data['lasttime']=$log['ctime']=time();
           	$log['uid']=$id=$re['id'];
@@ -107,7 +108,7 @@ class accountController extends commonController
           $url=empty($_GET['url'])?$_SERVER['HTTP_REFERER']:$_GET['url'];
           //if(set_cookie('auth','',time()-1)) $this->success('您已成功退出~',$url);//清除cookie
           //退出跳转到首页
-          if(set_cookie('auth','',time()-1)) $this->success('您已成功退出~',url('default/index/index'));
+          if(set_cookie('auth','',time()-1)) $this->success('您已成功退出~',url('default/index/login'));
           //清除session
       }
 
@@ -129,6 +130,7 @@ class accountController extends commonController
             if(!empty($acc['login_email'])) $this->error('该邮箱已被注册~');
             
             $data['uname']=in(trim($_POST['uname']));
+            //获取用户的首字母
             $data['password']=codepwd($_POST['password']);
             $data['regip']=$data['lastip']=get_client_ip();
             $data['ctime']=$data['lasttime']=time();
@@ -143,6 +145,7 @@ class accountController extends commonController
             $login['mid']=$id;
             $login['type']=1;
             $login['token']=$token;//激活码
+            //存在当前登陆微博账号的记录，则更新到member_login记录
             $weibo_uid=$_SESSION['token']['access_token'];//存在微博key，则更新到这个微博记录
             if($weibo_uid) model('member_login')->update("weibo_key='$weibo_uid'",$login);
             else model('member_login')->insert($login);//不是微博，则插入记录
@@ -236,15 +239,17 @@ class accountController extends commonController
 			//找不到该微博key,说明是第一次使用微博登陆，先将微博key写入member_login
 			elseif(model("member_login")->find("weibo_key='{$weibo_uid}' AND mid=''"))
 			{
-				//用微博登陆过，未注册，则进入注册
+				//用微博登陆过，但是未注册，则本次微博登陆进入注册页面
 				$this->redirect(url('member/account/openreg'));
 			}
-				else{
-					$data=array();
-					$data['weibo_key']=$weibo_uid;
-					model('member_login')->insert($data);//写入weibo_key
-					$this->redirect(url('member/account/loginbind'));
-				} //进行绑定
+			else{
+				$data=array();
+				$data['weibo_key']=$weibo_uid;
+				//写入weibo_key，需要判断，是否存在邮箱已经验证的用户，存在则是更新记录，不存在是插入记录
+				//dump($data);return;
+				model('member_login')->insert($data);
+				$this->redirect(url('member/account/loginbind'));
+			} //进行绑定
 		}
 		else $this->error('绑定失败~~~');
  	}
@@ -256,7 +261,7 @@ class accountController extends commonController
       	{
       		$weibo_uid=$_SESSION['token']['access_token'];
       		//绑定登陆的页面，此时已经使用微博登陆了，获取微博信息
-      		if(empty($weibo_uid)) $this->redirect(url('default/index/index'));
+      		if(empty($weibo_uid)) $this->redirect(url('default/index/login'));
       		$c = new SaeTClientV2($this->we_akey,$this->we_skey,$weibo_uid);
       		$ms  = $c->home_timeline(); // done
       		$uid_get = $c->get_uid();
@@ -272,11 +277,15 @@ class accountController extends commonController
       	}
       	else
       	{
-      		//提交绑定登陆动作
+      		//提交绑定登陆动作,注意对绑定邮箱的用户处理，只留一条记录
       		if(empty($_POST['login_email'])||empty($_POST['password'])) $this->error('请填写完整信息~');
       		$login_email=in(trim($_POST['login_email']));
       		$password=$_POST['password'];
       		$acc=model('member')->find("login_email='{$login_email}'");//确保微博登陆值针对学生用户
+      		
+      		//查看该用户邮箱是否绑定
+      		$last_member_login=model('member_login')->find("mid='".$acc['id']."'");
+      		//model('member_login')->find("mid='".$acc['id']."'");
       		$cookietime=empty($_POST['cooktime'])?0:intval($_POST['cooktime']);//接收cookie
       		//判断登录的处理，单独用一个函数判断登录
       		if($acc){
@@ -286,8 +295,17 @@ class accountController extends commonController
       				$data=array();
       				$data['mid']=$_SESSION['uid'];
       				$data['type']=1;
+      				//如果已经绑定邮箱，则删除之前的绑定，更新到新的记录
+      				if($last_member_login){
+      					$data['token']=$last_member_login['token'];
+      					//如果绑定微博跟邮箱，删除之前的邮箱token,防止记录重复
+      					model('member_login')->delete("id='".$last_member_login['id']."'");
+      				}
       				$weibo_uid=$_SESSION['token']['access_token'];
-      				if(model('member_login')->update("weibo_key='{$weibo_uid}'",$data)) $this->redirect(url('member/index/index'));
+      				if(model('member_login')->update("weibo_key='{$weibo_uid}'",$data)){
+      					
+      					$this->redirect(url('member/index/index'));
+      				}
       			}
       			else $this->error('邮箱或密码错误，或者您的账户已被锁定');
       		}else $this->error('用户不存在~');
@@ -298,6 +316,15 @@ class accountController extends commonController
       //新浪微博第一次登陆之后完善信息，这相当于微博用户注册
       public function openreg()
       {
+	      	$weibo_uid=$_SESSION['token']['access_token'];
+	      	if(empty($weibo_uid)) $this->redirect(url('default/index/login'));
+	      	$c = new SaeTClientV2($this->we_akey,$this->we_skey,$weibo_uid);
+	      	$ms  = $c->home_timeline(); // done
+	      	$uid_get = $c->get_uid();
+	      	$uid = $uid_get['uid'];
+	      	//根据ID获取用户等基本信息，$user_message数组为用户信息数组
+	      	$user_message = $c->show_user_by_id( $uid);//用户信息数组
+	      	$this->weibo_name=$user_message['screen_name'];//微博的昵称
       		$this->display();
       }
       
@@ -370,11 +397,11 @@ class accountController extends commonController
       		$id=$re['mid'];
       		if($re['type']==1) //学生
       		{
-      			if(model('member')->update("id='{$id}'",$data)) $this->success('密码修改成功~',url('default/index/index'));
+      			if(model('member')->update("id='{$id}'",$data)) $this->success('密码修改成功~',url('default/index/login'));
       		}
       		elseif($re['type']==2)//企业
       		{
-      			if(model('company')->update("id='{$id}'",$data)) $this->success('密码修改成功~',url('default/index/index'));
+      			if(model('company')->update("id='{$id}'",$data)) $this->success('密码修改成功~',url('default/index/login'));
       		}
       		else $this->error('密码修改失败~');
       	}

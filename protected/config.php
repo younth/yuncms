@@ -104,4 +104,5 @@ return array (
   'allowType' => 'jpg,bmp,gif,png,flv,mp4,mp3,wma,mp4,7z,zip,rar,ppt,txt,pdf,xls,doc,swf,wmv,avi,rmvb,rm',
   'sina_wb_akey' => '3226403690',
   'sina_wb_skey' => 'b476ab21cd1b75152fd2d90e63ce31e5',
+  'tongji' => 'fadsfdasdsafsadfdsafdsadsaf',
 );

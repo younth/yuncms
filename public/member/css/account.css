@@ -1488,8 +1488,9 @@ img {
 	height: 67px;
 }
 #header {
-	background: url(../images/header_bg_r.jpg) no-repeat right 0;
+	background: url(../images/header_bg_r.jpg) no-repeat center 0;
 	height: 65px;
+	margin:0 auto;
 }
 #header #logo {
 	width: 135px;

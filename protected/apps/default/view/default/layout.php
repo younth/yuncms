@@ -90,7 +90,7 @@
                {$copyright}
              
             
-                <br/>{$icp} &nbsp;&nbsp;{$beian}
+                <br/>{$icp} &nbsp;&nbsp;{$beian}&nbsp;&nbsp;{$tongji}
                 <a class="footer_icon" target="_blank" href="#"><img src="__PUBLIC__/images/beian.gif" /></a>
         </div>
              </div>

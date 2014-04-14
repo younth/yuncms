@@ -26,5 +26,5 @@
         </dl>
    </div>
    </div>
-   
+   </div>
  {include file="account/footer"}

@@ -1,7 +1,5 @@
 <?php if(!defined('APP_NAME')) exit;?>
-<div class="bottomCont"></div>
-  </div>
-    
+<br />
  <div class="footer_login_panel">
        <div class="friendlink" >
                   <span> 友情链接：</span>
@@ -27,5 +25,51 @@
    
    
 </div>
+        <script>
+        //关注企业
+  function corp_follow(cid){
+	  var nowobj='corp'+cid;
+    $.ajax({
+      url: "{url('company/index/follow')}",
+      data: {
+        id: cid,
+	  },
+        //except_ids: $("#except_ids").val()
+		 success: function (data) {
+			//成功返回数据
+			  $("#"+nowobj).replaceWith("<a href='' target='_blank' class='btniconin btnmargin'></a>");
+		 },
+		  error: function (msg) {
+                alert(msg);
+		  }
+    });
+  }
+
+
+//取消企业关注
+  function corp_remove_follow(cid){
+	  //获得不到当前的节点啊,函数里面不能用this
+	  var nowobj='corp'+cid;
+	  var delobj=$("#"+nowobj).parent().parent();//删除当前删除的节点
+    $.ajax({
+      url: "{url('company/index/cancel_follow')}",
+      data: {
+        id: cid,
+	  },
+        //except_ids: $("#except_ids").val()
+		 success: function (data) {
+			//成功返回数据，删除该公司
+			delobj.remove();
+			  
+		 },
+		  error: function (msg) {
+                alert(msg);
+		  }
+    });
+  }
+
+
+        </script>
+
 </body>
 </html>

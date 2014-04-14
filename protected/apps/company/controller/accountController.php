@@ -51,10 +51,11 @@ class accountController extends commonController
             	$emailbody=$name."你好！<br/><br/>点击以下链接完成邮箱验证并激活在91频道的帐号：​<br/><a href='{$verify_url}'>{$verify_url}</a>";//注册邮箱的内容
             	$emailbody.="<br/><span style='font-size:14px;color:#999999'>如无法点击，请将链接拷贝到浏览器地址栏中直接访问。</span>";
             	$re=Email::send($smtpemailto, $emailsubject, $emailbody);
-            	$_SESSION['company_id']=$id;
-            	$_SESSION['name']=$data['name'];
-            	$_SESSION['login_email']=$data['login_email'];
-            	if($_SESSION['company_id']) $this->redirect(url('company/account/regsucceed'));
+            	//此时未激活，不设置session
+            	//$_SESSION['company_id']=$id;
+            	//$_SESSION['name']=$data['name'];
+            	$_SESSION['login_email']=$data['login_email'];//用于传递
+            	if($re) $this->redirect(url('company/account/regsucceed'));
             }else $this->error('数据库写入失败~');
         }
       }
@@ -62,7 +63,7 @@ class accountController extends commonController
       //邮箱注册成功处理
       public function regsucceed()
       {
-      	//用session
+      	//用session传递提交的email
       	$member_email=$_SESSION['login_email'];
       	if($member_email)
       	{

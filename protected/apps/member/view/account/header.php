@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>找回密码--{$title}</title>
-<link href="__PUBLICAPP__/css/base.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="__PUBLIC__/css/base.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="__PUBLICAPP__/css/account.css" rel="stylesheet" type="text/css">
 </head>
 <body  id="bodyBg">

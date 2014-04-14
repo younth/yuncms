@@ -15,7 +15,9 @@ class setController extends commonController
 		}else{
 			//接收表单数据，直接接收post,不是数组提交，需要保证name与config里面的名字一样
 			$newconfig = $_POST; 
-			//print_r($newconfig);return;
+			//dump($newconfig['tongji']);return;
+			
+			///echo $newconfig['tongji'];return;
 			
 			//将url规则转换为数组
 			//echo $_POST['REWRITE'];return;

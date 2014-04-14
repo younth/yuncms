@@ -1,0 +1,251 @@
+@charset "utf-8";
+/* CSS Document */
+
+.card-edit {
+    position: relative;
+}
+.edit-special-wrap {
+    margin: 0 80px;
+}
+.special-tip {
+    background: none repeat scroll 0 0 #F4FBFF;
+    border: 1px solid #D0DDE4;
+    color: #666666;
+    height: 28px;
+    line-height: 28px;
+    margin: 20px 0;
+    text-align: center;
+}
+.special-title {
+    color: #666666;
+    font: bold 14px/36px 'SimSun';
+    height: 36px;
+}
+.special-label-now {
+    float: left;
+    font-size: 0;
+    overflow: hidden;
+    width: 100%;
+}
+.special-label-now span {
+    cursor: default;
+    font-size: 12px;
+}
+.special-label-edit em {
+    background: url("../images/special-ico-new.png") no-repeat scroll -115px -29px rgba(0, 0, 0, 0);
+    display: block;
+    height: 28px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 12px;
+}
+.special-label-edit b {
+    cursor: default;
+    display: inline-block;
+    font-weight: normal;
+    height: 28px;
+    line-height: 26px;
+    margin: 0 28px 0 12px;
+}
+.special-label-edit i {
+    background: url("../images/special-ico-new.png") no-repeat scroll -78px -29px rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: block;
+    height: 13px;
+    position: absolute;
+    right: 8px;
+    top: 7px;
+    width: 13px;
+}
+.special-label-edit, .special-label-default, .special-label-pass {
+    background: url("../images/special-ico-new.png") no-repeat scroll right top rgba(0, 0, 0, 0);
+    color: #666666;
+    display: inline-block;
+    height: 28px;
+    line-height: 26px;
+    margin: 0 8px 8px 0;
+    position: relative;
+    vertical-align: middle;
+}
+.add-btn-wrap {
+    border-bottom: 1px dashed #E6E6E6;
+    clear: both;
+    height: 28px;
+    padding: 28px 0 36px;
+    position: relative;
+    z-index: 100;
+}
+.matchbox {
+    margin-right: 6px;
+    z-index: 99999;
+}
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.clearfix {
+    display: block;
+}
+.add-btn-wrap input {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-color: #C6C6C6 #EEEEEE #EEEEEE #C6C6C6;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    color: #333333;
+    height: 28px;
+    margin-right: 6px;
+    padding-left: 8px;
+    vertical-align: middle;
+    width: 234px;
+}
+.pickpane {
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    clear: both;
+    margin-top: -1px;
+    position: absolute;
+    width: 160px;
+    z-index: 9990;
+}
+ul:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.add-btn-wrap button {
+    left: 252px;
+    position: absolute;
+    top: 28px;
+}
+button.big-default, button.big-default span, button.big-default span span, button.big-fresh, button.big-fresh span, button.big-fresh span span, button.big-normal, button.big-normal span, button.big-normal span span, a.button.big-default, a.button.big-default span, a.button.big-fresh, a.button.big-fresh span, a.button.big-normal, a.button.big-normal span {
+    font-family: "Helvetica Neue",Helvetica,Arial,clean,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+}
+button {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+    cursor: pointer;
+    height: 26px;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+    vertical-align: middle;
+}
+#J_addCustomLable span {
+    font-weight: normal;
+}
+button.big-normal span, button.big-default span, button.big-fresh span {
+    float: left;
+}
+button.big-fresh span, a.button.big-fresh {
+    background-position: 0 -180px;
+}
+button span, a.button, a.button span {
+    background-image: url("../images/btn_a.png");
+    background-repeat: no-repeat;
+}
+button span {
+    border: medium none;
+    display: inline-block;
+    height: 26px;
+    padding-left: 20px;
+    vertical-align: middle;
+}
+button.big-fresh span span, a.button.big-fresh span {
+    background-position: right -210px;
+}
+
+
+.add-label {
+    margin: 26px 0 56px;
+}
+.default-label-title {
+    color: #999999;
+    height: 28px;
+    line-height: 28px;
+}
+.default-label-wrap {
+    border: 1px solid #E6E6E6;
+    border-radius: 3px;
+    padding: 10px 30px;
+    position: relative;
+}
+.label-animate-wrap {
+    height: auto;
+    overflow: hidden;
+    position: relative;
+}
+.deafult-label-con {
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+.deafult-label-con li {
+    float: left;
+    width: 530px;
+}
+.special-label-pass {
+    background: url("../images/special-ico-new.png") no-repeat scroll right -109px rgba(0, 0, 0, 0);
+    cursor: default;
+}
+.special-label-edit, .special-label-default, .special-label-pass {
+    background: url("../images/special-ico-new.png") no-repeat scroll right top rgba(0, 0, 0, 0);
+    color: #666666;
+    display: inline-block;
+    height: 28px;
+    line-height: 26px;
+    margin: 0 8px 8px 0;
+    position: relative;
+    vertical-align: middle;
+}
+.special-label-pass em {
+    background: url("../images/special-ico-new.png") no-repeat scroll -19px -29px rgba(0, 0, 0, 0);
+}
+.special-label-default em, .special-label-pass em {
+    background: url("../images/special-ico-new.png") no-repeat scroll -92px -29px rgba(0, 0, 0, 0);
+    display: block;
+    height: 28px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 18px;
+}
+.special-label-pass span {
+    cursor: default;
+}
+.special-label-pass span {
+    cursor: default;
+}
+.special-label-default span, .special-label-pass span {
+    display: inline-block;
+    height: 28px;
+    line-height: 26px;
+    margin: 0 16px 0 24px;
+}
+
+button.big-fresh span span, a.button.big-fresh span {
+    background-position: right -210px;
+}
+
+.plus-tag-add {
+    border-bottom: 1px dashed #E6E6E6;
+    clear: both;
+    height: 28px;
+    padding: 18px 0 36px;
+    position: relative;
+    z-index: 100;
+}

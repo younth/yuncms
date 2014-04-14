@@ -28,4 +28,4 @@
    </div>
    </div>
    
- {include file="account/footer"}
+ {include file="footer"}

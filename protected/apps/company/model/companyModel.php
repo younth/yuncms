@@ -4,7 +4,7 @@ class companyModel extends baseModel{
 	
 	
 	//符合条件的会员数
-	public function companycount($keyword="",$starttime,$endtime)
+	public function companycount($keyword="",$starttime='',$endtime='')
 	{
 		if(empty($starttime)||empty($endtime)) $where=(empty($keyword)?'':'name like "%'.$keyword.'%"');
 		else  $where=(empty($keyword)?"ctime<='$endtime' AND ctime>='$starttime'":"ctime<='$endtime' AND ctime>='$starttime' AND name like '%$keyword%'");
@@ -17,6 +17,13 @@ class companyModel extends baseModel{
 		if(empty($starttime)||empty($endtime)) $where=(empty($keyword)?'':'name like "%'.$keyword.'%"');
 		else  $where=(empty($keyword)?"ctime<='$endtime' AND ctime>='$starttime'":"ctime<='$endtime' AND ctime>='$starttime' AND name like '%$keyword%'");
 		return $where;
+	}
+	
+	//推荐关注企业,连表查询,member_profile and company, concat 等同于字符串连接符,注意如何排序
+	public function quick_follow($mid)
+	{
+		$sql="SELECT c.id,c.name,c.logo,c.quality,c.scale,c.on_industry,c.websites,c.introduce,m.mid,m.major FROM {$this->prefix}member_profile as m,{$this->prefix}company as c WHERE c.on_industry like concat('%',m.major,'%') or c.on_industry like concat('%',m.tag,'%') and mid='{$mid}' ORDER BY c.ctime desc limit 6";
+		return $this->model->query($sql);
 	}
 }
 ?>

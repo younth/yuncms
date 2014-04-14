@@ -6,6 +6,7 @@
 <link href="__PUBLIC__/admin/css/back.css" type=text/css rel=stylesheet>
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/highslide.css" />
 <link rel="stylesheet" href="__PUBLIC__/kindeditor/themes/default/default.css" />
+ <link rel="stylesheet" href="__PUBLICAPP__/css/boxy.css" type="text/css" />
 <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
 <script type="text/javascript" src="__PUBLIC__/admin/js/common.js"></script>
 <script type="text/javascript" charset="utf-8" src="__PUBLIC__/kindeditor/kindeditor.js"></script>
@@ -51,6 +52,40 @@ hs.showCredits = false;
 		});	
 	});
 </script>
+
+<script type="text/javascript" src="__PUBLICAPP__/js/Selector.js"></script>
+<script type="text/javascript" src="__PUBLICAPP__/js/job.js"></script>
+<script type="text/javascript" src="__PUBLICAPP__/js/jquery.boxy.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+			    // 职位类型选择器
+    // value 表示选定的职位类型编号，字符串类型，编号间以逗号分隔    b+i就是类别  s+i就是子类类别
+    // shown 需要展示项的编号
+    // callback 表示回调
+    // option 为json格式的可选项的集合
+
+            $("#on_industry").click(function() {
+                Boxy.job("{$info['industry']}", "0", function(val) {
+                    //alert("你选择的是: " + val);
+					$("#industry").val(val);
+					//alert(val.text());
+					//循环出所选的行业，然后显示出来
+					var str="";
+					$("#job-result li span").each(function() {
+						//var $yun+=$yun+$(this).html();
+						
+						 str+=$(this).html()+"+";
+                    });
+					$("#on_industry").val(str);
+					
+                }, { title: "请选择行业类别" });
+                return false;
+            });
+			
+        });
+    </script>
+
 <title>编辑企业</title>
 </head>
 <body>
@@ -70,19 +105,40 @@ hs.showCredits = false;
             </tr>
             <tr>
                <td align="right">企业名称：</td>
-               <td><input type="text" name="address" value="{$info['name']}"></td>
+               <td><input type="text" name="name" value="{$info['name']}"></td>
                <td class="inputhelp"></td>
             </tr>
             <tr>
                <td align="right">所属行业：</td>
                <td>
-               <select name="sort" id="sort">
+               <input  type="hidden" id="industry" value="{$info['industry']}" name="industry"><input type="text"  name="on_industry" id="on_industry" value="{$info['on_industry']}"> 
+               </td>
+               <td class="inputhelp"></td>
+            </tr>
+            
+            <tr>
+               <td align="right">公司规模：</td>
+               <td>
+               <select name="scale" id="scale">
                   <option selected="selected" value="">=请选择类别=</option>
-                  {$option}
+                  {$company_scale}
                </select>
                </td>
                <td class="inputhelp"></td>
             </tr>
+
+            <tr>
+               <td align="right">公司性质：</td>
+               <td>
+               <select name="quality" id="quality">
+                  <option selected="selected" value="">=请选择类别=</option>
+                  {$quality_option}
+               </select>
+               </td>
+               <td class="inputhelp"></td>
+            </tr>
+
+
           <tr>
             <td align="right">企业LOGO：</td>
             <td align="left">
@@ -107,7 +163,7 @@ hs.showCredits = false;
             </tr>
             <tr>
                <td align="right">简介：</td>
-               <td> <textarea  name="introduce" rows="4" cols="70"> {$info['introduce']}</textarea></td>
+               <td> <textarea  name="introduce" rows="8" cols="90"> {$info['introduce']}</textarea></td>
                <td class="inputhelp"></td>
             </tr>
                <td align="right">是否激活：</td>

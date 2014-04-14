@@ -1,0 +1,106 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+.profile-edit table.form {
+    margin-top: 40px;
+}
+.profile-edit table.form td {
+    font-size: 14px;
+    line-height: 30px;
+    padding: 0 0 18px;
+    vertical-align: middle;
+}
+table.form td.label, table.form th.label {
+    text-align: right;
+}
+.profile-edit table.form td.label {
+    vertical-align: top;
+}
+.profile-edit table.form td.label span {
+    color: #FF3366;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+table.form td.aster, .aster {
+    color: #FF0000;
+    font-family: "宋体";
+    padding: 6px 0;
+}
+table.form td.input {
+    vertical-align: middle;
+}
+.matchbox {
+    margin-right: 6px;
+    z-index: 99999;
+}
+.clearfix:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.clearfix {
+    display: block;
+}
+table.form td.input input.text, table.form td.input select {
+    vertical-align: middle;
+}
+.profile-edit table.form input.text {
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-color: #C6C6C6 #EEEEEE #EEEEEE #C6C6C6;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 18px;
+    margin-top: -2px;
+    padding: 5px;
+    width: 245px;
+}
+table.form input.text {
+    background-color: #FFFFFF;
+    border-color: #CCCCCC #EBEBEB #EBEBEB #CCCCCC;
+    border-left: 1px solid #CCCCCC;
+    border-style: solid;
+    border-width: 1px;
+    height: 18px;
+    padding: 2px;
+    width: 220px;
+}
+.pickpane {
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    clear: both;
+    margin-top: -1px;
+    position: absolute;
+    width: 160px;
+    z-index: 9990;
+}
+ul:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.profile-edit table.form td.input select {
+    display: inline-block;
+    font-size: 14px;
+    height: 30px;
+    padding: 3px;
+    vertical-align: middle;
+}
+.profile-edit table.form .error {
+    padding-top: 5px;
+}
+.profile-edit table.form input.year {
+    width:105px;
+}
+.profile-edit table.form label {
+    display: inline-block;
+    line-height: 30px;
+    vertical-align: top;
+}
+.profile-edit table.form input.month {
+    width: 40px;
+}

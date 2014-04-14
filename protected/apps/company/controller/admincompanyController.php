@@ -6,13 +6,19 @@ class admincompanyController extends appadminController{
 	static protected $sorttype;//分类
 	static public $nopic='';//默认logo路径
 	static protected $uploadpath='';//封面图上传路径
+	static protected $company_sort;//公司性质
+	static protected $company_scale;//公司规模
+	
 	public function __construct()
 	{
 		parent::__construct();
+		$this->company_sort=100054;//公司性质100054
+		$this->company_scale=100060;//公司规模100054
 		$this->sorttype=5;//5是自定义类型
-		$this->nopic='NoPic.gif';//默认封面
-		$this->uploadpath = ROOT_PATH.'upload/company/image/';//封面图路径
+		$this->nopic='NoPic.png';//默认封面
+		$this->uploadpath = ROOT_PATH.'upload/company/license/';//封面图路径
 	}
+	
 	//企业列表
 	public function index()
 	{
@@ -35,9 +41,9 @@ class admincompanyController extends appadminController{
 		$count=model('company')->companycount($keyword,$starttime,$endtime);//总条数要结合keyword查询
 		//构造where条件直接查询
 		$where=model('company')->company_search($keyword,$starttime,$endtime,$limit);//在模型里面对检索条件进行处理
-		$list=model('company')->select($where,'id,name,sort,ctime,lasttime,is_active,license,logo');//检索出符合条件的企业
+		$list=model('company')->select($where,'id,name,industry,ctime,lasttime,is_active,license,logo,on_industry,recmd');//检索出符合条件的企业
 		
-		//给二维数组增加一个字段，统计出企业的粉丝数
+		//给二维数组增加一个字段，统计出企业的粉丝数，计算粉丝总数
 		foreach ($list as  $row=>$v)
 		{
 			$list[$row]['fans_count']=model('company_fans')->fanscount($v['id']);
@@ -55,13 +61,12 @@ class admincompanyController extends appadminController{
             }
             $this->sortname=$sortname;
 		}
-		//计算粉丝总数
 		
 		//print_r($sortname);
 		$this->list=$list;
 		$this->page=$this->pageShow($count);
 		$this->public=__PUBLIC__.'/admin';//app路径
-		$this->path=__ROOT__.'/upload/company/image/';
+		$this->path=__ROOT__.'/upload/company/license/';
 		$this->display();
 	}
 
@@ -72,35 +77,53 @@ class admincompanyController extends appadminController{
 		if(empty($id)) $this->error('参数错误');
 		$info=model('company')->find("id='$id'");//查找用户的信息,连表三次
 		if(!$this->isPost()){
-			$sort=$info['sort'];//当前的栏目
-			//构造企业所属行业,行业管理的sort是100039
-			$where="type=5 AND find_in_set('100039',path)";
-			$sortlist=model('sort')->select($where,'id,name,deep,path,norder,type');
-			//dump($sortlist);
+			$where="type=5 AND RIGHT(path,6)=".$this->company_sort;
+			$sortlist=model('sort')->select($where,'id,name,path');
+			$sort=$info['quality'];//当前的性质
+			
+			//循环构造公司性质select option
 			if(!empty($sortlist)){
-				$sortlist=re_sort($sortlist);//无限分类重排序
-				$sortname=array();
-				//循环生成栏目选项
 				foreach($sortlist as $vo){
-					$space = str_repeat('├┈', $vo['deep']-1);//str_repeat指定字符串重复的次数，重复deep-1次，二级栏目就一个，三级两个
 					$sortnow=$vo['path'].','.$vo['id'];//构造的栏目导航定位
 					$selected=($sort==$sortnow)?'selected="selected"':''; //选中当前的分类
-					$option.= '<option '.$selected.' value="'.$sortnow.'">'.$space.$vo ['name'].'</option>';
+					$quality_option.= '<option '.$selected.' value="'.$sortnow.'">'.$vo ['name'].'</option>';
 				}
-				$this->option=$option;
+				$this->quality_option=$quality_option;
 			}
+			unset($where);
+			unset($sortlist);
+			
+			//循环构造公司规模select option
+			$where="type=5 AND RIGHT(path,6)=".$this->company_scale;
+			$sortlist=model('sort')->select($where,'id,name,path');
+			$sort=$info['scale'];//当前的性质
+			if(!empty($sortlist)){
+				foreach($sortlist as $vo){
+					$sortnow=$vo['path'].','.$vo['id'];//构造的栏目导航定位
+					$selected=($sort==$sortnow)?'selected="selected"':''; //选中当前的分类
+					$company_scale.= '<option '.$selected.' value="'.$sortnow.'">'.$vo ['name'].'</option>';
+				}
+				$this->company_scale=$company_scale;
+			}
+		
+			//dump($info);				
 			$this->public=__PUBLIC__.'/admin';//app路径
-			$this->path=__ROOT__.'/upload/company/image/';
+			$this->path=__ROOT__.'/upload/company/license/';
 			$this->info=$info;
 			$this->display();
 		}else{
 			$data=array();
 			//更新企业信息
+			$data['name']=$_POST['name'];
+			//行业
+			$data['on_industry']=in($_POST['on_industry']);
+			$data['industry']=in($_POST['industry']);
 			
-			$data['sort']=$_POST['sort'];
+			$data['scale']=$_POST['scale'];
+			$data['quality']=$_POST['quality'];
 			$data['address']=$_POST['address'];
 			$data['websites']=$_POST['websites'];
-			$data['introduce']=$_POST['introduce'];
+			$data['introduce']=text_in($_POST['introduce']);
 			$data['is_active']=intval($_POST['is_active']);
 			
 			//logo上传，这里借助Kindeditor的上传功能
@@ -209,10 +232,10 @@ class admincompanyController extends appadminController{
 		//构造where条件直接查询
 		$where=model('company')->company_search($keyword,$starttime,$endtime,$limit);//在模型里面对检索条件进行处理
                 $where=  empty($where)?'is_active=0':$where.' and is_active = 0';
-		$list=model('company')->select($where,'id,name,sort,ctime,lasttime,is_active,license,logo');//检索出符合条件的企业
+		$list=model('company')->select($where,'id,name,ctime,on_industry,lasttime,is_active,license,logo');//检索出符合条件的企业
 		
 		//给二维数组增加一个字段，统计出企业的粉丝数
-                if(!empty($list)){
+      if(!empty($list)){
 		foreach ($list as  $row=>$v)
 		{
 			$list[$row]['fans_count']=model('company_fans')->fanscount($v['id']);
@@ -232,7 +255,7 @@ class admincompanyController extends appadminController{
 		$this->list=$list;
 		$this->page=$this->pageShow($count);
                 $this->public=__PUBLIC__.'/admin';//app路径
-		$this->path=__ROOT__.'/upload/company/image/';
+		$this->path=__ROOT__.'/upload/company/license/';
 		$this->display("admincompany/index");
 	}
 	
@@ -276,7 +299,7 @@ class admincompanyController extends appadminController{
 	//发送私信
 	public  function sendmsg()
 	{
-		$id=$_GET['id'];
+		$id=intval($_GET['id']);;
 		if(empty($id)) $this->error('参数错误');
 		$info=model('company')->find("id='$id'");
 		
@@ -341,6 +364,15 @@ class admincompanyController extends appadminController{
 		}
 	}
 
+	//推荐，ajax
+	public function recmd()
+	{
+		$id=intval($_POST['id']);
+		$recmd['recmd']=intval($_POST['recmd']);
+		if(model('company')->update("id='{$id}'",$recmd))
+			echo 1;
+		else echo '操作失败~';
+	}
 	
 	//编辑器上传
 	public function UploadJson(){

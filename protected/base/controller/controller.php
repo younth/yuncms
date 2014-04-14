@@ -114,7 +114,7 @@ class controller{
 		echo '</head><title></title><body></body></html>';
 		echo "<script language='javascript'>
 var dialog = art.dialog({
-    title: 'Yuncms提示',
+    title: '91频道提示',
     content: '{$msg}',
     icon: 'succeed',
     ok: function(){
@@ -137,7 +137,7 @@ var dialog = art.dialog({
 		echo '</head><title></title><body></body></html>';
 		echo "<script language='javascript'>
 var dialog = art.dialog({
-    title: 'Yuncms提示',
+    title: '91频道提示',
     content: '{$msg}',
     icon: 'error',
     ok: function(){

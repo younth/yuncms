@@ -98,6 +98,12 @@ $.jqtab("#tabs","#tab_conbox","click");
 				<td><input class="regular-text" type='text' value="{$config['icp']}" name="icp" id="icp" /></td>
 				<td></td>
 			</tr>
+			<tr>
+				<td align="right">流量统计：</td>
+				<td><textarea name="tongji" cols="60" rows="5" class="regular-textarea">{$config['tongji']}</textarea></td>
+				<td class="inputhelp"></td>
+			</tr>
+            
             </table>
            </li>
            

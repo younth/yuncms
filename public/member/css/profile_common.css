@@ -1,0 +1,381 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*
+此css为base,edu,aboutme,skill公用css
+包含.profile-edit h2
+*/
+#jy-content-wrap {
+    /*background: url("../images/bg.png") repeat scroll 0 0 #DEDEDE;*/
+    padding-bottom: 40px;
+}
+.jy-profile-mini {
+    padding-top: 0;
+}
+.jy-profile-mini .jy-content-inner {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.jy-profile-mini .jy-sub-title {
+    height: 30px;
+    overflow: hidden;
+}
+.jy-sub-title {
+    height: 82px;
+    margin: auto;
+    width: 960px;
+}
+.jy-sub-title h2 {
+    color: #FFFFFF;
+    font: 28px/31px "MicroSoft YaHei","SimHei";
+    height: 40px;
+    padding: 29px 0 0;
+}
+.jy-content-shadow {
+    box-shadow: 1px 3px 3px rgba(150, 152, 153, 0.3);
+}
+.jy-content-shadow {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    width: 960px;
+}
+#content{
+	width:960px;
+	margin-right:auto;
+	margin-left:auto;
+	clear:both;
+}
+#content:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.profile-edit {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    padding: 28px 60px;
+}
+.profile-edit h2 {
+    border-bottom: 1px solid #CCCCCC;
+    line-height: 19px;
+    padding-bottom: 7px;
+}
+.profile-edit h2 span {
+    display: block;
+    float: right;
+    height: 14px;
+    line-height: 14px;
+    padding-top: 8px;
+}
+a.green, a.high:visited {
+    color: #86B5D7;
+    text-decoration: none;
+}
+.profile-edit h2 em {
+    background: none repeat scroll 0 0 #E76322;
+    display: inline-block;
+    height: 19px;
+    margin-right: 10px;
+    overflow: hidden;
+    vertical-align: bottom;
+    width: 5px;
+}
+.profile-edit h2 i {
+    display: inline-block;
+    font-family: 'Microsoft YaHei','hei','tahoma';
+    font-size: 18px;
+    font-style: normal;
+    line-height: 22px;
+    vertical-align: middle;
+}
+
+/*
+此css为base,edu,aboutme公用css
+按钮部分
+*/
+btn-box {
+    padding-top: 30px;
+    text-align: center;
+}
+.btn-box a {
+    font-weight: normal;
+    margin: 0 5px;
+}
+a.default span, a.fresh span, a.normal span {
+    padding-left: 0;
+}
+.default span, a.default {
+    background-position: 0 0;
+}
+a.fresh span, a.fresh, a.normal {
+    background-position: 0 -120px;
+}
+.normal span, a.normal {
+    background-position: 0 -300px;
+}
+a.default span {
+    background-position: right -30px;
+}
+a.fresh span {
+    background-position: right -150px;
+}
+a.normal span, a.normal span {
+    background-position: right -330px;
+    color: #333333;
+}
+a.big-fresh {
+    background-position: 0 -180px;
+}
+a.big-normal {
+    background-position: 0 -360px;
+}
+a.big-default {
+    background-position: 0 -60px;
+}
+a.big-fresh span {
+    background-position: right -210px;
+}
+a.big-default span {
+    background-position: right -90px;
+}
+a.default, a.normal, a.fresh, a.small-fresh {
+    background-image: url("../images/btn_a.png");
+    border: medium none;
+    cursor: pointer;
+    display: inline-block;
+    height: 26px;
+    overflow: visible;
+    padding: 0 0 0 20px;
+    text-decoration: none;
+    vertical-align: middle;
+}
+a.default:hover, a.normal:hover, a.fresh:hover, a.small-fresh:hover {
+    text-decoration: none;
+}
+a.default span, a.fresh span, a.normal span, a.small-fresh span {
+    background-image: url("../images/btn_a.png");
+    color: #333333;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    height: 26px;
+    line-height: 26px;
+    padding-right: 20px;
+    text-decoration: none;
+}
+a.normal span {
+    color: #333333;
+}
+a.big-fresh, a.big-default, a.big-normal {
+    background-image: url("../images/btn_a.png");
+    color: #333333;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    height: 30px;
+    padding-left: 20px;
+    text-decoration: none;
+}
+
+a.big-normal:hover, a.normal:hover {
+    color: #333333;
+}
+a.big-fresh:hover, a.big-default:hover, a.fresh:hover, a.default:hover {
+    color: #333333;
+}
+a.big-fresh:hover, a.big-default:hover, a.big-normal:hover {
+    text-decoration: none;
+}
+a.big-fresh span, a.big-default span, a.big-normal span {
+    background-image: url("../images/btn_a.png");
+    color: #333333;
+    cursor: pointer;
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    padding-right: 20px;
+}
+a.big-normal span {
+    background-position: right -390px;
+    color: #333333;
+}
+a.default, a.normal, a.fresh, a.small-fresh, a.small-default {
+    background-image: url("../images/btn_a.png");
+    border: medium none;
+    cursor: pointer;
+    display: inline-block;
+    height: 26px;
+    overflow: visible;
+    padding: 0 0 0 20px;
+    vertical-align: middle;
+}
+a.default span, a.fresh span, a.normal span, a.small-default span {
+    display: inline-block;
+}
+a.default span, a.fresh span, a.normal span, a.small-default span {
+    background-image: url("../images/btn_a.png");
+}
+.default span, .fresh span, .normal span, .small-default span {
+    display: inline-block;
+    height: 26px;
+}
+a.small-default {
+    background-image: url("../images/btn_a.png");
+    background-position: 0 -480px;
+    height: 24px;
+    line-height: 24px;
+    padding-left: 25px;
+}
+a.small-default:hover {
+    text-decoration: none;
+}
+a.small-default span {
+    background-image: url("../images/btn_a.png");
+    background-position: right -510px;
+    color: #333333;
+    height: 24px;
+    line-height: 24px;
+    padding-right: 25px;
+}
+a.small-fresh {
+    height: 24px;
+    line-height: 24px;
+    padding-left: 24px;
+}
+a.small-fresh {
+    background-position: 0 -420px;
+}
+a.small-fresh span {
+    background-position: right -450px;
+    height: 24px;
+    line-height: 24px;
+    padding-right: 24px;
+}
+button.default span span, button.fresh span span, button.normal span span, button.big-default span span, button.big-fresh span span, button.big-normal span span, button.small-default span span, button.small-fresh span span, button.small-normal span span {
+    color: #333333;
+    display: block;
+    height: 26px;
+    line-height: 26px;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 20px;
+    white-space: nowrap;
+}
+button {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+    cursor: pointer;
+    height: 26px;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+    vertical-align: middle;
+}
+button span {
+    border: medium none;
+    display: inline-block;
+    height: 26px;
+    padding-left: 20px;
+    vertical-align: middle;
+}
+button span span {
+    color: #333333;
+    display: block;
+    height: 26px;
+    line-height: 26px;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 20px;
+    white-space: nowrap;
+}
+button span, a.button, a.button span {
+    background-image: url("../images/btn_a.png");
+    background-repeat: no-repeat;
+}
+button.default span, a.button.default {
+    background-position: 0 0;
+}
+
+
+button::-moz-focus-inner {
+    border: 0 none;
+    padding: 0;
+}
+button.big-normal span, button.big-default span, button.big-fresh span {
+    float: left;
+}
+button.normal:hover span, a.normal:hover {
+    background-position: 0 -660px;
+}
+button.normal:hover span span, a.normal:hover span {
+    background-position: right -660px;
+}
+button.big-normal:hover span, a.big-normal:hover {
+    background-position: 0 -690px;
+}
+button.big-normal:hover span span, a.big-normal:hover span {
+    background-position: right -690px;
+}
+button.default:hover span, button.fresh:hover span, a.default:hover, a.fresh:hover {
+    background-position: 0 -570px;
+}
+button.default:hover span span, button.fresh:hover span span, a.default:hover span, a.fresh:hover span {
+    background-position: right -570px;
+}
+button.big-default:hover span, button.big-fresh:hover span, a.big-default:hover, a.big-fresh:hover {
+    background-position: 0 -600px;
+}
+button.big-default:hover span span, button.big-fresh:hover span span, a.big-default:hover span, a.big-fresh:hover span {
+    background-position: right -600px;
+}
+
+
+a.small-fresh:hover {
+    background-position: 0 -540px;
+}
+a.small-fresh:hover span {
+    background-position: right -540px;
+}
+a.s-button, a.s-button span {
+    background-image: url("../images/s-btn.png");
+    background-repeat: no-repeat;
+    color: #333333;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+}
+a.s-button-default {
+    background-position: 0 0;
+    padding-left: 15px;
+}
+a.s-button-default span {
+    background-position: right -30px;
+    padding-right: 15px;
+}
+a.s-button-default:hover {
+    background-position: 0 -60px;
+    text-decoration: none;
+}
+a.s-button-default:hover span {
+    background-position: right -90px;
+}
+a.s-button-normal {
+    background-position: 0 -120px;
+    padding-left: 15px;
+}
+a.s-button-normal span {
+    background-position: right -150px;
+    color: #666666;
+    padding-right: 15px;
+}
+a.s-button-normal:hover {
+    background-position: 0 -120px;
+    text-decoration: none;
+}
+a.s-button-normal:hover span {
+    background-position: right -150px;
+}

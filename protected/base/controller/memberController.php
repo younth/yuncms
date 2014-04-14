@@ -23,6 +23,18 @@ class memberController extends baseController{
     $this->ver_name=config('ver_name');
     $this->copyright=config('copyright');
     $this->beian=config('beian');
+    $this->tongji=config('tongji');
+    $this->sorts=$this->sortArray();//树状菜单
+    //dump($this->sorts);
+    require(ROOT_PATH.'/avatar/AvatarUploader.class.php');
+    $uid=$_SESSION['uid'];
+    $au = new AvatarUploader();
+    $urlAvatarBig = $au->getAvatar($uid,'big');
+    $urlAvatarMiddle = $au->getAvatar($uid,'middle');
+    $urlAvatarSmall = $au->getAvatar($uid,'small');
+    $this->small_photo=$urlAvatarSmall;
+    $this->middle_photo=$urlAvatarMiddle;
+    $this->big_photo=$urlAvatarBig;
     
     //自定义标签加载添加，调用base/extend/function.php中getlist函数
     $this->view()->addTags(array(
@@ -58,6 +70,52 @@ class memberController extends baseController{
         //print_r($power);
         $this->assign('auth',$power);//auth的默认值是3,auth传到模板
         break;
-    }
+    	}
 	}
+	
+	
+	//返回无限分类数组
+	protected  function  sortArray($type=0,$deep=0,$path='')
+	{
+		$where="";
+		if($type) $where.="type='{$type}' ";
+		if($deep) $where.=empty($where)?"deep='{$deep}' ":" AND deep='{$deep}'";
+		if(!empty($path)) $where.=empty($where)?"path LIKE '{$path}%'":" AND path LIKE '{$path}%'";
+		$list=model('sort')->select($where,'id,deep,name,path,norder,method,url,type,ifmenu');
+		if(!empty($list)) $list=re_sort($list);
+		$newList=array();
+		if(!empty($list)){
+			foreach ($list as $vo)
+			{
+				$next=current($list);
+				next($list);
+				$newList[$vo['id']]['name']=$vo['name'];
+				if(!empty($vo['picture'])){
+					if($vo['picture']!='NoPic.gif'){
+						switch ($vo['type']) {
+							case 1:
+								$newList[$vo['id']]['picture']=$this->NewImgPath.$vo['picture'];
+								break;
+							case 2:
+								$newList[$vo['id']]['picture']=$this->PhotoImgPath.$vo['picture'];
+								break;
+							case 3:
+								$newList[$vo['id']]['picture']=$this->PageImgPath.$vo['picture'];
+								break;
+						}
+					}else $newList[$vo['id']]['picture']=__UPLOAD__.'/NoPic.gif';
+				}
+				$newList[$vo['id']]['pid']=substr($vo['path'],strrpos($vo['path'],",")+1);
+				$newList[$vo['id']]['type']=$vo['type'];
+				$newList[$vo['id']]['path']=$vo['path'].','.$vo['id'];
+				$newList[$vo['id']]['deep']=$vo['deep'];
+				$newList[$vo['id']]['method']=$vo['method'];
+				$newList[$vo['id']]['ifmenu']=$vo['ifmenu'];
+				$newList[$vo['id']]['nextdeep']=$next['deep'];
+				$newList[$vo['id']]['url']=getURl($vo['type'],$vo['method'],$vo['url'],$vo['id'],$vo['extendid']);
+			}
+		}
+		return $newList;
+	}
+	
 }

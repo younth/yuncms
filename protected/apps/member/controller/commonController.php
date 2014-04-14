@@ -5,4 +5,5 @@
 class commonController extends memberController {
 	//protected $layout = 'layout';//layout是基本页面布局
 
+
 }

@@ -10,4 +10,13 @@ class commonController extends memberController {
 		parent::__construct();
 		@session_start();//开启session
 	}
+	
+	//文件上传
+	protected  function  upload($savePath='',$maxSize='',$allowExts='',$allowTypes='',$saveRule='')
+	{
+		$upload=new UploadFile($savePath,$maxSize,$allowExts,$allowTypes,$saveRule);
+		return $upload;
+	}
+	
+	//访问记录
 }
