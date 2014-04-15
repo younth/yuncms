@@ -43,16 +43,6 @@
                <td><input type="text" name="login_email" value="{$info['login_email']}"></td>
                <td class="inputhelp"></td>
             </tr>
-            <tr>
-               <td align="right">手机：</td>
-               <td><input type="text" name="tel" value="{$info['tel']}"></td>
-               <td class="inputhelp"></td>
-            </tr>
-            <tr>
-               <td align="right">QQ：</td>
-               <td><input type="text" name="qq" value="{$info['qq']}"></td>
-               <td class="inputhelp"></td>
-            </tr>
             <?php if($action!="add") {?>
             <tr>
                <td align="right">注册时间：</td>
@@ -75,7 +65,7 @@
             </tr>
 			<tr>
 				<td width="200">&nbsp;</td>
-				<td align="left" colspan="2"><input type="hidden" name="id" value="{$info['id']}"> <input type="submit" value="{$t_name}" class="btn btn-primary btn-small"></td>
+				<td align="left" colspan="2"><input type="submit" value="{$t_name}" class="btn btn-primary btn-small"></td>
 			</tr>
 			</form>
 		</table>

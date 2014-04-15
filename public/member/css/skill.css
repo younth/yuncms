@@ -249,3 +249,62 @@ button.big-fresh span span, a.button.big-fresh span {
     position: relative;
     z-index: 100;
 }
+
+
+.test-main {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+}
+.test-top {
+    background: none repeat scroll 0 0 #F0F7FA;
+    border-bottom: 1px solid #D9D9D9;
+    height: 90px;
+    position: relative;
+}
+.test-top .photo-box {
+    border: 1px solid #CFCFCF;
+    height: 50px;
+    left: 60px;
+    position: absolute;
+    top: 17px;
+    width: 50px;
+}
+.test-top .photo-box img {
+    display: block;
+    height: 50px;
+    width: 50px;
+}
+.test-top .tit {
+    font-size: 22px;
+    left: 125px;
+    position: absolute;
+    top: 30px;
+    width: 620px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.yxl-box {
+    background: url("../images/yxl.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 104px;
+    position: absolute;
+    right: 75px;
+    top: 10px;
+    width: 104px;
+}
+.yxl-box .inner {
+    background: url("../images/yxl-y.png") no-repeat scroll 0 bottom rgba(0, 0, 0, 0);
+    bottom: 0;
+    height: 30%;
+    position: absolute;
+    width: 104px;
+}
+
+.btn-box {
+    text-align: center;
+	padding-bottom:30px;
+}
+
+.g9 {
+    color: #999999;
+}

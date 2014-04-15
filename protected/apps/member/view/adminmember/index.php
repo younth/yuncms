@@ -96,7 +96,7 @@ $(function ($) {
               <th align="center" width="136"><input type="checkbox" name="chkAll" value="checkbox" onClick="CheckAll(this.form)"/></th>
               <th width="130">用户名</th>
               <th width="130">级别</th>
-              <th width="130">注册IP</th>
+              <th width="130">邮箱</th>
               <th width="236">注册时间</th>
               <th width="130">上次登录IP</th>
               <th width="208">上次登录时间</th>
@@ -105,7 +105,7 @@ $(function ($) {
           <?php 
               if(!empty($list)){
                    foreach($list as $vo){
-                     $book.='<tr id="'.$vo['id'].'"><td align="center"><input type="checkbox" name="delid[]" value="'.$vo['id'].'" /></td><td align="center">'.$vo['uname'].'</td><td align="center">'.$vo['group_name'].'</td><td align="center">'.$vo['regip'].'</td>';
+                     $book.='<tr id="'.$vo['id'].'"><td align="center"><input type="checkbox" name="delid[]" value="'.$vo['id'].'" /></td><td align="center">'.$vo['uname'].'</td><td align="center">'.$vo['group_name'].'</td><td align="center">'.$vo['login_email'].'</td>';
                      $book.='<td align="center">'.date('Y/m/d H:m:s',$vo['ctime']).'</td><td align="center">'.$vo['lastip'].'</td>'; 
 					 $book.='<td align="center">'.date('Y/m/d H:m:s',$vo['lasttime']).'</td><td>';
                      $book.=$vo['is_active']?'<div class="lock">冻结</div>':'<div class="unlock">激活</div>';

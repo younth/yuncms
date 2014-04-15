@@ -1600,3 +1600,42 @@ padding: 5px;
 height: 22px\9;
 font-size: 14px;
 }
+
+/**按钮样式**/
+
+.p-btn {
+margin-left: 65px;
+display: inline-block;
+margin-top: 40px;
+}
+
+.dj-btn-xl {
+height: 40px;
+line-height: 40px;
+padding: 0 27px;
+font-size: 20px;
+font-family: 'microsoft yahei',tahoma,sans-serif;
+}
+
+.dj-btn-info:hover, .dj-btn-info:focus {
+	border-radius:5px;
+border: 1px solid #046597;
+background-color: #1678ac;
+background-image: -webkit-linear-gradient(top,#1888bd,#1676ab);
+background-image: -moz-linear-gradient(top,#1888bd,#1676ab);
+background-image: -o-linear-gradient(top,#1888bd,#1676ab);
+background-image: linear-gradient(to bottom,#1888bd,#1676ab);
+text-decoration: none;
+color: #fff;
+}
+
+.dj-btn-info {
+	border-radius:5px;
+border: 1px solid #086b9d;
+background-color: #1b86bb;
+color: #fff;
+background-image: -webkit-linear-gradient(top,#1f92c8,#1980b4);
+background-image: -moz-linear-gradient(top,#1f92c8,#1980b4);
+background-image: -o-linear-gradient(top,#1f92c8,#1980b4);
+background-image: linear-gradient(to bottom,#1f92c8,#1980b4);
+}

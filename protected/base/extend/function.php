@@ -570,3 +570,5 @@ function getFirstCharter($str){
 	if($asc>=-11055&&$asc<=-10247) return 'Z';
 	return '#';//未查找到 的
 }
+
+//根据用户id获取用户各种大小的头像

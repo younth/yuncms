@@ -1,9 +1,3 @@
-*{margin:0;padding:0;list-style-type:none;}
-a,img{border:0;}
-em{font-style:normal;}
-body{font:12px/180% Arial, Helvetica, sans-serif;}
-a,a:visited{color:#5e5e5e;text-decoration:none;}
-.clear{display:block;overflow:hidden;clear:both;height:0;line-height:0;font-size:0;}
 .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
 .clearfix{display:inline-table;}/* Hides from IE-mac \*/
 *html .clearfix{height:1%;}
@@ -204,3 +198,14 @@ a,a:visited{color:#5e5e5e;text-decoration:none;}
 .plus-tag-add button{}
 .plus-tag-add a{float:left;margin:12px 0 0 20px;display:inline;font-size:18px;background-position:-289px -59px;padding:0 0 0 16px;}
 .plus-tag-add a.plus{background-position:-289px -96px;}
+
+#myTags{
+    background: none repeat scroll 0 0 #F8F8F8;
+    border: 1px dashed #A1A1A1;
+    border-radius: 5px;
+    float: left;
+    height: 110px;
+    width: 620px;
+	margin-top:15px;
+	padding:0 8px 8px 10px;
+}

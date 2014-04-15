@@ -53,7 +53,7 @@
             </tr>
 			<tr>
 				<td width="200">&nbsp;</td>
-				<td align="left" colspan="2"><input type="hidden" name="id" value="{$info['id']}"> <input type="submit" value="{$t_name}" class="btn btn-primary btn-small"></td>
+				<td align="left" colspan="2"><input type="submit" value="{$t_name}" class="btn btn-primary btn-small"></td>
 			</tr>
 			</form>
 		</table>

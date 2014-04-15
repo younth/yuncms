@@ -184,7 +184,6 @@ text-overflow: ellipsis;
 padding: 0 0 10px 0;
 }
 .post-info .post {
-font-size: 14px;
 color: #333;
 line-height: 24px;
 height: 24px;
@@ -206,6 +205,7 @@ zoom: 1;
 .post-info p {
 line-height: 22px;
 color: #666;
+font-size: 13px;
 }
 .last-info {
 padding: 0;
@@ -325,7 +325,6 @@ background: #fff;
 margin-bottom: 15px;
 box-shadow: 1px 3px 3px rgba(150,152,153,0.3);
 zoom: 1;
-padding-bottom:20px;
 }
 #dj-widget-personal-feed .hd {
 position: static;
@@ -810,6 +809,7 @@ cursor: default;
 }
 .edit-bar {
 text-align: right;
+padding-bottom:20px;
 }
 p, fieldset, table, pre {
 margin-bottom: 0;
@@ -1205,4 +1205,73 @@ border: 1px solid #ccc;
     right: 13px;
     top: 9px;
     width: 8px;
+}
+
+.other .plain-bar .slide-btn-connect {
+    background: url("../images/btn.png") no-repeat scroll -165px -71px rgba(0, 0, 0, 0);
+}
+.other .plain-bar .slide-btn-none {
+    background: url("../images/slide-btn-none.png") no-repeat scroll 0 12px rgba(0, 0, 0, 0);
+    color: #999999;
+    cursor: default;
+}
+.dj-btn-change-message, .dj-btn-send-mail, .dj-btn-agree, .dj-btn-agreed, .cardTips-tocarded, .dj-btn-seochange {
+    display: inline-block;
+    height: 30px;
+    margin-right: 10px;
+    width: 104px;
+}
+
+.pf-bd .dj-btn-change-message, .pf-bd .dj-btn-seochange {
+    background: url("../images/btn.png") no-repeat scroll 0 -39px rgba(0, 0, 0, 0);
+}
+.pf-bd .dj-btn-change-message:hover, .pf-bd .dj-btn-seochange:hover {
+    background: url("../images/btn.png") no-repeat scroll -105px -39px rgba(0, 0, 0, 0);
+}
+.pf-bd .dj-btn-send-mail {
+     background: url("../images/btn.png") no-repeat scroll 0 -337px rgba(0, 0, 0, 0);
+}
+.pf-bd .dj-btn-send-mail:hover {
+     background: url("../images/btn.png") no-repeat scroll -105px -368px rgba(0, 0, 0, 0);
+}
+.pf-bd .dj-btn-agree {
+     background: url("../images/btn.png") no-repeat scroll 0 -306px rgba(0, 0, 0, 0);
+}
+.pf-bd .dj-btn-agree:hover {
+    background: url("../images/btn.png") no-repeat scroll -105px -337px rgba(0, 0, 0, 0);
+}
+
+.pf-bd .btn-box a {
+    float: left;
+}
+
+.eva-invite-btn {
+    background: url("../images/eva-invite-btn.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #333333;
+    display: inline-block;
+    font-size: 14px;
+    height: 30px;
+    line-height: 80px;
+    overflow: hidden;
+    text-indent: 34px;
+    vertical-align: middle;
+    width: 104px;
+}
+.eva-invite-btn:hover {
+    background-position: -104px 0;
+    color: #333333;
+    text-decoration: none;
+}
+.eva-invite-btn-male {
+    background-position: 0 -30px;
+}
+.eva-invite-btn-male:hover {
+    background-position: -104px -30px;
+}
+.eva-invite-btn:focus {
+    color: #333333;
+}
+
+.cardTips-tocarded {
+    background: url("../images/btn.png") repeat scroll 0 -368px rgba(0, 0, 0, 0);
 }

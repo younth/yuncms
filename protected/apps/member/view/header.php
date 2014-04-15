@@ -49,7 +49,7 @@
                         <ul class="left_menu">
                 <li> <a  href="{url('member/index/index')}"  {$hover_index}>首页</a> </li>
                 <li> <a href="{url('member/profile/index')}" {$hover_profile}>我的档案</a> </li>
-                <li> <a href="#" >人脉</a> </li>
+                <li> <a href="{url('member/card/index')}" {$hover_card}>人脉</a> </li>
                 <li> <a href="#" class="popup-login">任务大厅</a>
                 <div class="more_panel" style="overflow: hidden; height: 132px; display: none; margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 10px;">
                 </div>

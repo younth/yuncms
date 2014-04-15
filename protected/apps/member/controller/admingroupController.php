@@ -39,16 +39,15 @@ class admingroupController extends appadminController{
 	//会员组修改
 	public function edit()
 	{
+		$id=intval($_GET['id']);
+		if(empty($id)) $this->error('参数错误');
 		if(!$this->isPost()){
-			$id=$_GET['id'];
-			if(empty($id)) $this->error('参数错误');
 			$info=model('memberGroup')->find("id='$id'");
 			$info['notallow']=str_replace("|","\r\n",$info['notallow']);
 			$this->info=$info;
 			$this->t_name="修改";
 			$this->display();
 		}else{
-			$id=$_POST['id'];
 			$data=array();
 			$data['group_name']=trim($_POST['gname']);
 			$data['user_group_icon']=trim($_POST['user_group_icon']);

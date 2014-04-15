@@ -5,6 +5,11 @@
 此css为base,edu,aboutme,skill公用css
 包含.profile-edit h2
 */
+
+#maincolumn {
+    float: left;
+    width: 720px;
+}
 #jy-content-wrap {
     /*background: url("../images/bg.png") repeat scroll 0 0 #DEDEDE;*/
     padding-bottom: 40px;
@@ -378,4 +383,290 @@ a.s-button-normal:hover {
 }
 a.s-button-normal:hover span {
     background-position: right -150px;
+}
+
+
+
+/*********r人脉*****/
+.dj-content-wrap {
+    padding-top: 16px;
+}
+.dj-networks, .dj-job, .dj-club, .dj-account, .dj-ask, .dj-notice, .dj-ox-before-index {
+    background: url("../images/sub-nav-bg.gif") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+}
+.dj-content-inner {
+    background-position: center 0;
+    background-repeat: no-repeat;
+    min-height: 520px;
+}
+.dj-sub-title {
+    height: 82px;
+    margin: auto;
+    width: 960px;
+}
+.dj-sub-title h2 {
+    color: #FFFFFF;
+    font: 28px/31px "MicroSoft YaHei","SimHei";
+    height: 40px;
+    padding: 29px 0 0;
+}
+.dj-sub-title h2 em {
+    color: #C4D2DA;
+    font-family: 'arial';
+    padding-left: 10px;
+}
+.dj-index, .dj-profile, .dj-profile-mini, .dj-account {
+    padding-top: 0;
+}
+.dj-notice {
+    padding: 0;
+}
+.dj-notice .dj-content-inner {
+    background: url("../images/notice-banner.png") no-repeat scroll center 0 rgba(0, 0, 0, 0);
+}
+.dj-notice .statistics {
+    margin: auto;
+    padding-top: 80px;
+}
+.dj-notice #maincolumn {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    min-height: 380px;
+}
+.dj-notice #maincolumn.invitation-bg {
+    background: url(",,/images/notice-home-bg.jpg") no-repeat scroll right bottom #FFFFFF;
+}
+.dj-notice #maincolumn.public-border {
+    border: 1px solid #DDDDDD;
+}
+.notice-unhandled #maincolumn {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.dj-notice #jobInvite {
+    padding: 20px 50px;
+}
+.dj-notice .title .green {
+    color: #86B5D7;
+}
+.dj-account #navigation .tabs {
+    left: 170px;
+}
+.dj-account .dj-content-inner {
+    background-image: url("../images/account-banner.png");
+}
+.dj-account .base-btn, .dj-account .base-btn b, .dj-account .binding-btn, .dj-account .binding-btn b, .dj-account .binding-btn-no, .dj-account .binding-btn-no b {
+    background-image: url("../images/bg_reg_btn2.png");
+    color: #333333;
+}
+
+
+.dj-networks {
+    padding: 0;
+}
+.dj-networks .dj-content-inner {
+    background-image: url("../images/network-banner.png");
+}
+.dj-networks a.green, .dj-networks a.high:visited {
+    color: #86B5D7;
+    text-decoration: none;
+}
+.dj-networks a.green:hover {
+    color: #86B5D7;
+    text-decoration: underline;
+}
+.dj-networks .nav2-box {
+    margin-bottom: 5px;
+}
+.dj-reg {
+    background-color: #E9F1F5;
+    padding: 0;
+}
+.dj-reg .dj-sub-title {
+    display: none;
+}
+.dj-reg .dj-content-inner {
+    min-height: 480px;
+}
+.dj-ask {
+    padding-top: 0;
+}
+.dj-ask .dj-content-inner {
+    background-image: url("../images/ask-banner.png");
+}
+.dj-ask .dj-sub-title h2 {
+    color: #FFFFFF;
+}
+.public-border {
+    border: 1px solid #DDDDDD;
+}
+#dj-content-wrap.public-no-title {
+    padding-top: 0;
+}
+#dj-content-wrap.public-no-title .dj-sub-title {
+    display: none;
+}
+#resume-save {
+    border: 1px solid #CCCCCC;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+.dj-more .dj-sub-title {
+    display: none;
+}
+.dj-icard .dj-sub-title {
+    display: none;
+}
+.dj-auth {
+    padding: 0;
+}
+.dj-auth .dj-sub-title {
+    display: none;
+}
+.dj-ox-before-index {
+    background-image: url("../images/sub-nav-bg-ox.gif");
+    padding: 0;
+}
+.dj-ox-before-index .dj-content-inner {
+    background-image: url("../images/ox-banner.png");
+}
+.dj-ox-before-index .dj-sub-title {
+    height: 120px;
+}
+.dj-ox-before-index .dj-sub-title h2 {
+    padding: 40px 0 0;
+}
+
+.nav2-box {
+    border-bottom: 1px solid #AAAAAA;
+    height: 37px;
+    position: relative;
+    width: 960px;
+}
+
+.nav2 {
+    border: medium none;
+    height: 38px;
+    margin-bottom: -1px;
+    padding-left: 0;
+    position: absolute;
+}
+.nav2 li {
+    float: left;
+    padding-right: 5px;
+    width: 110px;
+}
+.nav2 li a {
+    background-image: url("../images/nav2-tab-nodot.png");
+    background-position: 0 -62px;
+    color: #333333;
+    display: block;
+    font-size: 14px;
+    height: 38px;
+    line-height: 42px;
+    padding-left: 4px;
+    text-align: center;
+
+}
+.nav2 li a:hover {
+    color: #333333;
+    text-decoration: none;
+}
+.nav2 li a span {
+    background-image: url("../images/nav2-tab-nodot.png");
+    background-position: right -62px;
+    cursor: pointer;
+    display: block;
+    height: 38px;
+    line-height: 39px;
+    overflow: hidden;
+    padding-right: 4px;
+font-size:14px;
+
+}
+.nav2 li a:hover {
+    background-position: left -112px;
+}
+.nav2 li a:hover span {
+    background-position: right -112px;
+}
+.nav2 li.selected a:hover {
+    background-position: 0 0;
+}
+.nav2 li.selected a:hover span {
+    background-position: right 0;
+}
+.nav2 li.selected a {
+    background-image: url("../images/nav2-tab-select.png");
+    background-position: 0 -63px;
+}
+.nav2 li.selected a span {
+    background-image: url("../images/nav2-tab-select.png");
+    background-position: 0 -63px;
+    color: #FFFFFF;
+}
+.nav2 li.selected a {
+    background-position: 0 0;
+    color: #FFFFFF;
+    font-weight: normal;
+}
+.nav2 li.selected a span {
+    background-position: right 0;
+}
+.nav2-small-box {
+    border-bottom: 1px solid #E0E0E0;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 20px;
+    position: relative;
+}
+.nav2-small-box ul {
+    bottom: -1px;
+    left: 20px;
+    position: absolute;
+}
+.nav2-small-box li {
+    cursor: pointer;
+    display: inline;
+    float: left;
+    height: 31px;
+    margin-left: 5px;
+    overflow: hidden;
+}
+.nav2-small-box li a {
+    background: url("../images/feedTabs.gif") no-repeat scroll 0 -31px rgba(0, 0, 0, 0);
+    color: #666666;
+    cursor: pointer;
+    display: inline-block;
+    height: 31px;
+    padding-left: 15px;
+}
+.nav2-small-box li a span {
+    background: url("../images/feedTabs.gif") no-repeat scroll right -31px rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: inline-block;
+    height: 31px;
+    line-height: 31px;
+    padding-right: 15px;
+}
+.nav2-small-box li.current a, .nav2-small-box li.current a:hover {
+    background: url("../images/feedTabs.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #666666;
+    cursor: default;
+}
+.nav2-small-box li.current a span, .nav2-small-box li.current a:hover span {
+    background: url("../images/feedTabs.gif") no-repeat scroll right 0 rgba(0, 0, 0, 0);
+    color: #666666;
+    cursor: default;
+    font-weight: bold;
+}
+.nav2-small-box li a:hover {
+    background: url("../images/feedTabs.gif") no-repeat scroll 0 -31px rgba(0, 0, 0, 0);
+    color: #666666;
+    text-decoration: none;
+}
+.nav2-small-box li a:hover span {
+    background: url("../images/feedTabs.gif") no-repeat scroll right -31px rgba(0, 0, 0, 0);
+    color: #666666;
+}
+.nav2-small-box .side {
+    float: right;
 }

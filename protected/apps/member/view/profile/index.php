@@ -4,7 +4,7 @@
 <div id="container_index">
   <div class="dj-content-shadow"> 
      <!-- 上传头像 -->
-    <div id="upload_avatar_root"> </div>
+   
     <div id="content">
       <div class="wrap clearfix mine"> 
         <!-- 右侧 -->
@@ -14,12 +14,16 @@
               <div class="content visited-mod-content">
                 <div class="hd">最近来访</div>
                 <ul class="visited-list">
-                  <li><a nocardtips="true" href="" target="_blank" class="head"><img with="30" height="30" src="{$small_photo}" alt=""></a>
-                    <div class="info">
-                      <p class="name"><a href="#" nocardtips="true" target="_blank" title="唐娜">唐娜</a></p>
-                      <p><span title="长沙理工大学 · 计算机科学与技术">长沙理工大学 · 计算机科学与技术</span></p>
-                    </div>
-                    <em class="time">1分钟内</em></li>
+                 {loop $visit $key $vo}
+                      <li>
+                      <a nocardtips="true" href="{url('profile/user',array('id'=>$vo['id']))}" target="_blank" class="head"><img with="30" height="30" src="{$vo['avatar']}" alt=""></a>
+                        <div class="info">
+                          <p class="name"><a href="{url('profile/user',array('id'=>$vo['fid']))}" nocardtips="true" target="_blank" title="{$vo['uname']}">{$vo['uname']}</a></p>
+                          <p><span title="{$vo['school']} · {$vo['major']}">{$vo['school']} · {$vo['major']}</span></p>
+                        </div>
+                        <em class="time">{date($vo['ctime'],m-d)}</em>
+                     </li>
+              {/loop}
                 </ul>
                 <p class="ft more-box"><a href="#" nocardtips="true" target="_blank">查看详情</a></p>
               </div>
@@ -46,9 +50,9 @@
                 </div>
                 <div class="post-info">
                   <p class="post"> <span>{$info['major']}</span> <span>{$info['school']}</span> </p>
-                  <p>本科 <i>|</i> 长沙</p>
-              
-                  <p></p>
+                  <p>学历 : {$edu}</p>
+               	  <p>现居：{$info['city']}</p>
+                  <p>籍贯：{$info['location']}</p>
                 </div>
                 <div class="last-info"> </div>
                
@@ -139,7 +143,7 @@
               
               
               
-            <div class="content-box" id="dj-widget-profile-data" style="">
+            <div class="content-box" id="aboutme" style="">
               <div class="hd">
                 <div class="title">
                   <h3>档案资料</h3>
@@ -162,7 +166,7 @@
                     <h4>教育经历</h4>
                   </div>
                   <div class="record-bd edu-exp">
-                    <dl class="exp-list" name="长沙理工大学" data-ids="0_13983450">
+                    <dl class="exp-list" name="{$edu}">
                       <dt>{date($info['start_time'],Y-m)}
                         至 {date($info['end_time'],Y-m)}</dt>
                       <dd>
@@ -174,15 +178,7 @@
                     </dl>
                   </div>
                 </div>
-                <div id="J_profileDeleteAlert" style="display: none;">
-                  <div class="profile-alert">
-                    <div class="bd">
-                      <p class="con"><img src="http://assets.dajieimg.com/up/profile2013/images/pf-alert.png" alt="">确认要删除此条经历吗？</p>
-                      <p class="del-exp-tip">经历对应的评价和邀请都会被删除。</p>
-                    </div>
-                    <div class="btn-box"> <a href="javascript:void(0)" class="big-fresh J_DialogOK"> <span>确定</span> </a> <a href="javascript:void(0)" class="big-normal J_DialogCancel"> <span>取消</span> </a> </div>
-                  </div>
-                </div>
+                
               </div>
             </div>
           </div>

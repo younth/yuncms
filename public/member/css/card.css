@@ -1,0 +1,1458 @@
+@charset "utf-8";
+.cart-wrap {
+    clear: both;
+    margin: 30px 0;
+    overflow: hidden;
+	background:#FFF;
+	border: 1px #A1A1A1;
+	 border-radius: 5px;
+}
+.card-left {
+    float: left;
+    width: 180px;
+}
+.card-right {
+    float: right;
+    width: 960px;
+}
+.search-bar {
+    border: 1px solid #CCCCCC;
+    clear: both;
+    height: 28px;
+    line-height: 28px;
+    overflow: hidden;
+}
+input.search-text {
+    border: 1px solid #FFFFFF;
+    float: left;
+    height: 24px;
+    line-height: 24px;
+    padding: 2px 0;
+    width: 145px;
+}
+.search-button {
+    background: url("../images/card-icon2.png") no-repeat scroll -52px -76px rgba(0, 0, 0, 0);
+    border: medium none;
+    cursor: pointer;
+    float: left;
+    height: 26px;
+    width: 31px;
+}
+.nicardm-group-list {
+    margin-top: 10px;
+}
+.nicardm-group-list div.con {
+    width: 180px;
+}
+.nicardm-group-list.g-use li {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #D9D9D9 -moz-use-text-color;
+    border-image: none;
+    border-style: solid none;
+    border-width: 1px medium;
+    color: #666666;
+    cursor: pointer;
+    height: 32px;
+    line-height: 32px;
+    margin-top: -1px;
+    padding-left: 12px;
+    padding-right: 8px;
+}
+.nicardm-group-list.g-use li.over {
+    background: url("http://2.assets.dajieimg.com/up/icard/images/nicardm-group-list-over.gif") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #D9D9D9;
+    padding-left: 11px;
+    padding-right: 7px;
+    position: relative;
+    z-index: 998;
+}
+.nicardm-group-list.g-use li.current {
+    background: url("http://9.assets.dajieimg.com/up/icard/images/nicardm-group-list-current.gif") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #BDD4E0;
+    font-weight: bold;
+    padding-left: 11px;
+    padding-right: 7px;
+    position: relative;
+    z-index: 999;
+}
+.nicardm-group-list.g-use li span {
+    color: #999999;
+    float: right;
+}
+.nicardm-group-list.g-use li.current span {
+    color: #999999;
+}
+.nicardm-group-list.g-use li cite {
+    display: block;
+    font-size: 14px;
+    height: 32px;
+    overflow: hidden;
+    width: 120px;
+    word-wrap: break-word;
+}
+.nicardm-group-list.g-use li.current cite {
+    font-weight: bold;
+}
+.nicardm-group-list div.btn {
+    padding: 10px 5px 0 0;
+    text-align: right;
+}
+.dj-networks a.green, .dj-networks a.high:visited {
+    color: #86B5D7;
+    text-decoration: none;
+}
+.nicardm-group-list.g-use #group-edit {
+    display: inline;
+}
+.nicardm-group-list.g-use li em, .nicardm-group-list.g-use li i, .nicardm-group-list.g-use li input, .nicardm-group-list.g-use li p, .nicardm-group-list.g-use li.new, .nicardm-group-list.g-use #group-ok {
+    background: url("http://5.assets.dajieimg.com/up/icard/images/nicardm-group-list-edit.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: none;
+}
+.nicardm-group-list.g-edit li {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #D9D9D9;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px 0;
+    cursor: default;
+    line-height: 32px;
+    margin-top: -1px;
+    min-height: 32px;
+    padding-left: 12px;
+    padding-right: 8px;
+    vertical-align: middle;
+}
+.nicardm-group-list.g-edit li span {
+    display: none;
+}
+.nicardm-group-list.g-edit li em {
+    background: url("http://5.assets.dajieimg.com/up/icard/images/nicardm-group-list-edit.png") repeat scroll right top rgba(0, 0, 0, 0);
+    cursor: pointer;
+    float: right;
+    height: 11px;
+    margin-left: 7px;
+    margin-top: 10px;
+    overflow: hidden;
+    width: 11px;
+}
+.nicardm-group-list.g-edit li i {
+    background: url("../images/card-icon2.png") no-repeat scroll -25px -76px rgba(0, 0, 0, 0);
+    cursor: pointer;
+    float: right;
+    height: 12px;
+    margin-top: 10px;
+    overflow: hidden;
+    width: 12px;
+}
+.nicardm-group-list.g-edit li cite {
+    display: block;
+    float: none;
+    font-size: 14px;
+    height: 32px;
+    overflow: hidden;
+    width: 120px;
+    word-wrap: break-word;
+}
+.nicardm-group-list.g-edit li.new cite {
+    border: 1px dashed #C0C0C0;
+    color: #999999;
+    cursor: pointer;
+    display: block;
+    height: 22px;
+    line-height: 22px;
+    margin-left: -6px;
+    margin-top: 4px;
+    padding: 0 5px;
+    width: 136px;
+}
+.nicardm-group-list.g-edit li.new em {
+    display: none;
+}
+.nicardm-group-list.g-edit li.nowing em {
+    background: url("../images/card-icon2.png") no-repeat scroll -72px -54px rgba(0, 0, 0, 0);
+    display: inline-block;
+}
+.nicardm-group-list.g-edit li.nowing em.over {
+    background: url("../images/card-icon2.png") no-repeat scroll -72px -64px rgba(0, 0, 0, 0);
+}
+.nicardm-group-list.g-edit li.nowing {
+    overflow: hidden;
+}
+.nicardm-group-list.g-edit li.nowing cite {
+    display: none;
+}
+.nicardm-group-list.g-edit li.nowing input {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #808080 #D4D0C8 #D4D0C8 #808080;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    float: left;
+    font-size: 14px;
+    height: 22px;
+    line-height: 22px;
+    margin-left: -6px;
+    margin-top: 4px;
+    padding: 0 5px;
+    position: relative;
+    width: 110px;
+}
+.nicardm-group-list.g-edit li.nowing b {
+    background: url("../images/card-icon2.png") no-repeat scroll 0 -76px rgba(0, 0, 0, 0);
+    cursor: pointer;
+    float: left;
+    height: 24px;
+    margin-top: 4px;
+    position: relative;
+    width: 24px;
+}
+.card-right-box {
+    border: 1px solid #CCCCCC;
+}
+.card-right-head {
+    background: none repeat scroll 0 0 #F7F7F7;
+    border-bottom: 1px solid #CCCCCC;
+    clear: both;
+    height: 28px;
+    line-height: 28px;
+    overflow: hidden;
+    padding: 0 10px;
+}
+.choses {
+    color: #999999;
+    float: left;
+}
+#choseAll {
+    margin: -2px 10px 0 0;
+}
+.chose-action {
+    float: left;
+    line-height: 28px;
+    padding: 0 23px 0 27px;
+}
+.chose-action a {
+    color: #CCCCCC;
+}
+.chose-action a:hover {
+    color: #CCCCCC;
+    cursor: default;
+    text-decoration: none;
+}
+.chose-action .hasnum:hover {
+    color: #86B5D7;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.chose-action .hasnum {
+    color: #86B5D7;
+}
+.chose-action i {
+    color: #CCCCCC;
+    margin: 0 10px;
+}
+.name-search {
+    background: url("../images/card-icon2.png") no-repeat scroll 0 -54px rgba(0, 0, 0, 0);
+    display: inline;
+    float: left;
+    height: 20px;
+    margin: 4px 0 0;
+    text-indent: -9999em;
+    width: 50px;
+}
+.card-right-body {
+    clear: both;
+    overflow: hidden;
+}
+.card-list-wrap {
+    border-right: 1px solid #E3E3E3;
+    float: left;
+    height: 600px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: relative;
+    width: 465px;
+}
+.card-group dt {
+    color: #666666;
+    font-size: 16px;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 10px 0 12px;
+    position: relative;
+}
+.card-group dt .line {
+    border-top: 2px solid #CCCCCC;
+    display: block;
+    height: 0;
+    margin-top: -1px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    width: 292px;
+}
+.card-group dt a {
+    color: #666666;
+}
+.card-group dd {
+    border-bottom: 1px solid #E6E6E6;
+    clear: both;
+    cursor: pointer;
+    height: 60px;
+    overflow: hidden;
+    padding: 0 0 0 35px;
+    position: relative;
+}
+.card-group .hover {
+    background: none repeat scroll 0 0 #F3F3F3;
+}
+.card-group .checked {
+    background: url("../images/selected.png") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    border-top: 1px solid #BDD4E0;
+    margin-top: -1px;
+    z-index: 15;
+}
+.card-group dd .user-box {
+    padding: 11px 0;
+}
+.card-group dd .user-head {
+    border: 1px solid #E0E0E0;
+    float: left;
+    height: 30px;
+    padding: 2px;
+    width: 30px;
+}
+.card-group dd .user-body {
+    color: #666666;
+    line-height: 20px;
+    margin: -3px 57px 0 46px;
+}
+.card-group dd .user-body p {
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+}
+.card-group dd .bold {
+    font-weight: bold;
+}
+.card-group .bold span {
+    color: #333333;
+}
+.card-group dd .chekbox {
+    left: 12px;
+    margin-top: -6px;
+    position: absolute;
+    top: 50%;
+}
+.card-number {
+    color: #86B5D7;
+    font-size: 12px;
+    margin-top: -12px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+}
+.card-info-wrap {
+    float: left;
+    padding: 24px 30px 0;
+    width: 342px;
+}
+.card-type-a .out {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    height: 168px;
+    overflow: hidden;
+    position: relative;
+    width: 336px;
+    z-index: 1;
+}
+.card-type-a, .card-type-b {
+    margin-bottom: 17px;
+    position: relative;
+}
+.card-type-a .hd a {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #D5D5D5;
+    padding: 4px;
+}
+.card-type-a .hd img {
+    height: 80px;
+    width: 80px;
+}
+.card-type-a .in {
+    background: none repeat scroll 0 0 #E7F0F5;
+    padding: 15px;
+}
+.card-type-a .hd {
+    float: left;
+}
+.card-type-a .bd {
+    margin-left: 100px;
+}
+.card-type-a .bd .inform {
+    line-height: 22px;
+}
+.card-type-a .bd h3 {
+    font-size: 12px;
+}
+.card-type-a .com {
+    font-size: 12px;
+    height: 22px;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: break-word;
+}
+.card-type-a .com a {
+    color: #333333;
+}
+.card-type-a .bd h3 a {
+    color: #1357A2;
+    font-weight: bold;
+}
+.card-type-a .job {
+    font-size: 12px;
+    height: 22px;
+    line-height: 22px;
+    overflow: hidden;
+    white-space: normal;
+    word-wrap: break-word;
+}
+.card-type-a .plus {
+    border-top: 1px solid #E4E4E4;
+    color: #999999;
+    margin-top: 10px;
+    padding-top: 5px;
+}
+.card-type-a .plus p {
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: normal;
+}
+.card-type-a .plus i {
+    display: inline-block;
+    font-family: 'tahoma','simsun';
+    font-style: normal;
+    line-height: 22px;
+    text-align: right;
+    vertical-align: middle;
+    width: 40px;
+}
+.card-type-a .plus em {
+    display: inline-block;
+    line-height: 22px;
+    padding-right: 10px;
+    vertical-align: middle;
+}
+.card-type-a .shadow, .card-type-b .shadow {
+    background: none repeat scroll 0 0 #000000;
+    height: 170px;
+    left: 7px;
+    opacity: 0.2;
+    overflow: hidden;
+    position: absolute;
+    top: 5px;
+    width: 336px;
+}
+.card-type-b .out {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    height: 169px;
+    overflow: hidden;
+    position: relative;
+    width: 338px;
+    z-index: 1;
+}
+.card-type-b .in {
+    height: 128px;
+    margin: 20px;
+    overflow: hidden;
+    position: relative;
+}
+.card-type-b .center td {
+    text-align: center;
+    width: 100%;
+}
+.card-type-b table {
+    height: 128px;
+    width: 100%;
+}
+.card-type-b .in td {
+    font-size: 0;
+}
+#personalTags {
+    width: 320px;
+}
+.card-type-b .in span, .card-type-b .in a {
+    color: #98A3B8;
+    display: block;
+    float: left;
+    font-family: 'Microsoft YaHei','Hei';
+    font-size: 12px;
+    line-height: 32px;
+    padding: 0 6px;
+    vertical-align: middle;
+    white-space: nowrap;
+    word-break: keep-all;
+    word-wrap: normal;
+}
+.card-type-b .in span.fav, .card-type-b .in a.fav {
+    color: #D3DBEC;
+    font-size: 18px;
+    position: relative;
+    top: -5px;
+}
+.edit-type {
+    padding-top: 5px;
+    position: relative;
+}
+.edit-type dl {
+    clear: both;
+    line-height: 22px;
+    overflow: hidden;
+}
+.edit-type dt {
+    color: #666666;
+    float: left;
+    font-weight: bold;
+}
+.edit-type dd {
+    color: #CCCCCC;
+    float: left;
+    width: 300px;
+}
+.edit-type dd span {
+    margin-right: 15px;
+}
+.edit-remark {
+    display: none;
+    margin: -20px -2px 0 0;
+    position: relative;
+    text-align: right;
+}
+.edit-remark textarea {
+    height: 68px;
+    line-height: 20px;
+    overflow: auto;
+    padding: 0 5px;
+    resize: none;
+    width: 296px;
+}
+.edit-remark p {
+    margin-top: 5px;
+    text-align: right;
+}
+.action {
+    height: 26px;
+    line-height: 26px;
+    margin-top: 20px;
+    text-align: center;
+}
+.action a {
+    background: url("../images/card-icon2.png") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 26px;
+    margin: 0 5px;
+    vertical-align: middle;
+    width: 84px;
+}
+.action .send-msg {
+    background-position: 0 0;
+}
+.action .person-page {
+    background-position: 0 -27px;
+}
+.keyboard {
+    background: url("../images/keyboard.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: none;
+    height: 65px;
+    left: 580px;
+    padding: 15px 6px 9px 12px;
+    position: absolute;
+    top: 180px;
+    width: 220px;
+    z-index: 100;
+}
+.keyboard a, .keyboard span {
+    background: url("../images/card-icon2.png") no-repeat scroll -51px -54px rgba(0, 0, 0, 0);
+    display: inline;
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 4px 3px 0;
+    overflow: hidden;
+    text-align: center;
+    width: 20px;
+}
+.keyboard span {
+    color: #999999;
+}
+.keyboard a {
+    cursor: pointer;
+}
+.lay-change-card {
+    position: absolute;
+    z-index: 99;
+}
+.lay-change-card.onecol {
+    width: 230px !important;
+}
+.prompt-box .shadow {
+    background: none repeat scroll 0 0 #FFFFFF;
+    box-shadow: 3px 3px 3px #CCCCCC;
+    padding: 0;
+}
+#lay-change-card .prompt-main {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    margin-left: -2px;
+    padding: 0;
+    position: relative;
+    z-index: 99;
+}
+.prompt-box .lay-change-card .prompt-main {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    margin-left: -2px;
+    padding: 0;
+    position: relative;
+    z-index: 99;
+}
+.card-defult {
+	
+    background: url("../images/card-defualt-bg.png") no-repeat scroll -2px 0 rgba(0, 0, 0, 0);
+    float: right;
+    height: 601px;
+    position: relative;
+    width: 492px;
+}
+.share-list {
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 445px;
+    width: 100%;
+}
+.share-list dt {
+    color: #666666;
+    line-height: 24px;
+    margin-bottom: 20px;
+}
+.share-list dd a {
+    background: url("../images/share-icon.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 32px;
+    margin: 0 18px 0 10px;
+    overflow: hidden;
+    width: 32px;
+}
+.share-list dd .renren {
+    background-position: 0 0;
+}
+.share-list dd .kaixin {
+    background-position: 0 -32px;
+}
+.share-list dd .sina {
+    background-position: 0 -65px;
+}
+.share-list dd .tecent {
+    background-position: 0 -97px;
+}
+.lay-litter-tips {
+    position: absolute;
+    width: 190px;
+}
+.prompt-box .shadow {
+    background: none repeat scroll 0 0 #FFFFFF;
+    box-shadow: 3px 3px 3px #CCCCCC;
+    padding: 0;
+}
+.prompt-box .prompt-main {
+    background: none repeat scroll 0 0 #FFFCD9;
+    border: 1px solid #F2E085;
+    margin-left: -2px;
+    padding: 10px 20px 10px 10px;
+    position: relative;
+}
+.lay-litter-tips .prompt-main {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    margin-left: -2px;
+    padding: 0;
+    position: relative;
+    z-index: 99;
+}
+.lay-litter-tips.top .pointer, .prompt-box .pointer {
+    background-position: 0 -163px;
+    height: 14px;
+    right: 20px;
+    top: -12px;
+    width: 21px;
+}
+.lay-litter-tips .con {
+    padding: 10px 0 15px;
+}
+.lay-litter-tips .con p {
+    padding: 25px 10px 18px;
+    text-align: left;
+}
+.lay-litter-tips .btn {
+    background: none repeat scroll 0 0 #F6F6F6;
+    border-top: 1px solid #DEDEDE;
+    height: 20px;
+    padding: 6px 10px;
+    text-align: right;
+}
+.lay-litter-tips button.fresh {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 50px;
+}
+.lay-litter-tips button.normal {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 -20px rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 50px;
+}
+.input_wrap, .smail-wrap {
+    display: inline-block;
+    position: relative;
+}
+.nicardm-group-list.g-edit li.nowing i {
+    display: none;
+}
+.nicardm-group-list.g-edit #group-edit {
+    display: none;
+}
+.loading {
+    margin: 100px auto;
+    width: 48px;
+}
+.lay-change-card .con input.text {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #CCCCCC #EAEAEA #EAEAEA #CCCCCC;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 3px;
+    width: 155px;
+}
+.lay-change-card .con label.checkbox.new-group-box {
+    height: auto;
+    overflow: visible;
+    width: auto;
+}
+.edit-type .edite-intro, .edit-type .ngroup {
+    color: #86B5D7;
+}
+.no-cards {
+    color: #666666;
+    height: 24px;
+    line-height: 24px;
+    padding: 70px 0;
+    text-align: center;
+}
+.no-cards a {
+    color: #86B5D7;
+}
+.no-cards img {
+    margin: -2px 10px 0 0;
+    vertical-align: middle;
+}
+.card-no-tag-other p {
+    font-size: 14px;
+    line-height: 45px;
+    margin-top: 45px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+.card-no-tag-other .out {
+    background: none repeat scroll 0 0 #FFFFFF;
+}
+.g-edit .con {
+    border-bottom: 2px solid #E6E6E6;
+    border-right: 2px solid #E6E6E6;
+}
+.g-edit ul {
+    border-left: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+}
+.hd a {
+    display: block;
+}
+.hd a:hover {
+    border: 5px solid #E47600;
+    padding: 0;
+}
+.hd a img {
+    display: inline-block;
+    vertical-align: middle;
+}
+.nicardm-group-list.g-edit li.nowing p {
+    clear: both;
+    margin-left: -5px;
+}
+.lay-change-card {
+    position: absolute;
+    z-index: 99;
+}
+.lay-change-card.onecol {
+    width: 230px !important;
+}
+.lay-change-card.twocol {
+    width: 403px !important;
+}
+.lay-change-card.thrcol {
+    width: 603px !important;
+}
+.lay-change-card.twocol .con ul, .lay-change-card.thrcol .con ul {
+    border-right: 1px solid #CCCCCC;
+    float: left;
+    margin-right: 10px;
+    padding-right: 10px;
+    width: 179px;
+}
+.lay-change-card.twocol ul.last, .lay-change-card.thrcol ul.last {
+    border: medium none;
+    margin-right: 0;
+    padding-right: 0;
+}
+.lay-change-card .pointer {
+    left: 32px;
+}
+.lay-change-card.top .pointer {
+    background-position: 0 -163px;
+    height: 14px;
+    top: -12px;
+    width: 21px;
+}
+.lay-change-card.bottom .pointer {
+    background: url("http://0.assets.dajieimg.com/up/my-job-v2/images/pointer-down-gray.gif") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: -13px;
+    height: 13px;
+    width: 19px;
+}
+.lay-change-card .prompt-main {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    margin-left: -2px;
+    padding: 0;
+    position: relative;
+    z-index: 99;
+}
+.lay-change-card .con {
+    padding: 10px 0 15px;
+}
+.lay-change-card .con p {
+    color: #999999;
+    padding: 0 0 5px 20px;
+}
+.lay-change-card .con div {
+    overflow: hidden;
+    padding: 0 10px;
+}
+.lay-change-card .con li {
+    margin-bottom: 5px;
+    padding: 0 10px;
+}
+.lay-change-card .con li.over {
+    background: none repeat scroll 0 0 #F3F3F3;
+    cursor: pointer;
+}
+.lay-change-card .con label.checkbox {
+    display: inline-block;
+    height: 19px;
+    margin-top: 1px;
+    overflow: hidden;
+    padding: 0 0 0 8px;
+    width: 120px;
+    word-wrap: break-word;
+}
+.lay-change-card .con label.checkbox.new-group-box {
+    height: auto;
+    overflow: visible;
+    width: auto;
+}
+.lay-change-card .con input.checkbox {
+    display: inline-block;
+}
+.lay-change-card .con input.text {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #CCCCCC #EAEAEA #EAEAEA #CCCCCC;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 3px;
+    width: 155px;
+}
+.lay-change-card.twocol .con input.text, .lay-change-card.thrcol .con input.text {
+    width: 126px;
+}
+.lay-change-card a {
+    display: inline-block;
+    margin-left: 10px;
+}
+.lay-change-card textarea {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #CCCCCC #EAEAEA #EAEAEA #CCCCCC;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    height: 40px;
+    line-height: 20px;
+    margin-left: 10px;
+    margin-top: 5px;
+    padding: 5px;
+    width: 176px;
+}
+.lay-change-card.twocol textarea {
+    height: 20px;
+    line-height: 20px;
+    width: 349px;
+}
+.lay-change-card.thrcol textarea {
+    height: 20px;
+    line-height: 20px;
+    width: 549px;
+}
+.lay-change-card .btn {
+    background: none repeat scroll 0 0 #F6F6F6;
+    border-top: 1px solid #DEDEDE;
+    height: 20px;
+    padding: 6px 10px 6px 0;
+    text-align: right;
+}
+.lay-change-card button.fresh {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 50px;
+}
+.lay-change-card button.fresh.long {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 -40px rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 80px;
+}
+.lay-change-card button.normal {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 -20px rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 50px;
+}
+.lay-change-card button.normal.long {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 -60px rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 80px;
+}
+.lay-litter-tips {
+    position: absolute;
+    width: 190px;
+}
+.lay-litter-tips.top .pointer {
+    background-position: 0 -163px;
+    height: 14px;
+    right: 20px;
+    top: -12px;
+    width: 21px;
+}
+.lay-litter-tips.bottom .pointer {
+    background: url("http://0.assets.dajieimg.com/up/my-job-v2/images/pointer-down-gray.gif") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: -13px;
+    height: 13px;
+    right: 20px;
+    width: 19px;
+}
+.lay-litter-tips .prompt-main {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    margin-left: -2px;
+    padding: 0;
+    position: relative;
+    z-index: 99;
+}
+.lay-litter-tips .con {
+    padding: 10px 0 15px;
+}
+.lay-litter-tips .con p {
+    padding: 25px 10px 18px;
+    text-align: left;
+}
+.lay-litter-tips .btn {
+    background: none repeat scroll 0 0 #F6F6F6;
+    border-top: 1px solid #DEDEDE;
+    height: 20px;
+    padding: 6px 10px;
+    text-align: right;
+}
+.lay-litter-tips button.fresh {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 50px;
+}
+.lay-litter-tips button.long {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 -40px rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 80px;
+}
+.lay-litter-tips button.long.normal {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 -60px rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 80px;
+}
+.lay-litter-tips button.normal {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 -20px rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 50px;
+}
+.comment li .note-recomend-list {
+    border: 1px solid #E6E6E6;
+    height: 90px;
+    margin-top: 10px;
+    padding: 10px 0 5px 20px;
+}
+.comment li .note-recomend-list dl {
+    display: block;
+    float: left;
+    font-family: "宋体",fixedsys;
+    height: 70px;
+    position: relative;
+    width: 220px;
+}
+.comment li .note-recomend-list dt, .note-recomend-list dd {
+    display: inline;
+    float: left;
+    height: 60px;
+}
+.comment li .note-recomend-list dt {
+    height: 56px;
+    margin: 0 10px 0 0;
+    padding: 4px 0 0;
+    width: 52px;
+}
+.comment li .note-recomend-list dd {
+    line-height: 18px;
+    margin: 5px 0 0 5px;
+}
+.comment li .note-recomend-list dd p {
+    padding: 0;
+}
+.comment li .note-rc-pf {
+    border: 1px solid #CCCCCC;
+    height: 52px;
+    padding: 2px;
+    width: 52px;
+}
+.comment li a.note-remove-rc {
+    background-image: url("http://1.assets.dajieimg.com/images/icons/close.gif");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    display: block;
+    height: 13px;
+    overflow: hidden;
+    position: absolute;
+    right: 40px;
+    text-indent: -9999em;
+    top: 0;
+    width: 13px;
+    z-index: 100;
+}
+.comment li a.note-remove-rc:hover {
+    background-position: right 0;
+}
+.mt5 {
+    margin-top: 5px;
+}
+.position-fix {
+    position: static;
+}
+li.comment-note .replay-topic {
+    position: static;
+}
+li.comment-note {
+}
+.edite-intro {
+    display: inline-block;
+}
+.card-type-a .com, .card-type-a .job, .card-type-a .plus p {
+    width: 200px;
+}
+#interactive-box-smail #textfield {
+    width: 376px;
+}
+#smail-name span {
+    font-weight: bold;
+}
+.input_wrap em {
+    line-height: 24px !important;
+}
+.date-list dt {
+    display: none;
+}
+#dj-content-wrap .chose-action .tocardnow {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.ms-wrap {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-color: #C6C6C6 #EEEEEE #EEEEEE #C6C6C6;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    padding: 4px 4px 0;
+    width: 300px;
+}
+.ms-bv {
+    color: #999999;
+    font-size: 12px;
+    height: 20px;
+    left: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 0;
+}
+a.ms-selected-item {
+    background: url("http://7.assets.dajieimg.com/images/chrome/pickpad.gif") no-repeat scroll left top rgba(0, 0, 0, 0);
+    color: #1357A2;
+    cursor: default;
+    display: inline-block;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 5px 4px 2px;
+    padding-left: 8px;
+    text-decoration: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+a.ms-selected-item .delete {
+    background: url("http://7.assets.dajieimg.com/images/chrome/pickpad.gif") no-repeat scroll right top rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: inline-block;
+    height: 20px;
+    margin-left: 6px;
+    text-indent: -99999px;
+    width: 20px;
+}
+a.ms-selected-item:hover {
+    background-position: left bottom;
+    color: #333333;
+    text-decoration: none;
+}
+a.ms-selected-item:hover .delete {
+    background-position: right bottom;
+}
+.ms-disabled a.ms-selected-item:hover {
+    background-position: left top;
+    color: #1357A2;
+    text-decoration: none;
+}
+.ms-disabled a.ms-selected-item:hover .delete {
+    background-position: right top;
+    cursor: default;
+}
+.ms-disabled a.ms-selected-item, .ms-disabled a.ms-selected-item:hover {
+    color: #999999;
+}
+input.ms-add {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+    display: inline-block;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 0 4px;
+    padding: 0;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 50px;
+    word-wrap: normal;
+}
+input.ms-add:focus {
+    outline: medium none;
+}
+.ms-data {
+    overflow: hidden;
+}
+.ms-data-wrap {
+    font-size: 0;
+    overflow: hidden;
+    position: relative;
+}
+.ms-data-scroll {
+    overflow: hidden;
+    position: relative;
+    width: 1000px;
+}
+.ms-data-wrap .ms-data {
+    float: left;
+}
+.ms-btn {
+    background: url("http://0.assets.dajieimg.com/up/multiselect/btn.png") no-repeat scroll 4px 4px rgba(0, 0, 0, 0);
+    cursor: pointer;
+    float: right;
+    height: 20px;
+    width: 20px;
+}
+.ms-btn-canhover:hover {
+    background-position: -26px 4px;
+}
+.ms-pick {
+    background: none repeat scroll 0 0 #FFFFFF;
+    position: absolute;
+}
+.ms-pick .remove {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+.ms-pick-city-used {
+    width: 370px;
+}
+.ms-pick-city-normal {
+    width: 550px;
+}
+.ms-pick-school {
+    width: 652px;
+}
+.ms-pick-school-scroll {
+    border: 1px solid #E6E6E6;
+    height: 254px;
+    overflow-y: auto;
+    padding: 8px;
+}
+.ms-pick-tab {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #CCCCCC #CCCCCC -moz-use-text-color;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 1px medium;
+    height: 25px;
+}
+.ms-pick-tab li {
+    border-right: 1px solid #E6E6E6;
+    color: #1688D9;
+    cursor: pointer;
+    float: left;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 12px;
+}
+.ms-pick-tab .ms-pick-tab-current {
+    font-weight: bold;
+}
+.ms-pick-filters {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #E6E6E6 #E6E6E6 -moz-use-text-color;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 1px medium;
+    padding: 8px;
+}
+.selecting .subpane {
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    margin-top: -1px;
+    padding: 4px 9px;
+    position: absolute;
+    z-index: 1000;
+}
+.selecting .dot-line {
+    background-position: 0 center;
+}
+.selecting .subpane a {
+    color: #333333;
+    word-wrap: normal;
+}
+.selecting .subpane a:hover {
+    color: #1688D9;
+    text-decoration: none;
+}
+.dialog-content h3 {
+    padding: 0 13px;
+}
+.dialog-content .pool {
+    border: 1px solid #CCCCCC;
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+.dialog-content .pool .foldable span.open {
+    background: none repeat scroll 0 0 #DAEAF2;
+    border: medium none;
+    height: 24px;
+}
+.dialog-content .pool .border {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.dialog-content .pool .lowlevel {
+    background: none repeat scroll 0 0 #DAEAF2;
+    border: medium none;
+}
+.dialog-content .pool .foldable {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.dialog-content .pool .lowlevel {
+    padding: 10px 15px;
+}
+.dialog-content .pool .lowlevel ul li {
+    width: 83px;
+}
+.dialog-content .ms-pick-school-scroll {
+    padding: 8px;
+}
+.pickpane {
+    z-index: 99999;
+}
+.dj-write-box {
+    padding: 16px 16px 34px;
+}
+.dj-write-box .ms-wrap {
+    width: 410px;
+}
+.dj-write-box .input-txt {
+    border-color: #C6C6C6 #EEEEEE #EEEEEE #C6C6C6;
+    border-style: solid;
+    border-width: 1px;
+}
+.dj-write-box .action-item {
+    margin-top: 10px;
+}
+.dj-write-box .check-code-item .item-input a {
+    line-height: 28px;
+    margin-left: 9px;
+}
+.dj-write-box .i-item .error-tip {
+    clear: both;
+    color: #FF0000;
+    display: none;
+    margin-top: 3px;
+}
+.dj-write-box .i-item .title {
+    display: block;
+    float: left;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: right;
+    width: 49px;
+}
+.dj-write-box .i-item .item-input {
+    float: left;
+    padding-bottom: 20px;
+    padding-left: 9px;
+}
+.dj-write-box .i-item .p-input {
+    height: 14px;
+    padding: 7px;
+}
+.dj-write-box .i-item .e-content {
+    background-color: #F9F9F9;
+    height: 103px;
+    padding: 9px 7px;
+    width: 404px;
+}
+.dj-write-box .i-item .check-code {
+    float: left;
+    height: 14px;
+    padding: 7px;
+    width: 114px;
+}
+.dj-write-box .i-item .code-img {
+    border: 1px solid #BFBEBF;
+    float: left;
+    height: 28px;
+    margin-left: 9px;
+    width: 83px;
+}
+.dj-write-box .i-item .i-action {
+    margin-left: 60px;
+    position: relative;
+}
+.dj-write-box .i-item .i-action .server-error {
+    color: #FF0000;
+    display: none;
+    margin-left: 10px;
+}
+.dj-write-box .i-item .i-action .success-tip {
+    background-image: url("http://0.assets.dajieimg.com/up/msgcenter/image/success-tip.png");
+    display: block;
+    height: 54px;
+    left: 106px;
+    position: absolute;
+    text-indent: -1000em;
+    top: -12px;
+    width: 134px;
+}
+.dj-write-box .i-item .send-btn {
+    width: 48px;
+}

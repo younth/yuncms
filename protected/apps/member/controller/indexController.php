@@ -15,7 +15,10 @@ class indexController extends commonController
 	    	
 	    	if($auth)
 	    	{
-	    		if($auth['is_active']==1) $this->uname=$auth['uname'];
+	    		if($auth['is_active']==1) {
+	    			$this->uname=$auth['uname'];//登陆成功
+	    			$id=$auth['id'];
+	    		}
 	    		//退出登陆
 	    		else {
 	    			$this->error('账号未激活~');
@@ -45,6 +48,12 @@ class indexController extends commonController
 	    	//输出会员的头像
 	    	$hover="class=\"current\"";//设置当前的导航状态
 	    	$this->hover_index=$hover;
+	    	
+	    	//查询用户人脉通知,是用户收到的，未处理的人脉邀请
+	    	$undo=model("member_card")->find("rece_id='{$id}' and status=1");
+	    	$send_user=model("member")->user_profile($undo['send_id'],'');//发送者的信息
+	    	//$rece_user=model("member")->user_profile($undo['rece_id']);//接受者的信息
+	    	$this->send=$send_user;
         	$this->display();
         	//exit;
 	    }

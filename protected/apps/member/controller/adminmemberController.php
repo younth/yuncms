@@ -25,7 +25,7 @@ class adminmemberController extends appadminController{
 		$limit=$this->pageLimit($url,$listRows);
 		$count=model('member')->membercount($keyword,$starttime,$endtime);//总条数要结合keyword查询
 		$list=model('member')->member_group_link($keyword,$starttime,$endtime,$limit);//连表查询，显示会员级别及会员信息
-		//print_r($list);
+		//dump($list);
 		$this->list=$list;
 		$this->page=$this->pageShow($count);
 		$this->display();
@@ -35,25 +35,29 @@ class adminmemberController extends appadminController{
    public function add(){
             if(!$this->isPost()){
                 $this->t_name="添加";
-                $group= model('memberGroup')->select("id !=1","id,group_name");
+                $group= model('memberGroup')->select("id !=1","id,group_name","id asc");
+                //构造会员组
                 foreach ($group as $val) {
                     $select.="<option value='{$val['id']}'>{$val['group_name']}</option>";
-			}
+				}
                 $this->select=$select;
                 $this->action="add";
                 $this->display('adminmember/edit');
             }else{
                 $data=array();
-          
+                $group=array();
                 $data['uname']=$_POST['uname'];
+                $data['first_letter']=getFirstCharter($data['uname']);
                 $data['password']=codepwd($_POST['password']);
                 $data['login_email']=$_POST['login_email'];
-                $data['tel']=$_POST['tel'];
-                $data['qq']=$_POST['qq'];
                 $data['is_active']=intval($_POST['is_active']);
                 $data['ctime']=  time();
                 $id=model('member')->insert($data);//插入到会员表，顺便获得插入的id
                 //更新到会员组，先插入会员记录，得到插入的id,才能更新会员组信息
+                //member_profile增加一条记录
+                $user=array();
+                $user['mid']=$id;
+                model("member_profile")->insert($user);
                 $group['user_group_id']=intval($_POST['groupid']);
                 $group['uid']=$id;
                 if(model('member_group_link')->insert($group)){
@@ -67,12 +71,13 @@ class adminmemberController extends appadminController{
     //会员修改
 	public function edit()
 	{
+		$id=intval($_GET['id']);
+		if(empty($id)) $this->error('参数错误');
 		if(!$this->isPost()){
             $this->t_name="编辑";
-			$id=$_GET['id'];
 			if(empty($id)) $this->error('参数错误');
-			$info=model('member')->find_link($id);//查找用户的信息,连表三次
-			//print_r($info);
+			$info=model('member')->find_link($id);//查找用户的信息
+			//dump($info);
 			//构造会员组权限组
 			$group=model('memberGroup')->select("id !='1'","id,group_name");
 			foreach ($group as $val) {
@@ -82,9 +87,7 @@ class adminmemberController extends appadminController{
 			$this->info=$info;
 			$this->display();
 		}else{
-			$id=$_POST['id'];
 			$data=array();
-			
 			//更新会员组信息
 			$groupid['user_group_id']=intval($_POST['groupid']);
 			model('member_group_link')->update("uid='$id'",$groupid);
@@ -92,8 +95,7 @@ class adminmemberController extends appadminController{
 			if($_POST['password']!=$_POST['oldpassword']) $data['password']=codepwd($_POST['password']);
 			$data['uname']=$_POST['uname'];
 			$data['login_email']=$_POST['login_email'];
-			$data['tel']=$_POST['tel'];
-			$data['qq']=$_POST['qq'];
+		
 			$data['is_active']=intval($_POST['is_active']);
 			if(model('member')->update("id='$id'",$data))
 			    $this->success('会员信息编辑成功~');

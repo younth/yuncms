@@ -131,6 +131,7 @@ class accountController extends commonController
             
             $data['uname']=in(trim($_POST['uname']));
             //获取用户的首字母
+            $data['first_letter']=getFirstCharter($data['uname']);
             $data['password']=codepwd($_POST['password']);
             $data['regip']=$data['lastip']=get_client_ip();
             $data['ctime']=$data['lasttime']=time();
@@ -141,6 +142,10 @@ class accountController extends commonController
             $grouplink['uid']=$id;//会员id
             $grouplink['user_group_id']=2;//新手上路
             model('member_group_link')->insert($grouplink);
+            //member_profile增加一条记录
+            $user=array();
+            $user['mid']=$id;
+            model("member_profile")->insert($user);
             //将token token_exptime写入member_login表
             $login['mid']=$id;
             $login['type']=1;
@@ -151,11 +156,8 @@ class accountController extends commonController
             else model('member_login')->insert($login);//不是微博，则插入记录
             //微博账号有了则更新
             //微博账号注册激活，则自动绑定账号,member_login有了用户记录
-      		
       		$weibo['weibo_key']=$weibo_uid;//用户的id
       		$weibo['type']=1;
-      		
-            
             if($id){
             	//下面处理邮箱
             	$config=require(BASE_PATH.'/config.php');//后台部分配置固定，需要重加载配置

@@ -18,33 +18,50 @@ class profileController extends commonController
         $auth=$this->auth;//本地登录的cookie信息
     	$id=$auth['id'];//读取用户的id
         $info=model('member_profile')->find("mid='$id'");
-        //学历的判断
-        switch ($info['education']){
-        	case 1:
-        		$education="博士研究生";
-        		break;
-        	case 2:
-        		$education="硕士研究生";
-        		break;
-        	case 3:
-        		$education="本科";
-        		break;
-        	case 4:
-        		$education="专科";
-        		break;
-        	case 5:
-        		$education="其他";
-        		break;
-        }
-        $this->edu=$education;
+        $this->edu=$this->_edu($info['education']);
         $this->info=$info;
         //我的专长
         $list= model('member_tag')->select("mid='{$id}'",'id,name','id asc');
         $this->mytag=$list;
-         
+        //最近来访
+        $visit=model("visit_history")->visitme($id);
+	    if(!empty($visit)){
+				include_once(ROOT_PATH.'/avatar/AvatarUploader.class.php');
+				$au = new AvatarUploader();
+				foreach ($visit as  $row=>$v)
+				{
+					$uid=$v['id'];
+					$visit[$row]['avatar']=$au->getAvatar($uid,'small');
+				}
+			}        
+        $this->visit=$visit;
         $this->display();
     }
     
+    //判断学历
+    protected function _edu($edu)
+    {
+    	//学历的判断
+    	switch ($edu){
+    		case 1:
+    			$education="博士研究生";
+    			break;
+    		case 2:
+    			$education="硕士研究生";
+    			break;
+    		case 3:
+    			$education="本科";
+    			break;
+    		case 4:
+    			$education="专科";
+    			break;
+    		case 5:
+    			$education="其他";
+    			break;
+    	}
+    	 return $education;
+    }
+
     //修改基本信息
     public function editbase()
     {
@@ -58,7 +75,7 @@ class profileController extends commonController
                                
                 //city表示所在城市，location表示家乡
                 $city=  explode(',', $info['city']);
-                $location=  explode(',', $info['location']);
+                $location= explode(',', $info['location']);
                 $info['province']=$city[0];
                 $info['city2']=$city[1];
                 $info['province1']=$location[0];               
@@ -78,7 +95,8 @@ class profileController extends commonController
                 $user['uname']=in(trim($_POST['uname']));
                 if($auth['uname']!=$user['uname'])
                 {
-                	//姓名被改,更改cookie
+                	$user['first_letter']=getFirstCharter($user['uname']);//获取会员的首字母
+                	//姓名被改,更改cookie及会员的首字母
                 	if(model("member")->update("id='{$id}'",$user))
                 	{
                 		$cookie_auth = $auth['id'].'\t'.$user['uname'].'\t'.$auth['lasttime'].'\t'.$auth['groupid'].'\t'.$auth['login_email'].'\t'.$auth['is_active'];
@@ -86,7 +104,6 @@ class profileController extends commonController
                 	}
                 	
                 }
-                
                 $city=$_POST['province'].",".$_POST['city'];
                 $location=$_POST['province1'].",".$_POST['city1'];               
                 
@@ -96,7 +113,7 @@ class profileController extends commonController
                 $data['location']=$location;
                 $data['tel']=$_POST['tel'];
                 if(model('member_profile')->update("mid='{$id}'",$data))
-                	$this->success('信息修改成功~',url('profile/index'));
+                	$this->redirect(url('profile/index'));
                 else 
                     $this->error('没有任何修改，不需要执行');
         }
@@ -128,11 +145,17 @@ class profileController extends commonController
                 $data['start_time']= strtotime(in($_POST['start_time']));
                 $data['end_time']=  strtotime(in($_POST['end_time']));
                 if(model('member_profile')->update("mid='{$id}'",$data))
-                $this->success('信息修改成功~',url('profile/index'));
+                $this->redirect(url('profile/index#aboutme'));
                 else $this->error('没有任何修改，不需要执行');
         }
      }
      
+     //首页秀特长
+     public function tag()
+     {
+     	$this->display();
+     }
+
      //修改技能信息
      public function editskills()
      {
@@ -208,12 +231,92 @@ class profileController extends commonController
          } else {
              //提交，修改
              $data=array();//要保存的数组
-             $data['introduce']=  in($_POST['introduce']);
+             $data['introduce']=in($_POST['introduce']);
              if(model('member_profile')->update("mid='{$id}'",$data))
-                $this->success('信息修改成功~',url('profile/index'));
+                $this->redirect(url('profile/index#aboutme'));
              else 
                  $this->error('没有任何修改，不需要执行');
          }
      }
 
+     //会员访问记录
+     protected  function _visit($fid,$bid)
+     {
+     	$data=array();
+     	if($fid==$bid) return false;//不可自己访问自己
+     	//看是否访问过，访问过则更新时间
+     	$re=model('visit_history')->find("fid='{$fid}' and bid='{$bid}' and type=1");
+     	if($re)
+     	{
+     		$id=$re['id'];
+     		$data['ctime']=time();
+     		model('visit_history')->update("id='{$id}'",$data);
+     		return true;
+     	}
+     	else{
+     		$data['type']=1;//类型1，会员访问记录
+     		$data['fid']=$fid;
+     		$data['bid']=$bid;
+     		$data['ctime']=time();
+     		if(model('visit_history')->insert($data))return true;
+     		else false;
+     	}
+     }
+      
+     //其他学生用户
+     public function user()
+     {
+     	$id=intval($_GET['id']);
+     	$auth=$this->auth;//本地登录的cookie信息
+     	$mid=$auth['id'];
+     	if($mid==$id) $this->redirect(url("member/profile/index"));//是自己
+     	//得到用户的所有信息,连表查询
+     	//访问记录
+     	$this->_visit($mid,$id);//更新访问记录
+     	$info=model('member')->user_profile($id,'');
+     	include_once(ROOT_PATH.'/avatar/AvatarUploader.class.php');
+     	$au = new AvatarUploader();
+     	$urlAvatarBig = $au->getAvatar($id,'big');
+     	$urlAvatarMiddle = $au->getAvatar($id,'middle');
+     	$urlAvatarSmall = $au->getAvatar($id,'small');
+     	$this->small=$urlAvatarSmall;
+     	$this->middle=$urlAvatarMiddle;
+     	$this->big=$urlAvatarBig;     	
+     	$this->edu=$this->_edu($info['education']);
+     	//会员的专长
+     	$list= model('member_tag')->select("mid='{$id}'",'id,name','id asc');
+     	$this->mytag=$list;
+     	//最近来访,不包括自己
+     	$visit=model("visit_history")->visitme($id);
+     	if(!empty($visit)){
+     		include_once(ROOT_PATH.'/avatar/AvatarUploader.class.php');
+     		$au = new AvatarUploader();
+     		foreach ($visit as  $row=>$v)
+     		{
+     			$uid=$v['id'];
+     			$visit[$row]['avatar']=$au->getAvatar($uid,'small');
+     		}
+     	}
+     	$this->visit=$visit;
+     	//mid我  id是被访问的用户
+     	//判断我是否被申请加为好友，申请者是他人
+     	$rece_card=model('member_card')->find("rece_id='{$mid}' AND send_id='{$id}'");//当前会员收到的申请
+     	//我收到申请，我看别人的资料显示：确认通过
+     	if($rece_card['status']==1)
+     	{
+     		$this->card=1;//接受邀请
+     	}elseif($rece_card['status']==2){
+     		$this->card=2;//发送私信
+     	}
+     	//我发出的申请，我看被申请的人的资料时候显示
+     	$send_card=model('member_card')->find("send_id='{$mid}' AND rece_id='{$id}'");
+       if($send_card['status']==1)
+     	{
+     		$this->card=3;//等待	审核
+     	}elseif($send_card['status']==2){
+     		$this->card=2;//发送私信
+     	}
+     	$this->info=$info;
+     	$this->display();
+     }
 }
