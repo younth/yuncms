@@ -127,7 +127,7 @@
       <p>
         与你技能相同的人都在关注
       </p>
-      <a href="javascript:void(0)"  class="aicon" onclick="corp_follow({$vo['id']},{$auth['id']})" id="corp{$vo['id']}"></a>
+      <a href="javascript:void(0)"  class="aicon" onclick="corp_follow({$vo['id']})" id="corp{$vo['id']}"></a>
     </div>
   </li>
       {/loop}    

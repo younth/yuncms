@@ -62,5 +62,33 @@ class cardController extends commonController
 		else echo "失败~";
 	}
 
+	//ajax加载名片信息
+	public function loadcard()
+	{
+		$id=intval($_GET['id']);
+		//查询用户的信息
+		$info=model("member")->user_profile($id,'');
+		//dump($info);
+		//$html.='<dl><dt><a target="_blank" href="showuser.php?uid='.$randuser[$i]['uid'].'">';
+		$url=url('profile/user',array('id'=>$id));
+		$html.='<div style="" class="card-type-a" id="J_cardTypeA"><div class="out"><div class="in"><div class="hd">';
+		$html.='<a target="_blank" href="'.$url.'"><img src="'.$info['avatar'].'" alt=""></a></div>';
+		$html.='<div class="bd"><div class="inform"><p class="com" title="'.$info['school'].'">'.$info['school'].'</p>';
+		$html.='<h3 title="'.$info['uname'].'"><a target="_blank" href="">'.$info['uname'].'</a></h3> <p class="job" title="'.$info['major'].' · '.$info['city'].'">'.$info['major'].' · '.$info['city'].'</p></div>';
+		$html.='<div class="plus"><p><i>Q&nbsp;Q：</i><em>'.$info['qq'].'</em></p><p><i>手机：</i><em>'.$info['tel'].'</em> </p>';
+		$html.='<p> <i>邮箱：</i><em title="'.$info['login_email'].'">'.$info['login_email'].'</em></p></div></div></div></div> <div class="shadow"></div></div>';
+		$html.='<div style="z-index: 1; cursor: default;" class="card-type-b" id="J_cardTypeB"> <div class="out"> <div class="in"><table> <tbody> <tr> <td id="personalTags">';
+		$tag=$info['tag'];
+		$count=count($tag);
+		for($i=0;$i<$count;$i++){
+			if($i%2==0) $html.='<span>'.$tag[$i]['name'].'</span>';
+			else $html.='<span class="fav">'.$tag[$i]['name'].'</span>';
+			
+		}
 	
+		$html.='</td></tr></tbody></table></div></div><div class="shadow"></div></div>';
+		$html.='<div class="edit-type"><p class="action"><a href="" class="send-msg" title="发私信" id="single_mail" uid="'.$info['id'].'" username="'.$info['uname'].'"></a>';
+		$html.='<a target="_blank" href="'.$url.'" title="查看档案" class="person-page"></a></p></div>';
+		echo $html;
+	}
 }

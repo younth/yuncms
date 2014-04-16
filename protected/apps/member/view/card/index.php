@@ -46,7 +46,7 @@
                                 <dl id="a" class="card-group">
             <!--<dt><span>A</span><i class="line"></i></dt>-->
             	 {loop $mycard $key $vo}
-                   <dd style="border-bottom: none" gid="1" jid="11858600" class="">
+                   <dd style="border-bottom: none" gid="1"  class="" onclick="cardinfo({$vo['id']})">
                        <div class="user-box">
                         <span class="user-head" href="{url('profile/user',array('id'=>$vo['id']))}"><img width="30" height="30" alt="" src="{$vo['avatar']}"></span>
                         <div class="user-body"><p class="bold sms">
@@ -285,5 +285,32 @@ var timer = null;
 </script>
 
 <script type="text/javascript">
+function cardinfo(id){
+	 var $rightCard = $("#J_cardInfo");
+  $.ajax({
+	  type: "GET",
+      url: "{url('member/card/loadcard')}",
+	  dataType: "html",
+      data: {
+        id: id,
+	  },
+		 success: function (data) {
+			// alert(data);
+			$rightCard.removeClass("card-defult").addClass("card-info-wrap");
+				//$rightCard.attr("class","card-info-wrap");
+			  	$rightCard.html(data);
+				var colorArr = ['#61cccd','#2b9bd7','#ff9960','#99999f'];
+				$('#personalTags span').each(function (index) {
+                        var colorIndex = index % colorArr.length,
+                                color = colorArr[colorIndex];
+
+                        $(this).css({'color':color});
+                    });
+
+		 },
+		  error: function (msg) {
+                alert(msg);
+		  }
+    });}
 </script>
  {include file="footer"}

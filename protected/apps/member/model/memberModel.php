@@ -61,8 +61,10 @@ class memberModel extends baseModel{
 			foreach ($user as  $row=>$v)
 			{
 				$uid=$v['id'];
-				$user[$row]['avatar']=$au->getAvatar($uid,'small');
+				$user[$row]['avatar']=$au->getAvatar($uid,'middle');
 				$user[$row]['allcart']=model('member_card')->count("send_id='{$uid}' or rece_id='{$uid}'");//联系人总数
+				//用户标签
+				$user[$row]['tag']=model("member_tag")->select("mid='{$id}'",'name');
 			}
 		}
 		return $user[0];//$user是二维数组，应该返回一维数组显示会员信息
