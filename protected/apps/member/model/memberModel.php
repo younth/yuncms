@@ -61,6 +61,7 @@ class memberModel extends baseModel{
 			foreach ($user as  $row=>$v)
 			{
 				$uid=$v['id'];
+				$user[$row]['small']=$au->getAvatar($uid,'small');
 				$user[$row]['avatar']=$au->getAvatar($uid,'middle');
 				$user[$row]['allcart']=model('member_card')->count("send_id='{$uid}' or rece_id='{$uid}'");//联系人总数
 				//用户标签
@@ -70,5 +71,30 @@ class memberModel extends baseModel{
 		return $user[0];//$user是二维数组，应该返回一维数组显示会员信息
 	}
 	
+	//可能认识的人,去除已经是发送过申请的或者已经是联系人。。
+	public function maybeknow($id)
+	{
+		$user=model("member")->user_profile($id,'');
+		$mycard=model('member_card')->allcard($id);
+		if(!empty($mycard)){
+			foreach ($mycard as  $row=>$v){
+				$myfriend.=$v['mid'].",";
+			}
+			$myfriend=rtrim($myfriend,',');//我的联系人字符串
+			$where='(school like "%'.$user['school'].'%" or major like "%'.$user['major'].'%") and mid!='.$id.' and mid NOT IN ('.$myfriend.')';
+		}else $where='(school like "%'.$user['school'].'%" or major like "%'.$user['major'].'%") and mid!='.$id;
+		//我的全部申请，被申请的人
+		
+		//echo $where;
+		$may=model("member_profile")->select($where,'mid');
+		if(!empty($may)){
+			foreach ($may as  $row=>$v)
+			{
+				$may[$row]=model("member")->user_profile($v['mid'],'');
+			}
+			//$this->mycard=$card;
+		}
+		return $may;
+	}
 }
 ?>

@@ -1456,3 +1456,379 @@ input.ms-add:focus {
 .dj-write-box .i-item .send-btn {
     width: 48px;
 }
+
+
+
+/**最新加入**/
+
+
+.news-list {
+    background-color: #E9F1F9;
+    border-top: 4px solid #A3BFD5;
+    clear: both;
+    padding: 13px 30px 30px;
+    position: relative;
+    z-index: 5;
+}
+.news-list .hd {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 30px;
+}
+.news-list .bd {
+    height: 80px;
+    margin-top: 13px;
+    overflow: hidden;
+    position: relative;
+    z-index: 5;
+}
+.news-list .user-list {
+    height: 80px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    z-index: 5;
+}
+.news-list .user-list li {
+    float: left;
+    overflow: hidden;
+    width: 310px;
+}
+.news-list .user-list .head {
+    float: left;
+}
+.news-list .head img {
+    display: block;
+}
+.news-list .user-list .user-info {
+    margin-left: 95px;
+    overflow: hidden;
+}
+.news-list .user-list p {
+    color: #666666;
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+}
+.news-list .user-list .name {
+    font-size: 14px;
+}
+.news-list .user-list .relationship {
+    color: #999999;
+    margin: 0 5px;
+}
+.news-list .user-list .btn-box {
+    margin-top: 10px;
+}
+.news-list .icon-add {
+    background: url("../images/dj-btn/btn-icon.png") no-repeat scroll 2px -166px rgba(0, 0, 0, 0);
+}
+.news-list .action-box {
+    bottom: 10px;
+    height: 16px;
+    position: absolute;
+    right: 30px;
+    width: 42px;
+    z-index: 5;
+}
+.news-list .action-box .scroll-btn {
+    background-image: url(",,/images/news-scroll.png");
+    background-repeat: no-repeat;
+    height: 16px;
+    text-indent: -999em;
+    width: 21px;
+}
+.news-list .action-box .left-btn {
+    background-position: 0 -17px;
+    float: left;
+}
+.news-list .action-box .left-btn:hover {
+    background-position: 0 0;
+}
+.news-list .action-box .left-none {
+    background-position: 0 -34px;
+}
+.news-list .action-box .right-btn {
+    background-position: 100% -17px;
+    float: right;
+}
+.news-list .action-box .right-btn:hover {
+    background-position: 100% 0;
+}
+.news-list .action-box .right-none {
+    background-position: 100% -34px;
+}
+.news-list .tip-icon {
+    background: url("../images/news-icon.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: block;
+    height: 47px;
+    position: absolute;
+    right: -1px;
+    text-indent: -9999em;
+    top: -4px;
+    width: 47px;
+    z-index: 5;
+}
+
+
+
+/***可能认识***/
+
+.news-list {
+    margin-top: 25px;
+}
+.mayknow-list {
+    margin-top: 10px;
+	background:#FFF;
+	border: 1px  dashed #CCCCCC;
+}
+.mayknow-list a{
+		color: #1357A2;
+}
+.mayknow-list .list-tab {
+    border-bottom: 2px solid #E8E8E8;
+    height: 34px;
+    line-height: 34px;
+}
+.mayknow-list .list-tab a {
+    float: left;
+    padding: 0 15px;
+}
+.mayknow-list .list-tab a:hover {
+    background: none repeat scroll 0 0 #F6F6F6;
+    text-decoration: none;
+}
+.mayknow-list .list-tab .selected {
+    background: url("../images/checked-icon.png") no-repeat scroll center bottom rgba(0, 0, 0, 0);
+    bottom: 0;
+    color: #333333;
+    font-weight: bold;
+    padding-bottom: 2px;
+    position: relative;
+    z-index: 10;
+}
+.mayknow-list .list-tab .selected:hover {
+    background: url("../images/checked-icon.png") no-repeat scroll center bottom rgba(0, 0, 0, 0);
+}
+.mayknow-list .more {
+    background: none repeat scroll 0 0 #F7F9FA;
+    border: 1px solid #EBEBEB;
+    display: none;
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+    margin-top: 22px;
+    text-align: center;
+}
+.list-content {
+    clear: both;
+    margin-right: -10px;
+    margin-top: 15px;
+    overflow: hidden;
+    width: 980px;
+}
+.list-content .mayknow-card, .search-box {
+    float: left;
+    margin-bottom: 18px;
+    margin-right: 18px;
+}
+.search-box {
+    background-color: #FFFBF0;
+    border: 1px solid #D9D9D9;
+    height: 124px;
+    overflow: hidden;
+    width: 306px;
+}
+.search-box .search-content {
+    padding: 12px 15px;
+}
+.search-content .hd {
+    color: #666666;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 26px;
+}
+.search-content .bd {
+    padding: 10px 0 0 25px;
+}
+.search-content .search-form {
+    clear: both;
+    overflow: hidden;
+    position: relative;
+}
+.search-content .J_placeLable, .blank-search .J_placeLable {
+    color: #999999;
+    height: 30px;
+    left: 5px;
+    line-height: 30px;
+    position: absolute;
+    top: 0;
+}
+.search-content .search-form .search-input {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-color: #CCCCCC -moz-use-text-color #CCCCCC #CCCCCC;
+    border-image: none;
+    border-style: solid none solid solid;
+    border-width: 1px medium 1px 1px;
+    float: left;
+    height: 18px;
+    line-height: 18px;
+    padding: 5px;
+    width: 190px;
+}
+.search-content .search-btn {
+    background: url("../images/mayknow-icon.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    float: left;
+    height: 30px;
+    text-indent: -9999em;
+    width: 29px;
+}
+.search-content .search-btn:hover {
+    background: url("../images/mayknow-icon.png") no-repeat scroll 0 -30px rgba(0, 0, 0, 0);
+}
+.search-content .search-word {
+    color: #999999;
+    line-height: 26px;
+    padding: 5px 0;
+}
+.error-tips {
+    color: #FF0000;
+    display: none;
+    line-height: 26px;
+    padding: 5px 0;
+}
+.blank-search {
+    margin: 40px auto 0;
+    width: 270px;
+}
+.blank-search .title {
+    background: url("../images/blank-title.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #999999;
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+    padding-left: 35px;
+}
+.blank-search .bd {
+    clear: both;
+    margin: 22px 18px 0 0;
+    overflow: hidden;
+    position: relative;
+}
+.blank-search .search {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #CCCCCC -moz-use-text-color #CCCCCC #CCCCCC;
+    border-image: none;
+    border-style: solid none solid solid;
+    border-width: 1px medium 1px 1px;
+    float: left;
+    height: 18px;
+    line-height: 18px;
+    padding: 5px;
+    width: 190px;
+}
+.blank-search .search-btn {
+    background: url("../images/mayknow-icon.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    float: left;
+    height: 30px;
+    text-indent: -9999em;
+    width: 29px;
+}
+.blank-search .search-btn:hover {
+    background: url("../images/mayknow-icon.png") no-repeat scroll 0 -30px rgba(0, 0, 0, 0);
+}
+.blank-search .ft {
+    color: #999999;
+    line-height: 32px;
+}
+.degree-type {
+    margin-left: 10px;
+}
+.mayknow-card .ft .cardTips-tocarded .icon-add {
+    background-position: 0 0;
+}
+.mayknow-card {
+    border: 1px solid #D9D9D9;
+    height: 124px;
+    overflow: hidden;
+    position: relative;
+    width: 306px;
+}
+.mayknow-card .user-content {
+    clear: both;
+    overflow: hidden;
+    padding: 13px 15px 20px;
+}
+.mayknow-card .user-content .head {
+    border: 1px solid #E5E5E5;
+    float: left;
+    height: 50px;
+    padding: 2px;
+    width: 50px;
+}
+.mayknow-card .head img {
+    display: block;
+}
+.mayknow-card .user-info {
+    margin-left: 70px;
+    overflow: hidden;
+}
+.mayknow-card .user-info .title {
+    font-size: 14px;
+    line-height: 26px;
+}
+.mayknow-card .user-info .title a {
+    display: inline-block;
+    height: 26px;
+    overflow: hidden;
+    vertical-align: top;
+    width: 150px;
+}
+.mayknow-card .user-info .position {
+    color: #666666;
+    line-height: 30px;
+}
+.mayknow-card .position i {
+    margin: 0 5px;
+}
+.mayknow-card .ft {
+    background: none repeat scroll 0 0 #F6F6F6;
+    border-top: 1px solid #D9D9D9;
+    clear: both;
+    height: 22px;
+    line-height: 22px;
+    overflow: hidden;
+    padding: 8px 15px;
+}
+.mayknow-card .ft .J_addBtn {
+    float: right;
+}
+.mayknow-card .ft .J_addBtn i {
+    background: url("../images/btn-icon.png") no-repeat scroll 2px -166px rgba(0, 0, 0, 0);
+}
+.mayknow-card .ft .relationship {
+    color: #999999;
+    float: left;
+}
+.mayknow-card .remove {
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+
+/*********搜索***/
+.cardserach{
+	margin-top:15px;
+}
+#delfriend{
+	background-position: 0 -104px;
+}

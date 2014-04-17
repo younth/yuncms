@@ -17,6 +17,7 @@ class cardController extends commonController
 		//我的联系人,查询我的联系人的信息
 		$auth=$this->auth;//本地登录的cookie信息
 		$id=$auth['id'];
+		if(empty($id)) $this->redirect(url('default/index/login'));//未登录， 跳转到登录页面
 		$card=model('member_card')->mycard($id);//好友分组
 		$allcard=model('member_card')->count("send_id='{$id}' or rece_id='{$id}'");//联系人总数
 		if(!empty($card)){
@@ -45,7 +46,7 @@ class cardController extends commonController
 		if(empty($re))
 		{
 			if(model("member_card")->insert($data)) echo 1;
-			else echo "发送失败";
+			else echo "添加失败";
 		}else echo 0;
 	}
 	
@@ -71,6 +72,7 @@ class cardController extends commonController
 		//dump($info);
 		//$html.='<dl><dt><a target="_blank" href="showuser.php?uid='.$randuser[$i]['uid'].'">';
 		$url=url('profile/user',array('id'=>$id));
+		$delurl=url('card/delfriend',array('id'=>$id));
 		$html.='<div style="" class="card-type-a" id="J_cardTypeA"><div class="out"><div class="in"><div class="hd">';
 		$html.='<a target="_blank" href="'.$url.'"><img src="'.$info['avatar'].'" alt=""></a></div>';
 		$html.='<div class="bd"><div class="inform"><p class="com" title="'.$info['school'].'">'.$info['school'].'</p>';
@@ -88,7 +90,49 @@ class cardController extends commonController
 	
 		$html.='</td></tr></tbody></table></div></div><div class="shadow"></div></div>';
 		$html.='<div class="edit-type"><p class="action"><a href="" class="send-msg" title="发私信" id="single_mail" uid="'.$info['id'].'" username="'.$info['uname'].'"></a>';
-		$html.='<a target="_blank" href="'.$url.'" title="查看档案" class="person-page"></a></p></div>';
+		$html.='<a target="_blank" href="'.$url.'" title="查看档案" class="person-page"></a><a href="'.$delurl.'" title="解除朋友关系" id="delfriend"></a></p></div>';
 		echo $html;
 	}
+	
+	//解除好友关系,应该用ajax，没有处理好
+	public function delfriend()
+	{
+		$auth=$this->auth;//本地登录的cookie信息
+		$rece_id=$auth['id'];//读取用户的id
+		$send_id=intval($_GET['id']);
+		$re=model('member_card')->find("send_id='$rece_id' and rece_id='$send_id'");
+		if($re) model('member_card')->delete("id='".$re['id']."'");
+		else{
+			$re=model('member_card')->find("send_id='$send_id' and rece_id='$rece_id'");
+			model('member_card')->delete("id='".$re['id']."'");
+		}
+		$this->redirect(url('card/index'));
+	}
+	
+	//找人,查询所有的会员
+	public function search()
+	{
+		
+	}
+	
+	//我可能认识的人，根据专业，标签，学校匹配，是当前的用户
+	public function mayknow()
+	{
+		$auth=$this->auth;//本地登录的cookie信息
+		$id=$auth['id'];//读取用户的id
+		$mayknow=model("member")->maybeknow($id);
+		
+		//最新加入，根据注册时间以及专业匹配
+		//dump($mayknow);
+		$this->mayknow=$mayknow;
+		$this->display();
+	}
+	
+	//邀请好友注册，增加我的积分
+	public function invite()
+	{
+		$this->display();
+	}
 }
+
+

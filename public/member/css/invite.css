@@ -1,0 +1,31 @@
+.i_copy_way{width:686px; height:78px; border-top:none;}
+.i_copy_link {
+    background: none repeat scroll 0 0 #FCF1F1;
+    border: 1px solid #F8E0E0;
+    border-radius: 2px;
+    color: #5D5D5D;
+    display: inline;
+    float: left;
+    font-size: 12px;
+    height: 33px;
+    line-height: 33px;
+    margin: 18px 0 0 14px;
+    overflow: hidden;
+    padding-left: 10px;
+    width: 488px;
+}
+.i_copylink_btn a {
+    background: url("../images/all_btn.gif") no-repeat scroll -15px -8px rgba(0, 0, 0, 0);
+    color: #FFFFFF;
+    display: inline;
+    float: right;
+    height: 34px;
+    line-height: 34px;
+    margin: 19px 60px 0 0;
+    text-align: center;
+    width: 104px;
+}
+.i_copylink_btn a:hover {
+    background: url("../images/all_btn.gif") no-repeat scroll -166px -8px rgba(0, 0, 0, 0);
+    text-decoration: none;
+}

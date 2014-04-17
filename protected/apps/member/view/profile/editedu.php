@@ -3,8 +3,7 @@
 <link href="__PUBLICAPP__/css/edu.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="__PUBLICAPP__/css/selectschool.css" media="screen" rel="stylesheet" type="text/css" />
 <script src="__PUBLICAPP__/js/selectschool.js" type="text/javascript"></script>
-<script src="http://common.cnblogs.com/script/jquery.js" type="text/javascript"></script>
-<script src="http://files.cnblogs.com/technology/school.js" type="text/javascript"></script>
+<script src="__PUBLICAPP__/js/school.js" type="text/javascript"></script>
 <!--调用时间-->
 <script type="text/javascript" src="__PUBLIC__/lhgcalendar/lhgcore.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/lhgcalendar/lhgcalendar.min.js"></script>
