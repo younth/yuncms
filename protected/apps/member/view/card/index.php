@@ -13,8 +13,7 @@
     <div class="nav2-box">
         <ul class="nav2">
             <li class="selected"><a href="{url('card/index')}"><span>我的联系人</span></a></li>
-            <li><a href="{url('card/index')}"><span>找人</span></a></li>
-            <li><a href="{url('card/mayknow')}"><span>可能认识的人</span></a></li>
+            <li><a href="{url('card/search')}"><span>找人</span></a></li>
             <li><a href="{url('card/invite')}"><span>邀请好友</span></a></li>
         </ul>
     </div>
@@ -46,14 +45,14 @@
                                 <dl id="a" class="card-group">
             <!--<dt><span>A</span><i class="line"></i></dt>-->
             	 {loop $mycard $key $vo}
-                   <dd style="border-bottom: none"  class="" onclick="cardinfo({$vo['id']})">
+                   <dd style="border-bottom: none"  class="" onclick="cardinfo({$vo['id']})" id="card{$vo['id']}">
                        <div class="user-box">
                         <span class="user-head" href="{url('profile/user',array('id'=>$vo['id']))}"><img width="30" height="30" alt="" src="{$vo['avatar']}"></span>
                         <div class="user-body"><p class="bold sms">
                             <span href="">{$vo['uname']}</span></p>
                             <p title="{$vo['school']} ·{$vo['major']}">{$vo['school']} · {$vo['major']}</p>
                         </div>
-                      <a class="card-number" href="" title="{$vo['uname']}的联系人">  联系人数：{$vo['allcart']}</a></div>
+                      <a class="card-number" href="javascript:void(0)" title="{$vo['uname']}的联系人">  联系人数：{$vo['allcart']}</a></div>
                     <input type="checkbox" class="chekbox" id="{$vo['id']}">
                 </dd>
                  {/loop}
@@ -138,11 +137,6 @@ $(function(){
    		 $("input:checkbox").removeAttr("checked");//全选
     });
 	
-	//解除关系
-	$(".chekbox").click(function(){
-		var $id=$(this).attr("id");//当前用户id
-		//暂时不做
-	});
 	
 var timer = null;
         var $keyboard = $(".keyboard");
@@ -171,6 +165,8 @@ var timer = null;
 
 <script type="text/javascript">
 function cardinfo(id){
+	var node="#card"+id;
+	$(node).addClass("checked").siblings().removeClass("checked");//去除兄弟节点的选中效果
 	 var $rightCard = $("#J_cardInfo");
   $.ajax({
 	  type: "GET",
@@ -196,8 +192,38 @@ function cardinfo(id){
 		  error: function (msg) {
                 alert(msg);
 		  }
-    });}
+    });
+}
 
 
+</script>
+<script>
+	//解除关系
+	$(document).on('click','#delfriend',function(){
+		var $uid=$(this).attr("uid");//放在最外边
+		
+		var nowobj="card"+$uid;
+		var delnode=$("#"+nowobj);
+		layer.confirm('确定解除关系吗？', function(){ 
+			  $.ajax({
+			  type: "GET",
+			  url: "{url('member/card/delfriend')}",
+			  data: {
+				id: $uid,
+			  },
+				 success: function (data) {
+					//
+					layer.msg('删除好友成功！',2,-1);
+					delnode.remove();
+				 },
+				  error: function (msg) {
+						alert(msg);
+				  }
+			});
+
+		
+		});
+		
+	});
 </script>
  {include file="footer"}

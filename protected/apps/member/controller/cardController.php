@@ -33,7 +33,7 @@ class cardController extends commonController
 		$this->display();
 	}
 	
-	//发送添加请求
+	//ajax发送添加请求，注意已经有记录，则不添加，直接接受
 	public function send( )
 	{
 		$auth=$this->auth;//本地登录的cookie信息
@@ -50,7 +50,29 @@ class cardController extends commonController
 		}else echo 0;
 	}
 	
-	//我同意别人的邀请,更新别人的申请记录，status设为2，两人互为好友
+	//ajax添加联系人
+	public function addfriend()
+	{
+		$auth=$this->auth;//本地登录的cookie信息
+		$data=array();
+		$data['send_id']=$send_id=$auth['id'];//读取用户的id
+		$data['rece_id']=$rece_id=intval($_GET['id']);
+		$data['status']=1;
+		$data['ctime']=time();
+		$re=model('member_card')->find("(send_id='{$send_id}' and rece_id='{$rece_id}') or (rece_id='{$send_id}' and send_id='{$rece_id}')");
+		if(empty($re))
+		{
+			if(model("member_card")->insert($data)) echo 1;
+			else echo "添加失败";
+		}else{
+			//非空说明已经添加过了，直接将status设置为2
+			$card['status']=2;
+			if(model("member_card")->update("id='{$re[id]}'",$card)) echo 1;
+		}
+		
+	}
+	
+	//我同意别人的邀请,更新别人的申请记录，status设为2，两人互为联系人
 	public function accept()
 	{
 		$auth=$this->auth;//本地登录的cookie信息
@@ -73,6 +95,7 @@ class cardController extends commonController
 		//$html.='<dl><dt><a target="_blank" href="showuser.php?uid='.$randuser[$i]['uid'].'">';
 		$url=url('profile/user',array('id'=>$id));
 		$delurl=url('card/delfriend',array('id'=>$id));
+		$html="";
 		$html.='<div style="" class="card-type-a" id="J_cardTypeA"><div class="out"><div class="in"><div class="hd">';
 		$html.='<a target="_blank" href="'.$url.'"><img src="'.$info['avatar'].'" alt=""></a></div>';
 		$html.='<div class="bd"><div class="inform"><p class="com" title="'.$info['school'].'">'.$info['school'].'</p>';
@@ -83,14 +106,13 @@ class cardController extends commonController
 		$tag=$info['tag'];
 		$count=count($tag);
 		for($i=0;$i<$count;$i++){
-			if($i%2==0) $html.='<span>'.$tag[$i]['name'].'</span>';
-			else $html.='<span class="fav">'.$tag[$i]['name'].'</span>';
-			
+			if($i%2==0) $html.='<span>'.$tag[$i]['name'].'</span>';//偶数
+			else $html.='<span class="fav">'.$tag[$i]['name'].'</span>';//奇数
 		}
 	
 		$html.='</td></tr></tbody></table></div></div><div class="shadow"></div></div>';
 		$html.='<div class="edit-type"><p class="action"><a href="" class="send-msg" title="发私信" id="single_mail" uid="'.$info['id'].'" username="'.$info['uname'].'"></a>';
-		$html.='<a target="_blank" href="'.$url.'" title="查看档案" class="person-page"></a><a href="'.$delurl.'" title="解除朋友关系" id="delfriend"></a></p></div>';
+		$html.='<a target="_blank" href="'.$url.'" title="查看档案" class="person-page"></a><a title="解除朋友关系" id="delfriend" uid="'.$info['id'].'"></a></p></div>';
 		echo $html;
 	}
 	
@@ -101,31 +123,93 @@ class cardController extends commonController
 		$rece_id=$auth['id'];//读取用户的id
 		$send_id=intval($_GET['id']);
 		$re=model('member_card')->find("send_id='$rece_id' and rece_id='$send_id'");
-		if($re) model('member_card')->delete("id='".$re['id']."'");
+		if($re){
+			if(model('member_card')->delete("id='".$re['id']."'")) echo 1;
+			else "失败";
+		}
 		else{
 			$re=model('member_card')->find("send_id='$send_id' and rece_id='$rece_id'");
-			model('member_card')->delete("id='".$re['id']."'");
+			if(model('member_card')->delete("id='".$re['id']."'")) echo 1;
+			else "失败~";
 		}
-		$this->redirect(url('card/index'));
 	}
 	
 	//找人,查询所有的会员
 	public function search()
 	{
-		
-	}
-	
-	//我可能认识的人，根据专业，标签，学校匹配，是当前的用户
-	public function mayknow()
-	{
 		$auth=$this->auth;//本地登录的cookie信息
 		$id=$auth['id'];//读取用户的id
 		$mayknow=model("member")->maybeknow($id);
-		
-		//最新加入，根据注册时间以及专业匹配
-		//dump($mayknow);
 		$this->mayknow=$mayknow;
 		$this->display();
+	}
+	
+	//判断学历
+	protected  function _edu($edu)
+	{
+		//学历的判断
+		switch ($edu){
+			case 1:
+				$education="博士研究生";
+				break;
+			case 2:
+				$education="硕士研究生";
+				break;
+			case 3:
+				$education="本科";
+				break;
+			case 4:
+				$education="专科";
+				break;
+			case 5:
+				$education="其他";
+				break;
+		}
+		return $education;
+	}
+	
+	//ajax响应搜索用户
+	public function dosearch()
+	{
+		$auth=$this->auth;//本地登录的cookie信息
+		$id=$auth['id'];
+		$keyword=in(trim($_POST['compositeSearchWord']));
+		//根据keyword查询用户
+		$info=model("member")->findmember($keyword);
+		$html='';
+		if(empty($info)){
+			$html.='<div class="icardm-con-tit"> <div style="display:block;" class="num" id="allnumber">共找到<span>0</span>条符合条件的结果：</div></div>';
+			$html.='<div id="search-null" class="search-null"> <p>没有找到符合条件的结果...更换条件重新搜索吧。</p></div>';
+			echo $html;
+		}else {
+			//要考虑分页。。
+			$count=count($info);
+			$html.='<div class="icardm-con-tit"><div style="display:block;" class="num" id="allnumber">共找到<span>'.$count.'</span>条符合条件的结果：</div></div><div id="card-list-fragment"><ul class="icardm-list">';
+			for($i=0;$i<$count;$i++)
+			{
+			$url=url('profile/user',array('id'=>$info[$i]['id']));
+			$edu=$this->_edu($info[$i]['education']);
+			//判断某人是否是自己的联系人,然后显示不同
+			$re=model("member_card")->find("(send_id='{$id}' and rece_id='{$info[$i]['id']}') or (rece_id='{$id}' and send_id='{$info[$i]['id']}')");
+			if($re){
+				if($re['status']==1)  $msg='<span class="sented">等待对方确认</span>';//等待确定
+				else $msg='<a href="javascript:void(0)" id="single_mail" class="send-msg" username="'.$info[$i]['uname'].'" uid="'.$info[$i]['id'].'" title="发私信"></a>';
+			}else {
+				$addurl=url('card/addcard',array('id'=>$info[$i]['id']));
+				$msg='<a href="javascript:;" class="addfriend" >加联系人</a>';
+			}
+			if($info[$i]['id']==$id) $msg="";//对自己的处理
+			$html.='<li uid="'.$info[$i]['id'].'"><div class="head-pic"><a target="_blank" href="'.$url.'">';
+			$html.=' <img src="'.$info[$i]['avatar'].'" ></a></div><div class="icardm-mail">'.$msg;
+			$html.='</div> <div class="icardm-list-c"><p class="sms"><a target="_blank" class="b search-cardtips"';
+			$html.='href="'.$url.'">'.$info[$i]['uname'].'</a></p><p class="company"> '.$info[$i]['major'].' &nbsp;&nbsp;<span class="highlight"></span>'.$info[$i]['city'].'</p>';
+			$html.='<dl><dt>教育背景</dt><dd><span> '.$info[$i]['school'].'&nbsp;'.$edu.'  </span> </dd></dl> </div> </li>';
+			}
+			$html.='</ul><div class="paging"></div></div>';
+			echo $html;
+			//构造返回的html
+					
+		}
 	}
 	
 	//邀请好友注册，增加我的积分
@@ -133,6 +217,20 @@ class cardController extends commonController
 	{
 		$this->display();
 	}
+
+	//发送私信
+	public function sendmsg()
+	{
+		$id=intval($_GET['id']);
+		if(!$this->isPost()){
+			$user=model("member")->find("id={$id}",'uname');
+			$this->re_name=$user['uname'];
+			$this->display();//添加修改用同一个页面
+		}else{
+			
+		}
+	}
+
 }
 
 

@@ -63,7 +63,7 @@ class memberModel extends baseModel{
 				$uid=$v['id'];
 				$user[$row]['small']=$au->getAvatar($uid,'small');
 				$user[$row]['avatar']=$au->getAvatar($uid,'middle');
-				$user[$row]['allcart']=model('member_card')->count("send_id='{$uid}' or rece_id='{$uid}'");//联系人总数
+				$user[$row]['allcart']=model('member_card')->myallcard($uid);//联系人总数
 				//用户标签
 				$user[$row]['tag']=model("member_tag")->select("mid='{$id}'",'name');
 			}
@@ -71,7 +71,7 @@ class memberModel extends baseModel{
 		return $user[0];//$user是二维数组，应该返回一维数组显示会员信息
 	}
 	
-	//可能认识的人,去除已经是发送过申请的或者已经是联系人。。
+	//可能认识的人,去除已经是发送过申请的或者已经是联系人。。我可能认识的人，根据专业，标签，学校匹配，是当前的用户
 	public function maybeknow($id)
 	{
 		$user=model("member")->user_profile($id,'');
@@ -85,8 +85,7 @@ class memberModel extends baseModel{
 		}else $where='(school like "%'.$user['school'].'%" or major like "%'.$user['major'].'%") and mid!='.$id;
 		//我的全部申请，被申请的人
 		
-		//echo $where;
-		$may=model("member_profile")->select($where,'mid');
+		$may=model("member_profile")->select($where,'mid','mid asc','9');//显示9个，其余的用显示更多来显示
 		if(!empty($may)){
 			foreach ($may as  $row=>$v)
 			{
@@ -95,6 +94,24 @@ class memberModel extends baseModel{
 			//$this->mycard=$card;
 		}
 		return $may;
+	}
+	
+	
+	//根据关键字模糊查询匹配用户，姓名、专业、标签、学校，涉及的表member  member_profile  member_tag
+	public function findmember($key)
+	{
+		// and m.id!='.$id  自己也可以找到
+		$where='where (m.uname like "%'.$key.'%" or p.school like "%'.$key.'%" or p.major like "%'.$key.'%" or t.name like "%'.$key.'%")';
+		//用distinct 去除重复记录
+		$sql="SELECT distinct m.id FROM {$this->prefix}member as m left outer join ({$this->prefix}member_tag as t,{$this->prefix}member_profile as p) on (m.id=t.mid AND m.id=p.mid) {$where} order by m.id asc";
+		$user= $this->model->query($sql);
+		if(!empty($user)){
+			foreach ($user as  $row=>$v)
+			{
+				$user[$row]=model("member")->user_profile($v['id'],'');
+			}
+		}
+		return $user;
 	}
 }
 ?>

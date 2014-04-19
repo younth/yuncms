@@ -10,6 +10,19 @@
         <!-- 右侧 -->
         <div class="right">
           <div class="rigth-inner">
+          <!--档案完整度进度条 -->
+          <div id="progress-box">
+          <div class="content profile-progress first">
+          <div class="hd">档案完整度</div>
+          <div class="bd"><div class="progress-bar"><em class="inner-bar" style="width: {$width}%;"></em><span class="num">{$width}%</span></div>
+          <div class="progress-box">
+          <ul class="progress-list">
+         <!-- <li><em class="line"></em><span class="name">关于我</span><a href="#" nocardtips="true" target="_blank" class="add-link">10%</a></li>-->
+          </ul>
+          </div></div></div>
+          </div>
+          
+          <!--最近来访-->
             <div id="J_visited" class="pannel">
               <div class="content visited-mod-content">
                 <div class="hd">最近来访</div>

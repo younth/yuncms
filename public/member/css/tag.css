@@ -204,8 +204,8 @@
     border: 1px dashed #A1A1A1;
     border-radius: 5px;
     float: left;
-    height: 110px;
+    height: auto;
     width: 620px;
 	margin-top:15px;
-	padding:0 8px 8px 10px;
+	padding:8px 8px 8px 10px;
 }

@@ -7,6 +7,7 @@
 <link href="__PUBLIC__/css/base.css" media="screen" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/common.js"></script>
+<script type="text/javascript" src="__PUBLIC__/layer/layer.min.js"></script>
 </head>
 <body>
 <div id="header" the-to-lan="en_US">

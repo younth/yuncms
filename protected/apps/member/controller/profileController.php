@@ -20,6 +20,10 @@ class profileController extends commonController
         $info=model('member_profile')->find("mid='$id'");
         $this->edu=$this->_edu($info['education']);
         $this->info=$info;
+        //资料完整度的判定
+        $this->width=$this->progress($id);
+        
+        
         //我的专长
         $list= model('member_tag')->select("mid='{$id}'",'id,name','id asc');
         $this->mytag=$list;
@@ -35,6 +39,7 @@ class profileController extends commonController
 				}
 			}        
         $this->visit=$visit;
+        
         $this->display();
     }
     
@@ -62,6 +67,35 @@ class profileController extends commonController
     	 return $education;
     }
 
+    //判定资料完整度
+    protected function progress($id)
+    {
+    	$user=model('member')->user_profile($id,'');
+    	 if(!empty($user['uname'])&&!empty($user['sex'])&&!empty($user['location'])&&!empty($user['tel'])&&!empty($user['city'])){
+    	 	$t1="基本信息";
+    	 	$w1=20;
+    	 }
+    	 if(model("member_tag")->find("mid='".$user['mid']."'")){
+    	 	$t2="我的专长";
+    	 	$w2=20;
+    	 }
+    	 if($user['avatar']!='0_middle.jpg'){
+    	 	$t3="我的头像";
+    	 	$w3=20;
+    	 }
+    	 if(!empty($user['introduce'])){
+    	 	$t4="关于我";
+    	 	$w4=10;
+    	 }
+    	 if(!empty($user['school'])&&!empty($user['major'])&&!empty($user['major_type'])&&!empty($user['education'])&&!empty($user['start_time'])){
+    	 	$t5="教育信息";
+    	 	$w5=20;
+    	 }
+    	 $prolile=array();
+    	 
+    	 return $w1+$w2+$w3+$w4+$w5;
+    }
+    
     //修改基本信息
     public function editbase()
     {
@@ -191,30 +225,6 @@ class profileController extends commonController
      	$id=intval($_GET['id']);
      	if(model("member_tag")->delete("mid='{$mid}' and id='{$id}'")) echo 1;
      	else echo "删除失败";
-     }
-     
-     //修改兴趣信息
-     public function editinterest()
-     {
-            $this->interest=$_POST['interest'];
-
-            if($_POST['interest1']) {
-                  $_SESSION['token']['access_token']="唐娜";
-                  $info=model('member')->find("uname='{$_SESSION['token']['access_token']}'",'id');
-
-                  //将数组转化为字符串
-                  foreach ($_POST['interest1'] as $_k => $_v) {
-                      $interest.=$_v.",";
-                  }
-                  $interest=  substr($interest, 0, strlen($interest)-1);//去掉末尾的逗号","
-                  
-                  if(model('member_profile')->update("mid='{$info['id']}'","interest='{$interest}'"))
-                      $this->success('信息修改成功~',url('profile/index'));
-                  else 
-                      $this->error('没有任何修改，不需要执行');
-            }
-            
-            $this->display();
      }
      
      //修改关于我的信息

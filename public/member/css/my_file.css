@@ -1275,3 +1275,136 @@ border: 1px solid #ccc;
 .cardTips-tocarded {
     background: url("../images/btn.png") repeat scroll 0 -368px rgba(0, 0, 0, 0);
 }
+
+.rigth-inner .content {
+    border-top: 1px solid #FFFFFF;
+    padding: 0 0 25px;
+}
+.rigth-inner .first {
+    border-top: medium none;
+}
+.rigth-inner .content .hd {
+    font-size: 16px;
+    height: 36px;
+    line-height: 36px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 180px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.profile-progress .bd {
+    margin-top: 10px;
+}
+.profile-progress .progress-bar {
+    background: none repeat scroll 0 0 #EBEBEB;
+    border-top: 1px solid #CCCCCC;
+    height: 14px;
+    position: relative;
+}
+.progress-bar .inner-bar {
+    background-image: linear-gradient(#93D336, #8BC23E);
+    background-position: 0 0;
+    background-repeat: repeat-x;
+    border-left: 1px solid #7CB22F;
+    border-top: 1px solid #7DB42E;
+    display: block;
+    height: 14px;
+    left: 1px;
+    position: absolute;
+    top: -1px;
+    width: 0;
+    z-index: 5;
+}
+.progress-bar .num {
+    display: block;
+    height: 15px;
+    line-height: 15px;
+    position: absolute;
+    right: 5px;
+    top: 0;
+    z-index: 10;
+}
+.progress-list {
+    margin-top: 12px;
+}
+.progress-list li {
+    height: 24px;
+    line-height: 24px;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 5;
+}
+.progress-list .name, .progress-list .add-link {
+    background-color: #FFFFFF;
+    line-height: 24px;
+    position: relative;
+    z-index: 10;
+}
+.progress-list .name {
+    float: left;
+    padding-right: 10px;
+}
+.progress-list .add-link {
+    background: url("../images/profile-progress.png") no-repeat scroll 0 -14px #FFFFFF;
+    color: #127DB3;
+    cursor: pointer;
+    float: right;
+    padding-left: 20px;
+}
+.progress-list .line {
+    border-top: 1px dotted #E0E0E0;
+    height: 0;
+    left: 0;
+    position: absolute;
+    top: 12px;
+    width: 100%;
+    z-index: 5;
+}
+.contracting {
+    height: 70px;
+    overflow: hidden;
+    position: relative;
+}
+.contracting .progress-slide-btn {
+    background: none repeat scroll 0 0 #FFFFFF;
+    bottom: 0;
+    box-shadow: 0 -12px 12px #FFFFFF;
+    display: block;
+    height: 32px;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    z-index: 20;
+}
+.contracting .progress-slide-btn:hover {
+    background: url("../images/feed-slide.png") no-repeat scroll center 0 #FFFFFF;
+}
+.contracting .progress-slide-btn span {
+    background: url("../images/btn.png") no-repeat scroll -59px -116px rgba(0, 0, 0, 0);
+    display: block;
+    height: 7px;
+    left: 50%;
+    margin-left: -7px;
+    margin-top: -3px;
+    position: absolute;
+    top: 50%;
+    width: 13px;
+}
+.contracting .progress-slide-btn:hover span {
+    background: url("../images/btn.png") no-repeat scroll -170px -133px rgba(0, 0, 0, 0);
+}
+.contracting .up {
+    box-shadow: none;
+}
+.contracting .up:hover {
+    background: url("../images/feed-slide.png") no-repeat scroll center 0 #FFFFFF;
+}
+.contracting .up span {
+    background: url("../images/btn.png") no-repeat scroll -59px -124px rgba(0, 0, 0, 0);
+}
+.contracting .up:hover span {
+    background: url("../images/btn.png") no-repeat scroll -170px -141px rgba(0, 0, 0, 0);
+}

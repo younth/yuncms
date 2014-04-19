@@ -1632,69 +1632,6 @@ input.ms-add:focus {
     margin-bottom: 18px;
     margin-right: 18px;
 }
-.search-box {
-    background-color: #FFFBF0;
-    border: 1px solid #D9D9D9;
-    height: 124px;
-    overflow: hidden;
-    width: 306px;
-}
-.search-box .search-content {
-    padding: 12px 15px;
-}
-.search-content .hd {
-    color: #666666;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: 26px;
-}
-.search-content .bd {
-    padding: 10px 0 0 25px;
-}
-.search-content .search-form {
-    clear: both;
-    overflow: hidden;
-    position: relative;
-}
-.search-content .J_placeLable, .blank-search .J_placeLable {
-    color: #999999;
-    height: 30px;
-    left: 5px;
-    line-height: 30px;
-    position: absolute;
-    top: 0;
-}
-.search-content .search-form .search-input {
-    -moz-border-bottom-colors: none;
-    -moz-border-left-colors: none;
-    -moz-border-right-colors: none;
-    -moz-border-top-colors: none;
-    background: none repeat scroll 0 0 #FFFFFF;
-    border-color: #CCCCCC -moz-use-text-color #CCCCCC #CCCCCC;
-    border-image: none;
-    border-style: solid none solid solid;
-    border-width: 1px medium 1px 1px;
-    float: left;
-    height: 18px;
-    line-height: 18px;
-    padding: 5px;
-    width: 190px;
-}
-.search-content .search-btn {
-    background: url("../images/mayknow-icon.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
-    float: left;
-    height: 30px;
-    text-indent: -9999em;
-    width: 29px;
-}
-.search-content .search-btn:hover {
-    background: url("../images/mayknow-icon.png") no-repeat scroll 0 -30px rgba(0, 0, 0, 0);
-}
-.search-content .search-word {
-    color: #999999;
-    line-height: 26px;
-    padding: 5px 0;
-}
 .error-tips {
     color: #FF0000;
     display: none;
@@ -1826,9 +1763,30 @@ input.ms-add:focus {
 
 
 /*********搜索***/
-.cardserach{
-	margin-top:15px;
+.search-box {
+	width:960px;
+    background: none repeat scroll 0 0 #FAFAFA;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+    padding: 24px 0;
+    text-align: center;
+}
+input.search-txt {
+    border: 2px solid #86B5D7;
+    color: #999999;
+    font-size: 12px;
+    height: 26px;
+    line-height: 26px;
+    margin-right: 10px;
+    padding: 0 9px;
+    width: 490px;
+}
+.search-box .big-fresh span {
+    font-weight: normal;
+}
+input.search-txt, #searchBtn {
+    vertical-align: middle;
 }
 #delfriend{
-	background-position: 0 -104px;
+	background-position:0 -104px;
 }

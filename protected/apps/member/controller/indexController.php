@@ -18,6 +18,8 @@ class indexController extends commonController
 	    		if($auth['is_active']==1) {
 	    			$this->uname=$auth['uname'];//登陆成功
 	    			$id=$auth['id'];
+	    			$user=model("member_tag")->select("mid='{$id}'");
+	    			if(empty($user)) $this->redirect(url('member/profile/tag'));//提醒完善tag信息
 	    		}
 	    		//退出登陆
 	    		else {
@@ -45,8 +47,8 @@ class indexController extends commonController
 	    		//微博登陆存储session
 	    	}
 	    	
-	    	//输出会员的头像
-	    	$hover="class=\"current\"";//设置当前的导航状态
+	    	//设置当前的导航状态
+	    	$hover="class=\"current\"";
 	    	$this->hover_index=$hover;
 	    	
 	    	//查询用户人脉通知,是用户收到的，未处理的人脉邀请

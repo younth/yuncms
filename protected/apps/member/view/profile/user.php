@@ -56,14 +56,14 @@
                
               
                {if $card==1}<!--接受邀请-->
-               <a  href="javascript:void(0)" id="{$info['id']}"  class="dj-btn-agree change-card-accepted"></a>
+               <a  href="javascript:" id="{$info['id']}"  class="dj-btn-agree change-card-accepted"></a>
                   <!---->
             {elseif $card==2}<!--发送私信-->
-            <a href="javascript:void(0)"  class="dj-btn-send-mail"></a>
+            <a href="javascript:"  class="dj-btn-send-mail" uid={$info['id']}></a>
             {elseif $card==3}<!--正在审核-->
-            <a href="javascript:void(0)"  class="cardTips-tocarded"></a>
+            <a href="javascript:"  class="cardTips-tocarded"></a>
             {else}
-             <a  href="javascript:void(0)" id="{$info['id']}"  class="dj-btn-change-message"></a>
+             <a  href="javascript:" id="{$info['id']}"  class="dj-btn-change-message"></a>
                {/if}
               <!-- 评价暂时不做-->
               <!-- <a style="" id="appraise-mini-entrance" href="#" class="eva-invite-btn eva-invite-btn-male J_evaGiveBtn">给他评价</a>
@@ -232,7 +232,7 @@
 				  }
 			});
 			
-		})
+		});
         //接受邀请
 		$(".change-card-accepted").click(function(){
 			var $send_id=$(this).attr("id");//申请人id
@@ -251,7 +251,20 @@
 				  }
 			});
 			
-		})
-        </script>
+		});
+		
+//发送私信
+$('.dj-btn-send-mail').on('click', function(){
+    $.layer({
+        type: 2,
+        title: '发送私信',
+        shadeClose: false, //开启点击遮罩关闭层
+        area : ['560px' , '360px'],
+        offset : ['260px', '540px'],
+        iframe: {src: "{url('card/sendmsg',array('id'=>$info['id']))}"}
+    });
+});
+		
+</script>
 
 {include file="footer"}
