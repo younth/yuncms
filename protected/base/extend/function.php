@@ -572,3 +572,43 @@ function getFirstCharter($str){
 }
 
 //根据用户id获取用户各种大小的头像
+
+
+function timeshow($sTime) {
+	//sTime=源时间，cTime=当前时间，dTime=时间差
+	$cTime		=	time();
+	
+        if($cTime>=$sTime){
+        $dTime		=	$cTime - $sTime;
+	$dDay		=	intval(date("Ymd",$cTime)) - intval(date("Ymd",$sTime));
+	$dYear		=	intval(date("Y",$cTime)) - intval(date("Y",$sTime));
+	if( $dTime < 60 ){
+		$dTime =  $dTime."秒前";
+	}elseif( $dTime < 3600 ){
+		$dTime =  intval($dTime/60)."分钟前";
+	}elseif( $dTime >= 3600 && $dDay == 0  ){
+		$dTime =  "今天".date("H:i",$sTime);
+	}elseif($dYear==0){
+		$dTime =  date("m月d日 H:i",$sTime);
+	}else{
+		$dTime =  date("Y年m月d日 H:i",$sTime);
+	}
+        }
+        else {
+            $dTime=$sTime - $cTime;
+            $dDay		=	intval(date("Ymd",$cTime)) - intval(date("Ymd",$sTime));
+	$dYear		=	intval(date("Y",$cTime)) - intval(date("Y",$sTime));
+	if( $dTime < 60 ){
+		$dTime =  $dTime."秒后";
+	}elseif( $dTime < 3600 ){
+		$dTime =  intval($dTime/60)."分钟后";
+	}elseif( $dTime >= 3600 && $dDay == 0  ){
+		$dTime =  "今天".date("H:i",$sTime);
+	}elseif($dYear==0){
+		$dTime =  date("m月d日 H:i",$sTime);
+	}else{
+		$dTime =  date("Y年m月d日 H:i",$sTime);
+	}
+        }
+	return $dTime;
+}

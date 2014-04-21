@@ -247,13 +247,13 @@ var $resultBox = $("#icardm-con");//搜索结果
 		{
 			var node='friend'+id;
 			$.ajax({
-			  url: "{url('card/send')}",
+			  url: "{url('card/addfriend')}",
 			  data: {
 				id: id,
 			  },
 				 success: function (data) {
 					 //改变状态
-					 $("#"+nowobj).replaceWith("<a href='' target='_blank' class='dj-btn-xs dj-btn-icon J_addBtn add-clicklog cardTips-tocarded'><i class='icon-add'></i>等待确认</a>");
+					 $("#"+node).replaceWith("<a href='' target='_blank' class='dj-btn-xs dj-btn-icon J_addBtn add-clicklog cardTips-tocarded'><i class='icon-add'></i>等待确认</a>");
 					
 					 //移除节点
 					//$("#"+node).remove();
@@ -271,8 +271,7 @@ var $resultBox = $("#icardm-con");//搜索结果
 	//添加好友，多个关系，可以不用函数
 	$(document).on('click','.addfriend',function(){
 		var $uid=$(this).parent().parent().attr("uid");//当前会员的id
-		//var node='friend'+$uid;//当前的节点
-		var node=$(this);
+		var node=$(this);//当前的节点
 		//alert(node);return;
 			  $.ajax({
 			  type: "GET",
@@ -281,9 +280,14 @@ var $resultBox = $("#icardm-con");//搜索结果
 				id: $uid,
 			  },
 				 success: function (data) {
-					//
-					layer.msg('发送成功，等待对方验证',2,-1);
-					node.replaceWith('<span class="sented">等待对方确认</span>');
+					if(data==1){
+						layer.msg('发送成功，等待对方验证',2,-1);
+						node.replaceWith('<span class="sented">等待对方确认</span>');
+					}
+					if(data==2){
+						layer.msg('发送成功，你们已经互为联系人了~',2,-1);
+						node.replaceWith('<a href="javascript:void(0)" id="single_mail" class="send-msg"  uid="'+$uid+'" title="发私信"></a>');
+					}
 					
 					
 				 },

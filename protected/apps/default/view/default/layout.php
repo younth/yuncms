@@ -108,7 +108,39 @@
           });
 	</script>
     <![endif]-->
-    
+    <script>
+	
+	$(function(){ 
+	var $login=$("#tianji-login-email_or_mobile");
+	var $pwd=$("#account_password");
+	
+	$login.on({ 
+	focus:function(){ 
+			if (this.value == this.defaultValue){ 
+				this.value=""; 
+				} 
+			$(this).addClass("focus");
+		}, 
+	blur:function(){ 
+	if (this.value == ""){ 
+		this.value = this.defaultValue; 
+		} 
+		$(this).removeClass("focus");
+	} 
+	}); 
+	
+		$pwd.on({ 
+	focus:function(){ 
+			$(this).addClass("focus");
+		}, 
+	blur:function(){ 
+		$(this).removeClass("focus");
+	} 
+	}); 
+
+}) 
+
+    </script>
    </body>
 </html>
 

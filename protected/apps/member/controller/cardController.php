@@ -33,24 +33,8 @@ class cardController extends commonController
 		$this->display();
 	}
 	
-	//ajax发送添加请求，注意已经有记录，则不添加，直接接受
-	public function send( )
-	{
-		$auth=$this->auth;//本地登录的cookie信息
-		$data=array();
-		$data['send_id']=$send_id=$auth['id'];//读取用户的id
-		$data['rece_id']=$rece_id=intval($_GET['id']);
-		$data['status']=1;
-		$data['ctime']=time();
-		$re=model('member_card')->find("send_id='{$send_id}' and rece_id='{$rece_id}'");
-		if(empty($re))
-		{
-			if(model("member_card")->insert($data)) echo 1;
-			else echo "添加失败";
-		}else echo 0;
-	}
 	
-	//ajax添加联系人
+	//ajax添加联系人,注意已经有记录，则不添加，直接接受（注意接收人）
 	public function addfriend()
 	{
 		$auth=$this->auth;//本地登录的cookie信息
@@ -59,16 +43,24 @@ class cardController extends commonController
 		$data['rece_id']=$rece_id=intval($_GET['id']);
 		$data['status']=1;
 		$data['ctime']=time();
+		
 		$re=model('member_card')->find("(send_id='{$send_id}' and rece_id='{$rece_id}') or (rece_id='{$send_id}' and send_id='{$rece_id}')");
 		if(empty($re))
 		{
+			//没有添加好友记录
 			if(model("member_card")->insert($data)) echo 1;
 			else echo "添加失败";
-		}else{
-			//非空说明已经添加过了，直接将status设置为2
-			$card['status']=2;
-			if(model("member_card")->update("id='{$re[id]}'",$card)) echo 1;
+		}elseif ($re['status']==1){
+			//有记录，判断是接受者还是发送者
+			if(model("member_card")->find("(rece_id='{$send_id}' and send_id='{$rece_id}' and status=1)"))
+			{
+				//非空说明已经添加过了，直接将status设置为2，已经是朋友
+				$card['status']=2;
+				if(model("member_card")->update("id='".$re['id']."'",$card)) echo 2;
+			}
+			else echo 1;
 		}
+		//如果是接受者发请求，则是确定处理
 		
 	}
 	
@@ -192,10 +184,9 @@ class cardController extends commonController
 			//判断某人是否是自己的联系人,然后显示不同
 			$re=model("member_card")->find("(send_id='{$id}' and rece_id='{$info[$i]['id']}') or (rece_id='{$id}' and send_id='{$info[$i]['id']}')");
 			if($re){
-				if($re['status']==1)  $msg='<span class="sented">等待对方确认</span>';//等待确定
-				else $msg='<a href="javascript:void(0)" id="single_mail" class="send-msg" username="'.$info[$i]['uname'].'" uid="'.$info[$i]['id'].'" title="发私信"></a>';
+				if($re['status']==2) $msg='<a href="javascript:void(0)" id="single_mail" class="send-msg" username="'.$info[$i]['uname'].'" uid="'.$info[$i]['id'].'" title="发私信"></a>';
+				else $msg='<a href="javascript:;" class="addfriend" >加联系人</a>';
 			}else {
-				$addurl=url('card/addcard',array('id'=>$info[$i]['id']));
 				$msg='<a href="javascript:;" class="addfriend" >加联系人</a>';
 			}
 			if($info[$i]['id']==$id) $msg="";//对自己的处理
@@ -227,6 +218,25 @@ class cardController extends commonController
 			$this->re_name=$user['uname'];
 			$this->display();//添加修改用同一个页面
 		}else{
+			/*
+			 * 私信对对应的是会员与会员之间的通信，涉及member_list member_content  member_message
+			 * */
+			//增加会员之间通信的记录
+			$auth=$this->auth;//本地登录的cookie信息
+			$mid=$auth['id'];
+			$data=array();
+			$msg=array();
+			$msg['last']=text_in($_POST['content']);//私信内容
+			$data['from_mid']=$mid;//发起者id,当前会员
+			$data['from_mid']=$mid;//发起者id,当前会员
+			$data['type']=1;//一对一
+			$data['member_num']=2;//参与者数量
+			$data['member_mid']=$mid.",".$id;//参与者连接字符串
+			$data['ctime']=time();
+			$id=model("message_list")->insert($data);//私信列表的id
+			$msg['content']=text_in($_POST['content']);//私信内容
+			
+			
 			
 		}
 	}

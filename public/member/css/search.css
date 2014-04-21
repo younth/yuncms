@@ -1,0 +1,1083 @@
+body{
+	background:#FFF;
+}
+.pickpane {
+    z-index: 99999;
+}
+.dj-write-box {
+    padding: 16px 16px 34px;
+}
+.dj-write-box .ms-wrap {
+    width: 410px;
+}
+.dj-write-box .input-txt {
+    border-color: #C6C6C6 #EEEEEE #EEEEEE #C6C6C6;
+    border-style: solid;
+    border-width: 1px;
+}
+.dj-write-box .action-item {
+    margin-top: 10px;
+}
+.dj-write-box .check-code-item .item-input a {
+    line-height: 28px;
+    margin-left: 9px;
+}
+.dj-write-box .i-item .error-tip {
+    clear: both;
+    color: #FF0000;
+    display: none;
+    margin-top: 3px;
+}
+.dj-write-box .i-item .title {
+    display: block;
+    float: left;
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: right;
+    width: 49px;
+}
+.dj-write-box .i-item .item-input {
+    float: left;
+    padding-bottom: 20px;
+    padding-left: 9px;
+}
+.dj-write-box .i-item .p-input {
+    height: 14px;
+    padding: 7px;
+}
+.dj-write-box .i-item .e-content {
+    background-color: #F9F9F9;
+    height: 103px;
+    padding: 9px 7px;
+    width: 404px;
+}
+.dj-write-box .i-item .check-code {
+    float: left;
+    height: 14px;
+    padding: 7px;
+    width: 114px;
+}
+.dj-write-box .i-item .code-img {
+    border: 1px solid #BFBEBF;
+    float: left;
+    height: 28px;
+    margin-left: 9px;
+    width: 83px;
+}
+.dj-write-box .i-item .i-action {
+    margin-left: 60px;
+    position: relative;
+}
+.dj-write-box .i-item .i-action .server-error {
+    color: #FF0000;
+    display: none;
+    margin-left: 10px;
+}
+.dj-write-box .i-item .i-action .success-tip {
+    background-image: url("http://0.assets.dajieimg.com/up/msgcenter/image/success-tip.png");
+    display: block;
+    height: 54px;
+    left: 106px;
+    position: absolute;
+    text-indent: -1000em;
+    top: -12px;
+    width: 134px;
+}
+.dj-write-box .i-item .send-btn {
+    width: 48px;
+}
+#wrap {
+    width: 960px;
+}
+.search-chose {
+    color: #333333;
+    height: 30px;
+    line-height: 30px;
+    padding: 15px 10px 5px;
+}
+.search-chose span {
+    font-weight: bold;
+}
+.search-chose i {
+    color: #CCCCCC;
+    margin: 0 10px;
+}
+.search-box {
+    background: none repeat scroll 0 0 #FAFAFA;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+    padding: 24px 0;
+    text-align: center;
+}
+input.search-txt {
+    border: 2px solid #86B5D7;
+    color: #999999;
+    font-size: 12px;
+    height: 26px;
+    line-height: 26px;
+    margin-right: 10px;
+    padding: 0 9px;
+    width: 490px;
+}
+.search-box .big-fresh span {
+    font-weight: normal;
+}
+.word-box {
+    clear: both;
+    overflow: hidden;
+    padding: 40px 20px 30px;
+	width:960px;
+}
+.word-list {
+    width: 435px;
+}
+.l {
+    float: left;
+}
+.r {
+    float: right;
+}
+.word-title {
+    border-bottom: 1px solid #CCCCCC;
+    color: #666666;
+    font-size: 12px;
+    font-weight: bold;
+    height: 34px;
+    line-height: 34px;
+}
+.words {
+    clear: both;
+    font-family: "Microsoft YaHei";
+    height: 178px;
+    line-height: 30px;
+    overflow: hidden;
+    padding: 10px 0;
+}
+.words a {
+    display: inline-block;
+    margin: 7px 20px 7px 0;
+}
+.font-16 {
+    font-size: 16px;
+}
+.font-18 {
+    font-size: 18px;
+}
+.font-20 {
+    font-size: 20px;
+}
+.font-22 {
+    font-size: 22px;
+}
+.dj-networks a.blue {
+    color: #3399CC;
+}
+.dj-networks a.blue:hover {
+    color: #3399CC;
+}
+.dj-networks a.green {
+    color: #66CCCC;
+}
+.dj-networks a.green:hover {
+    color: #66CCCC;
+}
+.dj-networks a.orange {
+    color: #FF9966;
+}
+.dj-networks a.orange:hover {
+    color: #FF9966;
+}
+.dj-networks a.gray {
+    color: #999999;
+}
+.dj-networks a.gray:hover {
+    color: #999999;
+}
+.icardm-plus-tips {
+    overflow: hidden;
+}
+.icardm-tips {
+    margin-bottom: 20px;
+}
+.icardm-tips li {
+    display: block;
+    height: 22px;
+    line-height: 22px;
+    padding-bottom: 10px;
+}
+.icardm-plus-tips .icardm-tips a span, .icardm-start-tips .icardm-plus-tips a span {
+    background: url("http://5.assets.dajieimg.com/up/icard/images/icardm-tips.gif") no-repeat scroll 0 -99px rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: inline-block;
+    line-height: 22px;
+    overflow: hidden;
+    padding-left: 15px;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.icardm-plus-tips .icardm-tips a:hover {
+    color: #1357A2;
+}
+.icardm-plus-tips .icardm-con {
+    float: left;
+    margin-top: 30px;
+    min-height: 670px;
+    padding: 0 20px 0 0;
+    width: 960px;
+}
+.icardm-con-tit {
+    clear: both;
+    overflow: hidden;
+    padding: 0 5px 5px 8px;
+}
+.icardm-con-tit .change {
+    color: #CCCCCC;
+    cursor: pointer;
+    float: right;
+    height: 26px;
+    line-height: 26px;
+    margin-top: 0;
+    position: relative;
+    text-align: center;
+    width: 95px;
+}
+.icardm-con-tit .change:hover {
+    cursor: default;
+    text-decoration: none;
+}
+.icardm-con-tit .hasnum:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+.icardm-con-tit .hasnum {
+    color: #86B5D7;
+}
+.icardm-con-tit div.new_cont {
+    padding-right: 10px;
+}
+.icardm-con-tit .num {
+    font-size: 14px;
+    line-height: 26px;
+}
+.icardm-con-tit .num span, .icardm-con-tit .num em {
+    color: #FF6600;
+    font-weight: bold;
+}
+.icardm-list {
+    border-top: 1px solid #D7D7D7;
+    padding-bottom: 10px;
+}
+.icardm-list li {
+    border-bottom: 1px solid #E6E6E6;
+    min-height: 80px;
+    padding: 12px 20px 6px 35px;
+}
+.icardm-list .list-check {
+    float: left;
+    margin-left: -26px;
+    margin-top: 20px;
+}
+.icardm-list .head-pic {
+    float: left;
+    height: 100%;
+    overflow: hidden;
+    width: 58px;
+}
+.icardm-list .head-pic img {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    float: left;
+    height: 52px;
+    padding: 2px;
+    width: 52px;
+}
+.icardm-plus-tips .icardm-mail {
+    padding-top: 22px;
+}
+.icardm-plus-tips .icardm-mail span, .icardm-plus-tips .icardm-mail a {
+    background: url("http://assets.dajieimg.com/up/Contacts-2012/images/dj-btn-cardmail-bg.png") no-repeat scroll 0 -104px rgba(0, 0, 0, 0);
+    color: #333333;
+    display: inline-block;
+    font-size: 12px;
+    height: 26px;
+    line-height: 26px;
+    overflow: hidden;
+    padding: 0;
+    text-decoration: none;
+    text-indent: 100px;
+    vertical-align: middle;
+    width: 84px;
+}
+.icardm-plus-tips .icardm-mail a {
+    background-position: 0 -104px;
+}
+.icardm-plus-tips .icardm-mail a.dj-btn-send-mail {
+    background-position: -84px 0;
+}
+.icardm-mail {
+    float: right;
+    padding-top: 0;
+}
+.icardm-mail a {
+    border-bottom: 1px solid #E5E5E5;
+    display: block;
+    line-height: 25px;
+    padding: 0 5px;
+}
+.icardm-list-c {
+    padding: 0 125px 0 70px;
+}
+.icardm-list-c .sms a {
+    font-size: 14px;
+}
+.icardm-list-c .sms img {
+    display: inline-block;
+    margin-left: 8px;
+}
+.icardm-list-c .company a {
+    color: #333333;
+}
+.icardm-list-c p {
+    line-height: 24px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.highlight {
+    color: #FF6600;
+}
+.icardm-list-tips {
+    margin-top: 10px;
+    max-height: 52px;
+    overflow: hidden;
+}
+.icardm-tt a {
+    float: left;
+    height: 22px;
+    line-height: 22px;
+    margin: 0 5px 6px 0;
+    padding: 0 10px 0 5px;
+    white-space: nowrap;
+}
+.icardm-plus-tips .icardm-tips a span {
+    display: inline;
+}
+.icardm-list-tips a {
+    background: url("http://7.assets.dajieimg.com/up/Contacts-2012/images/tag-icon.png") no-repeat scroll left 0 rgba(0, 0, 0, 0);
+    color: #333333;
+    cursor: pointer;
+    padding: 0 0 0 15px;
+}
+.icardm-list-tips a:hover {
+    text-decoration: none;
+}
+.icardm-tips a {
+    float: none;
+}
+.icardm-list-tips a span {
+    background: url("http://7.assets.dajieimg.com/up/Contacts-2012/images/tag-icon.png") no-repeat scroll right 0 rgba(0, 0, 0, 0);
+    cursor: pointer;
+    float: left;
+    padding-right: 15px;
+}
+.icardm-tt a:hover {
+    color: #333333;
+}
+.icardm-tt a.selected {
+    background: url("http://5.assets.dajieimg.com/up/icard/images/icardm-tips.gif") no-repeat scroll right -22px rgba(0, 0, 0, 0);
+    color: #333333;
+    cursor: default;
+    text-decoration: none;
+}
+.icardm-list-tips a.selected {
+    border: medium none;
+    padding: 0 15px 0 10px;
+}
+.icardm-plus-tips .icardm-list li {
+    position: relative;
+}
+#relevant-tags {
+    border-left: 1px solid #E5E5E5;
+    left: -1px;
+    margin-top: 30px;
+    overflow: hidden;
+    padding-left: 15px;
+    position: relative;
+}
+.icardm-tips li.b {
+    color: #666666;
+}
+.search-null {
+    border-top: 1px solid #CCCCCC;
+    padding: 140px 0;
+}
+.search-null p {
+    background: url("http://assets.dajieimg.com/up/Contacts-2012/images/alert.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #666666;
+    line-height: 22px;
+    margin: 0 auto;
+    padding-left: 30px;
+    width: 280px;
+}
+.search-null a{
+	font-size:15px;
+	color:#F00;
+}
+.accurate-box {
+    background: none repeat scroll 0 0 #FAFAFA;
+    border: 1px solid #D9D9D9;
+    border-radius: 2px;
+    padding: 30px 60px 35px;
+}
+.search-table {
+    border-bottom: 1px dotted #B3B3B3;
+    padding: 0 20px 5px;
+}
+.search-table th, .search-table td {
+    padding-bottom: 15px;
+}
+.search-table th {
+    text-align: right;
+    width: 100px;
+}
+.search-table td input.text {
+    background: none repeat scroll 0 0 #FFFFFF;
+    width: 255px;
+}
+.search-table td input.dropdown {
+    background: url("http://6.assets.dajieimg.com/up/Contacts-2012/images/arrow.png") no-repeat scroll 110px 9px #FFFFFF;
+    padding-right: 20px;
+    width: 104px;
+}
+.search-table td input.dropdown-long {
+    background: url("http://6.assets.dajieimg.com/up/Contacts-2012/images/arrow.png") no-repeat scroll 244px 9px #FFFFFF;
+    overflow: hidden;
+    padding-right: 20px;
+    width: 237px;
+}
+.search-table td .select {
+    display: inline;
+    float: left;
+    width: 123px;
+}
+.search-table td .select_1 {
+    margin-right: 15px;
+}
+.search-table td .select-long {
+    width: 261px;
+}
+.accurate-btn {
+    padding: 30px 0 0;
+    text-align: center;
+}
+.accurate-btn .big-fresh span {
+    font-weight: normal;
+}
+.lay-change-card {
+    position: absolute;
+    z-index: 99;
+}
+.lay-change-card.onecol {
+    width: 230px !important;
+}
+.lay-change-card.twocol {
+    width: 403px !important;
+}
+.lay-change-card.thrcol {
+    width: 603px !important;
+}
+.lay-change-card.twocol .con ul, .lay-change-card.thrcol .con ul {
+    border-right: 1px solid #CCCCCC;
+    float: left;
+    margin-right: 10px;
+    padding-right: 10px;
+    width: 176px;
+}
+.lay-change-card.twocol ul.last, .lay-change-card.thrcol ul.last {
+    border: medium none;
+    margin-right: 0;
+    padding-right: 0;
+}
+.lay-change-card .pointer {
+    left: 32px;
+}
+.lay-change-card.top .pointer {
+    background-position: 0 -163px;
+    height: 14px;
+    top: -12px;
+    width: 21px;
+}
+.lay-change-card.bottom .pointer {
+    background: url("http://0.assets.dajieimg.com/up/my-job-v2/images/pointer-down-gray.gif") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: -13px;
+    height: 13px;
+    width: 19px;
+}
+.lay-change-card .prompt-main {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    margin-left: -2px;
+    padding: 0;
+    position: relative;
+    z-index: 99;
+}
+.lay-change-card .con {
+    padding: 10px 10px 15px 0;
+}
+.lay-change-card .con p {
+    color: #999999;
+    padding: 0 0 5px 20px;
+}
+.lay-change-card .con div {
+    overflow: hidden;
+    padding: 0 10px;
+}
+.lay-change-card .con li {
+    margin-bottom: 5px;
+    padding: 0 10px;
+}
+.lay-change-card .con li.over {
+    background: none repeat scroll 0 0 #F3F3F3;
+    cursor: pointer;
+}
+.lay-change-card .con label.checkbox {
+    display: inline-block;
+    font: 12px/1.5 "tahoma,arial,宋体";
+    height: 19px;
+    margin-top: 1px;
+    overflow: hidden;
+    padding: 0 0 0 8px;
+    width: 120px;
+    word-wrap: break-word;
+}
+.lay-change-card .con label.checkbox.new-group-box {
+    height: auto;
+    overflow: visible;
+    vertical-align: middle;
+    width: auto;
+}
+.lay-change-card .con input.checkbox {
+    display: inline-block;
+    vertical-align: middle;
+}
+.lay-change-card .con input.text {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #CCCCCC #EAEAEA #EAEAEA #CCCCCC;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 3px;
+    width: 145px;
+}
+.lay-change-card.twocol .con input.text, .lay-change-card.thrcol .con input.text {
+    width: 126px;
+}
+.lay-change-card a {
+    display: inline-block;
+    margin-left: 10px;
+}
+.lay-change-card textarea {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #CCCCCC #EAEAEA #EAEAEA #CCCCCC;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    height: 40px;
+    line-height: 20px;
+    margin-left: 10px;
+    margin-top: 5px;
+    padding: 5px;
+    width: 176px;
+}
+.lay-change-card.twocol textarea {
+    height: 20px;
+    line-height: 20px;
+    width: 349px;
+}
+.lay-change-card.thrcol textarea {
+    height: 20px;
+    line-height: 20px;
+    width: 549px;
+}
+.lay-change-card .btn {
+    background: none repeat scroll 0 0 #F6F6F6;
+    border-top: 1px solid #DEDEDE;
+    height: 20px;
+    padding: 6px 10px 6px 0;
+    text-align: right;
+}
+.lay-change-card button.fresh {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 50px;
+}
+.lay-change-card button.fresh.long {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 -40px rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 80px;
+}
+.lay-change-card button.normal {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 -20px rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 50px;
+}
+.lay-change-card button.normal.long {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 -60px rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 80px;
+}
+.lay-litter-tips {
+    position: absolute;
+    width: 190px;
+}
+.lay-litter-tips.top .pointer {
+    background-position: 0 -163px;
+    height: 14px;
+    right: 20px;
+    top: -12px;
+    width: 21px;
+}
+.lay-litter-tips.bottom .pointer {
+    background: url("http://0.assets.dajieimg.com/up/my-job-v2/images/pointer-down-gray.gif") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    bottom: -13px;
+    height: 13px;
+    right: 20px;
+    width: 19px;
+}
+.lay-litter-tips .prompt-main {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    margin-left: -2px;
+    padding: 0;
+    position: relative;
+    z-index: 99;
+}
+.lay-litter-tips .con {
+    padding: 10px 0 15px;
+}
+.lay-litter-tips .con p {
+    padding: 25px 10px 18px;
+    text-align: left;
+}
+.lay-litter-tips .btn {
+    background: none repeat scroll 0 0 #F6F6F6;
+    border-top: 1px solid #DEDEDE;
+    height: 20px;
+    padding: 6px 10px;
+    text-align: right;
+}
+.lay-litter-tips button.fresh {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 50px;
+}
+.lay-litter-tips button.long {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 -40px rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 80px;
+}
+.lay-litter-tips button.long.normal {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 -60px rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 80px;
+}
+.lay-litter-tips button.normal {
+    background: url("http://4.assets.dajieimg.com/up/my-job-v2/images/mini-btn.gif") repeat scroll 0 -20px rgba(0, 0, 0, 0);
+    color: #333333;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    vertical-align: middle;
+    width: 50px;
+}
+.comment li .note-recomend-list {
+    border: 1px solid #E6E6E6;
+    height: 90px;
+    margin-top: 10px;
+    padding: 10px 0 5px 20px;
+}
+.comment li .note-recomend-list dl {
+    display: block;
+    float: left;
+    font-family: "宋体",fixedsys;
+    height: 70px;
+    position: relative;
+    width: 220px;
+}
+.comment li .note-recomend-list dt, .note-recomend-list dd {
+    display: inline;
+    float: left;
+    height: 60px;
+}
+.comment li .note-recomend-list dt {
+    height: 56px;
+    margin: 0 10px 0 0;
+    padding: 4px 0 0;
+    width: 52px;
+}
+.comment li .note-recomend-list dd {
+    line-height: 18px;
+    margin: 5px 0 0 5px;
+}
+.comment li .note-recomend-list dd p {
+    padding: 0;
+}
+.comment li .note-rc-pf {
+    border: 1px solid #CCCCCC;
+    height: 52px;
+    padding: 2px;
+    width: 52px;
+}
+.comment li a.note-remove-rc {
+    background-image: url("http://1.assets.dajieimg.com/images/icons/close.gif");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    display: block;
+    height: 13px;
+    overflow: hidden;
+    position: absolute;
+    right: 40px;
+    text-indent: -9999em;
+    top: 0;
+    width: 13px;
+    z-index: 100;
+}
+.comment li a.note-remove-rc:hover {
+    background-position: right 0;
+}
+.mt5 {
+    margin-top: 5px;
+}
+.position-fix {
+    position: static;
+}
+li.comment-note .replay-topic {
+    position: static;
+}
+li.comment-note {
+}
+.icardm-plus-tips .icardm-mail span.sented, .icardm-plus-tips .icardm-mail a.sented {
+    background-position: -84px -52px;
+    cursor: default;
+}
+.icardm-plus-tips .icardm-mail span.changed, .icardm-plus-tips .icardm-mail a.changed {
+    background-position: 0 -26px;
+    cursor: default;
+}
+.icardm-plus-tips .icardm-mail span.close-change, .icardm-plus-tips .icardm-mail a.close-change {
+    background-position: 0 -52px;
+    cursor: default;
+}
+.sms a {
+    color: #333333;
+}
+.sms .b {
+    color: #1357A2;
+}
+.null-result .icardm-tips a span {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    padding-left: 0;
+}
+input.search-txt, #searchBtn {
+    vertical-align: middle;
+}
+.loading {
+    display: none;
+    margin: 100px 0;
+    text-align: center;
+}
+#searchBtn_composite {
+    vertical-align: middle;
+}
+.icardm-plus-tips{
+		border: 1px dashed #E5E5E5;
+
+	width:960px;
+}
+.icardm-plus-tips .icardm-mail .send-msg {
+    background: url("http://1.assets.dajieimg.com/up/Contacts-2012/images/card-icon2.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.input_wrap {
+    display: block;
+    position: relative;
+}
+.icardm-list-c .sms img {
+    vertical-align: middle;
+}
+.mark100-16 {
+    background: url("http://9.assets.dajieimg.com/up/profile2013/images/icons.png") no-repeat scroll -71px -49px rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 16px;
+    margin-left: 3px;
+    text-indent: -9999em;
+    width: 16px;
+}
+.icardm-list-c dl {
+    clear: both;
+    color: #666666;
+    line-height: 20px;
+    overflow: hidden;
+}
+.icardm-list-c dt {
+    color: #CCCCCC;
+    float: left;
+}
+.icardm-list-c dd {
+    margin-left: 60px;
+    overflow: hidden;
+}
+.ms-wrap {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-color: #C6C6C6 #EEEEEE #EEEEEE #C6C6C6;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    padding: 4px 4px 0;
+    width: 300px;
+}
+.ms-bv {
+    color: #999999;
+    font-size: 12px;
+    height: 20px;
+    left: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 0;
+}
+a.ms-selected-item {
+    background: url("http://7.assets.dajieimg.com/images/chrome/pickpad.gif") no-repeat scroll left top rgba(0, 0, 0, 0);
+    color: #1357A2;
+    cursor: default;
+    display: inline-block;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 5px 4px 2px;
+    padding-left: 8px;
+    text-decoration: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+a.ms-selected-item .delete {
+    background: url("http://7.assets.dajieimg.com/images/chrome/pickpad.gif") no-repeat scroll right top rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: inline-block;
+    height: 20px;
+    margin-left: 6px;
+    text-indent: -99999px;
+    width: 20px;
+}
+a.ms-selected-item:hover {
+    background-position: left bottom;
+    color: #333333;
+    text-decoration: none;
+}
+a.ms-selected-item:hover .delete {
+    background-position: right bottom;
+}
+.ms-disabled a.ms-selected-item:hover {
+    background-position: left top;
+    color: #1357A2;
+    text-decoration: none;
+}
+.ms-disabled a.ms-selected-item:hover .delete {
+    background-position: right top;
+    cursor: default;
+}
+.ms-disabled a.ms-selected-item, .ms-disabled a.ms-selected-item:hover {
+    color: #999999;
+}
+input.ms-add {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+    display: inline-block;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    margin: 0 0 4px;
+    padding: 0;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 50px;
+    word-wrap: normal;
+}
+input.ms-add:focus {
+    outline: medium none;
+}
+.ms-data {
+    overflow: hidden;
+}
+.ms-data-wrap {
+    font-size: 0;
+    overflow: hidden;
+    position: relative;
+}
+.ms-data-scroll {
+    overflow: hidden;
+    position: relative;
+    width: 1000px;
+}
+.ms-data-wrap .ms-data {
+    float: left;
+}
+.ms-btn {
+    background: url("http://0.assets.dajieimg.com/up/multiselect/btn.png") no-repeat scroll 4px 4px rgba(0, 0, 0, 0);
+    cursor: pointer;
+    float: right;
+    height: 20px;
+    width: 20px;
+}
+.ms-btn-canhover:hover {
+    background-position: -26px 4px;
+}
+.ms-pick {
+    background: none repeat scroll 0 0 #FFFFFF;
+    position: absolute;
+}
+.ms-pick .remove {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+.ms-pick-city-used {
+    width: 370px;
+}
+.ms-pick-city-normal {
+    width: 550px;
+}
+.ms-pick-school {
+    width: 652px;
+}
+.ms-pick-school-scroll {
+    border: 1px solid #E6E6E6;
+    height: 254px;
+    overflow-y: auto;
+    padding: 8px;
+}
+.ms-pick-tab {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #CCCCCC #CCCCCC -moz-use-text-color;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 1px medium;
+    height: 25px;
+}
+.ms-pick-tab li {
+    border-right: 1px solid #E6E6E6;
+    color: #1688D9;
+    cursor: pointer;
+    float: left;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 12px;
+}
+.ms-pick-tab .ms-pick-tab-current {
+    font-weight: bold;
+}
+.ms-pick-filters {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: #E6E6E6 #E6E6E6 -moz-use-text-color;
+    border-image: none;
+    border-style: solid solid none;
+    border-width: 1px 1px medium;
+    padding: 8px;
+}
+.selecting .subpane {
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    margin-top: -1px;
+    padding: 4px 9px;
+    position: absolute;
+    z-index: 1000;
+}
+.selecting .dot-line {
+    background-position: 0 center;
+}
+.selecting .subpane a {
+    color: #333333;
+    word-wrap: normal;
+}
+.selecting .subpane a:hover {
+    color: #1688D9;
+    text-decoration: none;
+}
+.dialog-content h3 {
+    padding: 0 13px;
+}
+.dialog-content .pool {
+    border: 1px solid #CCCCCC;
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+.dialog-content .pool .foldable span.open {
+    background: none repeat scroll 0 0 #DAEAF2;
+    border: medium none;
+    height: 24px;
+}
+.dialog-content .pool .border {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.dialog-content .pool .lowlevel {
+    background: none repeat scroll 0 0 #DAEAF2;
+    border: medium none;
+}
+.dialog-content .pool .foldable {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+.dialog-content .pool .lowlevel {
+    padding: 10px 15px;
+}
+.dialog-content .pool .lowlevel ul li {
+    width: 83px;
+}
+.dialog-content .ms-pick-school-scroll {
+    padding: 8px;
+}

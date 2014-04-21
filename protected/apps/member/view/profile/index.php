@@ -169,8 +169,12 @@
                   <div class="record-hd"> <em class="me"></em>
                     <h4>关于我</h4>
                   </div>
-                  <div class="record-bd line-bg">{$info['introduce']}
-                      <a href="{url('profile/editintroduce',array('id'=>$id))}" class="edit" stat="10603">编辑</a> </div>
+                  <div class="record-bd line-bg">{if $info['introduce']==""} 
+                  <a href="{url('profile/editintroduce')}" class="none-add">
+                    简要描述一下个人经历，让访问者快速了解你 </a>
+                     {else}   {$info['introduce']}
+                  {/if}
+                      <a href="{url('profile/editintroduce')}" class="edit">编辑</a> </div>
                 </div>
                 <!-- 我的专长 -->
                 <!-- 教育经历 -->

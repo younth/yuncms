@@ -118,4 +118,46 @@ class memberController extends baseController{
 		return $newList;
 	}
 	
+	
+   protected function _upload($upload_dir)
+    {
+                        
+			$upload = new UploadFile();
+			//设置上传文件大小
+			$upload->maxSize=1024*1024*2;//最大2M
+			//设置上传文件类型
+			$upload->allowExts  = explode(',','jpg,gif,png,bmp');
+		
+			//设置附件上传目录
+			$upload->savePath ='../images/'.$upload_dir."/";
+			$upload->saveRule = cp_uniqid;
+                        // 使用对上传图片进行缩略图处理     
+                       $upload->thumb   =  TRUE;     
+                        // 缩略图最大宽度  
+                        $upload->thumbMaxWidth=240;    
+                        // 缩略图最大高度   
+                         $upload->thumbMaxHeight=2000;     
+                        // 缩略图前缀     
+                        $upload->thumbPrefix   =  'thumb_';     
+                        $upload->thumbSuffix  =  '';    
+                        // 缩略图保存路径     
+                        $upload->thumbPath = '';     
+                        // 缩略图文件名 
+                        
+                        $upload->savePath=$upload_dir;
+                        
+                        $upload->saveRule=rand(100, 999).time();
+	
+			if(!$upload->upload())
+			 {
+				//捕获上传异常
+				$this->error($upload->getErrorMsg());
+			}
+			else 
+			{
+				//取得成功上传的文件信息
+				return $upload->getUploadFileInfo();
+			}
+	}
+
 }

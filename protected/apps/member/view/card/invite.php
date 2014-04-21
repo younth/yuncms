@@ -32,8 +32,8 @@
         <div class="about-me-wrap">
             <p class="tips">复制以下链接，通过QQ或MSN发送给好友，让大家一起来体验91频道吧！</p>
             <div class="i_copy_way">
-      <input class="i_copy_link" the-id="invitedLink" value="{url('default/index/index')}" type="text" readonly="">
-      <div class="i_copylink_btn"><a href="javascript:void(0);" the-id="btnCopy">复制邀请链接</a></div>
+      <input class="i_copy_link"  value="{url('default/index/index')}" type="text" readonly="">
+      <div class="i_copylink_btn"><a href="javascript:void(0);" >复制邀请链接</a></div>
     </div>
             
         </div>
@@ -49,5 +49,13 @@
             </div>
     </div>
 </div>
+<script>
+$(function(){
+  $(".i_copylink_btn").click(function(){
+    var Url=$("#yao_txt").text();
+    copyToClipboard(Url);
+ });
+});
+</script>
 
  {include file="footer"}

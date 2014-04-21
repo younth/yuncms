@@ -1,7 +1,8 @@
     <fieldset id="login2" class="pop-login">
       <h3>登录91频道</h3>
       <form accept-charset="UTF-8" action="{url('member/account/login')}" class="simple_form new_account" id="tianji-pop-login-form" method="post" >
-        <input id="login_from" name="login_from" type="hidden" value="homepage_login" />        <ul>
+        <input id="login_from" name="login_from" type="hidden" value="homepage_login" /> 
+         <ul>
           <li>
             <input class="txt" id="tianji-login-email_or_mobile" name="login_email" size="30"  type="text" placeholder="输入登录邮箱" />
           </li>

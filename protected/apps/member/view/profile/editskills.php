@@ -98,7 +98,7 @@ var FancyForm=function(){
 				var c=$(this);
 				a.checkVal(c)
 			});
-			a.inputs.live("keyup blur",function(){
+			a.inputs.on("keyup blur",function(){
 				var c=$(this);
 				a.checkVal(c);
 			});
@@ -125,7 +125,7 @@ $(function(){(
 		
 		var a=$(".plus-tag");
 		//live添加事件
-		$("a em",a).live("click",function(){
+		$("a em",a).on("click",function(){
 			var c=$(this).parents("a"),b=c.attr("title"),d=c.attr("value");
 			//alert(b);
 			delTips(b,d)
@@ -273,7 +273,7 @@ var searchAjax = function(name, id, isAdd){
 })();
 // 增加推荐标签
 (function(){
-	$('.default-tag a').live('click', function(){
+	$('.default-tag a').on('click', function(){
 		var $this = $(this),
 				name = $this.attr('title'),
 				id = $this.attr('value');

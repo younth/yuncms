@@ -1,16 +1,23 @@
 <?php
-/*
- * feed表的模型方法
- * */
+
+/* 
+ * 心情主表模板cms_feed
+ * by jever
+ * 2014.4.10
+ */
+
 class feedModel extends baseModel{
-    //baseModel  extends  model  model  $table是model里面的属性
     protected $table = 'feed';
     
-    public function adminfeedANDmember($mid=''){
-        $where='where '.$this->prefix.'feed.mid ='.$mid;
-        $sql="SELECT {$this->prefix}feed.mid,{$this->prefix}member.uname 
-            FROM {$this->prefix}feed left outer join {$this->prefix}member on {$this->prefix}feed.mid = {$this->prefix}member.id {$where}";
-//        echo $sql;
-        return $this->model->query($sql);
+    public function getRepostCon($fid) {
+        $info=  model('feed')->withBelongOne('member','mid','id','id = '.$fid);
+        if($info['feed_type']!=2){
+            return $content;
+        }
+        else{
+             $content='//<a id="mem_show_uname" href="#"><strong>'.@$info['member']['uname'].'</strong></a>:'.dobadword($info['feed_content']).  $this->getRepostCon($info['fid']);
+        }
+        return $content;
     }
 }
+

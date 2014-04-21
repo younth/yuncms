@@ -77,23 +77,45 @@ class model{
         //with关联查询，将关联表的数据存入子数组中，先试试吧
         //注：目的是把关联的表的数据存入结果的子数组中，多对一用find，一对多和多对多用select      
         //属于，多对一,一个字段的关联
-        public function withBelong($withTable= '',$withField='',$condition='', $field = '', $order = '', $limit = ''){
+        //$withTable:关联表。。,$withField关联表的关联字段。。$orgField当前表的关联字段
+        public function withBelong($withTable= '',$withField='',$orgField='id',$condition='', $field = '', $order = '', $limit = ''){
             $result=$this->model->table($this->table, $this->ignoreTablePrefix)->field($field)->where($condition)->order($order)->limit($limit)->select();
-            $resultWith=$this->model->table($withTable, $this->ignoreTablePrefix)->field($field)->where($withField=$result[$withField])->order($order)->limit($limit)->find();
+           
+            
             for($i=0;$i<count($result);$i++){
+                $resultWith=$this->model->table($withTable, $this->ignoreTablePrefix)->where($orgField.'='.$result[$i][$withField])->order($order)->find();
                 $result[$i]=  array_merge($result[$i],array($withTable=>$resultWith));
             }
             return $result;
         }
         
+         public function withBelongOne($withTable= '',$withField='',$orgField='id',$condition='', $field = '', $order = ''){
+            $result=$this->model->table($this->table, $this->ignoreTablePrefix)->field($field)->where($condition)->order($order)->find();
+           
+            $resultWith=$this->model->table($withTable, $this->ignoreTablePrefix)->where($orgField.'='.$result[$withField])->order($order)->find();
+            $result=  array_merge($result,array($withTable=>$resultWith));
+            return $result;
+        }
+        
+       
         //属于，多对一,多个字段的关联
-         public function withMoreBelong($with=array(array('withTable'=>'','withField'=>'')),$condition='', $field = '', $order = '', $limit = ''){
+         public function withMoreBelong($with=array(array('withTable'=>'','withField'=>'','orgField'=>'id')),$condition='', $field = '', $order = '', $limit = ''){
              $result=$this->model->table($this->table, $this->ignoreTablePrefix)->field($field)->where($condition)->order($order)->limit($limit)->select();
-             for($i=0;$i<count($with);$i++){
-                $resultWith=$this->model->table($with[$i]['withTable'], $this->ignoreTablePrefix)->field($field)->where($with[$i]['withField']=$result[$with[$i]['withField']])->order($order)->limit($limit)->find();
-                for($j=0;$j<count($result);$j++){
-                  $result[$j]=  array_merge($result[$j],array($with[$i]['withTable']=>$resultWith));
+             for($i=0;$i<count($result);$i++){
+//                $resultWith[$i]=$this->model->table($with[$i]['withTable'], $this->ignoreTablePrefix)->where($with[$i]['orgField'].'='.$result[$i][$with[$i]['withField']])->order($order)->find();
+                for($j=0;$j<count($with);$j++){
+                  $resultWith=$this->model->table($with[$j]['withTable'], $this->ignoreTablePrefix)->where($with[$j]['orgField'].'='.$result[$i][$with[$j]['withField']])->find();
+                  $result[$i]=  array_merge($result[$i],array($with[$j]['withTable'].$with[$j]['withField']=>$resultWith));
                }
+            }
+            return $result;
+         }
+         
+          public function withMoreBelongOne($with=array(array('withTable'=>'','withField'=>'','orgField'=>'id')),$condition='', $field = '', $order = ''){
+             $result=$this->model->table($this->table, $this->ignoreTablePrefix)->field($field)->where($condition)->order($order)->find();
+             for($i=0;$i<count($with);$i++){
+                $resultWith=$this->model->table($with[$i]['withTable'], $this->ignoreTablePrefix)->where($with[$i]['orgField'].'='.$result[$with[$i]['withField']])->order($order)->find();
+                $result=  array_merge($result,array($with[$i]['withTable'].$with[$i]['withField']=>$resultWith));
             }
             return $result;
          }

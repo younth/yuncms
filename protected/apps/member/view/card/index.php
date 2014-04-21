@@ -201,7 +201,7 @@ function cardinfo(id){
 	//解除关系
 	$(document).on('click','#delfriend',function(){
 		var $uid=$(this).attr("uid");//放在最外边
-		
+		var $rightCard = $("#J_cardInfo");//名片区域
 		var nowobj="card"+$uid;
 		var delnode=$("#"+nowobj);
 		layer.confirm('确定解除关系吗？', function(){ 
@@ -215,6 +215,7 @@ function cardinfo(id){
 					//
 					layer.msg('删除好友成功！',2,-1);
 					delnode.remove();
+					$rightCard.empty().attr("class","card-defult");//删除右侧的名片显示
 				 },
 				  error: function (msg) {
 						alert(msg);

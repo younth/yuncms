@@ -254,7 +254,7 @@
 		});
 		
 //发送私信
-$('.dj-btn-send-mail').on('click', function(){
+$(document).delegate('.dj-btn-send-mail','click', function(){
     $.layer({
         type: 2,
         title: '发送私信',

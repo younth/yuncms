@@ -1408,3 +1408,19 @@ border: 1px solid #ccc;
 .contracting .up:hover span {
     background: url("../images/btn.png") no-repeat scroll -170px -141px rgba(0, 0, 0, 0);
 }
+
+.record-content .none-add {
+    background: none repeat scroll 0 0 #F8F8F8;
+    border: 1px dashed #E3E3E3;
+    color: #666666;
+    display: block;
+    font-size: 12px;
+    line-height: 26px;
+    padding: 15px 0;
+    text-align: center;
+}
+.record-content .none-add:hover {
+    background: none repeat scroll 0 0 #EBF4F9;
+    color: #6A6D6E;
+    text-decoration: none;
+}
