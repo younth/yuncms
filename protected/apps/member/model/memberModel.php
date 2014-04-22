@@ -96,7 +96,6 @@ class memberModel extends baseModel{
 		return $may;
 	}
 	
-	
 	//根据关键字模糊查询匹配用户，姓名、专业、标签、学校，涉及的表member  member_profile  member_tag
 	public function findmember($key)
 	{

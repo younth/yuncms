@@ -254,8 +254,8 @@
 		});
 		
 //发送私信
-$(document).delegate('.dj-btn-send-mail','click', function(){
-    $.layer({
+$(document).on('click', '.dj-btn-send-mail',function(){
+    var i=$.layer({
         type: 2,
         title: '发送私信',
         shadeClose: false, //开启点击遮罩关闭层
@@ -264,7 +264,8 @@ $(document).delegate('.dj-btn-send-mail','click', function(){
         iframe: {src: "{url('card/sendmsg',array('id'=>$info['id']))}"}
     });
 });
-		
+
+
 </script>
 
 {include file="footer"}

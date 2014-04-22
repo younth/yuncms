@@ -2,38 +2,50 @@
 /*
  * 人脉控制器
  * */
-class cardController extends commonController
+class messageController extends commonController
 {
 	public function __construct()
 	{
 		parent::__construct();
 		$this->uploadpath=ROOT_PATH.'upload/company/license/';
-		$hover="class=\"current\"";//设置当前的导航状态
-		$this->hover_card=$hover;
 	}
 	
+	//全部私信
 	public function index()
+	{
+		//检索我的全部私信列表
+		$auth=$this->auth;//本地登录的cookie信息
+		$id=$auth['id'];
+		$msg=model("message_list")->select("from_mid='{$id}'");//我发起的私信记录 
+		if(!empty($msg)){
+			//直接找到私信记录，则判断跟谁的记录
+			include_once(ROOT_PATH.'/avatar/AvatarUploader.class.php');
+			$au = new AvatarUploader();
+			foreach ($msg as  $row=>$v){
+				$mylink=explode('_', $v['member_mid']);
+				//获取我的私信联系人的头像
+				$msg[$row]['avatar']=$au->getAvatar($mylink[1],'small');
+			}
+		}
+			//我没有直接发起私信，但是我有私信联系人，我是接受者，这也是我的私信
+			/*技术难题
+			 * Mysql 实现split字符串分割，用CONCAT联合模糊查询
+			 * */
+		$msguser=model("message_list")->linkmsg($id);
+		//两个数组联合查询，也可以是联合where 
+		$this->display();
+	}
+	
+	public function unread()
 	{
 		//我的联系人,查询我的联系人的信息
 		$auth=$this->auth;//本地登录的cookie信息
 		$id=$auth['id'];
 		if(empty($id)) $this->redirect(url('default/index/login'));//未登录， 跳转到登录页面
-		$card=model('member_card')->mycard($id);//好友分组
-		$allcard=model('member_card')->count("send_id='{$id}' or rece_id='{$id}'");//联系人总数
-		if(!empty($card)){
-			foreach ($card as  $row=>$v)
-			{
-				$card[$row]=model("member")->user_profile($v['mid'],'');
-			}
-			$this->mycard=$card;
-		}
-
-		//查询我的联系人，分组A-Z,如何分组未解决
-		//dump($card);
 		$this->display();
 	}
 	
-	
+
 	//ajax添加联系人,注意已经有记录，则不添加，直接接受（注意接收人）
 	public function addfriend()
 	{

@@ -1,7 +1,5 @@
  {include file="header"}
  <link href="__PUBLICAPP__/css/profile_common.css" media="screen" rel="stylesheet" type="text/css" />
- <link href="__PUBLIC__/company/css/company.css" media="screen" rel="stylesheet" type="text/css" />
-<link href="__PUBLICAPP__/css/card.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="__PUBLIC__/member/css/aboutme.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="__PUBLIC__/member/css/invite.css" media="screen" rel="stylesheet" type="text/css" />
 <div id="dj-content-wrap" class="dj-content-wrap dj-networks clearfix">

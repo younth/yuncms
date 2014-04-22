@@ -69,7 +69,7 @@
             
           </li>
           <li id="look_see1" class="message">
-            <a href="#" class="icon_01" target="_self">
+            <a href="{url('member/message/index')}" class="icon_01" target="_self">
                 <div class="clear"></div>
                 <div class="span_promit png_ie6" style="display: block;">2</div>
             </a>

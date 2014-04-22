@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/layer/layer.min.js"></script>
 <link href="__PUBLIC__/member/css/my_file.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="__PUBLIC__/member/css/sendmsg.css" media="screen" rel="stylesheet" type="text/css" />
 <title></title>
@@ -26,20 +27,20 @@ $(function(){
 			  type: "POST",
 			  url: "{url('member/card/sendmsg')}",
 			  data: {
-				content: $uid,
+				 id:{$id},
+				content: content,
 			  },
 				 success: function (data) {
-					if(data==1){
-						layer.msg('发送成功，等待对方验证',2,-1);
-						node.replaceWith('<span class="sented">等待对方确认</span>');
-					}
-					if(data==2){
-						layer.msg('发送成功，你们已经互为联系人了~',2,-1);
-						node.replaceWith('<a href="javascript:void(0)" id="single_mail" class="send-msg"  uid="'+$uid+'" title="发私信"></a>');
-					}
-					
-					
-				 },
+					 //关闭弹出
+					 //alert(data);
+					var i = parent.layer.getFrameIndex(window.name);
+					layer.msg('发送私信成功~',1,-1);	
+					//延迟执行
+					setTimeout(function(){
+							parent.layer.close(i);
+						}, 500);					
+				
+				},
 				  error: function (msg) {
 						alert(msg);
 				  }

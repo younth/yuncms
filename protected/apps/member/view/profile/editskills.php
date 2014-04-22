@@ -124,7 +124,7 @@ $(function(){(
 	function(){
 		
 		var a=$(".plus-tag");
-		//live添加事件
+		//on添加事件
 		$("a em",a).on("click",function(){
 			var c=$(this).parents("a"),b=c.attr("title"),d=c.attr("value");
 			//alert(b);
