@@ -261,7 +261,7 @@ $(document).on('click', '.dj-btn-send-mail',function(){
         shadeClose: false, //开启点击遮罩关闭层
         area : ['560px' , '360px'],
         offset : ['260px', '540px'],
-        iframe: {src: "{url('card/sendmsg',array('id'=>$info['id']))}"}
+        iframe: {src: "{url('message/sendmsg',array('id'=>$info['id']))}"}
     });
 });
 

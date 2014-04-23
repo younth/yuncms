@@ -23,59 +23,36 @@
             <i class="pointer"></i>
     </div>
     <div class="menu-i selected">
-        <a id="letterMenuBtn" class="" href="/message/summary">
+        <a id="letterMenuBtn" class="" href="">
             全部私信
         </a>
     </div>
 
 </div>            <div class="list-item msg-list">
                     <ul>
-                            <li data-id="865838" data-href="/message/terminal?contractUid=23840651" class="unread">
+                            {loop $msg $key $vo}
+                    		<li data-href="{url('message/content',array('id'=>$vo['list_id'],'name'=>$vo['user']['uname']))}" class="" id="{$vo['mid']}">
                                 <div class="item-layout">
                                     <div class="pic">
-                                        <a target="_blank" href="http://www.dajie.com/profile/W3RU4xiV5Pk*?f_fid=24012661">
-                                            <img src="http://0.f1.dajieimg.com/group1/M00/2E/85/CgpAmVJhWleAK5jBAAAAoLwQons828s.jpg">
+                                        <a target="_blank" href="{url('profile/user',array('id'=>$vo['mid']))}">
+                                            <img src="{$vo['user']['small']}">
                                         </a>
                                     </div>
                                     <div class="item-content">
                                         <p class="item-h">
-                                            <a href="http://www.dajie.com/profile/W3RU4xiV5Pk*?f_fid=24012661" class="name b" target="_blank">
-                                            谭韬
-                                            </a>
-                                                <span class="tip">(1条新)</span>
-                                        </p>
-
-                                        <p class="desc">你好</p>
-                                    </div>
-                                    <input type="checkbox" class="checkbox">
-                                    <span class="time g9" style="display: block;">2013-10-18</span>
-                                    <a class="del-btn" data-name="蒲精" data-id="2048859" href="javascript:;" style="display: none;">x</a>
-                                </div>
-                            </li>
-                    
-                    		<li id="1905116" data-href="/message/terminal?contractUid=26437567" class="">
-                                <div class="item-layout">
-                                    <div class="pic">
-                                        <a target="_blank" href="http://www.dajie.com/profile/W3FY5B-W5_8*?f_fid=24012661">
-                                            <img src="http://5.f1.dajieimg.com/n/avatar/T1OQYTB7xv1RXrhCrK_s.jpg">
-                                        </a>
-                                    </div>
-                                    <div class="item-content">
-                                        <p class="item-h">
-                                            <a href="http://www.dajie.com/profile/W3FY5B-W5_8*?f_fid=24012661" class="name b" target="_blank">
-                                            蒲精
+                                            <a href="{url('profile/user',array('id'=>$vo['mid']))}" class="name b" target="_blank">
+                                            {$vo['user']['uname']}
                                             </a>
                                         </p>
 
-                                        <p class="desc">
-                                                <img src="http://assets.dajieimg.com/up/msgcenter/image/reply2.png">
-好啊                                        </p>
+                                        <p class="desc"><img src="__PUBLICAPP__/images/reply2.png">{$vo['msg']}</p>
                                     </div>
                                     <input type="checkbox" class="checkbox">
-                                    <span class="time g9" style="display: block;">2014-04-22</span>
-                                    <a data-name="蒲精" data-id="1905116" class="del-btn" href="javascript:;" style="display: none;">x</a>
+                                    <span class="time g9" style="display: block;">{timeshow($vo['time'])}</span>
+                                    <a data-name=" {$vo['user']['uname']}" class="del-btn" data-id="{$vo['mid']}" href="javascript:;" style="display: none;">x</a>
                                 </div>
                             </li>
+                      {/loop}
                     </ul>
                     <div class="all-mark">
                         <input type="checkbox" class="checkbox">
@@ -92,18 +69,53 @@
 </div>
 <script>
 $(function(){ 
-	$('.msg-list ul li').on({ 
+	$('.msg-list ul li').on({
 	mousemove:function(){ 
-		$(".time").css("display","none");
-		$(".del-btn").css("display","inline");
+		var id=$(this).attr('id');//获取当前data-id
+		$(this).addClass("hover");
+		$("#"+id+" span").css("display","none");
+		$("#"+id+" a").css("display","inline");
+		
 	}, 
 	mouseleave:function(){ 
+	$(this).removeClass("hover");
 		$(".time").css("display","block");
 		$(".del-btn").css("display","none");
-	} 
+	} ,
+	click:function(){
+		//改变链接
+		var url=$(this).data("href");
+		window.location.href=url;
+	}
 	}); 
 }) 
 
+//ajax删除私信
+
+$(document).on('click','.del-btn',function(){
+	var id=$(this).data("id");//私信记录的id
+	var name=$(this).data("name");//私信记录的id
+	
+	layer.confirm('确定删除与'+name+'所有私信记录吗？', function(){ 
+		  $.ajax({
+		  type: "GET",
+		  url: "{url('member/message/delmsg')}",
+		  data: {
+			id: id,
+		  },
+			 success: function (data) {
+				//
+				layer.msg('不好意思，暂未开放~！',2,-1);
+			 },
+			  error: function (msg) {
+					alert(msg);
+			  }
+		});
+
+	
+	});
+	
+})
 
 </script>
 

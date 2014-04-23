@@ -199,7 +199,7 @@ function cardinfo(id){
 </script>
 <script>
 	//解除关系
-	$(document).delegate('#delfriend','click',function(){
+	$(document).on('click','#delfriend',function(){
 		var $uid=$(this).attr("uid");//放在最外边
 		var $rightCard = $("#J_cardInfo");//名片区域
 		var nowobj="card"+$uid;

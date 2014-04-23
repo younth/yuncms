@@ -209,56 +209,6 @@ class cardController extends commonController
 		$this->display();
 	}
 
-	//发送私信
-	public function sendmsg()
-	{
-		if(!$this->isPost()){
-			$id=intval($_GET['id']);
-			$user=model("member")->find("id={$id}",'uname');
-			$this->id=$id;
-			$this->re_name=$user['uname'];
-			$this->display();//添加修改用同一个页面
-		}else{
-			/*
-			 * 私信对对应的是会员与会员之间的通信，涉及member_list member_content  member_message
-			 * */
-			//增加会员之间通信的记录
-			
-			$id=intval($_POST['id']);
-			$content=text_in($_POST['content']);
-			$auth=$this->auth;//本地登录的cookie信息
-			$mid=$auth['id'];
-			$data=array();
-			$msg=array();
-			//先判断有没有私信记录，有就更新时间与最后一条记录，记录是发还是收，如何判断，1.0版本不做~~
-			$member_mid=$mid."_".$id;
-			$member_mid2=$id."_".$mid;
-			$re=model("message_list")->find("(from_mid='{$mid}' and member_mid='{$member_mid}') or (member_mid='{$member_mid2}' and from_mid='{$id}')");
-			if($re){
-				//已经有私信记录,更新会员的私信记录
-				$data['ctime']=time();
-				$data['last_message']=$content;//私信内容
-				$list_id=$re['id'];
-				model("message_list")->update("id='{$list_id}'",$data);
-			}else{
-				$data['from_mid']=$mid;//发起者id,当前会员
-				$data['type']=1;//一对一
-				$data['member_num']=2;//参与者数量
-				$data['member_mid']=$mid."_".$id;//参与者连接字符串
-				$data['ctime']=time();
-				$data['last_message']=$content;//私信内容
-				$list_id=model("message_list")->insert($data);//私信列表的id
-			}
-			if($list_id){
-				$msg['list_id']=$list_id;//私信列表的id
-				$msg['from_uid']=$mid;//发信人id
-				$msg['content']=$content;//私信内容
-				$msg['ctime']=time();
-				if(model("message_content")->insert($msg)) echo 1;
-				else echo 0;
-			}
-		}
-	}
 
 }
 

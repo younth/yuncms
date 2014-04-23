@@ -25,7 +25,7 @@ $(function(){
 		//发送私信
 			  $.ajax({
 			  type: "POST",
-			  url: "{url('member/card/sendmsg')}",
+			  url: "{url('member/message/sendmsg')}",
 			  data: {
 				 id:{$id},
 				content: content,
