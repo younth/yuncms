@@ -104,5 +104,5 @@ return array (
   'allowType' => 'jpg,bmp,gif,png,flv,mp4,mp3,wma,mp4,7z,zip,rar,ppt,txt,pdf,xls,doc,swf,wmv,avi,rmvb,rm',
   'sina_wb_akey' => '3226403690',
   'sina_wb_skey' => 'b476ab21cd1b75152fd2d90e63ce31e5',
-  'tongji' => 'fadsfdasdsafsadfdsafdsadsaf',
+  'tongji' => 'var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id=\'cnzz_stat_icon_4125145\'%3E%3C/span%3E%3Cscript src=\'" + cnzz_protocol + "s22.cnzz.com/stat.php%3Fid%3D4125145%26show%3Dpic1\' type=\'text/javascript\'%3E%3C/script%3E"));',
 );

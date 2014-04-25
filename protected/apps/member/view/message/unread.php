@@ -17,20 +17,17 @@
         <div class="msg-main  ">
 <div class="fun-menu clearfix">
     <div class="menu-i selected">
-        <a id="middleMenuBtn" data-num="1" href="/message/summary/unread" class="">
+        <a id="middleMenuBtn" data-num="1" href="{url('message/unread')}" class="">
             未读私信(1)
         </a>
             <i class="pointer"></i>
     </div>
     <div class="menu-i ">
-        <a id="letterMenuBtn" href="/message/summary" class="">
+        <a id="letterMenuBtn" href="{url('message/index')}" class="">
             全部私信
         </a>
     </div>
 
-    <div class="menu-i ">
-        <a href="/message/editor" class="">写私信</a>
-    </div>
 </div>            <div class="list-item msg-list">
                     <ul>
                             <li data-id="865838" data-href="/message/terminal?contractUid=23840651" class="unread">

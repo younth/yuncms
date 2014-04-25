@@ -64,24 +64,41 @@
           <li id="contacts_one" class="contacts contacts_loaded">
             <a href="#" class="icon_01" target="_self">
                 <div class="clear"></div>
-                <div class="span_promit png_ie6" data-num="4" style="display: block;">4</div>
+                <div class="span_promit png_ie6" data-num="4" style="display: none;">4</div>
             </a>
             
-          </li>
+<div class="messages_list" id="contacts_one_list" style="display: none;">
+              <span class="list_c"></span>
+              <span class="title_renmai">人脉邀请 <a href="http://www.tianji.com/contacts/invitation" class="all_kone" title="查看更多人脉邀请">更多</a></span>
+              <span class="promit_no" style="display: none;">暂时没有收到人脉请求</span>
+              <div class="loding_notice mg_r125" style="display: none;">正在加载.....</div>
+              <ul class="contacts_main" id="new_header">
+              
+              
+
+
+			</ul>
+              
+              
+            </div>
+                      </li>
+          
           <li id="look_see1" class="message">
             <a href="{url('member/message/index')}" class="icon_01" target="_self">
                 <div class="clear"></div>
                 <div class="span_promit png_ie6" style="display: block;">2</div>
             </a>
-            
           </li>
+          
           <li id="look_see2" class="tool">
             <a href="#" class="icon_01" target="_self">
                 <div class="clear"></div>
                 <div class="span_promit png_ie6" data-num="2" style="display: block;">2</div>
             </a>
-            
+
           </li>
+          
+          
         </ul>
              
                         <div class="clear"></div>
@@ -90,4 +107,63 @@
             </div>
         </div>
         
-        
+<script>
+
+$(document).on("mouseover",".icon_01",function(){
+	var load_notice=$(".loding_notice");
+	var contact_notice=$(".contacts_main");
+		$("#contacts_one_list").slideDown(100);//显示通知区域
+		$("#contacts_one").addClass("contacts_hover");
+		//要使用ajax加载
+		contact_notice.hide();	
+		if($("#new_header li").length>0){
+		//load_notice.hide();
+		contact_notice.show();
+		}else{
+			load_notice.show();//显示加载框
+				//ajax请求数据，然后显示，隐藏加载通知
+			  $.ajax({
+			  type: "GET",
+			  url: "{url('member/card/addfriend')}",
+			  data: {
+				id: $uid,
+			  },
+				 success: function (data) {
+					if(data==1){
+						layer.msg('发送成功，等待对方验证',2,-1);
+						node.replaceWith('<span class="sented">等待对方确认</span>');
+					}
+					if(data==2){
+						layer.msg('发送成功，你们已经互为联系人了~',2,-1);
+						node.replaceWith('<a href="javascript:void(0)" id="single_mail" class="send-msg"  uid="'+$uid+'" title="发私信"></a>');
+					}
+					
+					
+				 },
+				  error: function (msg) {
+						alert(msg);
+				  }
+			});
+			
+			//没有元素，则ajax请求,此处用setTimeout演示ajax的回调
+			setTimeout(function(){
+					load_notice.hide();
+					//显示加载的数据
+					$("#new_header").append("<li>你好</li>");
+					contact_notice.show();//显示通知区域
+			},1000);
+			
+		}
+});
+
+//鼠标离开私信的通知区域
+$(document).on("mouseleave","#contacts_one_list",function(){
+	$("#contacts_one_list").slideUp(200);
+	$("#contacts_one").removeClass("contacts_hover");
+});
+
+$("#new_header li").hover(function(){
+	$(this).addClass("current").siblings().removeClass("current");
+	})
+
+</script>

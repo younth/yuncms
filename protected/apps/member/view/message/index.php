@@ -9,7 +9,7 @@
     <div class="msgcenter-box">
         <h2 class="title">
         <span>
-                <a class="green" href="/yuncms/index.php?yun=member/profile/index">返回我的档案</a>
+                <a class="green" href="{url('profile/index')}">返回我的档案</a>
             </span>
           <em></em><i>我的私信</i>
         </h2>
@@ -17,7 +17,7 @@
         <div class="msg-main  ">
 <div class="fun-menu clearfix">
     <div class="menu-i">
-        <a id="middleMenuBtn" data-num="1" href="/message/summary/unread" class="">
+        <a id="middleMenuBtn" data-num="1" href="{url('message/unread')}" class="">
             未读私信(1)
         </a>
             <i class="pointer"></i>

@@ -109,6 +109,7 @@ class messageController extends commonController
 				//获取我的私信联系人的相关信息
 				$list[$row]['user']=model("member")->user_profile($v['from_uid'],'');
 			}
+			$this->list_id=$list_id;
 			$this->msg=$list;
 		}
 		//dump($list);
@@ -120,6 +121,27 @@ class messageController extends commonController
 	{
 		$id=intval($_GET['id']);
 		if(model("message_content")->delete("id='{$id}'")) echo 1;
+	}
+	
+	//ajax回复私信
+	public function reply_msg()
+	{
+		$auth=$this->auth;//本地登录的cookie信息
+		$data=array();
+		$data['from_uid']=$mid=$auth['id'];
+		$user=model("member")->user_profile($mid,'');
+		$data['list_id']=$id=intval($_GET['id']);//私信列表的id
+		$data['content']=$content=in($_GET['content']);
+		$data['ctime']=$time=time();
+		
+		$url=url('profile/user',array('id'=>$mid));
+		$html='';
+		$html.='<li class="noborder" id="'.$id.'"><div class="item-layout"><div class="pic"><a href="'.$url.'">';
+		$html.='<img src="'.$user['small'].'"></a></div><div class="item-content"><p class="item-h"><a href="'.$url.'" class="name b">'.$user['uname'];
+		$html.='</a></p> <p class="desc">'.$content.'</p></div><span class="time g9" style="display: block;">'.timeshow($time).'</span>';
+		$html.='<a data-name="'.$user['uname'].'" class="del-btn" data-id="'.$id.'" href="javascript:;" style="display: none;">x</a></div></li>';
+		if(model("message_content")->insert($data))  echo $html;
+		
 	}
 }
 
