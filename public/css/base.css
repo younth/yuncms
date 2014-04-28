@@ -941,7 +941,6 @@ h1,h2,h3,h4,h5,h6{ margin: 0px; padding: 0px; font-weight: normal;}
 	top: 24px;
 	right: 18px;
 	background: url(../images/header_bg_2014.png) no-repeat -65px -329px;
-	display: none
 }
 
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .agree_btn {
@@ -955,7 +954,6 @@ h1,h2,h3,h4,h5,h6{ margin: 0px; padding: 0px; font-weight: normal;}
 	position: absolute;
 	right: 52px;
 	top: 25px;
-	display: none
 }
 
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li .agree_btn:hover {
@@ -1491,6 +1489,9 @@ h1,h2,h3,h4,h5,h6{ margin: 0px; padding: 0px; font-weight: normal;}
 	min-width: 980px
 }
 
+#header .header_menu_two ul.right_menu li .messages_list .contacts_main li ul.star_list {
+    margin-left: 5px;
+}
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li ul.star_list li {
 	display: inline-block;
 	cursor: pointer;

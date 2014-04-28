@@ -62,32 +62,47 @@
              <ul class="right_menu" style="">
              <!-----通过ajax请求查看----->
           <li id="contacts_one" class="contacts contacts_loaded">
-            <a href="#" class="icon_01" target="_self">
+            <a href="{url('member/message/index')}" class="icon_01" target="_self">
                 <div class="clear"></div>
-                <div class="span_promit png_ie6" data-num="4" style="display: none;">4</div>
+                {if $undo_count==0}
+                {else}
+                <div class="span_promit png_ie6" data-num="{$undo_count}" style="display: block;">{$undo_count}</div>
+                {/if}
             </a>
             
 <div class="messages_list" id="contacts_one_list" style="display: none;">
               <span class="list_c"></span>
-              <span class="title_renmai">人脉邀请 <a href="http://www.tianji.com/contacts/invitation" class="all_kone" title="查看更多人脉邀请">更多</a></span>
+              <span class="title_renmai">人脉邀请 <a href="#" class="all_kone" title="查看更多人脉邀请">更多</a></span>
               <span class="promit_no" style="display: none;">暂时没有收到人脉请求</span>
               <div class="loding_notice mg_r125" style="display: none;">正在加载.....</div>
               <ul class="contacts_main" id="new_header">
-              
-              
-
-
+          
 			</ul>
               
               
             </div>
                       </li>
           
-          <li id="look_see1" class="message">
-            <a href="{url('member/message/index')}" class="icon_01" target="_self">
+          
+<li class="message look_see1_loaded" id="look_see1">
+            <a target="_self" class="icon_01" href="http://www.tianji.com/messages">
                 <div class="clear"></div>
-                <div class="span_promit png_ie6" style="display: block;">2</div>
+                <div class="span_promit png_ie6" style="display: block;">1</div>
             </a>
+            <div id="look_list1" style="display: none;" class="messages_list">
+              <span class="list_c"></span>
+              <span class="title_renmai">私信 <a class="wirte_info" href="http://www.tianji.com/messages/new">写信</a> </span>
+              <div style="display:none;" class="no_notice">还没有收到私信</div>
+              <div class="loding_notice mg_r125" style="display: none;">正在加载.....</div>
+              <div class="hd_scroll_box" style="display: block;">
+                <ul id="new_header_message" class="contacts_main">
+                <li data-status="2"> <a target="_blank" href="http://www.tianji.com/messages/533b5f74659e938f44000056"> <span class="logo1"><img src="http://image.tianji.com/u/37918231/876200-s.jpg"></span> <span class="name1_title">龚之民</span><ul class="star_list"><li class="png_ie6"></li><li class="png_ie6"></li><li class="png_ie6"></li><li class="png_ie6"></li></ul> <span class="times">04-22 18:13</span> <span class="name1_companies"><b class="yi_icon"></b>haob</span> <span style="display: none" class="bi_x"></span> </a> </li><li data-status="2"> <a target="_blank" href="http://www.tianji.com/messages/5334cd73659e9358de000002"> <span class="logo1"><img src="http://image.tianji.com/u/16328226/82573-s.jpg"></span> <span class="name1_title">彦妮</span><ul class="star_list"><li class="png_ie6"></li><li class="png_ie6"></li><li class="png_ie6" style="border-bottom: medium none;"></li></ul> <span class="times">04-19 17:53</span> <span class="name1_companies"><b class="yi_icon"></b>你是做什么行业的啊？最近想换行，但是对自己没什么信心...可以简单聊下
+</span> <span style="display: none" class="bi_x"></span> </a> </li>
+
+</ul>
+                <div class="clear"></div>
+              </div>
+            </div>
           </li>
           
           <li id="look_see2" class="tool">
@@ -97,73 +112,197 @@
             </a>
 
           </li>
-          
-          
         </ul>
              
-                        <div class="clear"></div>
+                        <div class="clear"> </div>
                     </div>
                </div>
             </div>
         </div>
         
 <script>
-
-$(document).on("mouseover",".icon_01",function(){
-	var load_notice=$(".loding_notice");
-	var contact_notice=$(".contacts_main");
+$(document).on("mouseover","#contacts_one",notice_friend);
+var timer=null;//全局变量，定时器
+function notice_friend(){
+	var load_notice=$("#contacts_one .loding_notice");
+	var contact_notice=$("#contacts_one .contacts_main");
+	var show_li=$("#new_header");
+	var no_notice=$("#contacts_one .promit_no");
 		$("#contacts_one_list").slideDown(100);//显示通知区域
 		$("#contacts_one").addClass("contacts_hover");
 		//要使用ajax加载
 		contact_notice.hide();	
 		if($("#new_header li").length>0){
-		//load_notice.hide();
 		contact_notice.show();
 		}else{
 			load_notice.show();//显示加载框
 				//ajax请求数据，然后显示，隐藏加载通知
+			//没有元素，则ajax请求,此处用setTimeout演示ajax的回调
 			  $.ajax({
 			  type: "GET",
-			  url: "{url('member/card/addfriend')}",
-			  data: {
-				id: $uid,
-			  },
+			  url: "{url('member/message/friend_notice')}",
 				 success: function (data) {
-					if(data==1){
-						layer.msg('发送成功，等待对方验证',2,-1);
-						node.replaceWith('<span class="sented">等待对方确认</span>');
+					 //没有通知，则显示没有收到人脉请求
+					 load_notice.hide();
+					 if(data==1){
+						no_notice.show();//显示没有人脉请求,有个bug
+						
+					}else{
+						contact_notice.empty();//清空之前的内容，防止浏览器缓存保留
+						//显示加载的数据
+						show_li.append(data);	
+						contact_notice.show();//显示通知区域
 					}
-					if(data==2){
-						layer.msg('发送成功，你们已经互为联系人了~',2,-1);
-						node.replaceWith('<a href="javascript:void(0)" id="single_mail" class="send-msg"  uid="'+$uid+'" title="发私信"></a>');
-					}
-					
-					
 				 },
 				  error: function (msg) {
 						alert(msg);
 				  }
 			});
 			
+		}
+}
+
+//鼠标离开私信的通知区域
+$(document).on("mouseleave","#contacts_one",function(){
+	timer=setTimeout(function(){
+		$("#contacts_one_list").slideUp(100);
+		},400)
+	$("#contacts_one").removeClass("contacts_hover");
+});
+
+//鼠标在通知区域时候显示
+$(document).on("mouseover","#contacts_one_list",function(){
+		clearTimeout(timer);
+	});
+
+
+$("#new_header li").hover(function(){
+	$(this).addClass("current").siblings().removeClass("current");
+});
+
+//点击删除通知
+$(document).on("click",".bi_x1",function(){
+	var delnode=$(this).parent();
+	var card_id=delnode.data("id");
+		  $.ajax({
+		  type: "GET",
+		  url: "{url('member/message/del_friend_notice')}",
+		  data: {
+			id: card_id,
+		  },
+			 success: function (data) {
+				 //没有通知，则显示没有收到人脉请求
+				delnode.remove();
+			 },
+			  error: function (msg) {
+					alert(msg);
+			  }
+		});
+})
+
+
+$(document).on("click",".agree_btn",function(){
+	var delnode=$(this).parent();
+	var card_id=delnode.data("id");
+		  $.ajax({
+		  type: "GET",
+		  url: "{url('member/card/addfriend')}",
+		  data: {
+			id: card_id,
+		  },
+			 success: function (data) {
+				 //没有通知，则显示没有收到人脉请求
+				delnode.remove();
+			 },
+			  error: function (msg) {
+					alert(msg);
+			  }
+		});
+})
+
+
+//接受邀请
+	$(document).on("click",".agree_btn",function(){
+		var node=$(this).parent();
+		var  $send_id=node.data("userid");
+	$.ajax({
+	  url: "{url('card/accept')}",
+	  data: {
+		id: $send_id,
+	  },
+		 success: function (data) {
+			//成功返回数据,不能用this
+			 node.remove();
+		 },
+		  error: function (msg) {
+				alert(msg);
+		  }
+	});
+	
+});
+
+
+</script>
+
+<script>
+//私信通知
+$(document).on("mouseover","#look_see1",function(){
+	var load_notice=$("#look_see1 .loding_notice");
+	var contact_notice=$("#look_see1 .contacts_main");
+	var show_li=$("#new_header_message");
+	var no_notice=$("#look_see1 .promit_no");
+		$("#look_list1").slideDown(100);//显示通知区域
+		$("#look_see1").addClass("contacts_hover");
+		//要使用ajax加载
+		contact_notice.hide();	
+		if($("#new_header_message li").length>0){
+		contact_notice.show();
+		}else{
+			load_notice.show();//显示加载框
+				//ajax请求数据，然后显示，隐藏加载通知
+			  $.ajax({
+			  type: "GET",
+			  url: "{url('member/message/msg_notice')}",
+				 success: function (data) {
+					 //没有通知，则显示没有收到人脉请求
+					 load_notice.hide();
+					 if(data==1){
+						no_notice.show();//显示没有人脉请求,有个bug
+						
+					}else{
+						contact_notice.empty();//清空之前的内容，防止浏览器缓存保留
+						//显示加载的数据
+						show_li.append(data);	
+						contact_notice.show();//显示通知区域
+					}
+				 },
+				  error: function (msg) {
+						alert(msg);
+				  }
+			});
 			//没有元素，则ajax请求,此处用setTimeout演示ajax的回调
-			setTimeout(function(){
-					load_notice.hide();
-					//显示加载的数据
-					$("#new_header").append("<li>你好</li>");
-					contact_notice.show();//显示通知区域
-			},1000);
-			
+			contact_notice.show();//显示通知区域
 		}
 });
 
 //鼠标离开私信的通知区域
-$(document).on("mouseleave","#contacts_one_list",function(){
-	$("#contacts_one_list").slideUp(200);
-	$("#contacts_one").removeClass("contacts_hover");
+$(document).on("mouseleave","#look_see1",function(){
+	timer=setTimeout(function(){
+		$("#look_list1").slideUp(100);	
+	},400);
+	$("#look_see1").removeClass("contacts_hover");
 });
 
-$("#new_header li").hover(function(){
+//鼠标在通知区域移动时候
+$(document).on("mouseover","#look_list1",function(){
+	clearTimeout(timer);
+});
+
+
+
+$("#new_header_message li").hover(function(){
 	$(this).addClass("current").siblings().removeClass("current");
-	})
+});
+
 
 </script>

@@ -23,17 +23,15 @@
                     <div class="card-right-box">
                         <div class="card-right-head">
                     <span class="choses">
-                        <label for="delall">
-                            <input type="checkbox" id="delall">
-                            全选  <input type="checkbox" id="no">
-                            反选
+                        <label for="CheckedAll">
+                            <input type="checkbox" id="CheckedAll">
+                            全选 
                         </label>
                     </span>
 
                             <div class="chose-action">
                                 <a href="javascript:void(0);" id="btn_copy" class="ngroup">修改分组</a><i>|</i><a style="" class="del last" href="javascript:void(0);" id="btn_del">解除关系<span allnum="5"></span></a>
                             </div>
-                            <a href="javascript:void(0)" class="name-search"> </a>
                            
                         </div>
                         <div class="card-right-body">
@@ -53,7 +51,7 @@
                             <p title="{$vo['school']} ·{$vo['major']}">{$vo['school']} · {$vo['major']}</p>
                         </div>
                       <a class="card-number" href="javascript:void(0)" title="{$vo['uname']}的联系人">  联系人数：{$vo['allcart']}</a></div>
-                    <input type="checkbox" class="chekbox" id="{$vo['id']}">
+                    <input type="checkbox" class="chekbox" id="{$vo['id']}" name="items">
                 </dd>
                  {/loop}
         </dl>
@@ -129,38 +127,35 @@ $(function(){
 		$(this).removeClass("hover");
 		});
 	
-	$("#delall").click(function(){
-   		 $(".chekbox").attr("checked",'true');//全选
-    });
-	
-	$("#no").click(function(){
-   		 $("input:checkbox").removeAttr("checked");//全选
-    });
-	
-	
-var timer = null;
-        var $keyboard = $(".keyboard");
-        $(".name-search").mouseover(function (e) {
-            var _left = $(this).offset().left - 120;
-            var _top = $(this).offset().top + 25;
-            clearTimeout(timer);
-            $keyboard.css({'display': 'block', 'left': _left + 'px', 'top': _top + 'px'});
-        });
-        $(".name-search").mouseout(function (e) {
-            timer = setTimeout(function () {
-                $keyboard.css({'display': 'none'})
-            }, 200);
-        });
-        $keyboard.mouseenter(function (e) {
-            clearTimeout(timer);
-            $keyboard.css({'display': 'block'});
-        });
-        $keyboard.mouseleave(function (e) {
-            timer = setTimeout(function () {
-                $keyboard.css({'display': 'none'})
-            }, 200);
-        });	
-})
+     //全选
+     $("#CheckedAll").click(function(){
+/*			if(this.checked){				 //如果当前点击的多选框被选中
+				 $('input[type=checkbox][name=items]').attr("checked", true );
+			}else{								
+			     $('input[type=checkbox][name=items]').attr("checked", false );
+			}
+			this.checked  返回的是布尔值
+*/	$('input[type=checkbox][name=items]').attr("checked",this.checked);
+ });	
+	 	//除了CheckedAll 按钮之外的其他按钮
+	 $('input[type=checkbox][name=items]').click(function(){
+		 //flag=false 说明至少有一个未被选中 true 全部被选中
+			   var flag=true;
+			   //循环复选组框，未被选中的flag=false
+               $('input[type=checkbox][name=items]').each(function(){
+					if(!this.checked){
+						 flag = false;
+					}
+			   });
+
+				$('#CheckedAll').attr('checked',flag);
+/*			   if( flag ){
+					 $('#CheckedAll').attr('checked', true );
+			   }else{
+					 $('#CheckedAll').attr('checked', false );
+			   }
+*/	 });
+
 </script>
 
 <script type="text/javascript">
@@ -226,5 +221,23 @@ function cardinfo(id){
 		});
 		
 	});
+	
+//发送私信
+$(document).on('click', '.send-msg',function(){
+	var id=$(this).data('id');//接受者id
+	//参数传不到url....构造url
+	var url="{url('message/sendmsg')}";
+	url+="&id="+id;
+    var i=$.layer({
+        type: 2,
+        title: '发送私信',
+        shadeClose: false, //开启点击遮罩关闭层
+        area : ['560px' , '360px'],
+        offset : ['260px', '540px'],
+        iframe: {src: url}
+    });
+});
+
+
 </script>
  {include file="footer"}

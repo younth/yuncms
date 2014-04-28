@@ -783,10 +783,11 @@ button.dj-btn {
     display: block;
 }
 
-ul:after {
+/*ul:after {
     clear: both;
     content: ".";
     display: block;
     height: 0;
     visibility: hidden;
 }
+*/

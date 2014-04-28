@@ -22,6 +22,7 @@ $(function(){
 	//ajax发送私信
 	$(document).on('click','.i_copylink_btn a',function(){
 		var content=$(".e-content").val();
+		if(content==""){alert("内容不能为空");return;}
 		//发送私信
 			  $.ajax({
 			  type: "POST",

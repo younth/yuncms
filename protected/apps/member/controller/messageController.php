@@ -34,6 +34,7 @@ class messageController extends commonController
 		$this->display();
 	}
 	
+	//未读私信
 	public function unread()
 	{
 		//我的联系人,查询我的联系人的信息
@@ -142,6 +143,43 @@ class messageController extends commonController
 		$html.='<a data-name="'.$user['uname'].'" class="del-btn" data-id="'.$id.'" href="javascript:;" style="display: none;">x</a></div></li>';
 		if(model("message_content")->insert($data))  echo $html;
 		
+	}
+	
+	//人脉邀请通知
+	public function friend_notice(){
+		//检索未处理的人脉邀请，我是接受者，且状态为2
+		$auth=$this->auth;//本地登录的cookie信息|
+		$id=$auth['id'];
+		$undo=model("member_card")->select("rece_id='{$id}' and status=1");
+		if(empty($undo))
+		{
+			echo 1;
+		}else{
+		$count=count($undo);
+		$html='';
+		for($i=0;$i<$count;$i++){
+			$sender=model("member")->user_profile($undo[$i]['send_id'],'');
+			$html.='<li data-userid="'.$undo[$i]['send_id'].'" data-id="'.$undo[$i]['id'].'" class=""> <span class="logo1"><a class="goToProfile" target="_blank" href="#"><img src="'.$sender['small'].'"></a></span> ';
+			$html.='<span class="name1_title"><a href="#" target="_blank" class="goToProfile">'.$sender['uname'].'</a> </span>';
+			$html.='<ul class="star_list"><li class="png_ie6"></li><li class="png_ie6"></li><li class="png_ie6"></li><li class="png_ie6"></li><li class="png_ie6"></li></ul>';
+			$html.='<span class="name1_companies">'.$sender['school'].'&nbsp;&nbsp;'.$sender['major'].'</span><span class="bi_x1"></span><a href="javascript:void(0);" class="agree_btn">同意</a></li>';
+		}
+		echo $html;
+		}
+	}
+	
+	//ajax删除好友通知
+	public function del_friend_notice()
+	{
+		$id=intval($_GET['id']);
+		if(model("member_card")->delete("id='{$id}'")) echo 1;
+		else "删除失败";
+	}
+	
+	//私信通知
+	public function msg_notice()
+	{
+		//未读私信总数
 	}
 }
 

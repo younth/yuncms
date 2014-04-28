@@ -59,7 +59,7 @@
                <a  href="javascript:" id="{$info['id']}"  class="dj-btn-agree change-card-accepted"></a>
                   <!---->
             {elseif $card==2}<!--发送私信-->
-            <a href="javascript:"  class="dj-btn-send-mail" uid={$info['id']}></a>
+            <a href="javascript:"  class="dj-btn-send-mail"></a>
             {elseif $card==3}<!--正在审核-->
             <a href="javascript:"  class="cardTips-tocarded"></a>
             {else}

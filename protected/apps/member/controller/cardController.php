@@ -103,7 +103,7 @@ class cardController extends commonController
 		}
 	
 		$html.='</td></tr></tbody></table></div></div><div class="shadow"></div></div>';
-		$html.='<div class="edit-type"><p class="action"><a href="" class="send-msg" title="发私信" id="single_mail" uid="'.$info['id'].'" username="'.$info['uname'].'"></a>';
+		$html.='<div class="edit-type"><p class="action"><a href="javascript:" class="send-msg" title="发私信" id="single_mail" data-id="'.$info['id'].'" username="'.$info['uname'].'"></a>';
 		$html.='<a target="_blank" href="'.$url.'" title="查看档案" class="person-page"></a><a title="解除朋友关系" id="delfriend" uid="'.$info['id'].'"></a></p></div>';
 		echo $html;
 	}
