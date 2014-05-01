@@ -47,7 +47,7 @@ $(function () {
 			success: function(data) {
 //                                files.html(data);
 				files.html("<span class='delimg' rel='"+data+"' onclick='deletePic()'>删除</span>");
-				showimg.html("<img id='feed_post_picture' postval='__UPLOAD__/member/img/"+data+"'  src='__UPLOAD__/member/img/thumb_"+data+"'/>");
+				showimg.html("<img id='feed_post_picture' data-picture='"+data+"' postval='__UPLOAD__/member/feed/"+data+"'  src='__UPLOAD__/member/feed/thumb_"+data+"'/>");
 				btn.html("添加附件");
 			},
 			error:function(xhr){

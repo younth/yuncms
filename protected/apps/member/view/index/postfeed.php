@@ -1,25 +1,20 @@
-<script type="text/javascript">
-		$(document).ready(function() {
-                    $("a[rel=example_group]").fancybox({
-				'transitionIn'		: 'none',
-				'transitionOut'		: 'none',
-				'titlePosition' 	: 'none',
-			});
-                });
-</script>
+
 <div class="mem_feed_con">
     <div class="feedlayout mem_clearfix">
         <div class="absolute pic"><a href="#" target="_blank"><img src="{$data_org['avatar']}"></a></div>
     <h3><a href="">{$data_org['member']['uname']}</a></h3>
     <h3>{dobadword($data_org['feed_content'])}</h3>
    {if $picture}<h3>
-        <a rel="example_group" href="{$picture['url']}"><img  title="点击查看大图" alt="" src="{$picture['thumb_url']}" /></a>
+        <a href="{$path}{$picture['url']}" onClick="return hs.expand(this)"><img  title="点击查看大图" alt="" src="{$path}{$picture['thumb_url']}"  class="zoom"/></a>
      </h3>
    {/if}
     <h3>      
         <span class="mem_timeshow">{timeshow($data_org['ctime'])}</span>
     <div id="feed_zan_num_{$data_org['id']}"  style="float: right;">
-        <span  id="msg_zan_num_{$data_org['id']}"> 
+        <span  id="msg_zan_num_{$data_org['id']}">
+        {if $data_org['member']['id']==$auth['id']}
+        <a href="javascript:" class='delfeed' data-id={$_v['id']}>删除</a><span class="dot-middle">.</span>
+        {/if}
         <a href="javascript:void(0)" onclick="feedZan({ $data_org['id']},'{$url_zan}')" > 赞</a>&nbsp;
         </span>
         <a href="javascript:void(0)" onclick="showComment({$data_org['id']},'{$url_showcomment}')">评论</a>&nbsp;

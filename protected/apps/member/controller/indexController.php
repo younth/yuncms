@@ -8,6 +8,7 @@ class indexController extends commonController
 	    public function __construct()
 		{
 			parent::__construct();
+			$this->uploadpath=ROOT_PATH.'upload/member/feed/';//封面图路径
 			$hover="class=\"current\"";//设置当前的导航状态
 			$this->hover_index=$hover;
 		}
@@ -58,6 +59,7 @@ class indexController extends commonController
 	            $this->getUrls();
 	            $this->result=$result;
 	            $this->loadAds=1;
+	            $this->path=__ROOT__.'/upload/member/feed/';
 	            $this->display();
 	        }
 
@@ -67,6 +69,7 @@ class indexController extends commonController
                 $this->error('您请求的参数不存在！');
             }
             else{
+            	$this->path=__ROOT__.'/upload/member/feed/';
                 $this->getUrls();
                 $data=array();
                 $data['mid']=  $this->auth['id'];
@@ -121,12 +124,13 @@ class indexController extends commonController
                     $notice['fid']=$id;
                     $notice['type']=1;
                     if(model('feed_notify')->insert($notice)){
-                        $result ='<a href= "javascript:void(0)" onclick="feedLoseZan(\''.$id.'\',\''.url("index/losezan").'\')" > 取消赞('.$feed_data["praise_count"].')</a>';
+                        $result ='<a href= "javascript:void(0)" onclick="feedLoseZan(\''.$id.'\',\''.url("index/losezan").'\')" style="color:#999;"> 已赞('.$feed_data["praise_count"].')</a>';
                         echo $result;
                     }
                 }
             }
         }
+        
         //取消赞
          public function loseZan() {
             $id=$_POST['id'];
@@ -147,15 +151,16 @@ class indexController extends commonController
         }
 
         //显示评论内容
+        
         public function showComment() {
             if(!$this->isPost()){
-                echo "评论加载失败，请重试！！";
+                echo "评论加载失败，请重试！";
             }
             else{
                 $this->getUrls();
                 $id=$_POST['id'];
                 $this->id=$id;
-                $total=model('feed')->count('oid = '.$id.' and feed_type in (1,3)');
+                $total=model('feed')->count('oid = '.$id.' and feed_type=1');
                 $limit=10;
                 if($total!=0){
                     require_once ROOT_PATH.'/avatar/AvatarUploader.class.php';
@@ -163,7 +168,7 @@ class indexController extends commonController
                     $result=model('feed')->withMoreBelong(array(
                         array('withTable'=>'member','withField'=>'mid','orgField'=>'id'),
                         array('withTable'=>'member','withField'=>'fmid','orgField'=>'id'),
-                        ),'oid = '.$id,'','ctime desc',$limit);
+                        ),'oid = '.$id.' and feed_type=1','','ctime desc',$limit);
                 foreach ($result as $_k => $_v) {
                     $result[$_k]['avatar']=$au->getAvatar($_v['membermid']['id'],'small');
                 }
@@ -178,6 +183,7 @@ class indexController extends commonController
         }
 
         //提交评论
+        
         public function postcomment() {
             if(!$this->isPost()){
                 $this->error('请求的参数错误！！');
@@ -202,7 +208,7 @@ class indexController extends commonController
                     if(model('feed')->update('id = '.$data_org['id'],$fdata)){
                         require_once ROOT_PATH.'/avatar/AvatarUploader.class.php';
                         $au=new AvatarUploader();
-                        $result=  model('feed')->withBelongOne('member','mid','id','ctime = '.$data['ctime'],'','ctime desc');
+                        $result= model('feed')->withBelongOne('member','mid','id','ctime = '.$data['ctime'],'','ctime desc');
                         $result['avatar']=$au->getAvatar($result['member']['id'],'small');
                         $this->result=$result;
                         $this->display();
@@ -212,6 +218,7 @@ class indexController extends commonController
         }
 
         //显示回复框
+
         public function showReply() {
             if(!$this->isPost()){
                 echo "加载失败，请重试！！";
@@ -226,6 +233,7 @@ class indexController extends commonController
         }
 
         //提交回复
+        
         public function postReply() {
             if(!$this->isPost()){
                 $this->error('请求数据错误！！');
@@ -324,9 +332,11 @@ class indexController extends commonController
         }
 
         //显示图片上传
+        
+        
         public function showPic() {
                 if($_FILES){
-                     $picture=$this->_upload(ROOT_PATH."upload/member/img/");
+                     $picture=$this->_upload(ROOT_PATH."upload/member/feed/");
                      echo $picture[0]['savename'];
                 } 
                 else{
@@ -339,8 +349,8 @@ class indexController extends commonController
         public function delPic() {
                 $filename = $_POST['imagename'];
                 if(!empty($filename)){
-                        unlink(ROOT_PATH."upload/member/img/".$filename);
-                        unlink(ROOT_PATH."upload/member/img/"."thumb_".$filename);
+                        unlink(ROOT_PATH."upload/member/feed/".$filename);
+                        unlink(ROOT_PATH."upload/member/feed/"."thumb_".$filename);
                         echo '1';
                 }else{
                         echo '删除失败.';
@@ -364,10 +374,12 @@ class indexController extends commonController
             $this->url_mayknow=  url('index/mayknow');
         }
 
+        //删除心情
         public function loadWater(){
             $num=5;
-            $list=$_POST['list'];
-            $result=  model('feed')->withBelong('member','mid','id','is_audit = 1 and feed_type in(0,2)','','ctime desc',($list*$num).','.$num);
+            $list=intval($_POST['list']);
+            //这句sql有bug...
+            $result= model('feed')->withBelong('member','mid','id','is_audit = 1 and feed_type in(0,2)','','ctime desc',($list*$num).','.$num);
 
              if(!empty($result)){
                 include_once(ROOT_PATH.'/avatar/AvatarUploader.class.php');
@@ -424,5 +436,40 @@ class indexController extends commonController
                     $this->display();
                 }
             }
-            
+
+       //删除心情
+       public function delfeed()
+       {
+       	$id=intval($_GET['id']);
+       	$oid=intval($_GET['oid']);
+       	if(model("feed")->delete("id='{$id}'"))
+       	{
+       		if($oid)
+       		{
+       			//是评论的删除，则原来的心情评论数减一
+       			$comment_count=model("feed")->minus_comment($oid);
+       		}
+       		 
+       		//删除所有的赞记录，评论记录，图片记录
+       		$re=model("feed_pic")->find("fid='{$id}'");
+       		if($re)
+       		{
+       			//删除图片
+       			unlink($this->uploadpath.$re['url']);
+       			unlink($this->uploadpath.$re['thumb_url']);
+       			model("feed_pic")->delete("fid='{$id}'");
+       		}
+       		model("feed_digg")->delete("feed_id='{$id}'");//可能没有，需要判断？
+       		model("feed_notify")->delete("f_id='{$id}'");//可能没有，需要判断？
+       		model("feed")->delete("oid='{$id}' and feed_type=1");//删除评论
+       		echo 1;
+       	}else echo "失败~";
+       	
+       }
+       
+       //转发心情
+       public function repost_feed()
+       {
+       	
+       }
 }

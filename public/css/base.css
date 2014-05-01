@@ -1572,6 +1572,9 @@ body, ul, li, dl, dt, dd, h1, h2, h3, h4, p, a, form, textarea, input {
 #footer {width:700px;text-align:center;margin:15px auto;line-height:30px;color:#999999; position: relative; _margin-bottom: 0px;}
 #footer .footer_icon{ width: 34px; height: 42px; position: absolute; right:89px; top:40px;_right:100px;}
 #footer a,#footer a:visited{color:#CCCCCC;padding:0px 7px; }
+#footer a:hover{
+	text-decoration:underline;
+}
 #footer_bg {padding: 45px 0px;border-top: 1px solid #5B5958; font-size: 12px; color:#999999;}
 #footer .font_cl{color:#999999; }
 .footer_login_panel .friendlink{width: 1030px;margin: 50px auto 30px auto;overflow:hidden;}
@@ -1586,7 +1589,9 @@ body, ul, li, dl, dt, dd, h1, h2, h3, h4, p, a, form, textarea, input {
     line-height: 20px;
     margin-right: 13px;
 }
- 
+.friendlink a:hover{
+	text-decoration:underline;
+}
 
  
 .footer_btn{width: 175px;height: 38px;float: left;background: #EB6F63;border-radius:3px;font-size: 21px;color: #fff;font-family: '微软雅黑';line-height: 38px;text-align: center;cursor:pointer;}

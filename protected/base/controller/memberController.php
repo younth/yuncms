@@ -127,7 +127,6 @@ class memberController extends baseController{
 			$upload->maxSize=1024*1024*2;//最大2M
 			//设置上传文件类型
 			$upload->allowExts  = explode(',','jpg,gif,png,bmp');
-		
 			//设置附件上传目录
 			$upload->savePath ='../images/'.$upload_dir."/";
 			$upload->saveRule = cp_uniqid;

@@ -14,7 +14,14 @@ $(document).ready(function(){
 		$(this).removeClass("focus");
 	} 
 	}); 
+	//赞鼠标经过的效果
 	
+	var digg=$(".digg");
+	digg.hover(function(){
+			$(this).html("取消赞");
+		},function(){
+			$(this).html("已赞");
+	})
       memMayKnow();
     //心情发布框默认文本消除显示
     var post_feed_text=$("#post_feed").data('content');
@@ -107,24 +114,20 @@ $(document).ready(function(){
 	//提交原创消息
 	postFeed=function(){
                 var content=$('#post_feed').val();
-                var pic_url=$('#feed_post_picture').attr('postval');
-                var thumb_pic_url=$('#feed_post_picture').attr('src');
+                var pic_url=$('#feed_post_picture').data('picture');
+                var thumb_pic_url='thumb_'+pic_url;
 				var subbtn=$('.mem_feed_submit');
                 var n=content.replace(/[^\x00-\xff]/g, "xx").length;
                 if(n>140){
                      $('.showerror').html("长度超出限制！").show();
-                    /* setTimeout(function(){
-                            $('.showerror').hide('slow');
-                     },2000);*/
+                   
                 }
                 else{
                     var posturl=$('#post_url').val();
                     var isEmotion=content.match(/\[.*?\]/g);
                     if(content==="" || content===post_feed_text){
                             $('.showerror').html("发表的内容不能为空！").show(); 
-                            /*setTimeout(function(){
-                                $('.showerror').hide('slow');
-                            },2000);*/
+                            
                     }
                     else{
                             subbtn.html('正在发布');
@@ -156,9 +159,7 @@ $(document).ready(function(){
             $('#feed_comment_'+id).toggle();
 			
             $.post(url,{id:id},function(result){
-				//alert(result);
                 $('#feed_comment_'+id).html(result);
-				
 				var comment=$('#post_comment_'+id);
 				comment.focus().addClass('focus');
 				
@@ -181,6 +182,18 @@ $(document).ready(function(){
             $('#feed_reply_'+id).toggle();
             $.post(url,{id:id},function(result){
                 $('#feed_reply_'+id).html(result);
+				var reply=$('#post_reply_'+id);
+				reply.focus().addClass('focus');
+				
+				reply.on({ 
+				focus:function(){ 
+						$(this).addClass("focus");
+					}, 
+				blur:function(){ 
+					$(this).removeClass("focus");
+				} 
+				});
+								
             });
         };
         
@@ -233,7 +246,7 @@ $(document).ready(function(){
 				var newcontent=AnalyticEmotion(content);
 			}else newcontent=content;
 			$.post(url,{content:newcontent,id:id},function(result){
-				$('#show_new_comment_'+id).after(result);
+				$('#show_new_comment_'+id).prepend(result);//插入元素之前
 				$('.emotion_'+id).val('');
 			});
 		}
@@ -243,10 +256,7 @@ $(document).ready(function(){
 		var content = $('#post_reply_'+id).val();
 		var isEmotion=content.match(/\[.*?\]/g);
 		if(content===""){
-			$('#show_reply_error_'+id).show().text('回复的内容不能为空!!');
-                        setTimeout(function(){
-                                $('#show_reply_error_'+id).hide('slow');
-                            },2000);
+			$('#show_reply_error_'+id).show().text('回复的内容不能为空!');
 		}
 		else{
 			var url=$('#reply_url').val();
@@ -320,10 +330,10 @@ $(document).ready(function(){
                 }
              }
              else if(iswater==2){
-                 $('#mem_show_water').html("已加载全部!!");
+                 $('#mem_show_water').html("已加载全部");
              }
              else{
-                 $('#mem_show_water').html('<a href="javascript:void(0)" onclick="loadwater()">点击加载更多》》</a>').show();
+                 $('#mem_show_water').html('<a href="javascript:void(0)" onclick="loadwater()">点击加载更多</a>').show();
              }
          });
          
@@ -335,13 +345,12 @@ $(document).ready(function(){
 
 //瀑布流加载的函数
 var $num = 0;
-var $list=0;
-         
+var $list=1;//第一列不重复显示
 function loadwater(){
     var url=$('#water_url').val();
-    $('#mem_show_water').html("正在加载请稍后！！").show();
+    $('#mem_show_water').html("正在加载请稍后...").show();
     $num++;
-    if($num%5===0){
+    if($num%5==0){
         $('#iswater').val(1);  
        
     }else{
@@ -349,7 +358,7 @@ function loadwater(){
          $.post(url,{list:$list},function(result){
              if(result==0){
                  $('#iswater').val(2);  
-                 $('#mem_show_water').html("已加载全部！！");
+                 $('#mem_show_water').html("已加载全部");
                  
              }
              else{

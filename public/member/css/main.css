@@ -161,6 +161,7 @@ float: left;
     padding: 20px 35px 0 100px;
     border-bottom: 1px solid #e6e6e6;
 }
+
 .mem_feed_con .feedlayout{
     position: relative;
     padding-bottom: 20px;
@@ -349,20 +350,25 @@ margin-top: 2px;
 .mem_com_submit{
     cursor: pointer;
     font-size: 15px;
-    color: #ffffff;
+    color:#ffffff;
     float: right;
-    background: #1fbba6;
+    background: #5DADE2;
     text-align: center;
-    border-radius: 2px;
+    border-radius: 3px;
     font-weight: normal;
     font-family: '微软雅黑';
-    border-bottom: 2px solid #269791;
     width: 60px; 
     height: 24px; 
     line-height: 20px;
+	
+}
+#show_new_comment_106 h3 a{
+	color:#ffffff;
+	text-decoration:none;
 }
 .mem_com_submit:hover{
-    background: #117d99;
+    background: #2893D9;
+	text-decoration:none;
 }
 .mem_comlist{
     width: 100%;
@@ -371,7 +377,9 @@ margin-top: 2px;
     padding-bottom: 5px;
     padding-top: 5px;
 }
-
+.mem_comlist h2 a{
+	color:#ffffff;;
+}
 .mem_comlist .focus{
 	border:1px solid  #39F;
 }
@@ -385,7 +393,7 @@ margin-top: 2px;
 .mem_comlist_b{
     float: left;
     height:auto;
-    padding-right: 10px;
+    padding: 5px 10px 0 0;
     width:460px;
 }
 .show_repost_con{
@@ -623,3 +631,37 @@ display: inline-block;
 font-size: 0px;
 }
 
+ .feed-more {
+    display: none;
+	background: none repeat scroll 0 0 #FFFFFF;
+    display: block;
+    height: 16px;
+    line-height: 16px;
+    text-align: center;
+	padding-bottom:10px;
+	color: #127DB3;
+}
+.feed-more a {
+	color: #127DB3;
+}
+.feed-more a:hover {
+    text-decoration:underline;
+}
+.feedMore {
+    background: none repeat scroll 0 0 #F4F4F4;
+    border: 1px solid #EBEBEB;
+    display: none;
+    height: 32px;
+    text-align: center;
+}
+ .feedMore a {
+    display: inline-block;
+    font-size: 14px;
+    height: 32px;
+    line-height: 32px;
+}
+.dot-middle {
+    margin: 0 5px;
+    position: relative;
+    top: -2px;
+}

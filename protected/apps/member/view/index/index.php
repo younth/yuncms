@@ -86,24 +86,27 @@
         <h3><a href="{url('profile/user',array('id'=>$_v['member']['id']))}" target="_blank">{$_v['member']['uname']}</a>:&nbsp;&nbsp;{dobadword($_v['feed_content'])}</h3>
       
     {if !empty($_v['pic'])}<h3>
-        <a href="{$_v['pic']['url']}" onClick="return hs.expand(this)"><img  title="点击查看大图" alt="" src="{$_v['pic']['thumb_url']}" class="zoom"/></a>
+        <a href="{$path}{$_v['pic']['url']}" onClick="return hs.expand(this)"><img  title="点击查看大图" alt="" src="{$path}{$_v['pic']['thumb_url']}" class="zoom"/></a>
      </h3>
    {/if}
         <h3>
             <span class="mem_timeshow">{timeshow($_v['ctime'])}</span>
             <div id="feed_zan_num_{$_v['id']}" style="float: right;">
-        <span  id="msg_zan_num_{$_v['id']}"> 
+        <span  id="msg_zan_num_{$_v['id']}" >
+         {if $_v['member']['id']==$auth['id']}
+        <a href="javascript:" class='delfeed' data-id={$_v['id']}>删除</a><span class="dot-middle">.</span>
+        {/if}
         {if $_v['is_zan']==1}
-        <a href="javascript:void(0)" onclick="feedLoseZan({$_v['id']},'{$url_losezan}')" > 取消赞{if $_v['praise_count']!=0} ({$_v['praise_count']}){/if}</a>
+        <a href="javascript:void(0)" onclick="feedLoseZan({$_v['id']},'{$url_losezan}')" style="color:#999;"><span  class="digg">已赞</span>{if $_v['praise_count']!=0} ({$_v['praise_count']}){/if}</a>
         {else}
         <a href="javascript:void(0)" onclick="feedZan({$_v['id']},'{$url_zan}')" > 赞{if $_v['praise_count']!=0} ({$_v['praise_count']}){/if}</a>
         {/if}&nbsp;
         </span>
        &nbsp; <a href="javascript:void(0)" onclick="showComment({$_v['id']},'{$url_showcomment}')">评论{if $_v['comment_count']!=0} ({$_v['comment_count']}){/if}</a>&nbsp;&nbsp;
-        <a href="javascript:void(0)" onclick="showRepost({$_v['id']},'{$url_showrepost}')" >转发{if $_v['repost_count']!=0} ({$_v['repost_count']}){/if}</a>
+        <a href="javascript:void(0)" click="showRepost({$_v['id']},'{$url_showrepost}')" class="repost_feed">转发{if $_v['repost_count']!=0} ({$_v['repost_count']}){/if}</a>
     </div>
         <div class="mem_feed_jiantou" id="feed_comment_{$_v['id']}">
-               
+               <!-- 显示评论 -->
          </div>
         </h3>
     </div>
@@ -126,24 +129,28 @@
    {/if}
             <span class="mem_timeshow">{timeshow($_v['org_info']['ctime'])}</span>
             <div style="float: right;">
-        <a href="#"> 赞{if $_v['org_info']['praise_count']!=0}({$_v['org_info']['praise_count']}){/if}</a>&nbsp;
-        <a href="#">评论{if $_v['org_info']['comment_count']!=0}({$_v['org_info']['comment_count']}){/if}</a>&nbsp;
-        <a href="#">转发{if $_v['org_info']['repost_count']!=0}({$_v['org_info']['repost_count']}){/if}</a>
+            <!-- 这是什么呢 -->
+        <a href="javascript:"> 赞{if $_v['org_info']['praise_count']!=0}({$_v['org_info']['praise_count']}){/if}</a>&nbsp;
+        <a href="javascript:">评论{if $_v['org_info']['comment_count']!=0}({$_v['org_info']['comment_count']}){/if}</a>&nbsp;
+        <a href="javascript:">转发{if $_v['org_info']['repost_count']!=0}({$_v['org_info']['repost_count']}){/if}</a>
          </div>
         </h3>
             </div>       
     <h3>
             <span class="mem_timeshow">{timeshow($_v['ctime'])}</span>
     <div id="feed_zan_num_{$_v['id']}" style="float: right;">
-        <span  id="msg_zan_num_{$_v['id']}"> 
+        <span  id="msg_zan_num_{$_v['id']}">
+        {if $_v['member']['id']==$auth['id']}
+        <a href="javascript:" class='delfeed' data-id={$_v['id']}>删除</a><span class="dot-middle">.</span>
+        {/if}
         {if $_v['is_zan']==1}
         <a href="javascript:void(0)" onclick="feedLoseZan({$_v['id']},'{$url_losezan}')" > 取消赞{if $_v['praise_count']!=0} ({$_v['praise_count']}){/if}</a>
         {else}
         <a href="javascript:void(0)" onclick="feedZan({$_v['id']},'{$url_zan}')" > 赞{if $_v['praise_count']!=0} ({$_v['praise_count']}){/if}</a>
-        {/if}&nbsp;
+        {/if}<span class="dot-middle">.</span>
         </span>
-       &nbsp; <a href="javascript:void(0)" onclick="showComment({$_v['id']},'{$url_showcomment}')">评论{if $_v['comment_count']!=0} ({$_v['comment_count']}){/if}</a>&nbsp;&nbsp;
-        <a href="javascript:void(0)" onclick="showRepost({$_v['id']},'{$url_showrepost}')" >转发{if $_v['repost_count']!=0} ({$_v['repost_count']}){/if}</a>
+       <a href="javascript:void(0)" onclick="showComment({$_v['id']},'{$url_showcomment}')">评论{if $_v['comment_count']!=0} ({$_v['comment_count']}){/if}</a><span class="dot-middle">.</span>
+        <a href="javascript:void(0)" click="showRepost({$_v['id']},'{$url_showrepost}')" class="repost_feed">转发{if $_v['repost_count']!=0} ({$_v['repost_count']}){/if}</a>
      </div>
      <div class="mem_feed_jiantou" style=" display: none; height: auto; float: left; background: #f9f9f9;" id="feed_comment_{$_v['id']}">
                 <div style="width: 100%; height: auto; display: none; text-align: center; " id="comment_wait_{$_v['id']}">
@@ -156,8 +163,10 @@
 </div>
     {/if}
 {/loop}
-<div class="mem_feed_con" id="mem_show_water" style="display: none">
+<!-- 瀑布流加载 -->
+<div class="mem_feed_con feed-more" id="mem_show_water" style="display:none;">
 </div>
+
 </div>
     </div>
         <div class="mem_right_all">
@@ -184,6 +193,7 @@
     <div class="mem_pic_con" id="show_pic_con">
     </div>
 </div>
+
 <!---显示转发框的div-->
 <div class="show_repost" id="show_repost" style="display:none;">
 </div>
@@ -196,4 +206,46 @@
     </div>
  </div>
 </div>
+
+<script>
+//删除自己的心情
+$(document).on('click','.delfeed',function(){
+	var feed_id=$(this).data("id");//心情的id
+	var delnode=$(this).parent().parent().parent().parent().parent();
+	layer.confirm('确定删除该心情吗？', function(){ 
+		  $.ajax({
+		  type: "GET",
+		  url: "{url('index/delfeed')}",
+		  data: {
+			id: feed_id,
+		  },
+			 success: function (data) {
+				//
+				layer.msg('删除心情成功！',1,-1);
+				delnode.remove();
+			 },
+			  error: function (msg) {
+					alert(msg);
+			  }
+		});
+
+	});
+	
+});
+</script>
+<script>
+//转发
+$(document).on('click', '.repost_feed',function(){
+    var i=$.layer({
+        type: 2,
+        title: '转发心情',
+        shadeClose: false, //开启点击遮罩关闭层
+        area : ['560px' , '360px'],
+        offset : ['260px', '540px'],
+        iframe: {src: "{url('index/repost_feed',array('id'=>$info['id']))}"}
+    });
+});
+
+</script>
+
 {include file="footer"}

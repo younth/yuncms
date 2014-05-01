@@ -12,12 +12,19 @@ class feedModel extends baseModel{
     public function getRepostCon($fid) {
         $info=  model('feed')->withBelongOne('member','mid','id','id = '.$fid);
         if($info['feed_type']!=2){
-            return $content;
+            return $content;//.....
         }
         else{
              $content='//<a id="mem_show_uname" href="#"><strong>'.@$info['member']['uname'].'</strong></a>:'.dobadword($info['feed_content']).  $this->getRepostCon($info['fid']);
         }
         return $content;
+    }
+    
+    //评论减一
+    public function minus_comment($id)
+    {
+    	$sql="update {$this->prefix}feed set comment_count=comment_count-1 where id='{$id}'";
+    	return $this->model->query($sql);
     }
 }
 
