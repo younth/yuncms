@@ -1,9 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-<meta charset="utf-8">
-<script src="__PUBLIC__/js/jquery.js" type="text/javascript"></script>
- <script src="__PUBLIC__/uploadspicture/js/jquery.form.js" type="text/javascript"></script>
+<script src="__PUBLIC__/uploadspicture/js/jquery.form.js" type="text/javascript"></script>
 <style type="text/css">
 .demo{width:260px;}
 .btn{float: left;height: 20px;position: relative;overflow: hidden;margin-left: 4px;display:inline-block;*display:inline;padding:4px 10px 4px;font-size:14px;line-height:18px;*line-height:20px;color:#fff;text-align:center;vertical-align:middle;cursor:pointer;background-color:#5bb75b;border:1px solid #cccccc;border-color:#e6e6e6 #e6e6e6 #bfbfbf;border-bottom-color:#b3b3b3;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
@@ -14,9 +9,6 @@
 .files{height:22px; width: 100px; line-height:22px; float:right; padding-top: 2px;}
 .delimg{margin-left:20px; color:#090; cursor:pointer}
 </style>
-</head>
-
-<body>
 <div class="demo" id="feed_pic_content">
    		<div class="btn">
             <span>添加附件</span>
@@ -25,7 +17,7 @@
         <div class="files"></div><div class="progress">
         <span class="bar"></span><span class="percent">0%</span >
         </div>
-        <div id="showimg" class="showimg" style="width:auto;  "></div>
+        <div id="showimg" class="showimg" style="width:auto; float: left;  "></div>
 </div>
 
 <script type="text/javascript">
@@ -94,4 +86,3 @@ $(function () {
            
 });
 </script>
-</html>

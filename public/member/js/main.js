@@ -4,10 +4,22 @@
  * 2014.4.5
  */
 $(document).ready(function(){
+	//发布心情获得焦点效果
+    var feedpub=$("#post_feed");
+	feedpub.on({ 
+	focus:function(){ 
+			$(this).addClass("focus");
+		}, 
+	blur:function(){ 
+		$(this).removeClass("focus");
+	} 
+	}); 
+	
+      memMayKnow();
     //心情发布框默认文本消除显示
-    var post_feed_text="发表心情吧！";
+    var post_feed_text=$("#post_feed").data('content');
     $('#post_feed').val(post_feed_text);
-    $('#post_feed').focusin(function(){
+    $('#post_feed').focus(function(){
          if($(this).val()===post_feed_text)
          {
              $(this).val("");
@@ -22,7 +34,6 @@ $(document).ready(function(){
     
     //心情发布框文本数字提示函数
     $('#post_feed').bind('input propertychange keyup',function(){
-       
         var n=$(this).val().replace(/[^\x00-\xff]/g, "xx").length;
         if((n%2)===1){
            n=n/2-0.5; 
@@ -98,25 +109,25 @@ $(document).ready(function(){
                 var content=$('#post_feed').val();
                 var pic_url=$('#feed_post_picture').attr('postval');
                 var thumb_pic_url=$('#feed_post_picture').attr('src');
+				var subbtn=$('.mem_feed_submit');
                 var n=content.replace(/[^\x00-\xff]/g, "xx").length;
                 if(n>140){
                      $('.showerror').html("长度超出限制！").show();
-                     setTimeout(function(){
+                    /* setTimeout(function(){
                             $('.showerror').hide('slow');
-                     },2000);
+                     },2000);*/
                 }
                 else{
                     var posturl=$('#post_url').val();
                     var isEmotion=content.match(/\[.*?\]/g);
                     if(content==="" || content===post_feed_text){
                             $('.showerror').html("发表的内容不能为空！").show(); 
-                            setTimeout(function(){
+                            /*setTimeout(function(){
                                 $('.showerror').hide('slow');
-                            },2000);
+                            },2000);*/
                     }
                     else{
-                            $('#post_msg_wait').show();
-                            $('#post_msg_wait').text('正在发布，请稍后...');
+                            subbtn.html('正在发布');
                             if(isEmotion!==null){
                                 var content=AnalyticEmotion(content);
                             }
@@ -124,14 +135,18 @@ $(document).ready(function(){
                                 if(result){
                                              $('#show_pic_frame').remove();
                                              $('#show_new_feed').after(result);
-                                             $('#post_feed').val('');
-                                             $('#post_msg_wait').text('发布成功！');
+                                             $('#post_feed').val('');//清空
+                                            /* $('#post_msg_wait').text('发布成功！');
                                              setTimeout(function(){
                                                  $('#post_msg_wait').hide('slow');
-                                             },2000);     
+                                             },2000);    */ 
+											 layer.msg('发布成功~',1,-1);	
+											 subbtn.html('发布');
                                      }
                                  }
                             );
+							
+							
                     }	
                 }
 	};
@@ -139,11 +154,25 @@ $(document).ready(function(){
         //显示相应的评论列表
         showComment=function(id,url){
             $('#feed_comment_'+id).toggle();
-            $('#comment_wait_'+id).show();
+			
             $.post(url,{id:id},function(result){
+				//alert(result);
                 $('#feed_comment_'+id).html(result);
+				
+				var comment=$('#post_comment_'+id);
+				comment.focus().addClass('focus');
+				
+				comment.on({ 
+				focus:function(){ 
+						$(this).addClass("focus");
+					}, 
+				blur:function(){ 
+					$(this).removeClass("focus");
+				} 
+				});
+
                 limitComment(id);
-                 $('#comment_wait_'+id).hide();
+                 
             });
         };
         
@@ -185,28 +214,18 @@ $(document).ready(function(){
               var loc=$('#pic_show_link').position();
               $('#show_pic_frame').css({left:loc.left,top:loc.top+25}).fadeIn(400);
               $.post(url,function(result){
-                  $('#show_pic_con').html(result).show();
+                   $('#show_pic_con').show();
+                   $('#show_pic_con').html(result);
               });
           };
-          //点击边框外隐藏
-//	$(document).bind('click',function(e){
-//                var target = $(e.target);
-//                if( target.closest("#pic_show_link").length == 1 ||  target.closest("#post_feed").length==1)
-//                        return;
-//                if( target.closest("#show_pic_frame").length == 0 ){
-//                        $('#show_pic_frame').fadeOut(400);
-//                }
-//	});
-        
+
 	//提交评论
 	postComment=function(id){
 		var content = $('#post_comment_'+id).val();
 		var isEmotion=content.match(/\[.*?\]/g);
 		if(content===""){
-			$('#show_com_error_'+id).show().text('评论的内容不能为空!!');
-                        setTimeout(function(){
-                                $('#show_com_error_'+id).hide('slow');
-                            },2000);
+			$('#show_com_error_'+id).show().text('评论的内容不能为空!');
+                     
 		}
 		else{
 			var url=$('#com_url').val();
@@ -245,7 +264,7 @@ $(document).ready(function(){
 		var content = $('#repost_content').val();
 		var isEmotion=content.match(/\[.*?\]/g);
 		if(content===""){
-			$('#show_repost_error').show().text("评论的内容不能为空!!");
+			$('#show_repost_error').show().text("评论的内容不能为空!");
 		}
 		else{
 			var url=$('#repost_url').val();
@@ -286,33 +305,83 @@ $(document).ready(function(){
         });
 
 
-         setInterval(function(){
-             ajaxGetNotify();    //或者把该函数代码写在这里，
-           }, parseInt(120) * 1000);
-         function ajaxGetNotify(){
-                  $.get('/notify/getNotifyCount',
-                    {},
-                    function(data){
-                        $('#review_num').text(data.review_count);
-                        $('#letter_num').text(data.letter_count);
-                        if(data.num != 0){
-                            $('#all_notify').html("<em>"+data.num+"</em>");
-                        }else{
-                            $('#all_notify').html("");
-                        }
-                    },
-                    'json'
-                );
-            }
+        $(window).scroll(function(){  
+         //此方法是在滚动条滚动时发生的函数
+         // 当滚动到最底部以上100像素时，加载新内容
+         var iswater=$('#iswater').val();
+            if(iswater==0){
+                var $doc_height,$s_top,$now_height;
+                $doc_height = $(document).height();        //这里是document的整个高度
+                $s_top = $(this).scrollTop();            //当前滚动条离最顶上多少高度
+                $now_height =$(this).height();
+                var $height=$doc_height - $s_top - $now_height;
+                if($height<5){ 
+                    loadwater();
+                }
+             }
+             else if(iswater==2){
+                 $('#mem_show_water').html("已加载全部!!");
+             }
+             else{
+                 $('#mem_show_water').html('<a href="javascript:void(0)" onclick="loadwater()">点击加载更多》》</a>').show();
+             }
+         });
+         
+         
+         
 });
 
-function loadAds(url){
-     $.get(url,function(data){
-         $('#mem_left_all').prepend(data).fadeIn('slow');
-     });
-}
- //每隔一段时间ajax加载提醒
 
+
+//瀑布流加载的函数
+var $num = 0;
+var $list=0;
+         
+function loadwater(){
+    var url=$('#water_url').val();
+    $('#mem_show_water').html("正在加载请稍后！！").show();
+    $num++;
+    if($num%5===0){
+        $('#iswater').val(1);  
+       
+    }else{
+        $list++;
+         $.post(url,{list:$list},function(result){
+             if(result==0){
+                 $('#iswater').val(2);  
+                 $('#mem_show_water').html("已加载全部！！");
+                 
+             }
+             else{
+                $('#mem_show_water').before(result);
+                $('#mem_show_water').hide();
+                $('#iswater').val(0);
+            }
+            });
+            
+        
+     }
+     
+}
+var mayNum=0; 
+
+//可能认识的人加载的函数
+function memMayKnow(){
+    var url=$('#mayknow_url').val();
+    $.post(url,{num:mayNum},function(data){
+        $('#mem_mayknow').html(data);
+        if(mayNum==2){
+             mayNum=0;
+        }
+        else{
+            if($('#isnores'),val()!=null)
+            {
+                mayNum=0;
+            }
+           mayNum++; 
+        }
+    });
+}
 
 
 

@@ -129,7 +129,7 @@
 	} 
 	}); 
 	
-		$pwd.on({ 
+	$pwd.on({ 
 	focus:function(){ 
 			$(this).addClass("focus");
 		}, 

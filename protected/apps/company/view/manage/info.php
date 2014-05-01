@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>公司管理面板</title>
  <link rel="stylesheet" href="__PUBLICAPP__/css/boxy.css" type="text/css" />
-<script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/jquery1.7.js"></script>
 <script type="text/javascript" src="__PUBLICAPP__/js/Selector.js"></script>
 <script type="text/javascript" src="__PUBLICAPP__/js/job.js"></script>
 <script type="text/javascript" src="__PUBLICAPP__/js/jquery.boxy.js"></script>

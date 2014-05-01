@@ -1,0 +1,350 @@
+/* CSS Document */
+
+.dj-content-wrap {
+    padding-top: 30px;
+}
+
+.msgcenter-box {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-shadow: 1px 3px 3px rgba(150, 152, 153, 0.3);
+    min-height: 440px;
+    padding: 25px 60px 35px;
+    width: 840px;
+}
+.msgcenter-box .input-txt {
+    border-color: #C6C6C6 #EEEEEE #EEEEEE #C6C6C6;
+    border-style: solid;
+    border-width: 1px;
+}
+.msgcenter-box .noborder {
+}
+.msgcenter-box .dot-middle {
+    color: #999999;
+    margin: 0 5px;
+    position: relative;
+    top: -2px;
+}
+.msgcenter-box .msg-main {
+    width: 600px;
+}
+.msgcenter-box .all-middle {
+    width: auto;
+}
+.all-middle .blank-tip {
+    color: #666666;
+    margin-top: 35px;
+    padding-bottom: 155px;
+}
+.all-middle .blank-tip p {
+    font-size: 14px;
+}
+
+.msgcenter-box h2 {
+    border-bottom: 1px solid #CCCCCC;
+    line-height: 19px;
+    padding-bottom: 7px;
+}
+
+.msgcenter-box h2 span {
+    display: block;
+    float: right;
+    height: 14px;
+    line-height: 14px;
+    padding-top: 8px;
+}
+.msgcenter-box h2 em {
+    background: none repeat scroll 0 0 #E76322;
+    display: inline-block;
+    height: 19px;
+    margin-right: 10px;
+    overflow: hidden;
+    vertical-align: bottom;
+    width: 5px;
+}
+.msgcenter-box h2 i {
+    display: inline-block;
+    font-size: 18px;
+    font-style: normal;
+    line-height: 22px;
+    vertical-align: middle;
+}
+.msgcenter-box .title .backpage {
+    color: #84B4D9;
+    font-size: 12px;
+    font-weight: normal;
+    position: absolute;
+    right: 0;
+}
+.msgcenter-box .msg-tip {
+    color: #999999;
+    line-height: 20px;
+    margin-top: 10px;
+}
+.msgcenter-box .msg-tip .p-time {
+    color: #666666;
+    float: left;
+    margin-left: 5px;
+}
+.msgcenter-box .msg-tip .early-btn {
+    float: right;
+    margin-right: 5px;
+}
+.msgcenter-box .day-box {
+    height: 19px;
+    margin-bottom: 1px;
+    margin-top: 22px;
+    position: relative;
+}
+.msgcenter-box .day-box .day-box-i {
+    padding-bottom: 9px;
+    padding-top: 9px;
+}
+.msgcenter-box .day-box i {
+    background-color: #E5E5E5;
+    display: block;
+    height: 1px;
+}
+.msgcenter-box .day-box .day {
+    background-color: #FFFFFF;
+    color: #666666;
+    display: block;
+    left: 42%;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 88px;
+}
+
+.msg-main .fun-menu {
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+.fun-menu .menu-i {
+    border: 1px solid #B8B8B8;
+    border-radius: 2px;
+    color: #333333;
+    float: left;
+    font-size: 12px;
+    margin-right: 8px;
+    position: relative;
+}
+.fun-menu .menu-i a {
+    background-color: #F8F8F8;
+    color: #333333;
+    display: block;
+    line-height: 17px;
+    padding: 5px 26px;
+}
+.fun-menu .selected {
+    border-color: #575E69;
+}
+.fun-menu .selected .pointer {
+    background: url("http://1.assets.dajieimg.com/up/msgcenter/image/icons.png") repeat scroll 0 -30px rgba(0, 0, 0, 0);
+    display: block;
+    height: 7px;
+    position: absolute;
+    right: 42%;
+    top: 28px;
+    width: 13px;
+}
+.fun-menu .selected a {
+    background-color: #575E69;
+    color: #FFFFFF;
+}
+
+.list-item li {
+    border-top: 1px solid #E5E5E5;
+    padding: 20px 0 20px 65px;
+    position: relative;
+}
+.list-item li a{
+    color: #127DB3
+}
+
+.msg-list .item-layout .item-content {
+    min-height: 50px;
+}
+.msg-list li {
+    cursor: pointer;
+    padding-left: 96px;
+}
+.msg-list .item-h a {
+    color: #333333;
+}
+.msg-list .hover {
+    background-color: #FAFAFA;
+}
+.msg-list .unread {
+    background-color: #E6EEF2;
+}
+.msg-list .unread .item-h, .msg-list .unread .desc, .msg-list .unread .tip, .msg-list .unread .time {
+    color: #333333;
+}
+.msg-list .time, .msg-list .del-btn {
+    right: 10px;
+}
+.msg-list .item-layout .item-content .desc {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 450px;
+}
+.msg-main .active .del-sel, .msg-main .active .mark-sel {
+    color: #127DB3;
+    cursor: pointer;
+}
+.msg-main .all-mark {
+    color: #999999;
+    margin-bottom: 10px;
+    margin-top: 12px;
+    padding-left: 8px;
+}
+
+.list-item .item-layout {
+    position: relative;
+}
+.item-layout .pic {
+    left: -65px;
+    position: absolute;
+    top: 0;
+}
+.item-layout .checkbox {
+    left: -87px;
+    position: absolute;
+    top: 18px;
+}
+.item-layout .pic a {
+    border: medium none;
+}
+.item-layout .item-content {
+}
+.item-layout .item-content .item-h {
+    font-size: 14px;
+}
+.item-layout .item-content p {
+    color: #666666;
+}
+.item-layout .item-content .desc {
+    color: #999999;
+    margin-top: 15px;
+    width: 380px;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.item-layout .item-content .tip {
+    color: #999999;
+    font-size: 12px;
+    margin-left: 15px;
+}
+.item-layout .time, .item-layout .del-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.item-layout .del-btn {
+    background: url("../images/close.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    color: #CCCCCC;
+    display: none;
+    height: 13px;
+    text-indent: -1000px;
+    width: 13px;
+}
+
+.item-layout .del-btn:hover {
+    background-position: right 0;
+}
+.item-layout .time, .item-layout .del-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.msg-list .time, .msg-list .del-btn .item-content{
+    right: 10px;
+}
+.time{
+	color: #999;
+}
+.reply-box textarea {
+    background-color: #F9F9F9;
+    height: 103px;
+    padding: 9px 7px;
+    width: 584px;
+}
+
+.reply-box {
+    margin-top: 30px;
+}
+.reply-box .action {
+    margin-top: 18px;
+    text-align: right;
+}
+.reply-box .action .check-code {
+    float: left;
+}
+.reply-box .action .check-code input {
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    padding-left: 7px;
+    width: 121px;
+}
+.reply-box .action .check-code img {
+    border: 1px solid #BCBBB9;
+    cursor: pointer;
+    height: 28px;
+    margin-left: 9px;
+    width: 83px;
+}
+.reply-box .action .error {
+    display: none;
+    float: left;
+    line-height: 28px;
+    margin-left: 7px;
+}
+.reply-box .action .reply-btn {
+    float: right;
+}
+.msgcenter-box {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #CCCCCC;
+    box-shadow: 1px 3px 3px rgba(150, 152, 153, 0.3);
+    min-height: 440px;
+    padding: 25px 60px 35px;
+    width: 840px;
+}
+
+.msgcenter-box .input-txt {
+    border-color: #C6C6C6 #EEEEEE #EEEEEE #C6C6C6;
+    border-style: solid;
+    border-width: 1px;
+}
+.msgcenter-box .noborder {
+}
+.msgcenter-box .dot-middle {
+    color: #999999;
+    margin: 0 5px;
+    position: relative;
+    top: -2px;
+}
+.msgcenter-box .msg-main {
+    width: 600px;
+}
+.msgcenter-box .all-middle {
+    width: auto;
+}
+
+.dj-btn-main {
+    background-color: #FBD329;
+    background-image: linear-gradient(to bottom, #FEE989, #FFD41E);
+    border: 1px solid #E7A33B;
+    color: #333333;
+}
+.dj-btn-main:hover, .dj-btn-main:focus {
+    background-color: #FDC221;
+    background-image: linear-gradient(to bottom, #FEE77F, #FFC321);
+    border: 1px solid #EB9A1D;
+    color: #333333;
+    text-decoration: none;
+}

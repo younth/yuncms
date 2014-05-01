@@ -56,9 +56,10 @@ class messageController extends commonController
 		}else{
 			/*
 			 * 私信对对应的是会员与会员之间的通信，涉及member_list member_content  member_message
+			 * 注意对会员的私信通知的操作
 			 * */
-			//增加会员之间通信的记录
 			
+			//增加会员之间通信的记录
 			$id=intval($_POST['id']);
 			$content=text_in($_POST['content']);
 			$auth=$this->auth;//本地登录的cookie信息
@@ -73,12 +74,46 @@ class messageController extends commonController
 				$data['last_message']=$content;//私信内容
 				$list_id=$re['id'];
 				model("message_list")->update("id='{$list_id}'",$data);
+				//更新会员的私信通知
+				$member_msg1=array();//发送者
+				$member_msg2=array();//接受者
+				//发送者记录
+				$user1=model("message_member")->find("list_id='{$list_id}' and member_id='{$mid}'");
+				$member_msg1['message_num']=$user1['message_num']+1;//消息总数
+				$member_msg1['ctime']=time();
+				model("message_member")->update("list_id='$list_id' and member_id='$mid'",$member_msg1);
+				//接受者记录
+				$user2=model("message_member")->find("list_id='{$list_id}' and member_id='{$id}'");
+				$member_msg2['message_num']=$user2['message_num']+1;//消息总数
+				$member_msg2['new']=$user2['new']+1;//新增一条未读私信
+				$member_msg2['ctime']=time();
+				model("message_member")->update("list_id='$list_id' and member_id='$id'",$member_msg2);
 			}else{
+				//第一次发送私信
 				$data['from_mid']=$mid;//发起者id,当前会员
 				$data['rece_mid']=$id;//接收者
 				$data['ctime']=time();
 				$data['last_message']=$content;//私信内容
-				$list_id=model("message_list")->insert($data);//私信列表的id
+				$list_id=model("message_list")->insert($data);//新建私信列表并获取其id
+				
+				//增加会员的私信通知，增加两条
+				$member_msg1=array();//发送者
+				$member_msg2=array();//接受者
+				//发送者记录
+				$member_msg1['list_id']=$list_id;//私信列表id
+				$member_msg1['member_id']=$mid;//参与私信的用户ID
+				$member_msg1['new']=0;//未读消息数
+				$member_msg1['message_num']=1;//消息总数
+				$member_msg1['ctime']=0;//该参与者最后会话时间
+				model("message_member")->insert($member_msg1);
+				
+				//接受者记录
+				$member_msg2['list_id']=$list_id;//私信列表id
+				$member_msg2['member_id']=$id;//参与私信的用户ID
+				$member_msg2['new']=1;//未读消息数
+				$member_msg2['message_num']=1;//消息总数
+				$member_msg2['ctime']=time();//该参与者最后会话时间
+				model("message_member")->insert($member_msg2);
 			}
 			if($list_id){
 				$msg['list_id']=$list_id;//私信列表的id
@@ -179,7 +214,26 @@ class messageController extends commonController
 	//私信通知
 	public function msg_notice()
 	{
-		//未读私信总数
+		$auth=$this->auth;//本地登录的cookie信息|
+		$id=$auth['id'];
+		//查询我的通信记录
+		$unread=model("message_list")->allmag_user($id);
+		if(empty($unread))
+		{
+			echo 1;
+		}else{
+			$count=count($unread);
+			$html='';
+			for($i=0;$i<$count;$i++){
+				$user=model("member")->user_profile($unread[$i]['mid'],'');
+				$url=url('message/content',array('id'=>$unread[$i]['list_id'],'name'=>$user['uname']));
+				$html.='<li data-status="2"> <a target="_blank" href="'.$url.'"> <span class="logo1"><img src="'.$user['small'].'"></span>';
+				$html.='<span class="name1_title">'.$user['uname'].'</span><ul class="star_list"><li class="png_ie6"></li><li class="png_ie6"></li>';
+				$html.='<li class="png_ie6"></li><li class="png_ie6"></li></ul><span class="times">'.timeshow($unread[$i]['time']).'</span>';
+				$html.='<span class="name1_companies"><b class="yi_icon"></b>'.$unread[$i]['msg'].'</span><span style="display: none" class="bi_x"></span> </a> </li>';
+			}
+			echo $html;
+		}
 	}
 }
 

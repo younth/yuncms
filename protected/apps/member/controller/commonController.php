@@ -15,8 +15,14 @@ class commonController extends memberController {
 		$this->undo_count=$all_undo;
 		
 		//未读私信总数，自己是接受者
-		
-		
+		$all=model("message_member")->select("member_id='{$id}'",'new');
+		if($all){
+			foreach ($all as $v)
+			{
+				$totle+=$v['new'];//统计未读私信总数，用了一个循环
+			}
+		}
+		$this->unread=$totle;
 	}
 
 }

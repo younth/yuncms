@@ -85,20 +85,21 @@
           
           
 <li class="message look_see1_loaded" id="look_see1">
-            <a target="_self" class="icon_01" href="http://www.tianji.com/messages">
+            <a target="_self" class="icon_01" href="{url('member/message/index')}">
                 <div class="clear"></div>
-                <div class="span_promit png_ie6" style="display: block;">1</div>
+                {if $unread==0}
+                {else}
+                <div class="span_promit png_ie6" style="display: block;">{$unread}</div>
+                {/if}
             </a>
             <div id="look_list1" style="display: none;" class="messages_list">
               <span class="list_c"></span>
-              <span class="title_renmai">私信 <a class="wirte_info" href="http://www.tianji.com/messages/new">写信</a> </span>
+              <span class="title_renmai">私信 <a class="wirte_info" href="#">写信</a> </span>
               <div style="display:none;" class="no_notice">还没有收到私信</div>
               <div class="loding_notice mg_r125" style="display: none;">正在加载.....</div>
               <div class="hd_scroll_box" style="display: block;">
                 <ul id="new_header_message" class="contacts_main">
-                <li data-status="2"> <a target="_blank" href="http://www.tianji.com/messages/533b5f74659e938f44000056"> <span class="logo1"><img src="http://image.tianji.com/u/37918231/876200-s.jpg"></span> <span class="name1_title">龚之民</span><ul class="star_list"><li class="png_ie6"></li><li class="png_ie6"></li><li class="png_ie6"></li><li class="png_ie6"></li></ul> <span class="times">04-22 18:13</span> <span class="name1_companies"><b class="yi_icon"></b>haob</span> <span style="display: none" class="bi_x"></span> </a> </li><li data-status="2"> <a target="_blank" href="http://www.tianji.com/messages/5334cd73659e9358de000002"> <span class="logo1"><img src="http://image.tianji.com/u/16328226/82573-s.jpg"></span> <span class="name1_title">彦妮</span><ul class="star_list"><li class="png_ie6"></li><li class="png_ie6"></li><li class="png_ie6" style="border-bottom: medium none;"></li></ul> <span class="times">04-19 17:53</span> <span class="name1_companies"><b class="yi_icon"></b>你是做什么行业的啊？最近想换行，但是对自己没什么信心...可以简单聊下
-</span> <span style="display: none" class="bi_x"></span> </a> </li>
-
+               
 </ul>
                 <div class="clear"></div>
               </div>
@@ -265,6 +266,7 @@ $(document).on("mouseover","#look_see1",function(){
 			  url: "{url('member/message/msg_notice')}",
 				 success: function (data) {
 					 //没有通知，则显示没有收到人脉请求
+					 //alert(data);
 					 load_notice.hide();
 					 if(data==1){
 						no_notice.show();//显示没有人脉请求,有个bug

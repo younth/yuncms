@@ -118,7 +118,7 @@ function AnalyticEmotion(s) {
 					cr.select();
 				}else if (this.selectionStart || this.selectionStart == '0') {
                                     
-                                    if($('.emotion_'+mid).val()=="发表心情吧！"){
+                                    if($('.emotion_'+mid).val()=="向朋友分享你的新动态"){
                                         $('.emotion_'+mid).val("");
                                     }  
 					var 

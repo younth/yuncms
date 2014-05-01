@@ -1,52 +1,49 @@
 {include file="header"}
-        <link href="__PUBLIC__/emotions/css/emotion.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" type="text/css" href="__PUBLIC__/emotions/css/jquery.sinaEmotion.css" />
-        <link rel="stylesheet" type="text/css" href="__PUBLIC__/member/css/main.css" />
+<link href="__PUBLIC__/emotions/css/emotion.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/emotions/css/jquery.sinaEmotion.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/member/css/main.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/highslide.css" />
+<script src="__PUBLICAPP__/js/main.js" type="text/javascript"></script>   
+<script type="text/javascript" src="__PUBLIC__/emotions/js/jquery.sinaEmotion.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/highslide.js"></script>
+<script type="text/javascript">
+    //封面图效果
+    hs.graphicsDir = "__PUBLIC__/images/graphics/";
+    hs.showCredits = false;
+    hs.outlineType = 'rounded-white';
+    hs.restoreTitle = '关闭';
+</script>
         
-        <script src="__PUBLIC__/js/jquery.js" type="text/javascript"></script>
-        <script src="__PUBLIC__/member/js/main.js" type="text/javascript"></script>
-       
-        <script type="text/javascript" src="__PUBLIC__/emotions/js/jquery.sinaEmotion.js"></script>
-        <script type="text/javascript">
-            loadAds('{$url_loadads}');
-        </script>
-<!--{$uname}，
-欢迎你的到来！
 
-
-<a href="{url('member/account/logout')}">退出</a>
-
-
-<br />
-<br />
-<p><a href="{url('member/setting/avatar')}">档案设置</a></p>-->
 <!---获取链接的input---->
 <div id="container_index">
+<input type="hidden" value="0" id="iswater" />
 <input type="hidden" value="{$url_postcomment}" id="com_url"/>
 <input type="hidden" value="{$url_postfeed}" id="post_url" />
 <input type="hidden" value="{$url_postreply}" id="reply_url" />
 <input type="hidden" value="{$url_postrepost}" id="repost_url" />
+<input type="hidden" value="{$url_loadwater}" id="water_url" />
+<input type="hidden" value="{$url_mayknow}" id="mayknow_url" />
 <div class="member_mian">
     <div class="member_mianbg">
-<div id="mem_left_all" style="width:720px; height: auto; float: left; display: none;">
-   
- <div class="mem_left" id="index_publish" style=" background: #ecf9f2;">
+        <div class="mem_left_all" id="mem_left_all">
+        
+   			<div class="ad" ><img src="__PUBLICAPP__/images/ad.jpg" /></div>
+            
+ <div class="mem_left pubfeed" id="index_publish">
      <div class="mem_post_feed">
          <h3>
-             <strong>我要发动态</strong>
+             <strong>分享动态</strong>
              <span  id="remain_num">你还可以输入<strong>140</strong>字</span>
          </h3>
-    <textarea class="textarea emotion_0" cols="50" rows="4" id='post_feed' 
-              onfocus="this.style.borderColor='#FF6600'"
-              onblur="this.style.borderColor='#7b7b7b'"
-              onkeydown='keyMsg(event)'></textarea>
+    <textarea class="textarea emotion_0" cols="58" rows="4" id='post_feed'  onkeydown='keyMsg(event)' data-content="向朋友分享你的新动态"></textarea>
     <div class="mem_post_feed_icon">
         <span>
-            <span class="mem_feed_face"><a href="javascript:void(0);" id="face_0" ></a></span>
+            <span class="mem_feed_face"><a href="javascript:void(0);" id="face_0" ></a>
+            </span>
             <span class="mem_feed_pic">
             <a href="javascript:void(0);" id="pic_show_link" onclick="showPic('{$url_showpic}')" ></a>
             </span>
-            <span id="post_msg_wait" style="display:none;"></span>
             <span class="showerror"  style="display:none;"></span>
         </span>
         <a class="mem_feed_submit"  href="javascript:void(0)" onclick="postFeed()">发表</a>
@@ -72,9 +69,6 @@
                                     <a data-filter="watch" href="/feed/list?filter=watch">联系人</a>
                                 </li>
                                 <li>
-                                    <a data-filter="group" href="/groupfeed/list">圈子</a>
-                                </li>
-                                <li>
                                     <a data-filter="corpIndex" href="/corpfeed/list?filter=corpIndex">公司</a>
                                 </li>
                                 <li>
@@ -88,11 +82,11 @@
     
 <div class="mem_feed_con">
     <div class="feedlayout mem_clearfix">
-        <div class="absolute pic"><a href="#" target="_blank"><img src="http://6.f1.dajieimg.com/group1/M00/38/00/CgpAmVKd2guAMAlrAAAAoLwQons885s.jpg"></a></div>
-        <h3><a href="">{$_v['member']['uname']}:</a></h3>
-        <h3>{dobadword($_v['feed_content'])}</h3>
+        <div class="absolute pic"><a href="{url('profile/user',array('id'=>$_v['member']['id']))}" target="_blank"><img src="{$_v['avatar']}"></a></div>
+        <h3><a href="{url('profile/user',array('id'=>$_v['member']['id']))}" target="_blank">{$_v['member']['uname']}</a>:&nbsp;&nbsp;{dobadword($_v['feed_content'])}</h3>
+      
     {if !empty($_v['pic'])}<h3>
-<img src="{$_v['pic']['thumb_url']} " />  
+        <a href="{$_v['pic']['url']}" onClick="return hs.expand(this)"><img  title="点击查看大图" alt="" src="{$_v['pic']['thumb_url']}" class="zoom"/></a>
      </h3>
    {/if}
         <h3>
@@ -106,12 +100,10 @@
         {/if}&nbsp;
         </span>
        &nbsp; <a href="javascript:void(0)" onclick="showComment({$_v['id']},'{$url_showcomment}')">评论{if $_v['comment_count']!=0} ({$_v['comment_count']}){/if}</a>&nbsp;&nbsp;
-        <a href="javascript:void(0)" onclick="showRepost({$_v['id']},'{$url_showrepost}')" >转发{if $_v['comment_count']!=0} ({$_v['comment_count']}){/if}</a>
+        <a href="javascript:void(0)" onclick="showRepost({$_v['id']},'{$url_showrepost}')" >转发{if $_v['repost_count']!=0} ({$_v['repost_count']}){/if}</a>
     </div>
-        <div class="mem_feed_jiantou" style=" display: none; height: auto; float: left;  background: #f9f9f9;" id="feed_comment_{$_v['id']}">
-                <div style="width: 100%; height: auto; display: none; text-align: center; " id="comment_wait_{$_v['id']}">
-                    <img  height="10px" src="__PUBLIC__/member/images/mem_loading.gif"/>
-                </div>
+        <div class="mem_feed_jiantou" id="feed_comment_{$_v['id']}">
+               
          </div>
         </h3>
     </div>
@@ -121,15 +113,15 @@
     {else}
     <div class="mem_feed_con">
     <div class="feedlayout mem_clearfix">
-        <div class="absolute pic"><a href="#" target="_blank"><img src="http://6.f1.dajieimg.com/group1/M00/38/00/CgpAmVKd2guAMAlrAAAAoLwQons885s.jpg"></a></div>
-        <h3><a href="">{$_v['member']['uname']}</a></h3>
+        <div class="absolute pic"><a href="{url('profile/user',array('id'=>$_v['member']['id']))}" target="_blank"><img src="{$_v['avatar']}"></a></div>
+        <h3><a href="{url('profile/user',array('id'=>$_v['member']['id']))}" target="_blank">{$_v['member']['uname']}</a></h3>
         <h3>{$_v['feed_content']}</h3>
         <div class="mem_feed_jiantou">
             <div class="mem_feed_jiantou_a"><span class="mem_jia_back">◆</span><span  class="mem_jia_border">◆</span></div>
-        <h4><a href="#">{$_v['org_info']['member']['uname']}</a></h4>
+        <h4><a href="{url('profile/user',array('id'=>$_v['org_info']['member']['id']))}" target="_blank"">{$_v['org_info']['member']['uname']}</a></h4>
         <h3>{dobadword($_v['org_info']['feed_content'])}</h3>
             {if !empty($_v['org_info']['pic'])}<h3>
-<img src="{$_v['org_info']['pic']['thumb_url']} " />  
+                 <a rel="example_group" href="{$_v['org_info']['pic']['url']}"><img  title="点击查看大图" alt="" src="{$_v['org_info']['pic']['thumb_url']}" /></a>
      </h3>
    {/if}
             <span class="mem_timeshow">{timeshow($_v['org_info']['ctime'])}</span>
@@ -151,7 +143,7 @@
         {/if}&nbsp;
         </span>
        &nbsp; <a href="javascript:void(0)" onclick="showComment({$_v['id']},'{$url_showcomment}')">评论{if $_v['comment_count']!=0} ({$_v['comment_count']}){/if}</a>&nbsp;&nbsp;
-        <a href="javascript:void(0)" onclick="showRepost({$_v['id']},'{$url_showrepost}')" >转发{if $_v['comment_count']!=0} ({$_v['comment_count']}){/if}</a>
+        <a href="javascript:void(0)" onclick="showRepost({$_v['id']},'{$url_showrepost}')" >转发{if $_v['repost_count']!=0} ({$_v['repost_count']}){/if}</a>
      </div>
      <div class="mem_feed_jiantou" style=" display: none; height: auto; float: left; background: #f9f9f9;" id="feed_comment_{$_v['id']}">
                 <div style="width: 100%; height: auto; display: none; text-align: center; " id="comment_wait_{$_v['id']}">
@@ -164,9 +156,21 @@
 </div>
     {/if}
 {/loop}
-{$page}
+<div class="mem_feed_con" id="mem_show_water" style="display: none">
+</div>
 </div>
     </div>
+        <div class="mem_right_all">
+            <div class="mem_right">
+                <div class="mem_right_head">可能认识的人
+                    
+                    <a id="chang_may_know" onclick="memMayKnow()" class="mem_right_change" title="换一换" href="javascript:void(0);"></a>
+                </div>
+                <div class="mem_right_con" id="mem_mayknow">
+                    
+                </div>
+            </div>
+        </div>
 </div>
 <!---显示图片框的div-->
 <div class="mem_pic_frame" id="show_pic_frame" style="">

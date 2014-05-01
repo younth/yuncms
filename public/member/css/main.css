@@ -9,6 +9,8 @@ a{
 a:hover{
     text-decoration: none;
 }
+
+.showerror{ color:#F00;}
 .member_mian{
     width: 1000px;
     margin: 15px auto 25px;
@@ -18,25 +20,46 @@ a:hover{
     width: 1000px;
     min-height: 700px;
     float: left;
+	margin-bottom:20px;
+}
+.mem_left_all{
+    width:720px; 
+    height: auto; 
+    float: left; 
+}
+
+.mem_left_all .ad{
+	border:0;
+	margin-top:20px;
+}
+.mem_right_all{
+    width:280px; 
+    height: auto; 
+    float: left; 
 }
 .mem_left{
-    width: 660px;
+    width: 700px;
     height: auto;
-    border: 1px solid #c2c2c2;
+    border-radius: 5px;
     float: left;
     margin-top: 20px;
-     -moz-box-shadow:  0 0 3px #333232;
-    -webkit-box-shadow:  0 0 3px #333232;
-    box-shadow: 0 0 3px #333232;
+     -moz-box-shadow:  0 0 8px #666666;
+    -webkit-box-shadow:  0 0 8px #666666;
+    box-shadow:  0 0 8px #666666;
     background: #ffffff;
 }
+.member_mian .pubfeed{
+	background-color: #F5F5F5;white-space:nowrap;
+}
+
 .mem_post_feed{
-    width: 620px;
+    width: 660px;
     height: auto;
     margin: 0 auto;
 }
+.mem_post_feed .focus{border:1px solid  #39F;}
 .mem_post_feed h3{
-    padding: 10px 0 10px 0;
+    padding: 10px 0 10px 5px;
 }
 .mem_post_feed h3 span{
     float: right;
@@ -45,13 +68,18 @@ a:hover{
 }
 .mem_post_feed h3 strong{
     font-weight: 500;
-    font-size: 20px;
+    font-size: 18px;
+	color: #999999;
+	background:url(../images/share_icon.png) no-repeat ;
+	padding-left:35px;
 }
 .mem_post_feed h3 span strong{
     font-weight: 700;
     font-size: 22px;
     font-style: italic;
     font-family: Constantia, Georgia;
+	background:none;
+	padding-left:0;
 }
 .mem_post_feed_icon{
    padding: 3px 0 9px 0;
@@ -96,7 +124,7 @@ float: left;
 .textarea {
     border: 1px solid #bbb;
     height: 66px;
-    width: 620px;
+    width: 650px;
     background: #fff url(/images/statebox/talkbox-textarea-bg.gif) repeat-x 0 0;
     font-size: 14px;
     overflow-x: hidden;
@@ -104,7 +132,10 @@ float: left;
     -webkit-border-radius: 3px;
     border-radius: 3px;
     resize: none;
+	padding:5px 0 0 7px;
+	color: #6A6A6A;
 }
+
 .mem_feed_submit{
     width: 80px;
     height: 30px;
@@ -113,18 +144,18 @@ float: left;
     font-size: 15px;
     color: #ffffff;
     float: right;
-    background: #97c256;
+    background: #5DADE2;
     text-align: center;
     border-radius: 2px;
     font-weight: normal;
     font-family: '微软雅黑';
-    border-bottom: 2px solid #8ca138;
+    border-bottom: 2px solid #5DADE2;
 }
 .mem_feed_submit:hover{
-    background: #c9a80b;
+    background: #2893D9;
 }
 .mem_feed_con{
-    width: 525px;
+    width: 565px;
     height: auto;
     float: left;
     padding: 20px 35px 0 100px;
@@ -146,6 +177,7 @@ float: left;
 .mem_feed_con  .feedlayout h3{
     width:100%;
     margin-bottom: 5px;
+	font-size:14px;
 }
 .mem_feed_con  .feedlayout h3 a{
     font-size: 15px;
@@ -153,10 +185,16 @@ float: left;
     font-weight: 700;
     font-family: verdana;
 }
+.mem_feed_con  .feedlayout h3 a:hover{
+	text-decoration:underline;
+}
 .mem_feed_con  .feedlayout h3 div a{
     font-size: 12px;
     color: #127e9a;
     font-weight: 300;
+}
+.mem_feed_con .zoom{
+	cursor: url("../images/big.cur"), default;
 }
 .mem_feed_con .pic{
 display: inline;
@@ -181,7 +219,7 @@ margin-top: 2px;
     top: 11px;
     width: 0;
     height: 19px;
-    border-left: 5px solid #117d99;
+    border-left: 5px solid #E76322;
 }
 .mem_feed_con_head h3{
     font-family: 'Microsoft YaHei';
@@ -233,6 +271,11 @@ margin-top: 2px;
     color: #666;
     text-align: right;
 }
+.mem_feed_tabs a:hover{
+    background: none repeat scroll 0 0 #E4EFF5;
+    color: #137DB3;
+    text-decoration: none;
+}
 .mem_timeshow{
     font-size: 12px;
     color: #f6954e;
@@ -246,7 +289,9 @@ margin-top: 2px;
     border-radius: 3px;
     border-color: #e0dbd1;
     background: #f2f2f2;
-    width: 483px;
+    width: 523px;
+	display:none;
+	float:left;
 }
 .mem_feed_jiantou_a{
     position: absolute;
@@ -292,13 +337,14 @@ margin-top: 2px;
     word-wrap: break-word;
     line-height: 18px;
     outline: none;
-    height: 23px;
+    height: 36px;
     width: 99%;
     resize: none;
     background: #ffffff;
-    border: 1px solid #ccc;
-    border-radius: 2px;
+    border: 1px solid #bbb;
+    border-radius: 3px;
     box-shadow: 0px 1px 1px 0px #eaeaea inset;
+	padding:5px;
 }
 .mem_com_submit{
     cursor: pointer;
@@ -321,9 +367,13 @@ margin-top: 2px;
 .mem_comlist{
     width: 100%;
     float: left;
-    border-bottom: 1px solid #9fa6b6;
+    border-bottom: 1px  dotted #9fa6b6;
     padding-bottom: 5px;
     padding-top: 5px;
+}
+
+.mem_comlist .focus{
+	border:1px solid  #39F;
 }
 .mem_comlist_a{
     float: left;
@@ -336,7 +386,7 @@ margin-top: 2px;
     float: left;
     height:auto;
     padding-right: 10px;
-    width:420px;
+    width:460px;
 }
 .show_repost_con{
     position:absolute; 
@@ -456,8 +506,120 @@ margin-top: 2px;
 .mem_pic_con{
     width:250px; 
     height: auto; 
+    display: none;
     padding-top: 5px;
     float: left;
     padding-bottom: 5px;
     padding-left: 10px;
 }
+
+.mem_right{
+    width: 100%;
+    height: auto;
+    border: 1px solid #c2c2c2;
+    float: left;
+    margin-top: 20px;
+     -moz-box-shadow:  0 0 3px #333232;
+    -webkit-box-shadow:  0 0 3px #333232;
+    box-shadow: 0 0 3px #333232;
+    background: #ffffff;
+}
+.mem_right_head{
+    float: left;
+    width: 270px;
+    background: #e6e6e6;
+    border-bottom: 2px solid #127e9b;
+    line-height: 30px;
+    font-weight: bold;
+    color: #666;
+    font-size: 14px;
+    padding-left: 10px;
+}
+.mem_right_con{
+    float: left;
+    width: 100%;
+    height: auto;
+    background: #f9f9f9;
+}
+.mem_right_change{
+    width: 18px;
+    float: right;
+    margin-top: 7px;
+    display: inline;
+    height: 18px;
+    background: url('../images/mem_may_change.png') no-repeat scroll -11px -314px transparent;
+    margin-right: 20px;
+}
+.mem_right_change:hover{
+    background: url('../images/mem_may_change.png') no-repeat scroll -11px -278px transparent;
+}
+.mem_mayknow{
+    float: left;
+height:auto;
+overflow: hidden;
+position: relative;
+width: 270px;
+padding: 5px 5px 5px 5px;
+border-bottom: 1px solid #97c256;
+}
+.mem_mayknow_head{
+    float: left;
+    display: block;
+    border: 1px solid #E0E0E0;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+}
+.mem_mayknow_info{
+    margin: -4px 0px 0px 46px;
+line-height: 22px;
+color: #666;
+}
+.mem_mayknow_info h3{
+    height: 22px;
+line-height: 22px;
+overflow: hidden;
+width: 150px;
+text-overflow: ellipsis;
+}
+.mem_mayknow_info h3 a{
+height: 22px;
+line-height: 22px;
+overflow: hidden;
+font-weight: bold;
+color: #127DB2;
+}
+.mem_mayknow_add{
+    float: right;
+    padding-left: 8px;
+padding-right: 8px;
+color: #1357A2;
+font-size: 12px;
+height: 12px;
+line-height: 12px;
+padding: 3px 12px;
+font-size: 12px;
+height: 12px;
+line-height: 12px;
+padding: 3px 5px;
+display: inline-block;
+font-family: simsun,serif;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    background-color: #E6E6E6;
+background-image: linear-gradient(to bottom, #FDFDFD, #F3F2F3);
+background-repeat: repeat-x;
+border: 1px solid #C6C6C6;
+border-radius: 2px;
+
+}
+.mem_mayknow_add_img{
+    background: url('../images/btn-icon.png') no-repeat scroll 2px -166px transparent;
+    height: 12px;
+margin-right: 5px;
+width: 12px;
+display: inline-block;
+font-size: 0px;
+}
+

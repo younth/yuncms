@@ -70,20 +70,7 @@ class controller{
 		$this->view()->assign( $this->_data );
 		return $this->view()->display($tpl, $return, $is_tpl).cpright();
 	}
-        
-        //输出模板且不引用布局文件，即单独布局
-	protected function displayPart($tpl = '', $return = false, $is_tpl = true ){
-		if( $is_tpl ){
-			$tpl = empty($tpl) ? CONTROLLER_NAME . '/'. ACTION_NAME : $tpl;
-			if( $is_tpl && $this->layout ){
-				$this->__template_file = $tpl;
-			}
-		}
-		
-		$this->view()->assign( $this->_data );
-		return $this->view()->display($tpl, $return, $is_tpl).cpright();
-	}
-	
+
 	//获取分页查询limit
 	protected function pageLimit($url, $num = 10){
 		$url = str_replace(urlencode('{page}'), '{page}', $url);
