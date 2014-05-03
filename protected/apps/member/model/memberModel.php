@@ -112,5 +112,6 @@ class memberModel extends baseModel{
 		}
 		return $user;
 	}
+	
 }
 ?>

@@ -4,6 +4,7 @@
  * 2014.4.5
  */
 $(document).ready(function(){
+	
 	//发布心情获得焦点效果
     var feedpub=$("#post_feed");
 	feedpub.on({ 
@@ -177,14 +178,16 @@ $(document).ready(function(){
             });
         };
         
-        //显示回复框
+        //显示评论回复框，也是作为评论的一部分处理
         showReply=function(id,url){
             $('#feed_reply_'+id).toggle();
             $.post(url,{id:id},function(result){
-                $('#feed_reply_'+id).html(result);
-				var reply=$('#post_reply_'+id);
+                //$('#feed_reply_'+id).html(result);//显示评论回复框
+				//用评论框
+                var reply=$('#post_comment_'+id);
+				var name=reply.data('name');
 				reply.focus().addClass('focus');
-				
+				reply.val("回复"+name+":");//回复框信息
 				reply.on({ 
 				focus:function(){ 
 						$(this).addClass("focus");
@@ -232,40 +235,57 @@ $(document).ready(function(){
               });
           };
 
-	//提交评论
-	postComment=function(id){
-		var content = $('#post_comment_'+id).val();
-		var isEmotion=content.match(/\[.*?\]/g);
-		if(content===""){
-			$('#show_com_error_'+id).show().text('评论的内容不能为空!');
-                     
-		}
-		else{
-			var url=$('#com_url').val();
-			if(isEmotion!==null){
-				var newcontent=AnalyticEmotion(content);
-			}else newcontent=content;
-			$.post(url,{content:newcontent,id:id},function(result){
-				$('#show_new_comment_'+id).prepend(result);//插入元素之前
-				$('.emotion_'+id).val('');
-			});
-		}
-	};
-        //提交回复
+
+//评论的回复绑定事件
+$(document).on('click','.comment_reply',function(){
+	var id=$(this).data("id");//心情的id
+	var oid=$(this).data("oid");//原来的id
+	var name=$(this).data("name");
+	var reply=$('#post_comment_'+oid);//回复框
+	reply.focus().addClass('focus');
+	reply.val("回复"+name+":");//回复框信息
+	var sub_comment=$("#show_new_comment_"+oid);
+	//.attr({width:"50",height:"80"});
+	sub_comment.find("h3 >a").attr({'data-type':'3','data-repost_id':id});//设置评论的类似，此时是回复类型
+	//下面相当于提交评论,不用单独ajax处理
+});
+
+//提交评论,可能是普通评论，回复评论
+postComment=function(id){
+	var content = $('#post_comment_'+id).val();
+	var type=$('#post_comment_'+id).parent().find("h3 >a").data("type");//评论的类型
+	var rid=$('#post_comment_'+id).parent().find("h3 >a").data("repost_id");//回复评论的id
+	var isEmotion=content.match(/\[.*?\]/g);
+	if(content===""){
+		$('#show_com_error_'+id).show().text('评论的内容不能为空!');
+	}
+	else{
+		var url=$('#com_url').val();
+		if(isEmotion!==null){
+			var newcontent=AnalyticEmotion(content);
+		}else newcontent=content;
+		$.post(url,{content:newcontent,id:id,type:type,rid:rid},function(result){
+			$('#show_new_comment_'+id).prepend(result);//插入元素之前
+			$('.emotion_'+id).val('');
+		});
+	}
+};
+       //提交回复
 	postReply=function(id,oid){
 		var content = $('#post_reply_'+id).val();
-		var isEmotion=content.match(/\[.*?\]/g);
-		if(content===""){
+		var isEmotion=content.match(/\[.*?\]/g);//心情
+		if(content==""){
 			$('#show_reply_error_'+id).show().text('回复的内容不能为空!');
 		}
 		else{
 			var url=$('#reply_url').val();
-			if(isEmotion!==null){
+			if(isEmotion!=null){
 				var newcontent=AnalyticEmotion(content);
 			}else newcontent=content;
 			$.post(url,{content:newcontent,id:id,oid:oid},function(result){
+				//alert(result);
 				$('#show_new_comment_'+oid).after(result);
-                                $('#feed_reply_'+id).hide('slow');
+                                //$('#feed_reply_'+id).hide('slow');
 			});
 		}
 	};
@@ -345,10 +365,11 @@ $(document).ready(function(){
 
 //瀑布流加载的函数
 var $num = 0;
-var $list=1;//第一列不重复显示
+var $list=-1;//第一列不重复显示
 function loadwater(){
     var url=$('#water_url').val();
-    $('#mem_show_water').html("正在加载请稍后...").show();
+	var loading=$('#show_feed_loading');
+    loading.show();
     $num++;
     if($num%5==0){
         $('#iswater').val(1);  
@@ -359,12 +380,16 @@ function loadwater(){
              if(result==0){
                  $('#iswater').val(2);  
                  $('#mem_show_water').html("已加载全部");
-                 
+                 loading.hide();
              }
              else{
-                $('#mem_show_water').before(result);
-                $('#mem_show_water').hide();
+			 	//测试时候使用settimeout延迟显示效果
+               setTimeout(function(){
+			   	loading.hide();//隐藏加载图标
+			   	 $('#mem_show_water').before(result);
                 $('#iswater').val(0);
+				
+			   },400)
             }
             });
             
@@ -391,6 +416,8 @@ function memMayKnow(){
         }
     });
 }
+
+
 
 
 

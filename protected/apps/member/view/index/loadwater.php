@@ -1,12 +1,3 @@
-<script type="text/javascript">
-		$(document).ready(function() {
-                    $("a[rel=example_group]").fancybox({
-				'transitionIn'		: 'none',
-				'transitionOut'		: 'none',
-				'titlePosition' 	: 'none',
-			});
-                });
-</script>
 {loop $result $_k $_v}
     {if $_v['feed_type']==0}
     
@@ -16,13 +7,16 @@
         <h3><a href="{url('profile/user',array('id'=>$_v['member']['id']))}" target="_blank">{$_v['member']['uname']}</a>:&nbsp;&nbsp;{dobadword($_v['feed_content'])}</h3>
       
     {if !empty($_v['pic'])}<h3>
-        <a href="{$_v['pic']['url']}" onClick="return hs.expand(this)"><img  title="点击查看大图" alt="" src="{$_v['pic']['thumb_url']}" class="zoom"/></a>
+        <a href="{$path}{$_v['pic']['url']}" onClick="return hs.expand(this)"><img  title="点击查看大图" alt="" src="{$path}{$_v['pic']['thumb_url']}" class="zoom"/></a>
      </h3>
    {/if}
         <h3>
             <span class="mem_timeshow">{timeshow($_v['ctime'])}</span>
             <div id="feed_zan_num_{$_v['id']}" style="float: right;">
-        <span  id="msg_zan_num_{$_v['id']}" > 
+        <span  id="msg_zan_num_{$_v['id']}" >
+         {if $_v['member']['id']==$auth['id']}
+        <a href="javascript:" class='delfeed' data-id={$_v['id']}>删除</a><span class="dot-middle">.</span>
+        {/if}
         {if $_v['is_zan']==1}
         <a href="javascript:void(0)" onclick="feedLoseZan({$_v['id']},'{$url_losezan}')" style="color:#999;"><span  class="digg">已赞</span>{if $_v['praise_count']!=0} ({$_v['praise_count']}){/if}</a>
         {else}
@@ -30,10 +24,10 @@
         {/if}&nbsp;
         </span>
        &nbsp; <a href="javascript:void(0)" onclick="showComment({$_v['id']},'{$url_showcomment}')">评论{if $_v['comment_count']!=0} ({$_v['comment_count']}){/if}</a>&nbsp;&nbsp;
-        <a href="javascript:void(0)" onclick="showRepost({$_v['id']},'{$url_showrepost}')" >转发{if $_v['repost_count']!=0} ({$_v['repost_count']}){/if}</a>
+        <a href="javascript:void(0)" data-id={$_v['id']} class="repost_feed">转发{if $_v['repost_count']!=0} ({$_v['repost_count']}){/if}</a>
     </div>
         <div class="mem_feed_jiantou" id="feed_comment_{$_v['id']}">
-               
+               <!-- 显示评论 -->
          </div>
         </h3>
     </div>
@@ -56,9 +50,10 @@
    {/if}
             <span class="mem_timeshow">{timeshow($_v['org_info']['ctime'])}</span>
             <div style="float: right;">
-        <a href="#"> 赞{if $_v['org_info']['praise_count']!=0}({$_v['org_info']['praise_count']}){/if}</a>&nbsp;
-        <a href="#">评论{if $_v['org_info']['comment_count']!=0}({$_v['org_info']['comment_count']}){/if}</a>&nbsp;
-        <a href="#">转发{if $_v['org_info']['repost_count']!=0}({$_v['org_info']['repost_count']}){/if}</a>
+            <!-- 这是什么呢 -->
+        <a href="javascript:"> 赞{if $_v['org_info']['praise_count']!=0}({$_v['org_info']['praise_count']}){/if}</a>&nbsp;
+        <a href="javascript:">评论{if $_v['org_info']['comment_count']!=0}({$_v['org_info']['comment_count']}){/if}</a>&nbsp;
+        <a href="javascript:">转发{if $_v['org_info']['repost_count']!=0}({$_v['org_info']['repost_count']}){/if}</a>
          </div>
         </h3>
             </div>       
@@ -67,7 +62,7 @@
     <div id="feed_zan_num_{$_v['id']}" style="float: right;">
         <span  id="msg_zan_num_{$_v['id']}">
         {if $_v['member']['id']==$auth['id']}
-        <a >删除</a><span class="dot-middle">.</span>
+        <a href="javascript:" class='delfeed' data-id={$_v['id']}>删除</a><span class="dot-middle">.</span>
         {/if}
         {if $_v['is_zan']==1}
         <a href="javascript:void(0)" onclick="feedLoseZan({$_v['id']},'{$url_losezan}')" > 取消赞{if $_v['praise_count']!=0} ({$_v['praise_count']}){/if}</a>
@@ -76,7 +71,7 @@
         {/if}<span class="dot-middle">.</span>
         </span>
        <a href="javascript:void(0)" onclick="showComment({$_v['id']},'{$url_showcomment}')">评论{if $_v['comment_count']!=0} ({$_v['comment_count']}){/if}</a><span class="dot-middle">.</span>
-        <a href="javascript:void(0)" onclick="showRepost({$_v['id']},'{$url_showrepost}')" >转发{if $_v['repost_count']!=0} ({$_v['repost_count']}){/if}</a>
+        <a href="javascript:void(0)" click="showRepost({$_v['id']},'{$url_showrepost}')" class="repost_feed">转发{if $_v['repost_count']!=0} ({$_v['repost_count']}){/if}</a>
      </div>
      <div class="mem_feed_jiantou" style=" display: none; height: auto; float: left; background: #f9f9f9;" id="feed_comment_{$_v['id']}">
                 <div style="width: 100%; height: auto; display: none; text-align: center; " id="comment_wait_{$_v['id']}">
