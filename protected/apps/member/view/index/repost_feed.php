@@ -28,48 +28,51 @@
              <span id="remain_num">你还可以输入<strong>140</strong>字</span>
          </h3>
          <br/>
-    <textarea  id="repost_feed" class="textarea emotion_0"></textarea>
+    <textarea  id="repost_feed" class="emotion_9 textarea"></textarea>
     <div class="mem_post_feed_icon">
         <span>
         <p class="g6 cmt-to-person">
             <input type="checkbox">
             <label class="checkbox g3">同时评论给{$result['member']['uname']}</label>
           </p>
-            <span class="mem_feed_face"><a id="face_1" href="javascript:;"></a>
+            <span class="mem_feed_face"><a id="face_9" href="javascript:;"></a>
             </span>
-			<script type="text/javascript">$('#face_1').SinaEmotion($('.emotion_0'),'0');</script>
+			<script type="text/javascript">$('#face_9').SinaEmotion($('.emotion_9'),'9');</script>
             <span style="display:none;" class="showerror"></span>
         </span>
-        <a  href="javascript:" class="mem_feed_submit">转发</a>
+        <a  href="javascript:" class="mem_feed_submit" data-url={$url_repost_feed} data-oid={$result['oid']} data-mid={$result['mid']} data-id={$result['id']}>转发</a>
     </div>
     
     <span style="display:none;" id="post_msg_wait"></span>
      </div>     
 </div>
 <script>
-	//ajax转发心情
+//ajax转发心情,不涉及php代码，方便转移
 $(function(){
 	$("#repost_feed").focus().addClass('focus');//转发获得焦点
 	$(document).on('click','.mem_feed_submit',function(){
 		var content=$("#repost_feed").val();
+		var content=AnalyticEmotion(content);
 		if(content==""){$(".showerror").show().html("内容不能为空");}
-		var feed_id={$result['id']};
-		var oid={$result['oid']};
-		var fmid={$result['fmid']};
-		//转发
+		var feed_id=$(this).data('id');
+		var oid=$(this).data('oid');
+		var mid=$(this).data('mid');
+		var url=$(this).data('url');//解决了url动态路径问题
+		//ajax转发
 		  $.ajax({
 			  type: "POST",
-			  url: "{url('index/repost_feed')}",
+			  url: url,
 			  data: {
 				content: content,
 				feed_id:feed_id,
 				oid:oid,
-				fmid:fmid,
+				mid:mid,
 			  },
 				 success: function (data) {
 					 //alert(data);
 					var i = parent.layer.getFrameIndex(window.name);
-					layer.msg('转发心情成功~',1,-1);	
+					layer.msg('转发心情成功~',1,-1);
+					//做成ajax显示
 					//延迟执行
 					setTimeout(function(){
 							parent.layer.close(i);

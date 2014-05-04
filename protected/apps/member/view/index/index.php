@@ -15,7 +15,7 @@
 </script>
         
 
-<!---获取链接的input---->
+<!---获取链接的input,不建议采用这种方式---->
 <div id="container_index">
 <input type="hidden" value="0" id="iswater" />
 <input type="hidden" value="{$url_postcomment}" id="com_url"/>
@@ -60,19 +60,17 @@
     <div class="mem_feed_con_head" id="show_new_feed">
         <em class="icons"></em><h3>新鲜事</h3>
         <div class="mem_feed_box">
-                            <p data-filter="" class="result">{$feed_fiter}</p> <em class="pointer"></em>
+                            <p class="result" data-type=1>全部</p> <em class="pointer"></em>
                             <ul class="mem_feed_tabs">
-                                <li style="display:none;">
-                                    <a data-filter="" href="/feed/list">全部</a>
-                                </li>
+                               
                                 <li>
-                                    <a data-filter="watch" href="/feed/list?filter=watch">联系人</a>
+                                    <a data-type=2  data-name="联系人"  href="javascript:;">联系人</a>
                                 </li>
+                               <!--  <li>
+                                    <a data-filter="corpIndex" href="javascript:;">公司</a>
+                                </li> -->
                                 <li>
-                                    <a data-filter="corpIndex" href="/corpfeed/list?filter=corpIndex">公司</a>
-                                </li>
-                                <li>
-                                    <a data-filter="me" href="/feed/list?filter=me">我的新鲜事</a>
+                                    <a data-type=3  data-name="我的新鲜事" href="javascript:;">我的新鲜事</a>
                                 </li>
                             </ul>
                         </div>
@@ -80,10 +78,9 @@
     
     
 <!-- 瀑布流加载 -->
-<div class="mem_feed_con feed-more" id="mem_show_water" style="display:none;">
-	
+<div class="feed-more" id="mem_show_water" style="display:none;">
 </div>
-<div class="mem_feed_con feed-more" id="show_feed_loading" style="display: none;">
+<div class="feed-more" id="show_feed_loading" style="display: none;">
 	<img src="__PUBLIC__/images/loading_black.gif">
 </div>
 <script>loadwater();</script>
@@ -153,7 +150,7 @@ $(document).on('click','.delfeed',function(){
 //转发
 $(document).on('click', '.repost_feed',function(){
 	var id=$(this).data('id');
-	var url="{url('index/repost_feed')}";
+	var url=$(this).data('url');
 	url+="&id="+id;
     var i=$.layer({
         type: 2,
@@ -165,6 +162,43 @@ $(document).on('click', '.repost_feed',function(){
     });
 });
 
+$(document).on('click', '.mem_feed_tabs li',function(){
+	//alert($(this).index());data-filter
+	var now=$('a',this);
+	var type=$('a',this).data('type');
+	var name=$('a',this).data('name');
+	var loading=$('#show_feed_loading');
+	var now_name= $(".result").html();
+	var now_type=$(".result").data("type");
+	loading.show();
+	 
+	$(".mem_left .mem_feed_con").remove();
+	//alert(type);
+	  $.ajax({
+		  type: "POST",
+		  url: "{url('index/loadWater')}",
+		  data: {
+			  type: type,
+		  },
+			 success: function (data) {
+					//如何显示数据
+				 setTimeout(function(){
+					 loading.hide();
+					 now.attr("data-name",now_name);
+					 now.attr("data-type",now_type);
+					 now.html(now_name);
+					 $(".result").html(name);
+					 $(".result").attr("data-type",type);
+					$('#mem_show_water').before(data);
+				 
+					 },400)
+			
+			 },
+			  error: function (msg) {
+					alert(msg);
+			  }
+		});	
+})
 </script>
 
 {include file="footer"}

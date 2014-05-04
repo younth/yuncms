@@ -9,8 +9,5 @@
 class feed_picModel extends baseModel{
     protected $table = 'feed_pic';
     
-    public function feedPic($fid){
-        $result=model('feed_pic')->find('fid = '.$fid);
-        return $result;
-    }
+
 }

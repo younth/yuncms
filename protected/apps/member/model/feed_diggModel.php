@@ -9,8 +9,7 @@ class feed_diggModel extends baseModel{
     protected $table='feed_digg';
     
     public function  isDigg($mid,$fid){
-        $result=model('feed_digg')->find('mid = '.$mid.' and feed_id  = '.$fid);
-        if($result){ return 1;}
-        else { return 0; }
+        if(model('feed_digg')->find('mid = '.$mid.' and feed_id  = '.$fid))return 1;
+        else return 0;
     }
 }

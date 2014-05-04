@@ -181,13 +181,25 @@ float: right;
 .mem_feed_con  .feedlayout h3{
     width:100%;
     margin-bottom: 5px;
-	font-size:14px;
+	font-weight:normal;
 }
 .mem_feed_con  .feedlayout h3 a{
-    font-size: 15px;
     color: #127e9b;
-    font-weight: 700;
     font-family: verdana;
+}
+.mem_clearfix h3{
+	font-size:14px;
+}
+.mem_clearfix h3 a{
+	font-size:15px;
+	font-weight:700;
+}
+.mem_feed_jiantou h3{
+	font-size:12px;
+}
+.mem_feed_jiantou h3 a{
+	font-size:12px;
+	font-weight:normal;
 }
 .mem_feed_con  .feedlayout h3 a:hover{
 	text-decoration:underline;
@@ -296,6 +308,10 @@ margin-top: 2px;
     width: 523px;
 	display:none;
 	float:left;
+	font-size:12px;
+}
+.show{
+	display:block;
 }
 .mem_feed_jiantou_a{
     position: absolute;
@@ -634,6 +650,10 @@ font-size: 0px;
 }
 
  .feed-more {
+ 	width: 565px;
+	float: left;
+	padding: 20px 35px 0 100px;
+	border-bottom: 1px solid #e6e6e6;
     display: none;
 	background: none repeat scroll 0 0 #FFFFFF;
     display: block;
@@ -752,7 +772,6 @@ font-size: 0px;
     border-color: #CCCCCC #E5E5E5 #E5E5E5 #CCCCCC;
     border-style: solid;
     border-width: 1px;
-    color: #999999;
     height: 84px;
     overflow-x: hidden;
     padding: 7px;
@@ -761,6 +780,7 @@ font-size: 0px;
     word-wrap: break-word;
 	position:absolute;
 	right:28px;
+	font-family: '\5FAE\8F6F\96C5\9ED1';
 }
 .repost_t{
 	position:relative;
@@ -798,4 +818,23 @@ background-repeat: no-repeat;
 }
 .icon16-photo {
 background-position: 0 -864px;
+}
+.yhstar {
+    background: url("../images/yh.gif") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 15px;
+    margin-right: 5px;
+    vertical-align: middle;
+    width: 15px;
+}
+.yhend {
+    background: url("../images/yh.gif") no-repeat scroll 0 -18px rgba(0, 0, 0, 0);
+    display: inline-block;
+    height: 15px;
+    margin-left: 5px;
+    vertical-align: middle;
+    width: 15px;
+}
+.originalBar{
+	 color: #CCCCCC;
 }

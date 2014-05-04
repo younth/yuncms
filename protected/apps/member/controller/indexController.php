@@ -29,30 +29,93 @@ class indexController extends commonController
 			$this->url_delpic=  url('index/delpic');
 			$this->url_loadwater=  url('index/loadwater');
 			$this->url_mayknow=  url('index/mayknow');
+			$this->url_repost_feed=url('index/repost_feed');
 		}
 		
 	    public function index()
 	        {
-	            //判断是否登录
-	            //新浪微博的session信息,还需要判断是不是第一次用新浪微博登陆
-	            //注意使用新闻微博登录没有存储本地cookie
-	            $weibo_uid=$_SESSION['token']['access_token'];
-	            $auth=$this->auth;//本地登录的cookie信息
-	            if(empty($auth)&&empty($weibo_uid)) $this->redirect(url('member/account/login'));//未登录， 跳转到登录页面
-	            if($weibo_uid)
-	            {
-	                    //找出该微博key的用户
-	                    $acc=model("member_login")->member_weibo($weibo_uid);
-	                    if($acc) $this->uname=$acc['uname'];//绑定了，读出用户信息
-	            }
-	            if($auth&&$acc['is_active']=1) $this->uname=$auth['uname'];
-	
-	            $this->getUrls();
-	            $this->loadAds=1;
-	            $this->display();
+            //判断是否登录
+            //新浪微博的session信息,还需要判断是不是第一次用新浪微博登陆
+            //注意使用新闻微博登录没有存储本地cookie
+            $weibo_uid=$_SESSION['token']['access_token'];
+            $auth=$this->auth;//本地登录的cookie信息
+            if(empty($auth)&&empty($weibo_uid)) $this->redirect(url('member/account/login'));//未登录， 跳转到登录页面
+            if($weibo_uid)
+            {
+                    //找出该微博key的用户
+                    $acc=model("member_login")->member_weibo($weibo_uid);
+                    if($acc) $this->uname=$acc['uname'];//绑定了，读出用户信息
+            }
+            if($auth&&$acc['is_active']=1) $this->uname=$auth['uname'];
+
+            $this->getUrls();
+            $this->loadAds=1;
+            $this->display();
 	        }
 
-        //提交动态
+	   //瀑布流加载，进入加载
+        public function loadWater(){
+        	$num=5;
+        	$list=intval($_POST['list']);
+        	$limit=($list*$num).','.$num;
+        	//读取我的联系人
+        	$type=$_POST['type']?$_POST['type']:1;
+        	switch ($type)
+        	{
+        		case 1://全部
+        			$condition='';
+        			break;
+        		case 2://联系人
+        			$condition=model("member_card")->mycardstring($this->auth['id']);
+        			break;
+        		case 3://自己
+        			$condition=$this->auth['id'];
+        			break;
+        	}
+        	//echo $type;
+        	//dump($mycard);
+        	//echo $limit;
+        	//这句sql有bug啊,没有记录怎么办,查询member,feed表
+        	//$result= model('feed')->withBelong('member','mid','id','is_audit = 1 and feed_type in(0,2)','','ctime desc',($list*$num).','.$num);
+        	$result=model('feed')->feed_member($limit,$condition);//不会报错
+        	if(!empty($result)){
+        		include_once(ROOT_PATH.'/avatar/AvatarUploader.class.php');
+        		$au = new AvatarUploader();
+        		foreach ($result as $_k => $_v) {
+        			$result[$_k]['avatar']=$au->getAvatar($_v['mid'],'small');
+        			$picture=model('feed_pic')->find('fid = '.$_v['id']);
+        			if(!empty($picture)){
+        				$result[$_k]['pic']=$picture;
+        			}
+        			if($_v['feed_type']==2){
+        				//转发
+        					//不是原创的心情,
+        					$org_info=  model('feed')->withBelongOne('member','mid','id','id ='.$_v['oid']);
+        					
+        					$org_picture=model('feed_pic')->find('fid='.$org_info['id']);
+        					//dump($org_picture) ;
+        				if(!empty($org_picture)){
+        					$org_info['pic']=$org_picture;
+        				}
+        				
+        				$result[$_k]['org_info']=$org_info;
+        				$result[$_k]['feed_content']=$_v['feed_content'].model('feed')->getRepostCon($_v['fid']);
+        			}
+        			
+        			$result[$_k]['is_zan']=model('feed_digg')->isDigg($this->auth['id'],$_v['id']);//我是否赞过该心情
+        		}
+        		$this->result=$result;
+        		//dump($result);
+        		$this->getUrls();
+        		$this->path=__ROOT__.'/upload/member/feed/';
+        		$this->display();
+        	}
+        	else{
+        		echo 0;
+        	}
+        }
+	         
+        //发布心情
         public function postFeed() {
             if(!$this->isPost()){
                 $this->error('您请求的参数不存在！');
@@ -63,8 +126,9 @@ class indexController extends commonController
                 $data=array();
                 $data['mid']=  $this->auth['id'];
                 $data['feed_content']=$_POST['content'];
-                $data['ctime']=  time();
+                $data['ctime']= time();
                 $data['fid']=$data['fmid']=$data['oid']=-1;//-1是原创心情
+                $data['feed_type']=0;
                 if(model('feed')->insert($data)){
                     require_once ROOT_PATH.'/avatar/AvatarUploader.class.php';
                     $au=new AvatarUploader();
@@ -83,7 +147,7 @@ class indexController extends commonController
                             $this->display();
                         }
                         else{
-                            $this->error('请求数据错误！！');
+                            $this->error('请求数据错误！');
                         }
                     }
                     else{
@@ -93,7 +157,7 @@ class indexController extends commonController
                     }
                 }
                 else{
-                    $this->error('操作失败！！');
+                    $this->error('操作失败！');
                 }
             }
         }
@@ -206,26 +270,10 @@ class indexController extends commonController
             }
         }
 
-        //显示回复框
-        public function showReply() {
-          
-        }
-
-        //提交回复
-        public function postReply() {
-           
-        }
-
-        //显示转发框
-        public function showRepost(){
-        }
-        
-        //瀑布流加载，进入加载
-
         //提交转发
         public function postRepost(){
             if(!$this->isPost()){
-                $this->error('请求数据错误！！');
+                $this->error('请求数据错误！');
             }
             else{
                 $this->getUrls();
@@ -290,47 +338,6 @@ class indexController extends commonController
                 }
         }
 
-        //瀑布流加载
-        public function loadWater(){
-            $num=5;
-            $list=intval($_POST['list']);
-            //这句sql有bug啊
-            $result= model('feed')->withBelong('member','mid','id','is_audit = 1 and feed_type in(0,2)','','ctime desc',($list*$num).','.$num);
-
-             if(!empty($result)){
-                include_once(ROOT_PATH.'/avatar/AvatarUploader.class.php');
-                $au = new AvatarUploader();
-                foreach ($result as $_k => $_v) {
-                    $result[$_k]['avatar']=$au->getAvatar($_v['member']['id'],'small');
-                    $picture=model('feed_pic')->feedPic($_v['id']);
-                    if(!empty($picture)){
-                        $result[$_k]['pic']=$picture;
-                    }
-                    if($_v['feed_type']==2){
-                        $org_info=  model('feed')->withBelongOne('member','mid','id','id = '.$_v['oid']);
-                        $org_picture=model('feed_pic')->feedPic($org_info['id']);
-                        if(!empty($org_picture)){
-                            $org_info['pic']=$org_picture;
-                        }
-                        $result[$_k]['org_info']=$org_info;
-                        $result[$_k]['feed_content']=$_v['feed_content'].model('feed')->getRepostCon($_v['fid']);
-                    }
-                    $result[$_k]['is_zan']=model('feed_digg')->isDigg($this->auth['id'],$_v['id']);
-                        $this->lastTime=$_v['ctime'];
-            }
-            $this->result=$result;
-            $this->getUrls();
-            $this->path=__ROOT__.'/upload/member/feed/';
-            $this->display();
-            }
-            else{
-                return 0;
-            }
-            
-            
-        
-        }
-       
         //异步加载，显示可能认识的人
         public function mayKnow(){
                 if($this->isPost()){
@@ -384,8 +391,6 @@ class indexController extends commonController
        	
        }
        
-       //转发心情
-
        //转发
        public function repost_feed()
        {
@@ -395,26 +400,36 @@ class indexController extends commonController
        		$is_photo=model("feed_pic")->find("fid='{$id}'");
        		$this->photo=$is_photo;
        		$this->result=$result;
+       		$this->getUrls();
        		$this->display();
        	}else{
-       		//有bug
+       		//要判断是否是转发原创的心情
        		$id=intval($_POST['feed_id']);//心情的id
        		$oid=intval($_POST['oid']);//原始心情的id
-       		$fmid=intval($_POST['fmid']);//原始心情的id
-       		$content=in($_POST['content']);
+       		$mid=intval($_POST['mid']);//原始心情的id
+       		$content=$_POST['content'];
        		$data=array();
+       		if($oid==-1){
+       			//转发的是原创心情
+       			$data['oid']=$data['fid']=$id;
+       		}else{
+       			//转发的是已经转发的心情
+       			$data['oid']=$oid;
+       			$data['fid']=$id;
+       		}
+       		$data['fmid']=$mid;
        		$data['mid']=  $this->auth['id'];
-       		$data['fid']=$id;
-       		$data['fmid']=$fmid;
-       		$data['oid']=$oid;
        		$data['feed_content']=$content;
        		$data['feed_type']=2;
        		$data['comment_count']=0;
        		$data['repost_count']=0;
        		$data['praise_count']=0;
-       		$data['ctime']=0;
+       		$data['ctime']=time();
        		$data['is_audit']=1;
-       		if(model('feed')->insert($data)) echo 1;
+       		if(model('feed')->insert($data)){
+       			model('feed')->add_repost($data['oid']);//原转发量增加1
+       			echo 1;
+       		}
        	}
        }
 }

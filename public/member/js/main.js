@@ -132,7 +132,7 @@ $(document).ready(function(){
                     }
                     else{
                             subbtn.html('正在发布');
-                            if(isEmotion!==null){
+                            if(isEmotion!=null){
                                 var content=AnalyticEmotion(content);
                             }
                             $.post(posturl,{content:content,pic_url:pic_url,thumb_pic_url:thumb_pic_url},function(result){
@@ -366,25 +366,30 @@ postComment=function(id){
 //瀑布流加载的函数
 var $num = 0;
 var $list=-1;//第一列不重复显示
+
 function loadwater(){
     var url=$('#water_url').val();
 	var loading=$('#show_feed_loading');
     loading.show();
+	var type=$(".mem_feed_box .result").data("type");//当前的类型
+	//alert(type);
     $num++;
     if($num%5==0){
-        $('#iswater').val(1);  
-       
+        $('#iswater').val(1);//开启加载
     }else{
         $list++;
-         $.post(url,{list:$list},function(result){
+		//第一次加载，$list=0
+		//是否要传输当前的类型，瀑布流都需要加载
+         $.post(url,{list:$list,type:type},function(result){
              if(result==0){
                  $('#iswater').val(2);  
-                 $('#mem_show_water').html("已加载全部");
+                 $('#mem_show_water').html("已全部加载").show();
                  loading.hide();
              }
              else{
 			 	//测试时候使用settimeout延迟显示效果
                setTimeout(function(){
+			   	$('#mem_show_water').hide();
 			   	loading.hide();//隐藏加载图标
 			   	 $('#mem_show_water').before(result);
                 $('#iswater').val(0);
