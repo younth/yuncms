@@ -1,3 +1,4 @@
+<!-- 发布心情ajax返回 -->
 <div class="mem_feed_con">
     <div class="feedlayout mem_clearfix">
         <div class="absolute pic"><a href="#" target="_blank"><img src="{$data_org['avatar']}"></a></div>
@@ -12,7 +13,7 @@
     <div id="feed_zan_num_{$data_org['id']}"  style="float: right;">
         <span  id="msg_zan_num_{$data_org['id']}">
         {if $data_org['member']['id']==$auth['id']}
-        <a href="javascript:" class='delfeed' data-id={$data_org['id']}>删除</a><span class="dot-middle">.</span>
+        <a href="javascript:" class='delfeed' data-id={$data_org['id']} data-url={url('index/delfeed')}>删除</a><span class="dot-middle">.</span>
         {/if}
         <a href="javascript:void(0)" onclick="feedZan({ $data_org['id']},'{$url_zan}')" > 赞</a>&nbsp;
         </span>

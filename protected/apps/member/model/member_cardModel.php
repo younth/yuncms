@@ -10,7 +10,6 @@ class member_cardModel extends baseModel{
 	}
 	
 	//我的联系人，字符串形式
-	//我的联系人总数
 	public function mycardstring($id)
 	{
 		$sql="select send_id as mid from {$this->prefix}member_card where status=2 and rece_id='{$id}' union all select rece_id as mid from {$this->prefix}member_card where status=2 and send_id='{$id}'";
@@ -24,6 +23,7 @@ class member_cardModel extends baseModel{
 		return $myfriend;
 	}
 	
+	//我的联系人总数
 	public function myallcard($id)
 	{
 		$sql="select send_id as mid from {$this->prefix}member_card where status=2 and rece_id='{$id}' union all select rece_id as mid from {$this->prefix}member_card where status=2 and send_id='{$id}'";

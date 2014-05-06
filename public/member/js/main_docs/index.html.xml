@@ -1,0 +1,16 @@
+<?xml-stylesheet type="text/xsl" href="docs.xsl"?><javascript fileName="main.js">
+    <function name="loadwater" scope="static" constructor="false" deprecated="false" private="false" protected="false" ignored="true" internal="false" type="Function">
+        <property name="url" scope="static" constructor="false" deprecated="false" private="false" protected="false" ignored="true" internal="false" type="Object">
+        </property>
+    </function>
+    <function name="memMayKnow" scope="static" constructor="false" deprecated="false" private="false" protected="false" ignored="true" internal="false" type="Function">
+        <property name="url" scope="static" constructor="false" deprecated="false" private="false" protected="false" ignored="true" internal="false" type="Object">
+        </property>
+    </function>
+    <property name="$num" scope="static" constructor="false" deprecated="false" private="false" protected="false" ignored="true" internal="false" type="Number">
+    </property>
+    <property name="$list" scope="static" constructor="false" deprecated="false" private="false" protected="false" ignored="true" internal="false" type="Number">
+    </property>
+    <property name="mayNum" scope="static" constructor="false" deprecated="false" private="false" protected="false" ignored="true" internal="false" type="Number">
+    </property>
+</javascript>

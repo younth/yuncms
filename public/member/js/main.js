@@ -16,7 +16,6 @@ $(document).ready(function(){
 	} 
 	}); 
 	//赞鼠标经过的效果
-	
 	var digg=$(".digg");
 	digg.hover(function(){
 			$(this).html("取消赞");
@@ -24,6 +23,30 @@ $(document).ready(function(){
 			$(this).html("已赞");
 	})
       memMayKnow();
+	  //关闭广告
+	  $(".close").on('click',function(){
+	  	$(".ad").hide();
+	  })
+	  //显示个人图标,各位观众，原生态js登场了！！！
+	  var icon=document.getElementById("medal");
+	  var iconli=icon.getElementsByTagName("li");
+	  var i=0;
+	  for(i=0;i<iconli.length;i++){
+	  	iconli[i].onmouseover=function(){
+			$("span",this).show();
+			$("div",this).show();
+			//用js方法呢
+			//this.getElementsByTagName("span").style.display="block";
+			//this.getElementsByTagName("div").style.display="block";
+		}
+		iconli[i].onmouseout=function(){
+			//this.getElementsByTagName("span").style.display="none";
+			$("span",this).hide();
+			$("div",this).hide();
+			
+		}
+	  }
+	  
     //心情发布框默认文本消除显示
     var post_feed_text=$("#post_feed").data('content');
     $('#post_feed').val(post_feed_text);
@@ -200,31 +223,6 @@ $(document).ready(function(){
             });
         };
         
-        //显示转发框
-        showRepost=function(id,url){
-               var scrHeight=$(window).scrollTop();
-               var bodyHeight=document.body.scrollHeight;
-               var winWidth=$(window).width();
-               var repostWidth=$('#show_repost_con').width();
-               var repostLeft=(winWidth-repostWidth)/2;
-               var topHeight=180+scrHeight;
-               $('#show_repost_con').css({"left":repostLeft,"top":topHeight});
-               $('#show_repost').css({height:bodyHeight});
-               $('#show_repost').show();
-               $('#show_repost_con').fadeIn('slow');
-               $.post(url,{id:id},function(result){
-                   $('#show_repost_a').html(result);
-               });
-        }
-        
-        //关闭转发框
-        closeRepost=function(){
-                $('#show_repost_con').fadeOut('slow');  
-                $('#show_repost').hide();
-           };
-        
-        
-        
         //弹出添加图片的框
           showPic=function(url){
               var loc=$('#pic_show_link').position();
@@ -245,8 +243,7 @@ $(document).on('click','.comment_reply',function(){
 	reply.focus().addClass('focus');
 	reply.val("回复"+name+":");//回复框信息
 	var sub_comment=$("#show_new_comment_"+oid);
-	//.attr({width:"50",height:"80"});
-	sub_comment.find("h3 >a").attr({'data-type':'3','data-repost_id':id});//设置评论的类似，此时是回复类型
+	sub_comment.find("h3 >a").attr({'data-type':'3','data-repost_id':id});//设置评论的类型，此时是回复类型
 	//下面相当于提交评论,不用单独ajax处理
 });
 
@@ -255,6 +252,10 @@ postComment=function(id){
 	var content = $('#post_comment_'+id).val();
 	var type=$('#post_comment_'+id).parent().find("h3 >a").data("type");//评论的类型
 	var rid=$('#post_comment_'+id).parent().find("h3 >a").data("repost_id");//回复评论的id
+	var selectNode=$('#post_comment_'+id).parent().find("h3 input")
+	if (selectNode.is(':checked')) {//选中，则转发
+		var is_repost=1;
+	}else is_repost=0;
 	var isEmotion=content.match(/\[.*?\]/g);
 	if(content===""){
 		$('#show_com_error_'+id).show().text('评论的内容不能为空!');
@@ -264,51 +265,13 @@ postComment=function(id){
 		if(isEmotion!==null){
 			var newcontent=AnalyticEmotion(content);
 		}else newcontent=content;
-		$.post(url,{content:newcontent,id:id,type:type,rid:rid},function(result){
+		$.post(url,{content:newcontent,id:id,type:type,rid:rid,is_repost:is_repost},function(result){
 			$('#show_new_comment_'+id).prepend(result);//插入元素之前
 			$('.emotion_'+id).val('');
 		});
 	}
 };
-       //提交回复
-	postReply=function(id,oid){
-		var content = $('#post_reply_'+id).val();
-		var isEmotion=content.match(/\[.*?\]/g);//心情
-		if(content==""){
-			$('#show_reply_error_'+id).show().text('回复的内容不能为空!');
-		}
-		else{
-			var url=$('#reply_url').val();
-			if(isEmotion!=null){
-				var newcontent=AnalyticEmotion(content);
-			}else newcontent=content;
-			$.post(url,{content:newcontent,id:id,oid:oid},function(result){
-				//alert(result);
-				$('#show_new_comment_'+oid).after(result);
-                                //$('#feed_reply_'+id).hide('slow');
-			});
-		}
-	};
-        //提交转发
-	postRepost=function(id){
-		var content = $('#repost_content').val();
-		var isEmotion=content.match(/\[.*?\]/g);
-		if(content===""){
-			$('#show_repost_error').show().text("评论的内容不能为空!");
-		}
-		else{
-			var url=$('#repost_url').val();
-			if(isEmotion!==null){
-				var newcontent=AnalyticEmotion(content);
-			}else newcontent=content;
-			$.post(url,{content:newcontent,id:id},function(result){
-                                 $('#show_new_feed').after(result);
-				$('#show_repost_con').fadeOut();
-                                $('#show_repost').hide();
-			});
-		}
-	};
-        
+
         //赞
         feedZan=function(id,url){
             $.post(url,{id:id},function(result){
@@ -335,7 +298,7 @@ postComment=function(id){
         });
 
 
-        $(window).scroll(function(){  
+        $(window).scroll(function(){
          //此方法是在滚动条滚动时发生的函数
          // 当滚动到最底部以上100像素时，加载新内容
          var iswater=$('#iswater').val();
@@ -368,7 +331,8 @@ var $num = 0;
 var $list=-1;//第一列不重复显示
 
 function loadwater(){
-    var url=$('#water_url').val();
+	var url=$("#container_index").data("loadurl");
+	//alert(url);return;
 	var loading=$('#show_feed_loading');
     loading.show();
 	var type=$(".mem_feed_box .result").data("type");//当前的类型
@@ -402,6 +366,146 @@ function loadwater(){
      }
      
 }
+
+//删除自己的心情
+$(document).on('click','.delfeed',function(){
+	var feed_id=$(this).data("id");//心情的id
+	var delnode=$(this).parent().parent().parent().parent().parent();
+	var url=$(this).data('url');
+	layer.confirm('确定删除该心情吗？', function(){ 
+		  $.ajax({
+		  type: "GET",
+		  url: url,
+		  data: {
+			id: feed_id,
+		  },
+			 success: function (data) {
+				//
+				layer.msg('删除心情成功！',1,-1);
+				delnode.remove();
+			 },
+			  error: function (msg) {
+					alert(msg);
+			  }
+		});
+
+	});
+});
+
+//ajax切换心情类型
+$(document).on('click', '.mem_feed_tabs li',function(){
+	//点击之后再点击就不行了，这个js bug如何解决呢
+	var url=$("#container_index").data("loadurl");
+	var now=$('a',this);//当前节点
+	var type=now.data('type');
+	var name=now.data('name');
+	var onnode=$(".result");
+	var onname=onnode.data("name");//要显示
+	var ontype=onnode.data("type");
+	
+	var loading=$('#show_feed_loading');
+	loading.show();
+	
+	$(".mem_left .mem_feed_con").remove();
+	  $.ajax({
+		  type: "POST",
+		  url: url,
+		  data: {
+			  type: type,
+		  },
+			 success: function (data) {
+					//如何显示数据
+				 setTimeout(function(){
+					 loading.hide();
+					 now.attr("data-name",onname);
+					 now.attr("data-type",ontype);
+					 now.html(onname);
+					 
+					 onnode.attr("data-name",name);
+					 onnode.attr("data-type",type);
+					 onnode.html(name);
+					 $('#mem_show_water').before(data);
+				},400)
+			
+			 },
+			  error: function (msg) {
+					alert(msg);
+			  }
+		});	
+})
+
+//删除自己的评论
+$(document).on('click','.delcomment',function(){
+	var feed_id=$(this).data("id");//心情的id
+	var oid=$(this).data("oid");//原来的id
+	var url=$(this).data("url");
+	var delnode=$(this).parent().parent().parent();
+	layer.confirm('确定删除该评论吗？', function(){ 
+		  $.ajax({
+		  type: "GET",
+		  url: url,
+		  data: {
+			id: feed_id,
+			oid:oid,
+		  },
+			 success: function (data) {
+				//评论数减一应该用ajax体现
+				layer.msg('删除评论成功！',1,-1);
+				delnode.remove();
+			 },
+			  error: function (msg) {
+					alert(msg);
+			  }
+		});
+
+	});
+});
+
+//ajax转发心情,不涉及php代码，方便转移
+$(function(){
+	$("#repost_feed").focus().addClass('focus');//转发获得焦点
+	$(document).on('click','.mem_feed_submit',function(){
+		var content=$("#repost_feed").val();
+		var isEmotion=content.match(/\[.*?\]/g);
+		if(isEmotion) var content=AnalyticEmotion(content);//判断有没有表情	
+		//alert(content);return;
+		if(content==""){$(".showerror").show().html("内容不能为空");$("#repost_feed").focus();return;}
+		
+		var feed_id=$(this).data('id');
+		var oid=$(this).data('oid');
+		var mid=$(this).data('mid');
+		var url=$(this).data('url');//解决了url动态路径问题
+		//ajax转发
+		  $.ajax({
+			  type: "POST",
+			  url: url,
+			  data: {
+				content: content,
+				feed_id:feed_id,
+				oid:oid,
+				mid:mid,
+			  },
+				 success: function (data) {
+					 //alert(data);
+					var i = parent.layer.getFrameIndex(window.name);
+					layer.msg('转发心情成功~',1,-1);
+					//做成ajax显示
+					//延迟执行
+					setTimeout(function(){
+							parent.layer.close(i);
+						}, 500);					
+				
+				},
+				  error: function (msg) {
+						alert(msg);
+				  }
+			});
+			
+	});
+})
+
+
+
 var mayNum=0; 
 
 //可能认识的人加载的函数
@@ -421,8 +525,3 @@ function memMayKnow(){
         }
     });
 }
-
-
-
-
-

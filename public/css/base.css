@@ -1486,7 +1486,8 @@ h1,h2,h3,h4,h5,h6{ margin: 0px; padding: 0px; font-weight: normal;}
 }
 
 #container_index,#container,#header {
-	min-width: 980px
+	min-width: 980px;
+	height:auto;
 }
 
 #header .header_menu_two ul.right_menu li .messages_list .contacts_main li ul.star_list {

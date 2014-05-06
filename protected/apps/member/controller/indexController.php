@@ -4,7 +4,6 @@
  * */
 class indexController extends commonController
 {
-
 	    public function __construct()
 		{
 			parent::__construct();
@@ -19,10 +18,6 @@ class indexController extends commonController
 			$this->url_postfeed=  url('index/postfeed');
 			$this->url_showcomment=  url('index/showcomment');
 			$this->url_postcomment=  url('index/postcomment');
-			$this->url_showreply=  url('index/showreply');
-			$this->url_postreply=  url('index/postreply');
-			$this->url_showrepost=  url('index/showrepost');
-			$this->url_postrepost=  url('index/postrepost');
 			$this->url_zan=  url('index/zan');
 			$this->url_losezan=  url('index/losezan');
 			$this->url_showpic=  url('index/showpic');
@@ -74,7 +69,6 @@ class indexController extends commonController
         	}
         	//echo $type;
         	//dump($mycard);
-        	//echo $limit;
         	//这句sql有bug啊,没有记录怎么办,查询member,feed表
         	//$result= model('feed')->withBelong('member','mid','id','is_audit = 1 and feed_type in(0,2)','','ctime desc',($list*$num).','.$num);
         	$result=model('feed')->feed_member($limit,$condition);//不会报错
@@ -88,22 +82,19 @@ class indexController extends commonController
         				$result[$_k]['pic']=$picture;
         			}
         			if($_v['feed_type']==2){
-        				//转发
-        					//不是原创的心情,
-        					$org_info=  model('feed')->withBelongOne('member','mid','id','id ='.$_v['oid']);
-        					
-        					$org_picture=model('feed_pic')->find('fid='.$org_info['id']);
-        					//dump($org_picture) ;
+        				//显示转发的心情
+        				$org_info=  model('feed')->withBelongOne('member','mid','id','id ='.$_v['oid']);
+        				//dump($org_info);
+        				$org_picture=model('feed_pic')->find('fid='.$org_info['id']);
         				if(!empty($org_picture)){
         					$org_info['pic']=$org_picture;
         				}
-        				
         				$result[$_k]['org_info']=$org_info;
         				$result[$_k]['feed_content']=$_v['feed_content'].model('feed')->getRepostCon($_v['fid']);
         			}
-        			
         			$result[$_k]['is_zan']=model('feed_digg')->isDigg($this->auth['id'],$_v['id']);//我是否赞过该心情
         		}
+        		//dump($result);
         		$this->result=$result;
         		//dump($result);
         		$this->getUrls();
@@ -243,11 +234,11 @@ class indexController extends commonController
             else{
                 $this->getUrls();
                 $content=(string)$_POST['content'];
+                $is_repost=intval($_POST['is_repost']);//是否转发，0否1是
                 $id=$_POST['id'];
-                $data_org=  model('feed')->find('id = '.$id);
-
+                $data_org= model('feed')->find('id = '.$id);//原心情
                 $data=array();
-                $data['mid']=  $this->auth['id'];
+                $data['mid']= $this->auth['id'];
                 $data['fid']=$id;
                 $data['fid']=$_POST['rid']?$_POST['rid']:$id;
                 $data['fmid']=$data_org['mid'];
@@ -255,6 +246,11 @@ class indexController extends commonController
                 $data['feed_content']=$content;
                 $data['feed_type']=intval($_POST['type']);//回复类型
                 $data['ctime']= time();
+                
+                if(is_repost){
+                	//转发
+                	$this->_repost($id, $data_org['mid'], $data_org['oid'], $content);
+                }
                 if(model('feed')->insert($data)){
                     $fdata=array();
                     $fdata['comment_count']=$data_org['comment_count']+1;
@@ -263,50 +259,6 @@ class indexController extends commonController
                         $au=new AvatarUploader();
                         $result= model('feed')->withBelongOne('member','mid','id','ctime = '.$data['ctime'],'','ctime desc');
                         $result['avatar']=$au->getAvatar($result['member']['id'],'small');
-                        $this->result=$result;
-                        $this->display();
-                    }
-                }
-            }
-        }
-
-        //提交转发
-        public function postRepost(){
-            if(!$this->isPost()){
-                $this->error('请求数据错误！');
-            }
-            else{
-                $this->getUrls();
-                $id=$_POST['id'];
-                $content=(string)$_POST['content'];
-                $data_father=model('feed')->find('id = '.$id);
-
-                $data=array();
-                $data['mid']=$this->auth['id'];
-                $data['fid']=$id;
-                $data['fmid']=$data_father['mid'];
-                if(empty($data_father['fid'])){
-                    $data['oid']=$id;
-                }
-                else{
-                    $data['oid']=$data_father['oid'];
-                }
-                $data['feed_content']=$content;
-                $data['feed_type']=2;
-                $data['ctime']=  time();
-                if(model('feed')->insert($data)){
-                    $fdata=array();
-                    $fdata['repost_count']=$data_father['repost_count']+1;
-                    if(model('feed')->update('id = '.$id,$fdata)){
-                        require_once ROOT_PATH.'/avatar/AvatarUploader.class.php';
-                        $au=new AvatarUploader();
-                        $result=  model('feed')->withBelongOne('member','mid','id','ctime = '.$data['ctime']);
-                        $result['avatar']=$au->getAvatar($result['member']['id'],'small');
-                        $org_info=model('feed')->withBelongOne('member','mid','id','id = '.$result['oid']);
-                        $org_info['avatar']=$au->getAvatar($org_info['member']['id'],'small');
-                        $result['org']=$org_info;
-                        $result['pic']=model('feed_pic')->feedPic($org_info['id']);
-                        $result['feed_content']=$result['feed_content'].model('feed')->getRepostCon($result['fid']);
                         $this->result=$result;
                         $this->display();
                     }
@@ -326,7 +278,7 @@ class indexController extends commonController
                 }   
         }
 
-        //显示图片上传
+        //删除图片上传
         public function delPic() {
                 $filename = $_POST['imagename'];
                 if(!empty($filename)){
@@ -395,6 +347,7 @@ class indexController extends commonController
        public function repost_feed()
        {
        	if(!$this->isPost()){
+       		
        		$id=intval($_GET['id']);
        		$result= model('feed')->withBelongOne('member','mid','id','id = '.$id);
        		$is_photo=model("feed_pic")->find("fid='{$id}'");
@@ -406,30 +359,39 @@ class indexController extends commonController
        		//要判断是否是转发原创的心情
        		$id=intval($_POST['feed_id']);//心情的id
        		$oid=intval($_POST['oid']);//原始心情的id
-       		$mid=intval($_POST['mid']);//原始心情的id
+       		$mid=intval($_POST['mid']);//心情的发布者
        		$content=$_POST['content'];
-       		$data=array();
-       		if($oid==-1){
-       			//转发的是原创心情
-       			$data['oid']=$data['fid']=$id;
-       		}else{
-       			//转发的是已经转发的心情
-       			$data['oid']=$oid;
-       			$data['fid']=$id;
-       		}
-       		$data['fmid']=$mid;
-       		$data['mid']=  $this->auth['id'];
-       		$data['feed_content']=$content;
-       		$data['feed_type']=2;
-       		$data['comment_count']=0;
-       		$data['repost_count']=0;
-       		$data['praise_count']=0;
-       		$data['ctime']=time();
-       		$data['is_audit']=1;
-       		if(model('feed')->insert($data)){
-       			model('feed')->add_repost($data['oid']);//原转发量增加1
-       			echo 1;
-       		}
+       		if(empty($id)) return;//用这个修复自己提供bug
+       		//echo "<script>alert(1);</script>";return;
+       		$this->_repost($id, $mid, $oid, $content);
+       		echo 1;
        	}
        }
+      
+       //转发类，注意参数，用于转发和评论转发
+      protected function _repost($id,$mid,$oid,$content){
+      	$data=array();
+      	if($oid==-1){
+      		//转发的是原创心情
+      		$data['oid']=$data['fid']=$id;
+      	}else{
+      		//转发的是已经转发的心情
+      		$data['oid']=$oid;
+      		$data['fid']=$id;
+      	}
+      	$data['fmid']=$mid;
+      	$data['mid']=  $this->auth['id'];
+      	$data['feed_content']=$content;
+      	$data['feed_type']=2;
+      	$data['comment_count']=0;
+      	$data['repost_count']=0;
+      	$data['praise_count']=0;
+      	$data['ctime']=time();
+      	$data['is_audit']=1;
+      	if(model('feed')->insert($data)){
+      		model('feed')->add_repost($data['oid']);//原转发量增加1
+      	}
+      }
+
+      
 }

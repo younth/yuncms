@@ -15,7 +15,7 @@
             <div id="feed_zan_num_{$_v['id']}" style="float: right;">
         <span  id="msg_zan_num_{$_v['id']}" >
          {if $_v['mid']==$auth['id']}
-        <a href="javascript:" class='delfeed' data-id={$_v['id']}>删除</a><span class="dot-middle">.</span>
+        <a href="javascript:" class='delfeed' data-id={$_v['id']} data-url={url('index/delfeed')}>删除</a><span class="dot-middle">.</span>
         {/if}
         {if $_v['is_zan']==1}
         <a href="javascript:void(0)" onclick="feedLoseZan({$_v['id']},'{$url_losezan}')" style="color:#999;"><span  class="digg">已赞</span>{if $_v['praise_count']!=0} ({$_v['praise_count']}){/if}</a>
@@ -68,7 +68,7 @@
     <div id="feed_zan_num_{$_v['id']}" style="float: right;">
         <span  id="msg_zan_num_{$_v['id']}">
         {if $_v['mid']==$auth['id']}
-        <a href="javascript:" class='delfeed' data-id={$_v['id']}>删除</a><span class="dot-middle">.</span>
+        <a href="javascript:" class='delfeed' data-id={$_v['id']} data-url={url('index/delfeed')}>删除</a><span class="dot-middle">.</span>
         {/if}
         {if $_v['is_zan']==1}
         <a href="javascript:void(0)" onclick="feedLoseZan({$_v['id']},'{$url_losezan}')" > 取消赞{if $_v['praise_count']!=0} ({$_v['praise_count']}){/if}</a>
@@ -89,7 +89,5 @@
        
 </div>
 </div>
-   	
-   	
     {/if}
 {/loop}

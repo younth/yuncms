@@ -14,14 +14,13 @@
     <h4 style="text-align: right;">
     
          {if $_v['membermid']['id']==$auth['id']}
-        <a href="javascript:" class='delcomment' data-id={$_v['id']} data-oid={$_v['oid']}>删除</a>
+        <a href="javascript:" class='delcomment' data-id={$_v['id']} data-oid={$_v['oid']} data-url={url('index/delfeed')}>删除</a>
         {else}
         <a href="javascript:void(0)" click="showReply({$_v['id']},'{$url_showreply}')" data-id={$_v['id']} data-oid={$id}  data-name="{$_v['membermid']['uname']}" class="comment_reply">回复</a>
         {/if}
     
     </h4>
     </div>
-            
     </div>
  {/loop}
  {if $total>10}
@@ -31,7 +30,7 @@
             <textarea id="post_comment_{$id}" class="emotion_{$id} mem_com_textarea"></textarea>
     <h3>
   
-    <input type="checkbox" class="checkbox send-micro-blog"><label class="checkbox g9">同时转发到我的状态</label>
+    <input type="checkbox" class="checkbox send-micro-blog" ><label class="checkbox g9">同时转发到我的状态</label>
     
     <a class="mem_com_submit" href="javascript:" onclick="postComment('{$id}')" style="color:#ffffff;" data-type=1>发布</a>
     <span class="mem_feed_face"><a href="javascript:void(0);" id="face_{$id}" ></a></span>
@@ -43,33 +42,3 @@
     
         <div id="show_com_error_{$id}" class="showerror"></div>
         </div>
-        
-<script>
-//删除自己的评论
-$(document).on('click','.delcomment',function(){
-	var feed_id=$(this).data("id");//心情的id
-	var oid=$(this).data("oid");//原来的id
-	var delnode=$(this).parent().parent().parent();
-	layer.confirm('确定删除该评论吗？', function(){ 
-		  $.ajax({
-		  type: "GET",
-		  url: "{url('index/delfeed')}",
-		  data: {
-			id: feed_id,
-			oid:oid,
-		  },
-			 success: function (data) {
-				//评论数减一应该ajax体现
-				layer.msg('删除评论成功！',1,-1);
-				delnode.remove();
-			 },
-			  error: function (msg) {
-					alert(msg);
-			  }
-		});
-
-	});
-});
-
-
-</script>
