@@ -12,24 +12,26 @@
     hs.showCredits = false;
     hs.outlineType = 'rounded-white';
     hs.restoreTitle = '关闭';
+    //hs.marginLeft='300';//很诡异啊
 </script>
         
 
 <!---获取链接的input,建议采用html的data自定义---->
 <div id="container_index"  data-loadurl={$url_loadwater}>
+
+
 <input type="hidden" value="0" id="iswater" />
 <input type="hidden" value="{$url_postcomment}" id="com_url"/>
 <input type="hidden" value="{$url_postfeed}" id="post_url" />
 <input type="hidden" value="{$url_mayknow}" id="mayknow_url" />
-<div class="member_main">
+
 		<!-- 心情开始 -->
-	    <div class="member_mainbg">
         <div class="mem_left_all" id="mem_left_all">
-        
+        	<!-- ad start-->
    			<div class="ad" >
    			<!-- expire是日期，比较高级-->
    			<a href="javascript:void(0);" class="close">x</a>
-   			<img src="__PUBLICAPP__/images/ad.jpg" />
+   			<a href="javascript:;"><img src="__PUBLICAPP__/images/ad_main.jpg" /></a>
    			</div>
             
  <div class="mem_left pubfeed" id="index_publish">
@@ -90,11 +92,11 @@
 
 </div>
     </div>
-		<!-- 左边心情结束 -->
+		<!-- 心情结束 -->
 		
 		<!-- 右侧开始 -->
-		<!-- ad start-->
 		<div class="mem_right_all">
+			<!-- ad start-->
 			<div class="right_ad"><img src="__PUBLICAPP__/images/ad_right.jpg" /></div>
 			<!-- ad_right end -->
 			<!-- home start -->
@@ -102,12 +104,12 @@
     <div class="poster_panel">
       <dl class="poster_mian">
         <span class="poster">
-          <a href="/p/61506812" hide_card="true" title="王洋, 就读于反对法"><img alt="3366318" src="http://image.tianji.com/u/61506812/3366318.jpg"></a>
+          <a href="/p/61506812" hide_card="true" title=""><img alt="" src="{$my['avatar']}"></a>
         </span>         
         <span class="user_mian p65 png_ie6"></span>
       </dl>
-      <span class="name"><a href="/p/61506812" class="a_name" hide_card="true" title="王洋, 就读于反对法">王洋</a></span>
-      <span class="title" title="就读于反对法">就读于反对法</span>
+      <span class="name"><a href="/p/61506812" class="a_name" hide_card="true" title="{$my['school']}">{$my['uname']}</a></span>
+      <span class="title" title="{$my['school']}">{$my['school']}</span>
       <span class="title">个人资料完整度</span>
       <span class="schedule_panel">67%</span>
       <a href="/p/edit" title="继续完善" class="impove_btn">继续完善</a>
@@ -174,16 +176,78 @@
     
   </div>
 		<!-- home end -->
-			
+		
+		<div class="sign-in" id="checkdiv">
+	<span class="datetime"><em class="date">05.07</em>
+	<em class="week">周三</em></span>
+	<em class="day">DAYS</em>
+	<em class="num" id="con_num_day">0</em>
+<em href="javascript:void(0)" id="checkin" onclick="checkin()" class="btn-sign">签到</em>
+   <div class="sign-wrap" style="display:none" id="checkdetail">
+      <i class="arrow-y"></i>
+      <div class="sign-box">
+	    <h3 id="checkinfo">未签到</h3>
+	    <div class="sign-info"><p>已连续签到<font id="con_num">0</font>天，累计签到<font id="total_num">8</font>天</p></div>
+		      </div>
+		   </div>
+		</div>
+
+	<div class="right_panel mt20" id="pymk_right_position">
+		<h4>
+		<span class="new_title">可能感兴趣的人</span>
+		<a href="javascript:void(0);" id="j_pymk_right_change" class="chekcout_ones png_ie6" title="换一换" onclick="memMayKnow()" data-url={url("index/mayknow")}></a>
+		</h4>    
+		<div class="content" id="pymk_div">
+
+		</div>
+		<div class="clear"></div>
 	</div>
-	<!-- right end -->
-		
-		
-		
-</div>
+
+	<div class="right_panel mt20">
+    <h4>
+      <span class="new_title">可能感兴趣的任务</span>
+      <a href="/mba" class="more_btn" title="更多">更多</a>
+    </h4>
+    <div class="content">
+      <ul class="interestkclist">
+          <li>
+              <a href="http://www.tianji.com/events/278405" target="_blank" title="【UBI工商管理公开课】—领导力的发展">【UBI工商管理公开课】—领导力的发展</a>
+          </li>
+          <li>
+              <a href="http://www.tianji.com/events/278405" target="_blank" title="【UBI工商管理公开课】—领导力的发展">【UBI工商管理公开课】—领导力的发展</a>
+          </li>
+          <li>
+              <a href="http://www.tianji.com/events/278405" target="_blank" title="【UBI工商管理公开课】—领导力的发展">【UBI工商管理公开课】—领导力的发展</a>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
 	
+<div class="right_panel mt20">
+    <h4>
+      <span class="new_title">可能感兴趣的公司</span>
+      <a href="http://job.tianji.com/sr/home/positionYouMayLike" class="more_btn" title="更多">更多</a>
+    </h4>
+    <div class="content"><ul class="interestjoblist" id="jymi_div">    
+     {loop $rec_follow $key $vo}  
+    <li>
+        <span class="logo">          
+            <a href="{url('index/show',array('id'=>$vo['id']))}" hide_card="true" title="{$vo['name']}"><img alt="" src="{$path}{$vo['logo']}"></a>
+        </span>
+        <span class="title">
+          <a href="http://job.tianji.com/career/position/45331" target="_blank" class="ellipsis" title="{$vo['name']}">{$vo['name']}</a>
+        </span>
+        <span class="title">重庆&nbsp;|&nbsp;{$vo['name']}&nbsp;&nbsp;</span>
+      </li>
+       {/loop}    
 
-
+</ul></div>
+  </div>
+	</div>
+	
+		<!-- right end -->
+<div class="clear"></div>
 <!---显示图片框的div-->
 <div class="mem_pic_frame" id="show_pic_frame" style="">
     <div class="mem_feed_jiantou_a" style="margin-top:-8px; left: 7px;">
@@ -198,7 +262,7 @@
 </div>
 </div>
 
-</div>
+
    <script>
    //转发心情
    $(document).on('click', '.repost_feed',function(){
@@ -215,5 +279,4 @@
        });
    });
 </script>
-   	
 {include file="footer"}

@@ -10,7 +10,7 @@
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/emotions/css/jquery.sinaEmotion.css" />
 <title>转发</title>
 <script type="text/javascript" src="__PUBLIC__/emotions/js/jquery.sinaEmotion.js"></script>
-<script src="__PUBLICAPP__/js/main.js" type="text/javascript"></script> 
+<script src="__PUBLICAPP__/js/main.js" type="text/javascript"></script>
 </head>
 <body>
 <div class="transpondMain">
@@ -47,6 +47,5 @@
     <span style="display:none;" id="post_msg_wait"></span>
      </div>     
 </div>
-
 </body>
 </html>

@@ -11,7 +11,7 @@ class feedbackController extends commonController
         $url=url('feedback/index',array('page'=>'{page}'));
         $limit=$this->pageLimit($url,$listRows); 
         
-        $sortlist=model('feedback')->select('','id,title,email,ctime','ctime DESC',$limit);
+        $sortlist=model('feedback')->select('','id,email,ctime','ctime DESC',$limit);
         $count=model('feedback')->count(); 
         $this->list=$sortlist;
         $this->t_name='留言';
@@ -82,7 +82,6 @@ class feedbackController extends commonController
     		$data['uid']=-1;//代表系统管理员
     		$data['type']=-1;
     		$data['email']=$email;//收信人
-    		$data['title']=$_POST['title'];//主题
     		//内容
     		if (get_magic_quotes_gpc()) {
     			$data['body'] = stripslashes($_POST['body']);
@@ -90,8 +89,9 @@ class feedbackController extends commonController
     			$data['body'] = $_POST['body'];
     		}
     		$data['ctime']=time();
+    		$title="91频道回复邮件";
     		Email::init($config['EMAIL']);//初始化邮箱配置
-    		$re=Email::send($data['email'], $data['title'], $data['body']);
+    		$re=Email::send($data['email'], $title, $data['body']);
     		if($re)
     		{
     			//写入系统邮件记录

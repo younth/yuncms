@@ -464,7 +464,7 @@ a.s-button-normal:hover span {
     padding: 0;
 }
 .dj-networks .dj-content-inner {
-    background-image: url("../images/network-banner.png");
+    background-image: url("../images/network-banner.png");/*暂时不用*/
 }
 .dj-networks a.green, .dj-networks a.high:visited {
     color: #86B5D7;
@@ -499,6 +499,7 @@ a.s-button-normal:hover span {
 .public-border {
     border: 1px solid #DDDDDD;
 }
+
 #dj-content-wrap.public-no-title {
     padding-top: 0;
 }
@@ -791,3 +792,17 @@ button.dj-btn {
     visibility: hidden;
 }
 */
+
+.dj-btn-main {
+    background-color: #FBD329;
+    background-image: linear-gradient(to bottom, #FEE989, #FFD41E);
+    border: 1px solid #E7A33B;
+    color: #333333;
+}
+.dj-btn-main:hover, .dj-btn-main:focus {
+    background-color: #FDC221;
+    background-image: linear-gradient(to bottom, #FEE77F, #FFC321);
+    border: 1px solid #EB9A1D;
+    color: #333333;
+    text-decoration: none;
+}

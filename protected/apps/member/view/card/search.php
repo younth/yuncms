@@ -126,7 +126,8 @@ $(function(){
 
 <script>
 $(document).on( "keypress","#searchText", function (e) {
-        if (e.keyCode == 13) {
+//e是事件对象
+    if (e.keyCode == 13) {
             compositeSearch();
         }
     });
@@ -241,8 +242,6 @@ var $resultBox = $("#icardm-con");//搜索结果
     }
 </script>
 <script>
-
-
 		function addfriend(id)
 		{
 			var node='friend'+id;

@@ -61,7 +61,7 @@
              
              <ul class="right_menu" style="">
              <!-----通过ajax请求查看----->
-          <li id="contacts_one" class="contacts contacts_loaded">
+          <li id="contacts_one" class="contacts contacts_loaded" data-url={url('member/message/friend_notice')}>
             <a href="{url('member/message/index')}" class="icon_01" target="_self">
                 <div class="clear"></div>
                 {if $undo_count==0}
@@ -84,7 +84,7 @@
                       </li>
           
           
-<li class="message look_see1_loaded" id="look_see1">
+<li class="message look_see1_loaded" id="look_see1" data-url={url('message/msg_notice')}>
             <a target="_self" class="icon_01" href="{url('member/message/index')}">
                 <div class="clear"></div>
                 {if $unread==0}
@@ -114,197 +114,8 @@
 
           </li>
         </ul>
-             
                         <div class="clear"> </div>
                     </div>
                </div>
             </div>
         </div>
-        
-<script>
-$(document).on("mouseover","#contacts_one",notice_friend);
-var timer=null;//全局变量，定时器
-function notice_friend(){
-	var load_notice=$("#contacts_one .loding_notice");
-	var contact_notice=$("#contacts_one .contacts_main");
-	var show_li=$("#new_header");
-	var no_notice=$("#contacts_one .promit_no");
-		$("#contacts_one_list").slideDown(100);//显示通知区域
-		$("#contacts_one").addClass("contacts_hover");
-		//要使用ajax加载
-		contact_notice.hide();	
-		if($("#new_header li").length>0){
-		contact_notice.show();
-		}else{
-			load_notice.show();//显示加载框
-				//ajax请求数据，然后显示，隐藏加载通知
-			//没有元素，则ajax请求,此处用setTimeout演示ajax的回调
-			  $.ajax({
-			  type: "GET",
-			  url: "{url('member/message/friend_notice')}",
-				 success: function (data) {
-					 //没有通知，则显示没有收到人脉请求
-					 load_notice.hide();
-					 if(data==1){
-						no_notice.show();//显示没有人脉请求,有个bug
-						
-					}else{
-						contact_notice.empty();//清空之前的内容，防止浏览器缓存保留
-						//显示加载的数据
-						show_li.append(data);	
-						contact_notice.show();//显示通知区域
-					}
-				 },
-				  error: function (msg) {
-						alert(msg);
-				  }
-			});
-			
-		}
-}
-
-//鼠标离开私信的通知区域
-$(document).on("mouseleave","#contacts_one",function(){
-	timer=setTimeout(function(){
-		$("#contacts_one_list").slideUp(100);
-		},400)
-	$("#contacts_one").removeClass("contacts_hover");
-});
-
-//鼠标在通知区域时候显示
-$(document).on("mouseover","#contacts_one_list",function(){
-		clearTimeout(timer);
-	});
-
-
-$("#new_header li").hover(function(){
-	$(this).addClass("current").siblings().removeClass("current");
-});
-
-//点击删除通知
-$(document).on("click",".bi_x1",function(){
-	var delnode=$(this).parent();
-	var card_id=delnode.data("id");
-		  $.ajax({
-		  type: "GET",
-		  url: "{url('member/message/del_friend_notice')}",
-		  data: {
-			id: card_id,
-		  },
-			 success: function (data) {
-				 //没有通知，则显示没有收到人脉请求
-				delnode.remove();
-			 },
-			  error: function (msg) {
-					alert(msg);
-			  }
-		});
-})
-
-
-$(document).on("click",".agree_btn",function(){
-	var delnode=$(this).parent();
-	var card_id=delnode.data("id");
-		  $.ajax({
-		  type: "GET",
-		  url: "{url('member/card/addfriend')}",
-		  data: {
-			id: card_id,
-		  },
-			 success: function (data) {
-				 //没有通知，则显示没有收到人脉请求
-				delnode.remove();
-			 },
-			  error: function (msg) {
-					alert(msg);
-			  }
-		});
-})
-
-
-//接受邀请
-	$(document).on("click",".agree_btn",function(){
-		var node=$(this).parent();
-		var  $send_id=node.data("userid");
-	$.ajax({
-	  url: "{url('card/accept')}",
-	  data: {
-		id: $send_id,
-	  },
-		 success: function (data) {
-			//成功返回数据,不能用this
-			 node.remove();
-		 },
-		  error: function (msg) {
-				alert(msg);
-		  }
-	});
-	
-});
-
-
-</script>
-
-<script>
-//私信通知
-$(document).on("mouseover","#look_see1",function(){
-	var load_notice=$("#look_see1 .loding_notice");
-	var contact_notice=$("#look_see1 .contacts_main");
-	var show_li=$("#new_header_message");
-	var no_notice=$("#look_see1 .promit_no");
-		$("#look_list1").slideDown(100);//显示通知区域
-		$("#look_see1").addClass("contacts_hover");
-		//要使用ajax加载
-		contact_notice.hide();	
-		if($("#new_header_message li").length>0){
-		contact_notice.show();
-		}else{
-			load_notice.show();//显示加载框
-				//ajax请求数据，然后显示，隐藏加载通知
-			  $.ajax({
-			  type: "GET",
-			  url: "{url('member/message/msg_notice')}",
-				 success: function (data) {
-					 //没有通知，则显示没有收到人脉请求
-					 //alert(data);
-					 load_notice.hide();
-					 if(data==1){
-						no_notice.show();//显示没有人脉请求,有个bug
-						
-					}else{
-						contact_notice.empty();//清空之前的内容，防止浏览器缓存保留
-						//显示加载的数据
-						show_li.append(data);	
-						contact_notice.show();//显示通知区域
-					}
-				 },
-				  error: function (msg) {
-						alert(msg);
-				  }
-			});
-			//没有元素，则ajax请求,此处用setTimeout演示ajax的回调
-			contact_notice.show();//显示通知区域
-		}
-});
-
-//鼠标离开私信的通知区域
-$(document).on("mouseleave","#look_see1",function(){
-	timer=setTimeout(function(){
-		$("#look_list1").slideUp(100);	
-	},400);
-	$("#look_see1").removeClass("contacts_hover");
-});
-
-//鼠标在通知区域移动时候
-$(document).on("mouseover","#look_list1",function(){
-	clearTimeout(timer);
-});
-
-
-
-$("#new_header_message li").hover(function(){
-	$(this).addClass("current").siblings().removeClass("current");
-});
-
-
-</script>

@@ -99,7 +99,6 @@ $(document).on('click','.del-btn',function(){
 	var id=$(this).data("id");//私信记录的id
 	var name=$(this).data("name");//私信记录的id
 	var node="#"+id;
-	layer.confirm('确定删除该私信记录吗？', function(){ 
 		  $.ajax({
 		  type: "GET",
 		  url: "{url('member/message/del_detailmsg')}",
@@ -114,8 +113,6 @@ $(document).on('click','.del-btn',function(){
 					alert(msg);
 			  }
 		});
-
-	});
 })
 
 

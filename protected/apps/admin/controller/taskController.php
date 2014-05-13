@@ -35,11 +35,14 @@ class taskController extends commonController{
 				} else {
 					$data['content'] = $_POST['content'];
 				}
+            $data['obtain_gold']=intval($_POST['obtain_gold']);
+            $data['consume_gold']=intval($_POST['consume_gold']);
+            $data['certification_way']=in($_POST['certification_way']);
             $data['reminder']=$_POST['reminder'];
+            $data['score']=in($_POST['score']);
             $data['way']=$_POST['way'];
-            $data['starttime']=intval(strtotime($_POST['starttime']));
-            $data['endtime']=  intval(strtotime($_POST['endtime']));
             $data['ctime']=  time();
+            $data['author']=$_SESSION['admin_username'];
             if(model('task_base')->insert($data)){
                 $this->success('添加任务成功！',  url('task/index'));
             }else{
@@ -56,7 +59,6 @@ class taskController extends commonController{
             $tid=$_GET['tid'];
         if(!$this->isPost()){
             $result=  model('task_base')->find('id= '.$tid);
-//            dump($result);
             $this->h_name="编辑任务";
             $this->result=$result;
             $this->display('task/add');
@@ -71,11 +73,14 @@ class taskController extends commonController{
 				} else {
 					$data['content'] = $_POST['content'];
 				}
+			$data['obtain_gold']=intval($_POST['obtain_gold']);
+			$data['consume_gold']=intval($_POST['consume_gold']);
+			$data['certification_way']=in($_POST['certification_way']);
             $data['reminder']=$_POST['reminder'];
+            $data['score']=in($_POST['score']);
             $data['way']=$_POST['way'];
-            $data['starttime']=intval(strtotime($_POST['starttime']));
-            $data['endtime']=  intval(strtotime($_POST['endtime']));
             $data['ctime']=  time();
+            $data['author']=$_SESSION['admin_username'];
             if(model('task_base')->update('id ='.$tid,$data)){
                 $this->success('编辑任务成功！',  url('task/index'));
             }else{

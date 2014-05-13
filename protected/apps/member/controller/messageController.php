@@ -126,7 +126,7 @@ class messageController extends commonController
 		}
 	}
 
-	//删除私信记录，一方删除，另一方应该还保留
+	//删除私信记录，一方删除，另一方应该还保留，因为通信是双方的
 	public function delmsg()
 	{
 		echo 1;
@@ -191,13 +191,15 @@ class messageController extends commonController
 			echo 1;
 		}else{
 		$count=count($undo);
+		$cancel_url=url('message/del_friend_notice');
+		$agreeurl=url('card/accept');
 		$html='';
 		for($i=0;$i<$count;$i++){
 			$sender=model("member")->user_profile($undo[$i]['send_id'],'');
 			$html.='<li data-userid="'.$undo[$i]['send_id'].'" data-id="'.$undo[$i]['id'].'" class=""> <span class="logo1"><a class="goToProfile" target="_blank" href="#"><img src="'.$sender['small'].'"></a></span> ';
 			$html.='<span class="name1_title"><a href="#" target="_blank" class="goToProfile">'.$sender['uname'].'</a> </span>';
 			$html.='<ul class="star_list"><li class="png_ie6"></li><li class="png_ie6"></li><li class="png_ie6"></li><li class="png_ie6"></li><li class="png_ie6"></li></ul>';
-			$html.='<span class="name1_companies">'.$sender['school'].'&nbsp;&nbsp;'.$sender['major'].'</span><span class="bi_x1"></span><a href="javascript:void(0);" class="agree_btn">同意</a></li>';
+			$html.='<span class="name1_companies">'.$sender['school'].'&nbsp;&nbsp;'.$sender['major'].'</span><span class="bi_x1" data-url='.$cancel_url.'></span><a href="javascript:void(0);" class="agree_btn" data-url='.$agreeurl.'>同意</a></li>';
 		}
 		echo $html;
 		}

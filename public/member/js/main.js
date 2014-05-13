@@ -15,6 +15,8 @@ $(document).ready(function(){
 		$(this).removeClass("focus");
 	} 
 	}); 
+	//转发心情
+	$("#repost_feed").focus().addClass('focus');//转发获得焦点
 	//赞鼠标经过的效果
 	var digg=$(".digg");
 	digg.hover(function(){
@@ -27,22 +29,30 @@ $(document).ready(function(){
 	  $(".close").on('click',function(){
 	  	$(".ad").hide();
 	  })
-	  //显示个人图标,各位观众，原生态js登场了！！！
+	  //显示个人图标
 	  var icon=document.getElementById("medal");
 	  var iconli=icon.getElementsByTagName("li");
 	  var i=0;
 	  for(i=0;i<iconli.length;i++){
 	  	iconli[i].onmouseover=function(){
-			$("span",this).show();
-			$("div",this).show();
-			//用js方法呢
-			//this.getElementsByTagName("span").style.display="block";
-			//this.getElementsByTagName("div").style.display="block";
+		  //原生js
+		  var lispan=this.getElementsByTagName('span')[0];
+		  var lidiv=this.getElementsByTagName('div')[0];
+		  lispan.style.display="block";
+		  lidiv.style.display="block";
+			//$("span",this).show();
+			//$("div",this).show();
 		}
 		iconli[i].onmouseout=function(){
-			//this.getElementsByTagName("span").style.display="none";
-			$("span",this).hide();
-			$("div",this).hide();
+			//jq:
+			//$("span",this).hide();
+			//$("div",this).hide();
+			//原生js
+		  var lispan=this.getElementsByTagName('span')[0];
+		  var lidiv=this.getElementsByTagName('div')[0];
+		  lispan.style.display="none";
+		  lidiv.style.display="none";
+			
 			
 		}
 	  }
@@ -147,7 +157,7 @@ $(document).ready(function(){
                    
                 }
                 else{
-                    var posturl=$('#post_url').val();
+                    var posturl=$('#post_url').val();//提交的url
                     var isEmotion=content.match(/\[.*?\]/g);
                     if(content==="" || content===post_feed_text){
                             $('.showerror').html("发表的内容不能为空！").show(); 
@@ -354,10 +364,10 @@ function loadwater(){
 			 	//测试时候使用settimeout延迟显示效果
                setTimeout(function(){
 			   	$('#mem_show_water').hide();
-			   	loading.hide();//隐藏加载图标
+			   	//loading.hide();//隐藏加载图标
 			   	 $('#mem_show_water').before(result);
                 $('#iswater').val(0);
-				
+				loading.hide();
 			   },400)
             }
             });
@@ -462,8 +472,7 @@ $(document).on('click','.delcomment',function(){
 });
 
 //ajax转发心情,不涉及php代码，方便转移
-$(function(){
-	$("#repost_feed").focus().addClass('focus');//转发获得焦点
+
 	$(document).on('click','.mem_feed_submit',function(){
 		var content=$("#repost_feed").val();
 		var isEmotion=content.match(/\[.*?\]/g);
@@ -493,8 +502,9 @@ $(function(){
 					//延迟执行
 					setTimeout(function(){
 							parent.layer.close(i);
-						}, 500);					
-				
+						}, 500);
+				//parent操作父级页面			
+				//parent.loadwater;
 				},
 				  error: function (msg) {
 						alert(msg);
@@ -502,26 +512,45 @@ $(function(){
 			});
 			
 	});
-})
 
+
+//可能认识的人，添加好友
+$(document).on('click','.apply_friend',function(){
+	   var rece_id=$(this).data('uid');
+	   var url=$(this).data('url');
+	   var delnode=$(this).parent().parent();
+		$.ajax({
+			  url: url,
+			  data: {
+				id: rece_id,
+			  },
+				 success: function (data) {
+					 //移除节点
+					 layer.msg('发送成功~',1,-1);	
+					 delnode.remove();
+				 },
+				  error: function (msg) {
+						alert(msg);
+				  }
+			});
+	   
+	 })
 
 
 var mayNum=0; 
-
 //可能认识的人加载的函数
 function memMayKnow(){
-    var url=$('#mayknow_url').val();
+    var url=$('#j_pymk_right_change').data("url");
     $.post(url,{num:mayNum},function(data){
-        $('#mem_mayknow').html(data);
-        if(mayNum==2){
-             mayNum=0;
-        }
-        else{
-            if($('#isnores'),val()!=null)
-            {
-                mayNum=0;
-            }
-           mayNum++; 
-        }
+		if(data==0){
+			mayNum=0;
+			memMayKnow();//重新开始
+		}
+		else{
+		   $('#pymk_div').html(data);
+          mayNum++; 
+
+		}
+       
     });
 }

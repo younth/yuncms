@@ -219,7 +219,7 @@
 			var $rece_id=$(this).attr("id");//接受人id
 			var node=$(this);
 			$.ajax({
-			  url: "{url('card/send')}",
+			  url: "{url('card/addfriend')}",
 			  data: {
 				id: $rece_id,
 			  },

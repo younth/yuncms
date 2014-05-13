@@ -256,7 +256,7 @@
 }
 .item-layout .time, .item-layout .del-btn {
     position: absolute;
-    right: 0;
+    right: 10px;
     top: 0;
 }
 
@@ -329,7 +329,7 @@
     top: -2px;
 }
 .msgcenter-box .msg-main {
-    width: 600px;
+    width: 800px;
 }
 .msgcenter-box .all-middle {
     width: auto;

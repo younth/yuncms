@@ -1,26 +1,19 @@
-<input type="hidden" value="{$isNores}" id="isnores" />
-{if empty($result[0])}
-没有更多的可能认识的人
-{else}
 {loop $result $_k $_v}
-     <div class="mem_mayknow" id="friend{$_v['id']}">
-             <a class="mem_mayknow_head" target="_blank" href="{url('profile/user',array('id'=>$_v['id']))}">
-                 <img alt="" src="{$_v['small']}" >
-             </a>
-             <div class="mem_mayknow_info">
-                 <h3>
-                     <a target="_blank" href="{url('profile/user',array('id'=>$_v['id']))}">{$_v['uname']}</a>
-                     <span style="float: right" title="{$_v['school']} · {$_v['major']}">{$_v['school']} · {$_v['major']}
-                     </span>
-                     
-                 </h3>
-                <div class="mem_mayknow_position">
-                     <span class="mem_mayknow_relationship">共有{$_v['allcart']}个联系人</span>
-                    <a  class="mem_mayknow_add" href="javascript:void(0)" onclick="addfriend({$_v['id']})">
-                 <i class="mem_mayknow_add_img"></i>加联系人</a>
-                 </div>
-             </div>
-         
-     </div>
+<dl class="right_user_list" id="stranger_23872812">
+			  <dd class="logo">
+			    <a href="{url('profile/user',array('id'=>$_v['id']))}" hide_card="true" title="{$_v['uname']}"><img alt="Medium_logo" src="{$_v['small']}"></a>
+			  </dd>
+			  <dd class="name">
+			    <a href="#" class="a_link" data-uid="23872812" title="{$_v['uname']}">{$_v['uname']}</a>
+			    <a href="#" class="auther_icon hr_star_bg png_ie6 hr_star_11px1" target="_blank" original-title="职场V力 229分"></a>
+			  </dd>
+			  <dd class="promit_title">
+			     {$_v['school']}
+			  </dd>
+			  <dd class="add_button">
+			    <a href="javascript:;" class="apply_friend" data-uid={$_v['id']} data-url={url('card/addfriend')}>加为好友</a>
+			  </dd>
+			</dl>
+			
 {/loop}
-{/if}
+<span class="more_btns"><a href="{url('card/search')}" title="更多">更多</a></span>

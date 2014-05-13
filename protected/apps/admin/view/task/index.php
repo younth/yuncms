@@ -22,9 +22,11 @@
               <th><input style="color:#E2E2E2" type="checkbox" name="chkAll" value="checkbox" onClick="CheckAll(this.form)"/></th>
               <th>任务目标</th>
               <th>任务名称</th>
-              <th>需耗金币值</th>
-              <th>学分值</th>
+              <th>需耗91币</th>
+              <th>获得91币</th>
+              <th>获得学分值</th>
               <th>添加时间</th>
+              <th>发布者</th>
               <th width="150">管理选项</th>
           </tr>
           
@@ -35,11 +37,14 @@
                               <td><?php echo $i?><input type="checkbox" name="delid[]" value="{$_v['id']}" /></td>
                               <td><?php echo $_v['goal']?></td>
                               <td><?php echo $_v['name']?></td>
-                              <td><?php echo $_v['gold']?></td>
+                              <td><?php echo $_v['consume_gold']?></td>
+                              <td><?php echo $_v['obtain_gold']?></td>
                               <td><?php echo $_v['score']?></td>
                               <td><?php echo date('Y-m-d H:i:s',$_v['ctime'])?></td>
+                              <td><?php echo $_v['author']?></td>
                               <td><a href="{url('task/edit',array('tid'=>$_v['id']))}">编辑</a>
                                   <a href="javascript:void(0)" id="del_<?php echo $_v['id'] ?>" onclick="del('<?php echo url('task/del') ?>','<?php echo $_v['id']?>')">删除</a>
+                                  
                               </td>
                           </tr>
                              
@@ -57,6 +62,7 @@
                  <div class="listdo" id="col"><select  name="col"><option value="">=选择栏目=</option>{$option}</select></div>
                  <div class="listdo"><input type="submit" class="btn btn-small"  value="执行"></div>
              </td><td colspan="5"><div class="pagelist">{$page}</div></td>
+             <td></td><td></td>
           </tr>
         </form>
         </table>

@@ -12,6 +12,7 @@ input,table {border:none; margin:0; padding:0;}
 h1,h2,h3,h4,h5,h6{ margin: 0px; padding: 0px; font-weight: normal;}
 .clear{clear: both;}
 
+
 /*css minify file, build at 2014-01-24 06:16:28*/
 /*主要是头部CSS*/
 #header .border_t {
@@ -1645,4 +1646,47 @@ background-image: -webkit-linear-gradient(top,#1f92c8,#1980b4);
 background-image: -moz-linear-gradient(top,#1f92c8,#1980b4);
 background-image: -o-linear-gradient(top,#1f92c8,#1980b4);
 background-image: linear-gradient(to bottom,#1f92c8,#1980b4);
+}
+/*toTopBtn*/
+body #toTop.goTopBtn {
+	width:50px;
+	height:40px;
+	background:url(../images/dashboard_icon.png) no-repeat -13px -479px;
+	_background:url(../images/dashboard_icon.png) no-repeat -13px -479px;
+	bottom:272px;
+    _bottom:350px;
+	cursor: pointer;
+	display: none;
+	left:51%;
+	line-height:23px;
+	margin-left:495px;
+	position: fixed;
+	_position:absolute;
+	text-align: center;
+	text-decoration: none;
+	z-index: 1000;
+}
+body #toTop.goTopBtn:hover{background:url(../images/dashboard_icon.png) no-repeat -13px -532px;}
+/*toTopBtn_end*/
+
+span.feed_back {
+    background: url("../images/dashboard_icon.png") no-repeat -93px -479px;
+    bottom: 330px;
+    cursor: pointer;
+    height: 40px;
+    left: 51%;
+    margin-left: 495px;
+    position: fixed;
+    text-align: center;
+    text-decoration: none;
+    width: 50px;
+    z-index: 6;
+}
+span.feed_back:hover {
+    background: url("../images/dashboard_icon.png") no-repeat -93px -533px;
+}
+span.feed_back a {
+    float: left;
+    height: 40px;
+    width: 50px;
 }

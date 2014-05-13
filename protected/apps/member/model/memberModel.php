@@ -72,7 +72,7 @@ class memberModel extends baseModel{
 	}
 	
 	//可能认识的人,去除已经是发送过申请的或者已经是联系人。。我可能认识的人，根据专业，标签，学校匹配，是当前的用户
-	public function maybeknow($id)
+	public function maybeknow($id,$num)
 	{
 		$user=model("member")->user_profile($id,'');
 		$mycard=model('member_card')->allcard($id);
@@ -85,7 +85,7 @@ class memberModel extends baseModel{
 		}else $where='(school like "%'.$user['school'].'%" or major like "%'.$user['major'].'%") and mid!='.$id;
 		//我的全部申请，被申请的人
 		
-		$may=model("member_profile")->select($where,'mid','mid asc','9');//显示9个，其余的用显示更多来显示
+		$may=model("member_profile")->select($where,'mid','mid asc',$num);//显示9个，其余的用显示更多来显示
 		if(!empty($may)){
 			foreach ($may as  $row=>$v)
 			{

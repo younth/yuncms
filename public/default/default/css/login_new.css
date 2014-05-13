@@ -81,7 +81,7 @@ h1,h2,h3,h4,h5,h6{ margin: 0px; padding: 0px; font-weight: normal;}
 
 
 #msform {width: 320px;float:right;position: absolute; right: 0px;top: 91px;height: 410px;}
-#msform fieldset {background: #494c50;border: 0 none;width:320px;position: absolute;right:0px;top: 0px;border-radius:2px;}
+#msform fieldset {background: #494c50;border: 0 none;width:320px;position: absolute;right:0px;top: 0px;border-radius:2px; opacity:0.9}
 #msform fieldset:not(:first-of-type) {display: none;}
 #msform .action-button {width: 100px;background: #27AE60;font-weight: bold;color: white;border: 0 none;border-radius: 1px;cursor: pointer;padding: 10px 5px;margin: 10px 5px;}
 #msform .action-button:hover, #msform .action-button:focus {box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;}

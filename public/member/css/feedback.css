@@ -1,0 +1,89 @@
+/* CSS Document */
+.about-me-wrap  .title {
+    font-family: 'Microsoft YaHei';
+    font-size: 20px;
+    line-height: 32px;
+    padding: 32px 0 37px;
+    text-align: center;
+}
+
+.faq-table th {
+    font-size: 14px;
+    line-height: 30px;
+    text-align: right;
+    vertical-align: top;
+    width: 177px;
+	font-weight:normal;
+}
+.faq-table th, .faq-table td {
+    padding-bottom: 20px;
+}
+.faq-table .faq-word {
+    background: none repeat scroll 0 0 #F9F9F9;
+    border: 1px solid #CCCCCC;
+    height: 112px;
+    overflow: auto;
+    padding: 5px;
+    resize: none;
+    width: 467px;
+}
+.faq-table .faq-mail {
+    background: none repeat scroll 0 0 #F9F9F9;
+    border: 1px solid #CCCCCC;
+    height: 28px;
+    line-height: 28px;
+    padding: 0 5px;
+    width: 278px;
+}
+.up-list li {
+    color: #999999;
+    line-height: 25px;
+}
+.up-list li a {
+    color: #7AB1CC;
+    margin-left: 20px;
+}
+.error-tips {
+    color: #FF0000;
+    display: none;
+    line-height: 24px;
+}
+.suc_pop_wrap {
+    display: none;
+}
+.suc_pop {
+    padding: 33px 0 35px;
+    text-align: center;
+}
+.suc_pop .title {
+    font-size: 14px;
+    line-height: 30px;
+    padding: 0 0 44px;
+}
+.suc_pop .btn-box {
+    text-align: center;
+}
+.btn-box .tip {
+    color: #999999;
+    margin-left: 15px;
+}
+.dj-btn-cancel, .dj-btn-cancel:hover {
+    color: #CCCCCC;
+}
+.uploading, .uploading:hover {
+    color: #CCCCCC;
+}
+.holder-text {
+    color: #999999;
+    padding: 5px;
+    position: absolute;
+    width: 467px;
+}
+.mail-holder {
+    color: #999999;
+    height: 24px;
+    line-height: 24px;
+    padding: 5px;
+    position: absolute;
+}
+

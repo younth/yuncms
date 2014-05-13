@@ -270,6 +270,7 @@ margin-bottom:30px;
     color: #666666;
     font-family: Tahoma,'SimSun';
     padding: 9px 0;
+	position:relative;
 }
 
 .manage-panel .social-network .ss-weibo {

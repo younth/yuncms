@@ -82,17 +82,15 @@ $(function(){
 		$(".time").css("display","block");
 		$(".del-btn").css("display","none");
 	} ,
-	click:function(){
-		//改变链接
-		var url=$(this).data("href");
-		window.location.href=url;
-	}
-	}); 
+	});
 }) 
-
+$(document).on('click','.msg-list ul li',function(){
+	var url=$(this).data("href");
+	window.location.href=url;//改变链接
+})
 //ajax删除私信
-
-$(document).on('click','.del-btn',function(){
+$(document).on('click','.del-btn',function(e){
+	stopBubble(e);//防止事件冒泡
 	var id=$(this).data("id");//私信记录的id
 	var name=$(this).data("name");//私信记录的id
 	

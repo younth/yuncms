@@ -15,8 +15,7 @@ class cardController extends commonController
 	public function index()
 	{
 		//我的联系人,查询我的联系人的信息
-		$auth=$this->auth;//本地登录的cookie信息
-		$id=$auth['id'];
+		$id=$this->auth['id'];
 		if(empty($id)) $this->redirect(url('default/index/login'));//未登录， 跳转到登录页面
 		$card=model('member_card')->mycard($id);//好友分组
 		$allcard=model('member_card')->count("send_id='{$id}' or rece_id='{$id}'");//联系人总数
@@ -32,7 +31,6 @@ class cardController extends commonController
 		//dump($card);
 		$this->display();
 	}
-	
 	
 	//ajax添加联系人,注意已经有记录，则不添加，直接接受（注意接收人）
 	public function addfriend()
@@ -108,15 +106,17 @@ class cardController extends commonController
 		echo $html;
 	}
 	
-	//解除好友关系,应该用ajax，没有处理好
+	//解除好友关系,应该用ajax
 	public function delfriend()
 	{
-		$auth=$this->auth;//本地登录的cookie信息
-		$rece_id=$auth['id'];//读取用户的id
-		$send_id=intval($_GET['id']);
+		$rece_id=$this->auth['id'];//读取用户的id
+		$send_id=intval($_GET['id']);//联系人的id
 		$re=model('member_card')->find("send_id='$rece_id' and rece_id='$send_id'");
 		if($re){
-			if(model('member_card')->delete("id='".$re['id']."'")) echo 1;
+			if(model('member_card')->delete("id='".$re['id']."'")){
+				//删除联系人之间的私信记录，私聊记录是双方的，此bug以后修复
+				echo 1;
+			}
 			else "失败";
 		}
 		else{
@@ -131,7 +131,7 @@ class cardController extends commonController
 	{
 		$auth=$this->auth;//本地登录的cookie信息
 		$id=$auth['id'];//读取用户的id
-		$mayknow=model("member")->maybeknow($id);
+		$mayknow=model("member")->maybeknow($id,"9");
 		$this->mayknow=$mayknow;
 		$this->display();
 	}
@@ -208,6 +208,7 @@ class cardController extends commonController
 	{
 		$this->display();
 	}
+
 
 
 }

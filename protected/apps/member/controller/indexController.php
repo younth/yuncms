@@ -42,9 +42,13 @@ class indexController extends commonController
                     if($acc) $this->uname=$acc['uname'];//绑定了，读出用户信息
             }
             if($auth&&$acc['is_active']=1) $this->uname=$auth['uname'];
-
+			$this->my=$user=model("member")->user_profile($this->auth['id'],'');//个人信息
+			//推荐关注，跟我的专业相关,自己未关注的公司
+			$list= model('company_fans')->corp_recmd($auth['id']);
+			$this->rec_follow=$list;
             $this->getUrls();
             $this->loadAds=1;
+            $this->path=__ROOT__.'/upload/company/license/';
             $this->display();
 	        }
 
@@ -290,29 +294,6 @@ class indexController extends commonController
                 }
         }
 
-        //异步加载，显示可能认识的人
-        public function mayKnow(){
-                if($this->isPost()){
-                    $total=model('member')-> maybeknow($this->auth['id']);
-                    $len=  count($total);
-                    $num=1;
-                    $key=$len/$num;
-                    $now=$_POST['num'];
-                    $result=array();
-                    if(empty($total[$now*$num])){
-                        $now=0;
-                        $this->isNores=0;
-                    }
-                    for($j=0;$j<$num;$j++){
-                        if(!empty($total[$now*$num+$j])){
-                            $result[$j]=$total[$now+$j];
-                        }
-                    }
-                    $this->result=$result;
-                    $this->display();
-                }
-            }
-
        //删除心情
        public function delfeed()
        {
@@ -393,5 +374,44 @@ class indexController extends commonController
       	}
       }
 
-      
+      //异步加载，显示可能认识的人
+      public function mayknow(){
+      	if($this->isPost()){
+      		$total=model('member')->maybeknow($this->auth['id'],'');//为空，全部读出
+      		$len= count($total);
+      		$num=3;
+      		$key=$len/$num;
+      		$now=$_POST['num'];
+      		$result=array();
+      		for($j=0;$j<$num;$j++){
+      			if(!empty($total[$now*$num+$j])){
+      				$result[$j]=$total[$now+$j];
+      			}
+      		}
+      		if(empty($result)) echo 0;
+      		else{
+      			$this->result=$result;
+      			$this->display();
+      		}
+      	}
+      }
+            
+      //反馈信息
+      public function feedback()
+      {
+      	if(!$this->isPost()){
+      		$this->display();
+      	}else{
+      		//ajax提交处理
+      		$data=array();
+      		$data['email']=in($_POST['email']);
+      		$data['content']=in($_POST['content']);
+      		$data['ctime']=time();
+      		$data['is_reply']=0;
+      		if(empty($data['email'])||empty($data['content'])) return;
+      		//增加到记录
+      		if(model("feedback")->insert($data)) echo 1;
+      	}
+      	
+      }
 }

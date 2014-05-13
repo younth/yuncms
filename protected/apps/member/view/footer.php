@@ -1,5 +1,9 @@
 <?php if(!defined('APP_NAME')) exit;?>
 <br />
+<!-- 返回顶部与留言反馈 -->
+<a href="javascript:;" class="goTopBtn" id="toTop" style="display: none;"></a>
+<span class="feed_back"><a target="_blank" href="{url('index/feedback')}"></a></span>
+
  <div class="footer_login_panel">
        <div class="friendlink" >
                   <span> 友情链接：</span>

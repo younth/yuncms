@@ -21,9 +21,9 @@
         <a href="javascript:void(0)" onclick="feedLoseZan({$_v['id']},'{$url_losezan}')" style="color:#999;"><span  class="digg">已赞</span>{if $_v['praise_count']!=0} ({$_v['praise_count']}){/if}</a>
         {else}
         <a href="javascript:void(0)" onclick="feedZan({$_v['id']},'{$url_zan}')" > 赞{if $_v['praise_count']!=0} ({$_v['praise_count']}){/if}</a>
-        {/if}&nbsp;
+        {/if}<span class="dot-middle">.</span>
         </span>
-       &nbsp; <a href="javascript:void(0)" onclick="showComment({$_v['id']},'{$url_showcomment}')">评论{if $_v['comment_count']!=0} ({$_v['comment_count']}){/if}</a>&nbsp;&nbsp;
+		<a href="javascript:void(0)" onclick="showComment({$_v['id']},'{$url_showcomment}')">评论{if $_v['comment_count']!=0} ({$_v['comment_count']}){/if}</a><span class="dot-middle">.</span>
         <a href="javascript:void(0)" data-id={$_v['id']} data-url={$url_repost_feed} class="repost_feed">转发{if $_v['repost_count']!=0} ({$_v['repost_count']}){/if}</a>
     </div>
         <div class="mem_feed_jiantou" id="feed_comment_{$_v['id']}">

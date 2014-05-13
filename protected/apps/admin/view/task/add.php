@@ -27,41 +27,62 @@
             <tr>
                <td align="right" width="10%">任务名称:</td>
                <td align="left"><input type="text" name="name" value="{$result['name']}"></td>
+               <td class="inputhelp">填写任务的名称</td>
             </tr>
             <tr>
-            <td align="right"  width="10%">任务目标:</td>
+            <td align="right"  width="10%">任务目的:</td>
                <td  align="left">
                    <textarea  name="goal" rows="4" cols="70"> {$result['goal']}</textarea>
                </td>
+               <td class="inputhelp">任务的目的</td>
             </tr>
             <tr>
             <td align="right"  width="10%">任务内容:</td>
                <td  align="left">
                <textarea name="content" rows="4" cols="70">{$result['content']}</textarea>
                </td>
+               <td class="inputhelp">任务的内容</td>
             </tr>
             <tr>
-            <td align="right"  width="10%">任务提示:</td>
+            <td align="right"  width="10%">完成途径:</td>
+               <td  align="left">
+               <textarea name="way" rows="4" cols="70">{$result['way']}</textarea>
+               </td>
+               <td class="inputhelp">例如：和联系人合影、读后感，联系人对领取任务者的书面评价
+               </td>
+            </tr>
+             <tr>
+            <td align="right"  width="10%">认证方式:</td>
+               <td  align="left">
+               <textarea name="certification_way" rows="4" cols="70">{$result['certification_way']}</textarea>
+               </td>
+                <td class="inputhelp">例如：上传相关材料（或清晰的图片）</td>
+            </tr>
+            
+            <tr>
+            <td align="right"  width="10%">任务提示及帮助:</td>
                <td  align="left">
                <textarea name="reminder" rows="4" cols="70"> {$result['reminder']}</textarea>
                </td>
+               <td class="inputhelp">完成该任务一些技巧</td>
             </tr>
             <tr>
-               <td align="right" width="10%">需耗金币值:</td>
-               <td align="left"><input type="text" name="gold" value="{$result['gold']}"></td>
+               <td align="right" width="10%">需耗91币:</td>
+               <td align="left"><input type="text" name="consume_gold" value="{$result['consume_gold']}"></td>
+               <td class="inputhelp">学生领取任务需要消耗的91币</td>
             </tr>
+              <tr>
+               <td align="right" width="10%">完成任务获得91金币:</td>
+               <td align="left"><input type="text" name="obtain_gold" value="{$result['obtain_gold']}"></td>
+               <td class="inputhelp">学生完成任务能够获得的91币</td>
+            </tr>
+            
             <tr>
-               <td align="right" width="10%">任务学分值:</td>
+               <td align="right" width="10%">完成任务获得学分值:</td>
                <td align="left"><input type="text" name="score"  value="{$result['score']}"></td>
+               <td class="inputhelp">学生完成任务能够获得的学分值</td>
             </tr>
-            <tr>
-               <td align="right" width="10%">开始时间:</td>
-               <td align="left"><input type="text" name="starttime" size="20"  value="<?php if(!empty($result['starttime'])){ echo date('Y-m-d H:i:s',$result['starttime']); }?>"  id="starttime" readonly /></td>
-            </tr>
-            <tr>
-               <td align="right" width="10%">结束时间:</td>
-               <td align="left"><input type="text" name="endtime" size="20" value="<?php if(!empty($result['endtime'])){ echo date('Y-m-d H:i:s',$result['endtime']); }?>"  id="endtime" readonly /></td>
-            </tr>
+            
 			<tr>
 			<td></td>
                                 <td align="left" colspan="2"><input type="submit" value="<?php if(ACTION_NAME=='edit'){ ?>更新<?php }else{ ?> 创建<?php }?>" class="btn btn-primary btn-small"></td>

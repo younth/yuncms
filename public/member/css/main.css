@@ -13,23 +13,21 @@ label.checkbox, label.radio, label.text {
     padding: 0 6px 0 4px;
 }
 .showerror{ color:#F00;}
-.member_main{
-    width: 1000px;
+
+#container_index{
     margin: 15px auto 25px;
-	height:auto;
-	min-height:960px;
-	overflow:hidden;/*父级元素设置，保证高度随子级自适应*/
+	min-height:700px;
+	width: 1000px;
 }
-.member_mainbg{
-    width: 1000px;
-    float: left;
-	margin-bottom:20px;
-}
+
 .mem_left_all{
     width:700px; 
     height: auto; 
     float: left;
 	margin-top:5px;
+	display:inline;
+	margin-bottom:20px;
+	/*用清除浮动解决自适应高度问题，不是说overflow:hidden*/
 }
 
 .mem_left_all .ad{
@@ -63,14 +61,12 @@ label.checkbox, label.radio, label.text {
  
 .mem_right_all{
     width:280px; 
-    height: 1000px; 
     float: right;
 	margin-top: 5px;
 }
 .mem_right_all .right_ad{
 	width: 278px;
 	height: 340px;
-	background: red;
 	border: 1px solid #D8D8D8;
 	margin-bottom: 20px;
 	float: left;
@@ -172,7 +168,7 @@ label.checkbox, label.radio, label.text {
     background: #ffffff;
 	border: 1px solid #D8D8D8;
 }
-.member_main .pubfeed{
+.pubfeed{
 	background-color: #F5F5F5;white-space:nowrap;
 }
 
@@ -965,5 +961,75 @@ background-position: 0 -864px;
 	 color: #CCCCCC;
 }
 
+/*签到*/
 
+.sign-in .date,.sign-in-h .date{color:#006B7B;font-size:12px;}
+.sign-in .week,.sign-in-h .week{color:#006B7B;font-size:14px;font-family:"微软雅黑";padding:0 0 0 1px;}
+.sign-in .day{color:#fff;position:absolute;right:0;top:6px;font-size:12px;width:50px;text-align:center;}
+.sign-in-h .day{color:#999;position:absolute;right:0;top:6px;font-size:12px;width:50px;text-align:center;}
+.sign-in-h .num{color:#999;position:absolute;right:0;top:23px;font-size:16px;font-family:"微软雅黑";width:50px;text-align:center;}
+.sign-in .num{color:#fff;position:absolute;right:0;top:23px;font-size:16px;font-family:"微软雅黑";width:50px;text-align:center;}
+.sign-in .btn-sign,.sign-in-h .btn-sign-h{font-size:20px;font-family:"微软雅黑";color:#fff;position:absolute;left:70px;top:0;display:block;outline:none;cursor:pointer;width:100px;height:46px;line-height:46px;text-align:center;background:url(../images/sign-line.png) no-repeat right;}
+.sign-in-h .btn-sign-h{color:#999;}
+
+.sign-box{width:210px;padding:10px;background:#fff8e1;border:1px solid #fdd193;}
+.sign-box h3{font-size:16px;color:#666;font-family:"微软雅黑";padding:0 0 10px 0;border-bottom:1px dashed #ddd}
+.sign-info{margin:10px 0 0 0;}
+.sign-wrap{position:absolute;top:54px;z-index:1;}
+.sign-wrap .arrow-topic{left:110px;}
+
+/*签到*/
+.sign-in{background:#CCB085;width:280px;height:47px;margin:10px 0 10px 0;border-radius:2px;-moz-border-radius:2px;-webkit-border-radius:2px;float:left;position:relative;}
+.sign-in .date,.sign-in-h .date,.sign-in .week,.sign-in-h .week{color:#AA6600;}
+.sign-in .datetime{background:url(../images/date-box.png) no-repeat;padding:0 0 8px 10px;width:56px;height:36px;display:block;position:absolute;left:6px;top:5px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.sign-in-h .datetime{background:url(../images/date-box-h.png) no-repeat;padding:2px 0 8px 10px;width:56px;height:36px;display:block;position:absolute;left:6px;top:6px;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+.sign-in em,.sign-in-h em{font-style:normal;display:block;}
+
+
+.mem_right_all .right_panel{ background-color: #ffffff; border: 1px solid #D8D8D8; float: left; width: 278px;}
+.mem_right_all .right_panel .content{margin-top:20px;  float: left;width: 278px;display: inline;color:#2A7FB8;}
+.mem_right_all .right_panel h4{position:relative;height:44px; padding-left:20px; background:#F5F5F5; font-size:15px; color:#454545; border-bottom: 1px solid #D8D8D8;font-weight: normal;}
+.mem_right_all .right_panel h4 .new_title{float: left;padding: 0px 3px;line-height: 43px;border-bottom: 2px solid #EC7064;font-family: '微软雅黑';}
+.mem_right_all .right_panel h4 .edit_btn{height: 14px; overflow: hidden; font-size: 12px; line-height: 14px;font-weight: normal;
+ position: absolute; right: 0px; top: 9px;background:url(/images/home_new/header_icon.png) no-repeat 0px -148px; padding-left: 70px;}
+.mem_right_all .right_panel h4 .edit_btn a{color: #777777; position: none;}
+.mem_right_all .right_panel h4 .edit_btn img{float: left; margin-right:49px;}
+.mem_right_all .right_panel h4 .chekcout_ones{width: 18px;float: right;margin-top: 16px;display: inline;height: 18px;background:url(../images/new_icon_02.png) no-repeat; margin-right: 20px;background-position: -11px -314px;}
+.mem_right_all .right_panel h4 .chekcout_ones:hover{background:url(../images/new_icon_02.png) no-repeat;background-position: -11px -278px;}
+.mem_right_all .right_panel h4 .more_btn{width:45px;height: 44px;line-height: 44px;font-size: 12px;float: right;color: #666666;}
+
+.right_panel .more_btns a{ color:#666666;}
+.right_panel .more_btns{width: 258px; height: 36px; text-align: right; line-height: 36px; float: right;background: #F5F5F5;border-top: 1px solid #D8D8D8;padding-right: 20px;*margin-bottom:-8px;}
+dl.right_user_list{width: 240px;height:60px;overflow: hidden;margin-bottom: 8px;position:relative;padding-left:20px; padding-bottom: 8px; }
+dl.right_user_list dd.logo{width:45px;height: 50px;float: left;border-radius:2px;margin-right: 11px;}
+dl.right_user_list dd.logo a{ width:45px; height: 50px; float: left;}
+dl.right_user_list dd.logo a img{float: left;width: 100%;height: 100%;border-radius:2px;}
+dl.right_user_list dd.name{width:182px;height: 20px;float: left;overflow: hidden;font-size: 12px;color: #454545;font-weight: bold;margin-top: 4px; }
+dl.right_user_list dd.name a{color: #454545;}
+
+dl.right_user_list dd.headline {float:left; width:110px; height:24px; overflow:hidden; line-height:24px; color: #777777;}
+dl.right_user_list dd.headline_promit {float:left; width:110px; height:40px; overflow:hidden; line-height:20px; color: #777777;}
+dl.right_user_list .companies_title{width:145px;height: 20px;float: left;overflow: hidden;font-size: 12px;color:#666666;line-height:20px;}
+dl.right_user_list dd.promit_title{width:105px;height: 20px;float: left;overflow: hidden;font-size: 12px;color:#BBBBBB;line-height: 20px;}
+dl.right_user_list dd.reason {float:left; width:110px; height:17px; overflow:hidden; color:#AAAAAA;}
+dl.right_user_list dd.add_button{width:72px;position: absolute;right: -24px;top: 21px;font-size: 12px;padding-left:13px;color: #2A7FB8;background:url(../images/jia.jpg) no-repeat left; }
+dl.right_user_list dd.add_button a{color:#2A7FB8;}
+dl.right_user_list dd.add_button_end{position:absolute;right: 0px;top:18px; width:47px; height: 20px; font-size: 12px; color: #838A96; line-height: 20px; text-align: right;}
+dl.right_user_list dd.add_button_end a{ color: #999999;}
+
+.mt20 {margin-top:20px;}
+ul.interestkclist {padding-left:20px;float: left;width: 238px;*padding-bottom: 10px;}
+ul.interestkclist a{color:#2A7FB8;}
+ul.interestkclist li{float: left;margin-bottom: 20px;height: 20px;overflow: hidden;line-height: 20px;}
+ul.interestkclist li .time{width: 60px;height: 50px;float: left;margin-right: 15px;background: #F2F2F2;border-radius:2px;font-size: 18px;color: #555555;text-align: center;font-family: '微软雅黑';line-height: 30px;}
+ul.interestkclist li .time b{float: left;width: 60px;height: 20px;background: #CCCCCC;line-height: 20px;text-align: center;font-weight: normal;color: #fff;border-radius:2px;font-size: 12px;}
+ul.interestkclist li .title{width: 145px;height: 24px;float: left;line-height: 24px;overflow: hidden;color: #666666;}
+
+ul.interestjoblist {padding-left:20px;padding-right: 20px;float: left;width: 238px;*padding-bottom: 10px;}
+ul.interestjoblist a{color:#2A7FB8;}
+ul.interestjoblist li{float: left;margin-bottom: 20px;}
+ul.interestjoblist li .logo{width: 80px;height: 50px;border: 1px solid #EEEEEE;float: left;margin-right: 10px;}
+ul.interestjoblist li .logo img{text-align: center;width: 100%;height: 100%;}
+ul.interestjoblist li .title{width: 145px;height: 24px;float: left;line-height: 24px;overflow: hidden;color: #666666;}
+ul.interestjoblist li .title a{font-weight: bold;}
 
