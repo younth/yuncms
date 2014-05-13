@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2014 年 04 月 20 日 02:52
+-- 生成日期: 2014 年 05 月 13 日 05:45
 -- 服务器版本: 5.1.41
 -- PHP 版本: 5.3.1
 
@@ -37,15 +37,19 @@ CREATE TABLE IF NOT EXISTS `cms_admin` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `usename` (`username`),
   KEY `groupid` (`groupid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='管理员信息表' AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='管理员信息表' AUTO_INCREMENT=13 ;
 
 --
 -- 转存表中的数据 `cms_admin`
 --
 
 INSERT INTO `cms_admin` (`id`, `groupid`, `username`, `password`, `realname`, `lastlogin_time`, `lastlogin_ip`, `iflock`) VALUES
-(1, 1, 'admin', '168a73655bfecefdb15b14984dd2ad60', '王洋', 1397912682, 'unknown', 0),
-(8, 3, 'test', '168a73655bfecefdb15b14984dd2ad60', '测试', 0, '', 0);
+(1, 1, 'admin', '168a73655bfecefdb15b14984dd2ad60', '王洋', 1399958042, 'unknown', 0),
+(8, 3, 'test', '168a73655bfecefdb15b14984dd2ad60', '测试', 0, '', 0),
+(9, 4, '刘明', 'c80a9a5155fd952bc086f08d6b5babe8', '刘明', 1399550947, '192.168.0.120', 0),
+(10, 4, '张牧', 'e1135db59e8094f65b19358749f5ba4e', '张牧', 1399638991, '192.168.0.112', 0),
+(11, 4, '李鸥鸥', 'c80a9a5155fd952bc086f08d6b5babe8', '李鸥鸥', 0, '', 0),
+(12, 4, '田向阳', 'f10d59d24ae0c985037a0fcc1b011fc0', '田向阳', 1399899844, '192.168.0.102', 0);
 
 -- --------------------------------------------------------
 
@@ -84,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `cms_company` (
 --
 
 INSERT INTO `cms_company` (`id`, `login_email`, `password`, `name`, `logo`, `quality`, `scale`, `phone`, `industry`, `on_industry`, `address`, `websites`, `introduce`, `ctime`, `regip`, `lasttime`, `lastip`, `license`, `is_active`, `is_init`, `is_auth`, `recmd`) VALUES
-(1, '862820606@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '云作坊', '20140404/thumb_1396624421.png', ',000000,100054,100057', ',000000,100060,100063', '0731-89676708', 's638,s40,s42,s20', '计算机软件+互联网+通信+保险', '长沙理工大学', 'http://wy.yunstudio.net/', '    大学生科技交流平台是一个科技学术交友的平台，并兼有科技交流、名师检索、资料下载、赛事预览、在线报名等功能。 立足于服务学生，以增强在校大学生科技创新与学术交流的氛围为宗旨，以提高大学生的科技创新素质为目标。在线组队，在线交友，在竞争中锻炼自我， 在合作中提升能力。同时加强对科技学术类赛事的管理，提高研究工作实效，推动在校大学生的科技创新活动的开展。 沟通是进步的桥梁，合作是发展的阶梯， 全校的科技学术爱好者齐聚一堂。资料下载、发帖、组队、求名师一气呵成，为我们的科技创新拓宽了视野、提供了空间、觅得了挚友、奠定了基础， 在我们的成功之路上迈出了关键的一步！关注大学生科技交流平台，带给你不一样的精彩。\r\n<br>\r\n<br>\r\n<br>好吧', 0, '', 1397726535, '', '20140404/thumb_1396625120.png', 1, 1, 0, 1),
+(1, '862820606@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '云作坊', '20140404/thumb_1396624421.png', ',000000,100054,100057', ',000000,100060,100063', '0731-89676708', 's638,s40,s42,s20', '计算机软件+互联网+通信+保险', '长沙理工大学', 'http://wy.yunstudio.net/', '    大学生科技交流平台是一个科技学术交友的平台，并兼有科技交流、名师检索、资料下载、赛事预览、在线报名等功能。 立足于服务学生，以增强在校大学生科技创新与学术交流的氛围为宗旨，以提高大学生的科技创新素质为目标。在线组队，在线交友，在竞争中锻炼自我， 在合作中提升能力。同时加强对科技学术类赛事的管理，提高研究工作实效，推动在校大学生的科技创新活动的开展。 沟通是进步的桥梁，合作是发展的阶梯， 全校的科技学术爱好者齐聚一堂。资料下载、发帖、组队、求名师一气呵成，为我们的科技创新拓宽了视野、提供了空间、觅得了挚友、奠定了基础， 在我们的成功之路上迈出了关键的一步！关注大学生科技交流平台，带给你不一样的精彩。\r\n<br>\r\n<br>\r\n<br>好吧', 0, '', 1399723115, '', '20140404/thumb_1396625120.png', 1, 1, 0, 1),
 (2, '4464@qq.com', '6f670965787abc2569acf4317e164117', '百度', 'NoPic.png', ',000000,100054,100057', ',000000,100060,100063', '', 's779,s776,s782,s783', '游戏设备维修+游戏策划+游戏单片机编程+三维动画制作+', '', '', '大百度', 1396581151, 'unknown', 1396581151, 'unknown', '', 1, 0, 0, 1),
 (5, '1@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '腾讯', '20140403/20140403212752_42453.jpg', ',000000,100054,100058', ',000000,100060,100065', '', 's332,s701,s216,s4,s464', '网络营销顾问+电子商务/网店/商城+计算机培训教师+电脑美工+硬件测试+', '长沙理工大学创业园305', 'www.yunstudio.net', '        你好', 1396525138, 'unknown', 1396525138, 'unknown', 'NoPic.gif', 1, 0, 0, 1),
 (9, '8@145.com', 'c5328c77ea43ab0bca5d9382b6a32b28', '阿里', 'NoPic.png', ',000000,100054,100056', ',000000,100060,100062', '', 's395,s112,s109', '铸造工+磨工+钳工+', '腾讯', '', '   大公司', 1396581425, 'unknown', 1396581425, 'unknown', '', 1, 0, 0, 0),
@@ -104,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `cms_company_fans` (
   `score` float NOT NULL COMMENT '会员在该企业下学分值',
   `ctime` int(11) NOT NULL COMMENT '关注时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=69 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
 
 --
 -- 转存表中的数据 `cms_company_fans`
@@ -115,8 +119,14 @@ INSERT INTO `cms_company_fans` (`id`, `mid`, `cid`, `score`, `ctime`) VALUES
 (67, 5, 5, 0, 1397478476),
 (64, 1, 1, 0, 1397230672),
 (63, 1, 5, 0, 1397230672),
-(66, 33, 1, 0, 1397281522),
-(65, 33, 5, 0, 1397281522);
+(65, 33, 5, 0, 1397281522),
+(69, 43, 1, 0, 1397982242),
+(70, 43, 2, 0, 1397982244),
+(71, 43, 5, 0, 1397982246),
+(72, 43, 9, 0, 1397982246),
+(73, 6, 2, 0, 1397984967),
+(76, 6, 1, 0, 1399692800),
+(77, 6, 5, 0, 1399692801);
 
 -- --------------------------------------------------------
 
@@ -154,7 +164,6 @@ CREATE TABLE IF NOT EXISTS `cms_feed` (
   `fid` int(11) DEFAULT NULL COMMENT '原心情id',
   `fmid` int(11) DEFAULT NULL COMMENT '原心情发布者id',
   `oid` int(11) DEFAULT NULL COMMENT '最开始的心情id',
-  `is_repost` tinyint(2) NOT NULL DEFAULT '1' COMMENT '是否转发,0否1是',
   `is_audit` int(11) NOT NULL DEFAULT '1' COMMENT '是否审核,0否1是',
   `feed_content` text NOT NULL COMMENT '心情内容',
   `feed_type` tinyint(2) NOT NULL DEFAULT '0' COMMENT '动态类型,0原创1评论2转发3回复',
@@ -163,102 +172,38 @@ CREATE TABLE IF NOT EXISTS `cms_feed` (
   `praise_count` int(11) NOT NULL DEFAULT '0' COMMENT '赞数',
   `ctime` int(11) NOT NULL COMMENT '发布时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=90 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=58 ;
 
 --
 -- 转存表中的数据 `cms_feed`
 --
 
-INSERT INTO `cms_feed` (`id`, `mid`, `fid`, `fmid`, `oid`, `is_repost`, `is_audit`, `feed_content`, `feed_type`, `comment_count`, `repost_count`, `praise_count`, `ctime`) VALUES
-(1, 7, NULL, NULL, NULL, 1, 1, 'fdsafds', 0, 0, 0, 0, 1397098685),
-(2, 7, NULL, NULL, NULL, 1, 1, 'fdasf', 0, 0, 0, 0, 1397098697),
-(3, 7, NULL, NULL, NULL, 1, 1, 'fdsafasd', 0, 0, 0, 0, 1397098712),
-(4, 7, NULL, NULL, NULL, 1, 1, 'fdadfsa', 0, 0, 0, 0, 1397098833),
-(5, 7, NULL, NULL, NULL, 1, 1, 'gasd', 0, 0, 0, 0, 1397098861),
-(6, 7, NULL, NULL, NULL, 1, 1, 'fda', 0, 0, 0, 0, 1397099322),
-(7, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/0b/tootha_thumb.gif" height="22" width="22" />', 0, 0, 0, -3, 1397131081),
-(8, 7, NULL, NULL, NULL, 1, 1, '你好你好，习近平，', 0, 0, 0, 0, 1397278446),
-(9, 7, NULL, NULL, NULL, 1, 1, '共产党', 0, 0, 0, 0, 1397278547),
-(10, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/6a/laugh.gif" height="22" width="22" />', 0, 0, 0, 0, 1397278813),
-(11, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/6a/laugh.gif" height="22" width="22" />', 0, 0, 0, 0, 1397279108),
-(12, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/1a/bs_thumb.gif" height="22" width="22" />', 0, 0, 0, 0, 1397279121),
-(13, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/81/rabbit_thumb.gif" height="22" width="22" />', 0, 0, 0, 0, 1397279390),
-(14, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/70/88_thumb.gif" height="22" width="22" />', 0, 0, 0, 0, 1397279595),
-(15, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/1a/bs_thumb.gif" height="22" width="22" />', 0, 0, 0, 0, 1397279634),
-(16, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/6d/zhh_thumb.gif" height="22" width="22" />', 0, 0, 0, 0, 1397279757),
-(17, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/c7/no_thumb.gif" height="22" width="22" />', 0, 0, 0, 0, 1397279763),
-(18, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/62/crazya_thumb.gif" height="22" width="22" />', 0, 12, 2, 1, 1397279806),
-(19, 7, 18, 7, NULL, 1, 1, '范德萨分四大发', 1, 0, 0, 0, 1397280851),
-(20, 7, 18, 7, NULL, 1, 1, '放大放大上', 1, 0, 0, 0, 1397280875),
-(21, 7, 18, 7, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/6a/laugh.gif" height="22" width="22" />', 1, 0, 0, 0, 1397289993),
-(22, 7, 18, 7, NULL, 1, 1, '范德萨发撒旦', 1, 0, 0, 0, 1397291784),
-(23, 7, 18, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/d9/dizzya_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397292769),
-(24, 7, 23, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/bc/fuyun_thumb.gif" height="22" width="22" />', 3, 0, 0, 0, 1397298144),
-(25, 7, 18, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/1a/bs_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397298659),
-(26, 7, 18, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/d9/dizzya_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397299343),
-(27, 7, 18, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/a5/cza_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397299433),
-(28, 7, 27, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/8f/qq_thumb.gif" height="22" width="22" />', 3, 0, 0, 0, 1397299439),
-(29, 7, 27, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/5c/yw_thumb.gif" height="22" width="22" />', 3, 0, 0, 0, 1397299471),
-(30, 7, 27, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/b6/sb_thumb.gif" height="22" width="22" />', 3, 0, 0, 0, 1397299774),
-(31, 7, 30, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/8f/qq_thumb.gif" height="22" width="22" />', 3, 0, 0, 0, 1397300025),
-(32, 7, 31, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/70/88_thumb.gif" height="22" width="22" />', 3, 0, 0, 0, 1397300068),
-(33, 7, 32, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/af/cry.gif" height="22" width="22" />', 3, 0, 0, 0, 1397300099),
-(34, 7, 18, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/5c/yw_thumb.gif" height="22" width="22" />', 2, 0, 0, 0, 1397305265),
-(35, 7, 18, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/81/rabbit_thumb.gif" height="22" width="22" />', 2, 0, 1, 0, 1397317222),
-(36, 7, 35, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/b6/sb_thumb.gif" height="22" width="22" />', 2, 0, 1, 0, 1397317234),
-(37, 7, 36, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/af/cry.gif" height="22" width="22" />', 2, 0, 1, 0, 1397317295),
-(38, 7, 37, 7, 18, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/6b/sleepa_thumb.gif" height="22" width="22" />', 2, 0, 0, 0, 1397317564),
-(39, 7, NULL, NULL, NULL, 1, 1, '发个图片试试', 0, 0, 0, 0, 1397388619),
-(40, 7, NULL, NULL, NULL, 1, 1, '发个图片试试', 0, 0, 1, 0, 1397388665),
-(41, 7, NULL, NULL, NULL, 1, 1, '再发个图片试试', 0, 0, 1, 0, 1397388750),
-(42, 7, 41, 7, 41, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/81/rabbit_thumb.gif" height="22" width="22" />', 2, 0, 1, 0, 1397389745),
-(43, 7, 42, 7, 41, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/c3/zy_thumb.gif" height="22" width="22" />', 2, 0, 0, 0, 1397389969),
-(44, 7, 40, 7, 40, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/98/yhh_thumb.gif" height="22" width="22" />', 2, 0, 0, 0, 1397389981),
-(45, 7, NULL, NULL, NULL, 1, 1, '是生死是是是试试哈斯是', 0, 0, 0, 0, 1397390592),
-(46, 7, NULL, NULL, NULL, 1, 1, '哈哈哈哈哈哈哈', 0, 0, 0, 0, 1397390699),
-(47, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/d8/good_thumb.gif" height="22" width="22" />', 0, 1, 0, 0, 1397390749),
-(48, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/5c/yw_thumb.gif" height="22" width="22" />', 0, 0, 0, 0, 1397390803),
-(49, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/24/sweata_thumb.gif" height="22" width="22" />', 0, 0, 0, 0, 1397391651),
-(50, 7, 47, 7, 47, 1, 1, 'mi', 1, 0, 0, 0, 1397391680),
-(51, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/ac/smilea_thumb.gif" height="22" width="22" />', 0, 1, 0, 1, 1397651562),
-(52, 7, 51, 7, 51, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/0b/tootha_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397703432),
-(53, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/5c/yw_thumb.gif" height="22" width="22" />', 0, 0, 0, 0, 1397714143),
-(54, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/36/gza_thumb.gif" height="22" width="22" />哈哈哈哈，我做的页面好漂亮啊', 0, 0, 0, 0, 1397718985),
-(55, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/36/gza_thumb.gif" height="22" width="22" />', 0, 0, 1, 0, 1397719046),
-(56, 7, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/81/rabbit_thumb.gif" height="22" width="22" />', 0, 0, 1, 0, 1397719258),
-(57, 7, 56, 7, 56, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/14/tza_thumb.gif" height="22" width="22" />', 2, 12, 0, 1, 1397721103),
-(58, 7, 57, 7, 57, 1, 1, '的DSA 打撒DSA 打撒<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/bc/fuyun_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397751507),
-(59, 7, 57, 7, 57, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/6e/panda_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397808147),
-(60, 7, 57, 7, 57, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/89/hufen_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397808186),
-(61, 7, 57, 7, 57, 1, 1, 'gfsdgfsgfds', 1, 0, 0, 0, 1397808691),
-(62, 7, 57, 7, 57, 1, 1, 'fdsaf sadf', 1, 0, 0, 0, 1397809192),
-(63, 7, 57, 7, 57, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/20/alizuoguiliannew_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397810120),
-(64, 7, 57, 7, 57, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/bc/otm_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397810143),
-(65, 7, 64, 7, 57, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/c4/liwu_thumb.gif" height="22" width="22" />', 3, 0, 0, 0, 1397810149),
-(66, 7, 64, 7, 57, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/6e/panda_thumb.gif" height="22" width="22" />', 3, 0, 0, 0, 1397811110),
-(67, 7, 66, 7, 57, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/91/lazu_thumb.gif" height="22" width="22" />', 3, 0, 0, 0, 1397821835),
-(68, 7, 67, 7, 57, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/7f/sleepya_thumb.gif" height="22" width="22" />', 3, 0, 0, 0, 1397821898),
-(69, 7, 55, 7, 55, 1, 1, 'fdsafdsafasd ', 2, 0, 1, 0, 1397825486),
-(70, 7, 69, 7, 55, 1, 1, 'tgretertrewtewrt', 2, 0, 2, 0, 1397825793),
-(71, 7, 70, 7, 55, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/bc/otm_thumb.gif" height="22" width="22" />', 2, 0, 0, 0, 1397825879),
-(72, 7, 70, 7, 55, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/af/kl_thumb.gif" height="22" width="22" />', 2, 1, 1, 0, 1397827890),
-(73, 7, 72, 7, 55, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/e9/sk_thumb.gif" height="22" width="22" />', 2, 7, 0, 0, 1397827908),
-(74, 7, 73, 7, 73, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/af/kl_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397828118),
-(75, 6, 73, 7, 73, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/f2/wg_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397909205),
-(76, 6, 73, 7, 73, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/a6/x_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397909291),
-(77, 6, 57, 7, 57, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/14/tza_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397909310),
-(78, 6, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/58/mb_thumb.gif" height="22" width="22" />', 0, 0, 0, 1, 1397909556),
-(79, 6, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/6b/sleepa_thumb.gif" height="22" width="22" />范德萨仿盛大发生非盛大', 0, 0, 0, 0, 1397909659),
-(80, 6, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/a5/cza_thumb.gif" height="22" width="22" />', 0, 0, 0, 0, 1397909704),
-(81, 6, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/9e/t_thumb.gif" height="22" width="22" />', 0, 0, 0, 0, 1397909775),
-(82, 6, NULL, NULL, NULL, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/24/sweata_thumb.gif" height="22" width="22" />', 0, 0, 1, 0, 1397909821),
-(83, 6, 82, 6, 82, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/c9/geili_thumb.gif" height="22" width="22" />', 2, 0, 0, 0, 1397909833),
-(84, 7, 73, 7, 73, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/5c/yw_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397910172),
-(85, 7, 76, 7, 73, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/af/kl_thumb.gif" height="22" width="22" />', 3, 0, 0, 0, 1397911334),
-(86, 7, 76, 7, 73, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/c9/geili_thumb.gif" height="22" width="22" />', 3, 0, 0, 0, 1397911348),
-(87, 7, 72, 7, 72, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/bc/fuyun_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1397911729),
-(88, 7, 76, 6, 73, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/bc/otm_thumb.gif" height="22" width="22" />', 3, 0, 0, 0, 1397911823),
-(89, 33, NULL, NULL, NULL, 1, 1, '测试', 0, 0, 0, 0, 1397959903);
+INSERT INTO `cms_feed` (`id`, `mid`, `fid`, `fmid`, `oid`, `is_audit`, `feed_content`, `feed_type`, `comment_count`, `repost_count`, `praise_count`, `ctime`) VALUES
+(1, 33, -1, -1, -1, 1, '任务板块谈论会议，很激烈呀<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/68/dadadenglong_thumb.gif" height="22" width="22" />', 0, 2, 7, 1, 1399192918),
+(2, 5, -1, -1, -1, 1, '明天很美好，今天要努力~~', 0, 0, 1, 0, 1399193823),
+(3, 33, 2, 5, 2, 1, '你说的不赖[互粉][囧]', 2, 0, 0, 0, 1399194830),
+(4, 5, 1, 33, 1, 1, '看起来好好玩啊', 1, 0, 0, 0, 1399195015),
+(7, 33, 5, 5, 5, 1, '怎么不显示表情呢<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/7a/shenshou_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1399195116),
+(13, 33, 4, 33, 1, 1, '回复蒲精:那是必须的', 3, 0, 0, 0, 1399196706),
+(12, 5, 1, 33, 1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/c9/geili_thumb.gif" height="22" width="22" /><img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/c9/geili_thumb.gif" height="22" width="22" />', 2, 0, 0, 0, 1399196642),
+(14, 7, -1, -1, -1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/19/heia_thumb.gif" height="22" width="22" />', 0, 3, 2, 0, 1399274907),
+(15, 7, 14, 7, 14, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/a0/kbsa_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1399274951),
+(26, 33, 14, 7, 14, 1, '好吧', 1, 0, 0, 0, 1399283902),
+(37, 33, 14, 7, 14, 1, '评论+转发<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/c9/geili_thumb.gif" height="22" width="22" />', 2, 1, 0, 1, 1399297114),
+(33, 43, 1, 33, 1, 1, '你们搞的都不错啊<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/7a/shenshou_thumb.gif" height="22" width="22" />', 2, 0, 0, 0, 1399289939),
+(38, 33, 14, 7, 14, 1, '评论+转发<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/c9/geili_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1399297114),
+(41, 33, -1, -1, -1, 1, '今天很好<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/6a/laugh.gif" height="22" width="22" />', 0, 0, 0, 0, 1399430054),
+(40, 33, 37, 33, 37, 1, '再转一次', 1, 0, 0, 0, 1399297227),
+(42, 33, -1, -1, -1, 1, '今天糖糖回来啦\n', 0, 0, 0, 0, 1399433020),
+(44, 43, -1, -1, -1, 1, '小伙子搞的不赖啊', 0, 2, 8, 0, 1399535942),
+(45, 43, 44, 43, 44, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3f/ltzhuanfa_thumb.gif" height="22" width="22" />', 2, 0, 0, 0, 1399535999),
+(46, 43, 44, 43, 44, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/3f/ltzhuanfa_thumb.gif" height="22" width="22" />', 1, 0, 0, 0, 1399535999),
+(48, 33, 44, 43, 44, 1, '小伙子确实不赖', 1, 0, 0, 0, 1399536464),
+(50, 33, 44, 43, 44, 1, '小伙子确实不赖啊<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/1b/m_thumb.gif" height="22" width="22" />', 2, 0, 0, 0, 1399545582),
+(54, 33, 45, 43, 44, 1, '搞的不赖<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/70/vw_thumb.gif" height="22" width="22" />', 2, 0, 0, 0, 1399546122),
+(55, 33, -1, -1, -1, 1, '今天任务组会议<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/70/vw_thumb.gif" height="22" width="22" />', 0, 0, 1, 0, 1399549700),
+(56, 33, 55, 33, 55, 1, '给力', 2, 0, 0, 0, 1399549729),
+(57, 6, -1, -1, -1, 1, '<img src="http://img.t.sinajs.cn/t4/appstyle/expression/ext/normal/58/mb_thumb.gif" height="22" width="22" />', 0, 0, 0, 0, 1399692712);
 
 -- --------------------------------------------------------
 
@@ -268,21 +213,23 @@ INSERT INTO `cms_feed` (`id`, `mid`, `fid`, `fmid`, `oid`, `is_repost`, `is_audi
 
 CREATE TABLE IF NOT EXISTS `cms_feedback` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) NOT NULL COMMENT '标题',
   `content` text NOT NULL,
   `email` varchar(100) NOT NULL,
   `ctime` int(11) NOT NULL,
   `is_reply` tinyint(2) NOT NULL COMMENT '是否已读',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
 -- 转存表中的数据 `cms_feedback`
 --
 
-INSERT INTO `cms_feedback` (`id`, `title`, `content`, `email`, `ctime`, `is_reply`) VALUES
-(2, '测试留言', '留言测试啊', 'yunstudio2012@qq.com', 0, 1),
-(3, '测试留言2', '测试留言2', 'yunstudio2012@qq.com', 0, 1);
+INSERT INTO `cms_feedback` (`id`, `content`, `email`, `ctime`, `is_reply`) VALUES
+(10, '档案有问题啊', '825075713@qq.com', 1399958003, 0),
+(9, '坑马蒂厄', '825075713@qq.com', 1399957941, 0),
+(8, '坑爹', '825075713@qq.com', 1399957917, 0),
+(7, '师傅的说法', '825075713@qq.com', 1399957873, 0),
+(11, '有问题啊', '825075713@qq.com', 1399958025, 0);
 
 -- --------------------------------------------------------
 
@@ -296,17 +243,38 @@ CREATE TABLE IF NOT EXISTS `cms_feed_digg` (
   `feed_id` int(11) NOT NULL COMMENT '心情id',
   `ctime` int(11) NOT NULL COMMENT '时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `cms_feed_digg`
 --
 
 INSERT INTO `cms_feed_digg` (`id`, `mid`, `feed_id`, `ctime`) VALUES
-(72, 7, 57, 1397747021),
-(77, 7, 78, 1397913521),
-(71, 7, 51, 1397746884),
-(52, 7, 18, 1397300361);
+(3, 33, 37, 1399361771),
+(2, 5, 1, 1399196104);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `cms_feed_notify`
+--
+
+CREATE TABLE IF NOT EXISTS `cms_feed_notify` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `mid` int(11) NOT NULL COMMENT '用户ID',
+  `fid` int(11) NOT NULL COMMENT '心情ID',
+  `type` tinyint(2) NOT NULL COMMENT '1,赞.2评论.3,转发',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- 转存表中的数据 `cms_feed_notify`
+--
+
+INSERT INTO `cms_feed_notify` (`id`, `mid`, `fid`, `type`) VALUES
+(1, 5, 8, 1),
+(2, 33, 1, 1),
+(3, 33, 37, 1);
 
 -- --------------------------------------------------------
 
@@ -315,28 +283,24 @@ INSERT INTO `cms_feed_digg` (`id`, `mid`, `feed_id`, `ctime`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cms_feed_pic` (
-  `id` int(11) NOT NULL COMMENT 'ID',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `fid` int(11) NOT NULL COMMENT '心情ID',
   `url` varchar(200) NOT NULL COMMENT '地址',
   `thumb_url` varchar(200) NOT NULL COMMENT '缩略图地址',
-  `ctime` int(11) NOT NULL COMMENT '创建时间'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `ctime` int(11) NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `cms_feed_pic`
 --
 
 INSERT INTO `cms_feed_pic` (`id`, `fid`, `url`, `thumb_url`, `ctime`) VALUES
-(0, 40, '/91pindao/upload/member/img/4501397388653.jpg', '/91pindao/upload/member/img/thumb_4501397388653.jpg', 1397388665),
-(0, 41, '/91pindao/upload/member/img/8081397388746.jpg', '/91pindao/upload/member/img/thumb_8081397388746.jpg', 1397388750),
-(0, 45, '/91pindao/upload/member/img/3011397390581.jpg', '/91pindao/upload/member/img/thumb_3011397390581.jpg', 1397390592),
-(0, 46, '/91pindao/upload/member/img/8551397390693.jpg', '/91pindao/upload/member/img/thumb_8551397390693.jpg', 1397390699),
-(0, 47, '/91pindao/upload/member/img/7091397390742.jpg', '/91pindao/upload/member/img/thumb_7091397390742.jpg', 1397390749),
-(0, 49, '/91pindao/upload/member/img/8821397391643.jpg', '/91pindao/upload/member/img/thumb_8821397391643.jpg', 1397391651),
-(0, 53, '/91pindao/upload/member/img/3941397714136.jpg', '/91pindao/upload/member/img/thumb_3941397714136.jpg', 1397714143),
-(0, 54, '/91pindao/upload/member/img/9541397718961.png', '/91pindao/upload/member/img/thumb_9541397718961.png', 1397718985),
-(0, 55, '/91pindao/upload/member/img/4201397719039.jpg', '/91pindao/upload/member/img/thumb_4201397719039.jpg', 1397719046),
-(0, 56, '/91pindao/upload/member/img/7301397719249.jpg', '/91pindao/upload/member/img/thumb_7301397719249.jpg', 1397719258);
+(3, 1, '9961399192917.jpg', 'thumb_9961399192917.jpg', 1399192918),
+(4, 14, '9271399274902.jpg', 'thumb_9271399274902.jpg', 1399274907),
+(6, 44, '5501399535926.gif', 'thumb_5501399535926.gif', 1399535942),
+(7, 55, '9521399549694.jpg', 'thumb_9521399549694.jpg', 1399549700),
+(8, 57, '7811399692693.jpg', 'thumb_7811399692693.jpg', 1399692712);
 
 -- --------------------------------------------------------
 
@@ -373,7 +337,7 @@ CREATE TABLE IF NOT EXISTS `cms_group` (
   `name` varchar(255) NOT NULL,
   `power` varchar(1000) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `cms_group`
@@ -382,7 +346,8 @@ CREATE TABLE IF NOT EXISTS `cms_group` (
 INSERT INTO `cms_group` (`id`, `name`, `power`) VALUES
 (1, '超级管理员', '-1'),
 (2, '普通管理员', '277,283,1,2,4,5,6,7,8,9,228,10,11,12,13,14,15,16,157,158,174,268,288'),
-(3, 'test', '277,283,1,2,4,5,6,7,8,9,228');
+(3, 'test', '277,283,1,2,4,5,6,7,8,9,228'),
+(4, '任务管理员', '277,1,2,6,7,228,328,3,304,305,10,11,12,15,16,157,158,174,288,17,22,23,24,25,26,27,28,29,85,182,245,292,293,296,325,30,31,230,231,234,236,237,251,301,159,188,189,190,229,238,239,240,243,244,267,283,330,331,332,333,334,314,315,316,336,337,338,339,340,341,342,343');
 
 -- --------------------------------------------------------
 
@@ -438,7 +403,7 @@ CREATE TABLE IF NOT EXISTS `cms_login_logs` (
   `ip` varchar(15) NOT NULL COMMENT '登陆ip',
   `ctime` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=188 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=347 ;
 
 --
 -- 转存表中的数据 `cms_login_logs`
@@ -630,7 +595,166 @@ INSERT INTO `cms_login_logs` (`id`, `type`, `uid`, `ip`, `ctime`) VALUES
 (184, 1, 5, 'unknown', 1397910449),
 (185, 1, 33, 'unknown', 1397957640),
 (186, 1, 7, 'unknown', 1397960567),
-(187, 1, 33, 'unknown', 1397962187);
+(187, 1, 33, 'unknown', 1397962187),
+(188, 1, 43, '192.168.0.104', 1397963944),
+(189, 1, 33, 'unknown', 1397964516),
+(190, 1, 33, 'unknown', 1397964608),
+(191, 1, 43, 'unknown', 1397971925),
+(192, 1, 44, 'unknown', 1397972368),
+(193, 1, 33, 'unknown', 1397973145),
+(194, 1, 33, 'unknown', 1397979461),
+(195, 1, 33, '192.168.0.112', 1397979913),
+(196, 1, 8, '192.168.0.113', 1397979947),
+(197, 1, 8, '192.168.0.113', 1397980510),
+(198, 1, 33, '192.168.0.112', 1397980561),
+(199, 1, 8, '192.168.0.113', 1397980596),
+(200, 1, 8, '192.168.0.113', 1397980825),
+(201, 1, 44, '192.168.0.109', 1397981573),
+(202, 1, 33, 'unknown', 1397981965),
+(203, 1, 43, '192.168.0.104', 1397982142),
+(204, 1, 7, '192.168.0.106', 1397982578),
+(205, 1, 6, '192.168.0.108', 1397984570),
+(206, 1, 6, '192.168.0.108', 1397984683),
+(207, 1, 8, '192.168.0.113', 1397986047),
+(208, 1, 33, 'unknown', 1398047709),
+(209, 1, 33, 'unknown', 1398049303),
+(210, 1, 33, 'unknown', 1398050621),
+(211, 1, 33, 'unknown', 1398051610),
+(212, 1, 33, 'unknown', 1398051667),
+(213, 1, 33, 'unknown', 1398068064),
+(214, 1, 33, 'unknown', 1398068155),
+(215, 1, 33, 'unknown', 1398068698),
+(216, 1, 33, 'unknown', 1398148495),
+(217, 1, 43, 'unknown', 1398152207),
+(218, 1, 5, 'unknown', 1398167835),
+(219, 1, 6, 'unknown', 1398169370),
+(220, 1, 33, 'unknown', 1398228162),
+(221, 1, 5, 'unknown', 1398228535),
+(222, 1, 43, 'unknown', 1398228825),
+(223, 1, 43, '192.168.0.109', 1398244271),
+(224, 1, 43, '192.168.0.109', 1398254408),
+(225, 1, 6, '192.168.0.105', 1398255100),
+(226, 1, 6, '192.168.0.105', 1398255318),
+(227, 2, 1, '192.168.0.105', 1398255514),
+(228, 2, 1, '192.168.0.105', 1398256170),
+(229, 1, 33, 'unknown', 1398260150),
+(230, 1, 33, 'unknown', 1398404288),
+(231, 1, 33, '192.168.0.112', 1398412270),
+(232, 1, 33, 'unknown', 1398413083),
+(233, 1, 33, 'unknown', 1398432592),
+(234, 1, 33, 'unknown', 1398476883),
+(235, 1, 33, 'unknown', 1398478252),
+(236, 1, 33, 'unknown', 1398497537),
+(237, 1, 33, 'unknown', 1398502034),
+(238, 1, 5, 'unknown', 1398502777),
+(239, 1, 33, 'unknown', 1398511452),
+(240, 1, 44, 'unknown', 1398511914),
+(241, 1, 6, 'unknown', 1398518076),
+(242, 1, 5, 'unknown', 1398519230),
+(243, 1, 44, 'unknown', 1398519390),
+(244, 1, 33, 'unknown', 1398684205),
+(245, 1, 43, 'unknown', 1398684332),
+(246, 1, 33, 'unknown', 1398684350),
+(247, 1, 33, 'unknown', 1398745684),
+(248, 1, 5, 'unknown', 1398748866),
+(249, 1, 33, 'unknown', 1398750628),
+(250, 1, 7, 'unknown', 1398751229),
+(251, 1, 43, 'unknown', 1398751413),
+(252, 1, 44, 'unknown', 1398751458),
+(253, 1, 33, 'unknown', 1398755610),
+(254, 2, 1, 'unknown', 1398758605),
+(255, 1, 33, 'unknown', 1398759196),
+(256, 2, 1, 'unknown', 1398761598),
+(257, 1, 33, 'unknown', 1398768048),
+(258, 1, 33, 'unknown', 1398771084),
+(259, 1, 33, 'unknown', 1398859989),
+(260, 1, 33, 'unknown', 1398862356),
+(261, 1, 33, 'unknown', 1398922211),
+(262, 1, 33, 'unknown', 1398926767),
+(263, 1, 33, 'unknown', 1398936376),
+(264, 1, 33, 'unknown', 1398938150),
+(265, 1, 33, 'unknown', 1398938977),
+(266, 1, 33, 'unknown', 1398939011),
+(267, 1, 5, 'unknown', 1398945733),
+(268, 1, 5, 'unknown', 1398946324),
+(269, 1, 33, 'unknown', 1399008945),
+(270, 1, 33, 'unknown', 1399009475),
+(271, 1, 33, 'unknown', 1399014322),
+(272, 1, 33, 'unknown', 1399033569),
+(273, 1, 33, 'unknown', 1399092991),
+(274, 1, 5, 'unknown', 1399095892),
+(275, 1, 33, 'unknown', 1399095920),
+(276, 1, 33, 'unknown', 1399108574),
+(277, 1, 33, 'unknown', 1399181644),
+(278, 1, 5, 'unknown', 1399183336),
+(279, 1, 6, 'unknown', 1399190804),
+(280, 1, 7, 'unknown', 1399190852),
+(281, 1, 43, 'unknown', 1399191067),
+(282, 1, 8, 'unknown', 1399191099),
+(283, 1, 6, 'unknown', 1399191127),
+(284, 1, 44, 'unknown', 1399191222),
+(285, 1, 5, 'unknown', 1399191357),
+(286, 1, 33, 'unknown', 1399192975),
+(287, 1, 33, 'unknown', 1399198488),
+(288, 1, 33, 'unknown', 1399201305),
+(289, 1, 5, 'unknown', 1399201611),
+(290, 1, 33, 'unknown', 1399254994),
+(291, 1, 33, 'unknown', 1399272066),
+(292, 1, 7, '192.168.0.108', 1399274847),
+(293, 1, 6, '192.168.0.107', 1399275295),
+(294, 1, 33, 'unknown', 1399276254),
+(295, 1, 33, 'unknown', 1399288393),
+(296, 1, 43, 'unknown', 1399289913),
+(297, 1, 6, 'unknown', 1399290570),
+(298, 1, 33, 'unknown', 1399290590),
+(299, 1, 6, 'unknown', 1399290613),
+(300, 1, 33, 'unknown', 1399295625),
+(301, 1, 33, 'unknown', 1399296061),
+(302, 1, 33, 'unknown', 1399357363),
+(303, 1, 33, 'unknown', 1399357383),
+(304, 1, 33, 'unknown', 1399426674),
+(305, 1, 33, 'unknown', 1399432269),
+(306, 1, 33, 'unknown', 1399442235),
+(307, 1, 33, 'unknown', 1399445312),
+(308, 1, 33, 'unknown', 1399531380),
+(309, 1, 43, '192.168.0.110', 1399531952),
+(310, 1, 7, '192.168.0.108', 1399534794),
+(311, 1, 33, 'unknown', 1399535130),
+(312, 1, 6, '192.168.0.107', 1399535627),
+(313, 1, 43, '192.168.0.110', 1399536305),
+(314, 1, 33, 'unknown', 1399539715),
+(315, 1, 33, 'unknown', 1399544823),
+(316, 1, 33, 'unknown', 1399546223),
+(317, 1, 33, 'unknown', 1399548037),
+(318, 1, 33, '192.168.0.106', 1399549042),
+(319, 1, 33, 'unknown', 1399549099),
+(320, 1, 33, '192.168.0.106', 1399549484),
+(321, 1, 8, '192.168.0.106', 1399549937),
+(322, 1, 33, '192.168.0.106', 1399550001),
+(323, 1, 33, 'unknown', 1399617703),
+(324, 1, 33, 'unknown', 1399619608),
+(325, 1, 33, 'unknown', 1399619966),
+(326, 1, 5, 'unknown', 1399621585),
+(327, 1, 46, '192.168.0.122', 1399627714),
+(328, 1, 33, 'unknown', 1399627870),
+(329, 1, 8, '192.168.0.106', 1399633051),
+(330, 1, 33, 'unknown', 1399642006),
+(331, 1, 33, 'unknown', 1399642301),
+(332, 1, 6, '192.168.0.107', 1399692626),
+(333, 1, 8, '192.168.0.106', 1399706498),
+(334, 1, 33, 'unknown', 1399708682),
+(335, 1, 33, 'unknown', 1399710934),
+(336, 1, 8, '192.168.0.106', 1399711028),
+(337, 1, 8, '192.168.0.106', 1399713915),
+(338, 1, 6, 'unknown', 1399721506),
+(339, 1, 33, 'unknown', 1399722588),
+(340, 2, 1, 'unknown', 1399723115),
+(341, 1, 33, 'unknown', 1399882763),
+(342, 1, 33, 'unknown', 1399889079),
+(343, 1, 33, 'unknown', 1399891891),
+(344, 1, 33, 'unknown', 1399949567),
+(345, 1, 33, 'unknown', 1399954810),
+(346, 1, 33, 'unknown', 1399959535);
 
 -- --------------------------------------------------------
 
@@ -653,7 +777,7 @@ CREATE TABLE IF NOT EXISTS `cms_member` (
   `last_feed_id` int(11) NOT NULL COMMENT '最后发表心情id',
   `last_feed_time` int(11) NOT NULL COMMENT '最后发表心情时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
 
 --
 -- 转存表中的数据 `cms_member`
@@ -661,13 +785,16 @@ CREATE TABLE IF NOT EXISTS `cms_member` (
 
 INSERT INTO `cms_member` (`id`, `login_email`, `password`, `uname`, `first_letter`, `ctime`, `regip`, `lasttime`, `lastip`, `is_active`, `is_init`, `last_feed_id`, `last_feed_time`) VALUES
 (1, 'yunstudio2012@qq.com', 'd707c24bd27660ca7d65870027fb9218', 'admin', 'a', 1372135503, '', 1397230586, '', 1, 0, 0, 0),
-(33, '825075713@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '王洋', 'W', 1396279141, '', 1397962187, '', 1, 0, 0, 0),
-(5, '1161499602@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '蒲精', 'P', 1395580185, '', 1397910449, '', 1, 0, 0, 0),
-(6, '1095620719@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '唐娜', 'T', 1395581194, '', 1397548435, '', 1, 0, 0, 0),
-(7, '1103349641@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '赵杰', 'Z', 1395581233, '', 1397960567, '', 1, 0, 0, 0),
-(8, '113771910@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '田书记', 'T', 1395581267, '', 1397885935, '', 1, 0, 0, 0),
-(43, 'tianyufang@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '田玉方', 'T', 1397473278, '', 1397805423, '', 1, 0, 0, 0),
-(44, '1085195131@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '易武', 'Y', 1397473574, '', 1397725099, '', 1, 0, 0, 0);
+(33, '825075713@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '王洋', 'W', 1396279141, '', 1399959535, '', 1, 0, 0, 0),
+(5, '1161499602@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '蒲精', 'P', 1395580185, '', 1399621585, '', 1, 0, 0, 0),
+(6, '1095620719@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '唐娜', 'T', 1395581194, '', 1399721506, '', 1, 0, 0, 0),
+(7, '1103349641@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '赵杰', 'Z', 1395581233, '', 1399534794, '', 1, 0, 0, 0),
+(8, '113771910@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '田向阳', 'T', 1395581267, '', 1399713915, '', 1, 0, 0, 0),
+(43, 'tianyufang@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '田玉方', 'T', 1397473278, '', 1399536305, '', 1, 0, 0, 0),
+(44, '1085195131@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '易武', 'Y', 1397473574, '', 1399191222, '', 1, 0, 0, 0),
+(46, 'jiayouxuning@126.com', '1151d6a7c36588031a69dbd6dec10686', '徐宁', 'X', 1399626848, '192.168.0.122', 1399627714, '192.168.0.122', 1, 0, 0, 0),
+(47, '591259573@qq.com', 'e947df9b9c75758ff497f8b031c019b8', '李鸥鸥', 'L', 1399636615, '192.168.0.106', 1399636615, '192.168.0.106', 1, 0, 0, 0),
+(48, '842370156@qq.com', '3f81740f650c59d075fa49497e228361', '张牧', 'Z', 1399639078, '192.168.0.112', 1399639078, '192.168.0.112', 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -683,21 +810,38 @@ CREATE TABLE IF NOT EXISTS `cms_member_card` (
   `remark` varchar(15) NOT NULL COMMENT '备注信息',
   `ctime` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=48 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=101 ;
 
 --
 -- 转存表中的数据 `cms_member_card`
 --
 
 INSERT INTO `cms_member_card` (`id`, `send_id`, `rece_id`, `status`, `remark`, `ctime`) VALUES
-(46, 33, 8, 2, '', 1397889502),
-(16, 33, 6, 1, '', 1397720619),
-(35, 5, 33, 2, '', 1397885893),
+(66, 44, 6, 2, '', 1399276183),
+(83, 5, 82, 1, '', 1399201614),
+(95, 33, 46, 1, '', 1399628087),
 (20, 5, 44, 1, '', 1397726157),
-(21, 5, 6, 1, '', 1397726159),
-(24, 33, 44, 1, '', 1397784550),
-(47, 7, 33, 2, '', 1397962207),
-(45, 33, 43, 1, '', 1397889358);
+(21, 5, 6, 2, '', 1397726159),
+(73, 33, 72, 1, '', 1398519151),
+(99, 33, 43, 1, '', 1399719165),
+(48, 43, 5, 2, '', 1398519363),
+(49, 43, 6, 2, '', 1397964097),
+(50, 43, 7, 2, '', 1397964098),
+(51, 43, 8, 2, '', 1399633098),
+(52, 43, 44, 1, '', 1397964102),
+(67, 44, 7, 1, '', 1397981788),
+(68, 33, 8, 2, '', 1399549945),
+(69, 6, 7, 1, '', 1397984706),
+(75, 5, 74, 1, '', 1398519258),
+(76, 5, 48, 1, '', 1398519363),
+(78, 33, 77, 1, '', 1398684266),
+(96, 33, 7, 1, '', 1399628185),
+(81, 33, 80, 1, '', 1398751249),
+(84, 6, 66, 1, '', 1399276183),
+(85, 33, 79, 1, '', 1399432332),
+(86, 8, 68, 1, '', 1399549945),
+(100, 6, 33, 2, '', 1399721529),
+(98, 6, 0, 1, '', 1399693790);
 
 -- --------------------------------------------------------
 
@@ -810,7 +954,7 @@ CREATE TABLE IF NOT EXISTS `cms_member_group_link` (
   `uid` int(11) NOT NULL COMMENT '会员id',
   `user_group_id` int(11) NOT NULL COMMENT '会员组id',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
 
 --
 -- 转存表中的数据 `cms_member_group_link`
@@ -824,7 +968,10 @@ INSERT INTO `cms_member_group_link` (`id`, `uid`, `user_group_id`) VALUES
 (6, 7, 2),
 (7, 8, 2),
 (20, 44, 2),
-(19, 43, 2);
+(19, 43, 2),
+(22, 46, 2),
+(23, 47, 2),
+(24, 48, 2);
 
 -- --------------------------------------------------------
 
@@ -839,7 +986,7 @@ CREATE TABLE IF NOT EXISTS `cms_member_login` (
   `weibo_key` varchar(100) NOT NULL COMMENT '微博key',
   `token` varchar(50) NOT NULL COMMENT '账号激活码',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=43 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
 
 --
 -- 转存表中的数据 `cms_member_login`
@@ -862,7 +1009,10 @@ INSERT INTO `cms_member_login` (`id`, `type`, `mid`, `weibo_key`, `token`) VALUE
 (39, 2, 8, '', '06314da474c8cb36d1724daf0e3987c4'),
 (40, 2, 9, '', 'afa9f739298d5e18b3e241c553c5c201'),
 (41, 2, 10, '', '9dc4b93e39fb640fb3849837c1b61955'),
-(42, 2, 11, '', '748aa180e88f082056090250455f72bb');
+(42, 2, 11, '', '748aa180e88f082056090250455f72bb'),
+(44, 1, 46, '', 'e7d2d9dc8a32229f145798f63b926a05'),
+(45, 1, 47, '', '0411e34f6fa3f5a2bd5e3dc7473b97a8'),
+(46, 1, 48, '', 'd5c770d3f3402031cf1afccf9fa72be6');
 
 -- --------------------------------------------------------
 
@@ -895,13 +1045,17 @@ CREATE TABLE IF NOT EXISTS `cms_member_profile` (
 --
 
 INSERT INTO `cms_member_profile` (`mid`, `sex`, `location`, `school`, `qq`, `tel`, `city`, `major`, `major_type`, `education`, `start_time`, `end_time`, `interest`, `skill`, `honour`, `introduce`) VALUES
-(33, 1, '安徽,合肥', '长沙理工大学', '825075713', '14789998264', '湖南,长沙', '计算机科学与技术', '经济学,经济学相关类', '1', 1314806400, 1435680000, '招聘,兼职,找投资,投资项目,商务活动', 'linux,编程,php,mysql', NULL, '云作坊网络开发团队主管，开发了以&lt;大学生科技交流平台&gt;为核心的自主产品，科技立项一等奖，挑战杯校二等奖，创新实验项目。探索 出自主项目为主，商业项目为辅的团队发展模式。长沙理工大学第二届十佳自强之星，优秀毕业生。'),
-(43, 0, '', '', '', '', NULL, '', NULL, NULL, 0, 0, NULL, NULL, NULL, ''),
-(44, 0, '', '长沙理工大学', '', '', NULL, '计算机', '工学,仪器仪表相关类', '3', 537465600, 1169654400, NULL, NULL, NULL, ''),
-(8, 0, '', '', '', '', NULL, '', NULL, NULL, 0, 0, NULL, NULL, NULL, ''),
+(33, 1, '安徽,合肥', '长沙理工大学', '825075713', '14789998264', '湖南,长沙', '计算机科学与技术', '经济学,经济学相关类', '1', 1314806400, 1435680000, '招聘,兼职,找投资,投资项目,商务活动', 'linux,编程,php,mysql', NULL, '云作坊网络开发团队主管，开发了以《大学生科技交流平台》为核心的自主产品，科技立项一等奖，挑战杯校二等奖，创新实验项目。探索 出自主项目为主，商业项目为辅的团队发展模式。长沙理工大学第二届十佳自强之星，优秀毕业生。'),
+(43, 1, '湖北,恩施', '长沙理工大学', '137244230', '18373137187', '湖南,长沙', '数字媒体艺术', '文学,艺术相关类', '3', 1314806400, 1435680000, NULL, NULL, NULL, '我是91频道的'),
+(44, 1, '湖南,岳阳', '长沙理工大学', '1085195131', '15574873872', '湖南,长沙', '计算机', '工学,网络工程相关类', '3', 1347206400, 1397923200, NULL, NULL, NULL, ''),
+(8, 1, '贵州,遵义', '长沙理工大学', '113771910', '13517494496', '湖南,长沙', '汉语言文学', '文学,中国语言文学相关类', '3', 568656000, 694627200, NULL, NULL, NULL, '柴米油盐酱醋茶，琴棋书画诗酒花'),
 (7, 0, '', '长沙理工大学', '', '', NULL, '计算机科学与技术', '工学,计算机相关类', '3', 979574400, 1484064000, NULL, NULL, NULL, ''),
-(6, 1, ',', '北京林业大学', '', '', '湖南,长沙', '计算机科学与技术', '哲学,哲学相关类', '3', 1231948800, 1263830400, NULL, NULL, NULL, '我是唐娜'),
-(5, 0, '江西,南昌', '北京大学', '4545', '1223', '湖南,长沙', '计算机', '经济学,财政学相关类', '3', -30268800, 1925481600, NULL, NULL, NULL, '我是长沙理工大学蒲精。');
+(6, 1, '湖南,株洲', '西南交大', '1095620719', '15507482673', '湖南,长沙', '计算机科学与技术', '历史学,历史学相关类', '3', 1315065600, 1263830400, NULL, NULL, NULL, '从事财务工作6年，其中2年管理经验，4年的外资全盘账务处理经验。擅长精确核算收入、成本利润。对进出口医疗卫浴、IT、旅游等行业的税务政策及工作都非常熟悉。'),
+(5, 0, '江西,南昌', '北京大学', '4545', '1223', '湖南,长沙', '计算机', '经济学,财政学相关类', '3', -30268800, 1925481600, NULL, NULL, NULL, '我是长沙理工大学蒲精。'),
+(45, 0, '', '', '', '', NULL, '', NULL, NULL, 0, 0, NULL, NULL, NULL, ''),
+(46, 1, '黑龙江,黑河', '长沙理工大学', '619572606', '13667377194', '湖南,长沙', '港口航道与海岸工程', '工学,水利相关类', '3', 1283270400, 1404144000, NULL, NULL, NULL, '大学期间参加云作坊网络开发团队'),
+(47, 0, '', '', '', '', NULL, '', NULL, NULL, 0, 0, NULL, NULL, NULL, ''),
+(48, 0, '', '', '', '', NULL, '', NULL, NULL, 0, 0, NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -915,53 +1069,61 @@ CREATE TABLE IF NOT EXISTS `cms_member_tag` (
   `tid` varchar(100) NOT NULL COMMENT '标签id，-1是自定义',
   `name` varchar(20) NOT NULL COMMENT '标签名称',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=68 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=114 ;
 
 --
 -- 转存表中的数据 `cms_member_tag`
 --
 
 INSERT INTO `cms_member_tag` (`id`, `mid`, `tid`, `name`) VALUES
-(36, 33, '100084', '公文写作'),
-(35, 33, '100088', '表达能力'),
-(34, 33, '100086', '沟通协调'),
-(33, 33, '100091', 'photoshop'),
-(30, 33, '100081', '商务谈判'),
-(32, 33, '100104', 'flash'),
-(17, 33, '100078', 'powerpoint'),
-(16, 33, '100077', 'excel'),
-(15, 33, '100076', 'word'),
-(37, 33, '100084', '公文写作'),
-(38, 33, '100084', '公文写作'),
-(39, 33, '100080', 'outlook'),
+(82, 33, '-1', 'php'),
+(81, 33, '100085', '办公自动化'),
+(80, 33, '100082', '市场拓展'),
+(94, 43, '100101', '领导力'),
+(93, 43, '100097', '精通互联网'),
+(83, 33, '-1', 'asp'),
 (40, 5, '100087', '逻辑分析'),
 (41, 5, '100081', '商务谈判'),
 (42, 5, '100089', '创新能力'),
 (43, 5, '100091', 'photoshop'),
-(44, 33, '100076', 'word'),
-(45, 33, '100078', 'powerpoint'),
-(46, 33, '100080', 'outlook'),
-(47, 33, '100081', '商务谈判'),
-(48, 33, '100078', 'powerpoint'),
-(49, 33, '100091', 'photoshop'),
-(50, 33, '100077', 'excel'),
-(51, 33, '100077', 'excel'),
-(52, 33, '100078', 'powerpoint'),
-(53, 33, '100091', 'photoshop'),
-(54, 33, '100077', 'excel'),
-(55, 33, '100091', 'photoshop'),
-(56, 33, '100081', '商务谈判'),
-(57, 33, '100084', '公文写作'),
+(112, 6, '100082', '市场拓展'),
+(113, 6, '100091', 'photoshop'),
+(90, 43, '100104', 'flash'),
+(76, 6, '100106', 'access'),
+(84, 33, '-1', '.net'),
+(91, 43, '100115', '项目管理'),
+(92, 43, '100093', '团队合作'),
+(88, 6, '100086', '沟通协调'),
 (58, 7, '100091', 'photoshop'),
 (59, 7, '100087', '逻辑分析'),
 (60, 7, '100088', '表达能力'),
 (61, 7, '100098', '电话接待'),
 (62, 7, '100096', '文件管理'),
 (63, 7, '-1', 'php'),
-(64, 43, '100076', 'word'),
-(65, 43, '100077', 'excel'),
+(89, 43, '100094', '学习能力'),
 (66, 8, '100088', '表达能力'),
-(67, 8, '100098', '电话接待');
+(67, 8, '100098', '电话接待'),
+(68, 7, '100077', 'excel'),
+(69, 7, '100078', 'powerpoint'),
+(70, 43, '100091', 'photoshop'),
+(71, 43, '100100', '执行力'),
+(72, 43, '-1', '运动'),
+(95, 33, '100086', '沟通协调'),
+(96, 46, '100083', '英语'),
+(97, 46, '100093', '团队合作'),
+(98, 6, '100078', 'powerpoint'),
+(99, 6, '100087', '逻辑分析'),
+(100, 6, '100088', '表达能力'),
+(101, 6, '100089', '创新能力'),
+(102, 6, '100081', '商务谈判'),
+(103, 6, '100084', '公文写作'),
+(104, 6, '100090', '目标管理'),
+(105, 6, '100076', 'word'),
+(106, 6, '100077', 'excel'),
+(107, 6, '100103', 'visio'),
+(108, 6, '100096', '文件管理'),
+(109, 6, '100104', 'flash'),
+(111, 6, '100080', 'outlook');
 
 -- --------------------------------------------------------
 
@@ -974,15 +1136,26 @@ CREATE TABLE IF NOT EXISTS `cms_message_content` (
   `list_id` int(11) NOT NULL COMMENT '私信id',
   `from_uid` int(11) NOT NULL COMMENT '发信人id',
   `content` text NOT NULL COMMENT '内容',
-  `title` varchar(50) NOT NULL COMMENT '标题',
   `ctime` int(11) NOT NULL COMMENT '时间',
+  `is_read` tinyint(2) NOT NULL COMMENT '是否已读',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
 
 --
 -- 转存表中的数据 `cms_message_content`
 --
 
+INSERT INTO `cms_message_content` (`id`, `list_id`, `from_uid`, `content`, `ctime`, `is_read`) VALUES
+(40, 14, 7, '赵杰第二条', 1398751307, 0),
+(39, 14, 7, '哈哈', 1398751267, 0),
+(38, 13, 33, '恩呢。。。', 1398750843, 0),
+(37, 13, 33, '我跟', 1398750816, 0),
+(36, 13, 33, '好遥远', 1398750792, 0),
+(35, 13, 5, '好吧', 1398750018, 0),
+(42, 15, 44, '我是易武', 1398751473, 0),
+(43, 16, 5, '我去。。', 1399108323, 0),
+(45, 16, 43, '我擦', 1399536336, 0),
+(46, 17, 8, 'Hello', 1399549992, 0);
 
 -- --------------------------------------------------------
 
@@ -992,20 +1165,23 @@ CREATE TABLE IF NOT EXISTS `cms_message_content` (
 
 CREATE TABLE IF NOT EXISTS `cms_message_list` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '私信id',
-  `from_mid` int(11) NOT NULL COMMENT '发信人id',
-  `type` int(11) NOT NULL COMMENT '私信类别，1：一对一；2：多人',
-  `title` varchar(100) NOT NULL COMMENT '标题',
-  `member_num` int(6) NOT NULL COMMENT '参与者数量',
-  `member_mid` int(11) NOT NULL COMMENT '参与者id，用逗号链接',
+  `from_mid` int(11) NOT NULL COMMENT '私信发起者ID',
+  `rece_mid` int(11) NOT NULL COMMENT '接收者id',
   `ctime` int(11) NOT NULL COMMENT '时间',
-  `last_message` int(11) NOT NULL COMMENT '最新的一条会话',
+  `last_message` text NOT NULL COMMENT '最新的一条会话',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
 -- 转存表中的数据 `cms_message_list`
 --
 
+INSERT INTO `cms_message_list` (`id`, `from_mid`, `rece_mid`, `ctime`, `last_message`) VALUES
+(15, 44, 33, 1398751473, '我是易武'),
+(14, 7, 33, 1398751399, '好友有意义'),
+(13, 5, 33, 1398750843, '恩呢。。。'),
+(16, 5, 43, 1399108323, '我去。。'),
+(17, 8, 33, 1399549992, 'Hello');
 
 -- --------------------------------------------------------
 
@@ -1018,14 +1194,24 @@ CREATE TABLE IF NOT EXISTS `cms_message_member` (
   `member_id` int(11) NOT NULL COMMENT '参与私信用户id',
   `new` smallint(8) NOT NULL COMMENT '未读消息数',
   `message_num` int(11) NOT NULL COMMENT '消息总数(通信双方)',
-  `ctime` int(11) NOT NULL COMMENT '该参与者最后会话时间',
-  `list_ctime` int(11) NOT NULL COMMENT '私信最后回话时间'
+  `ctime` int(11) NOT NULL COMMENT '该参与者最后会话时间'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- 转存表中的数据 `cms_message_member`
 --
 
+INSERT INTO `cms_message_member` (`list_id`, `member_id`, `new`, `message_num`, `ctime`) VALUES
+(13, 33, 1, 4, 1398750843),
+(13, 5, 3, 4, 1398750843),
+(14, 7, 0, 3, 1398751399),
+(14, 33, 3, 3, 1398751399),
+(15, 44, 0, 1, 0),
+(15, 33, 1, 1, 1398751473),
+(16, 5, 0, 1, 0),
+(16, 43, 1, 1, 1399108323),
+(17, 8, 0, 1, 0),
+(17, 33, 1, 1, 1399549992);
 
 -- --------------------------------------------------------
 
@@ -1042,7 +1228,7 @@ CREATE TABLE IF NOT EXISTS `cms_method` (
   `ifmenu` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否菜单显示',
   PRIMARY KEY (`id`),
   KEY `pid` (`pid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=343 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=345 ;
 
 --
 -- 转存表中的数据 `cms_method`
@@ -1142,7 +1328,9 @@ INSERT INTO `cms_method` (`id`, `rootid`, `pid`, `operate`, `name`, `ifmenu`) VA
 (339, 339, 0, 'task', '任务管理', 1),
 (340, 339, 339, 'index', '基本任务', 1),
 (341, 339, 339, 'add', '增加基本任务', 1),
-(342, 339, 339, 'custom', '企业特定任务', 1);
+(342, 339, 339, 'custom', '企业特定任务', 1),
+(343, 339, 339, 'edit', '编辑基本任务', 0),
+(344, 339, 339, 'del', '删除任务', 0);
 
 -- --------------------------------------------------------
 
@@ -1411,21 +1599,24 @@ CREATE TABLE IF NOT EXISTS `cms_task_base` (
   `content` text NOT NULL COMMENT '任务内容',
   `reminder` varchar(200) NOT NULL COMMENT '任务提示',
   `way` varchar(200) NOT NULL COMMENT '完成途径',
-  `gold` int(11) NOT NULL COMMENT '领取任务消耗91币',
+  `certification_way` varchar(250) NOT NULL COMMENT '认证方式',
+  `obtain_gold` int(11) NOT NULL COMMENT '完成任务获得的91币',
+  `consume_gold` int(11) NOT NULL COMMENT '领取任务消耗91币',
   `score` float NOT NULL COMMENT '任务学分值',
-  `starttime` int(11) NOT NULL COMMENT '任务开始时间',
-  `endtime` int(11) NOT NULL COMMENT '任务结束时间',
   `ctime` int(11) NOT NULL,
+  `author` varchar(50) NOT NULL COMMENT '作者',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `cms_task_base`
 --
 
-INSERT INTO `cms_task_base` (`id`, `goal`, `name`, `content`, `reminder`, `way`, `gold`, `score`, `starttime`, `endtime`, `ctime`) VALUES
-(1, ' 考察应聘者对公司的熟知度', '测试任务', '了解公司概况、主要业务、企业文化、\r\n社会评价等', ' 可从公司网站、主流媒体报道、\r\n其他宣传材料获取有关信息', '', 2, 0, 0, 0, 1396185838),
-(2, '   考察应聘者对公司的熟知度ha ', '测试任务', '了解公司概况、主要业务、企业文化、社会评价等\r\n还有什么', '   可从公司网站、主流媒体报道、公司其他宣传材料获取有关信息', '', 0, 0, 0, 0, 1396185730);
+INSERT INTO `cms_task_base` (`id`, `goal`, `name`, `content`, `reminder`, `way`, `certification_way`, `obtain_gold`, `consume_gold`, `score`, `ctime`, `author`) VALUES
+(1, '  对公司的熟知度（一）', '测试任务', '', '    可从公司网站、主流媒体报道、\r\n其他宣传材料获取有关信息', '', '', 0, 0, 1, 1399710784, '田向阳'),
+(4, '   加强面对面沟通的能力', '面试（一）', '在三个月内参加一次面试，面试完成后写出面试的具体情况及对自己面试情况的具体评价（涉及到具体问题），并给自己打分（总分100分）。文档中请提供面试的职位、公司、具体联系方式。', '   可通过应届生求职网http://www.yingjiesheng.com/等寻找面试机会，面试前请认真准备个人简历。参加面试、写出面试具体情况与自我评价、给自己评分\r\n提交文档、', '测试', '测试', 2, 2, 1, 1399710780, '田向阳'),
+(6, ' 人际交往能力（二）', '认识新朋友（二）', '在一月内的时间内认识三位新朋友并完成向每为联系人借阅一本书籍，阅读后归还联系人。', '       ', '根据91频道提供的同校10名联系人名单和联系方式，领取任务者主动和联系人联系，借阅书籍，完成读后感，获得联系人对领取任务者的书面评价并和联系人合影、', '上传相关材料（或清晰的图片）', 0, 0, 0, 1399714213, '田向阳'),
+(5, '  学会如何取得陌生人的信任', '向陌生人推销一件你自己的物品', '提交文档、照片', '  可通过微博、校内网等找寻自己与陌生人的徽关系，取得他（她）信任。提供的物品最好是对方所需要的，以减少成效难度。', '', '', 0, 0, 0, 1399710788, '田向阳');
 
 -- --------------------------------------------------------
 
@@ -1509,38 +1700,56 @@ CREATE TABLE IF NOT EXISTS `cms_visit_history` (
   `bid` int(11) NOT NULL COMMENT '被访问者id',
   `ctime` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
 
 --
 -- 转存表中的数据 `cms_visit_history`
 --
 
 INSERT INTO `cms_visit_history` (`id`, `type`, `fid`, `bid`, `ctime`) VALUES
-(1, 2, 33, 1, 1397405850),
-(2, 2, 33, 2, 1397725936),
+(1, 2, 33, 1, 1399630162),
+(2, 2, 33, 2, 1398756638),
 (3, 2, 5, 1, 1397478479),
-(4, 1, 5, 33, 1397884944),
-(5, 1, 6, 33, 1397548446),
-(6, 2, 6, 1, 1397489894),
-(7, 1, 33, 5, 1397959870),
-(8, 1, 33, 6, 1397806010),
+(4, 1, 5, 33, 1399629785),
+(5, 1, 6, 33, 1399721512),
+(6, 2, 6, 1, 1399275865),
+(7, 1, 33, 5, 1399630073),
+(8, 1, 33, 6, 1399721496),
 (10, 1, 0, 5, 1397537635),
 (11, 1, 7, 33, 1397962113),
-(12, 1, 33, 7, 1397962206),
-(13, 1, 33, 44, 1397746555),
-(14, 1, 44, 33, 1397725112),
+(12, 1, 33, 7, 1399549604),
+(13, 1, 33, 44, 1399721644),
+(14, 1, 44, 33, 1398751612),
 (15, 1, 44, 6, 1397725111),
-(16, 2, 33, 5, 1397725922),
+(16, 2, 33, 5, 1399630175),
 (17, 1, 5, 44, 1397726156),
-(18, 1, 5, 6, 1397726158),
-(19, 1, 33, 43, 1397893742),
-(20, 1, 43, 33, 1397805541),
-(21, 1, 43, 8, 1397805563),
-(22, 1, 33, 8, 1397911929),
+(18, 1, 5, 6, 1399190793),
+(19, 1, 33, 43, 1399721554),
+(20, 1, 43, 33, 1398256250),
+(21, 1, 43, 8, 1399191091),
+(22, 1, 33, 8, 1399883794),
 (23, 1, 8, 5, 1397805651),
-(24, 1, 8, 33, 1397891942),
+(24, 1, 8, 33, 1399549952),
 (25, 1, 0, 8, 1397891139),
-(26, 1, 7, 44, 1397960597);
+(26, 1, 7, 44, 1397960597),
+(27, 2, 7, 1, 1397963746),
+(28, 2, 43, 1, 1397982240),
+(29, 2, 44, 1, 1397972994),
+(30, 2, 44, 2, 1397973000),
+(31, 1, 8, 7, 1397980225),
+(32, 1, 43, 6, 1399290558),
+(33, 1, 43, 44, 1397982209),
+(34, 1, 43, 5, 1398690114),
+(35, 1, 7, 43, 1399191055),
+(36, 1, 0, 33, 1397984761),
+(37, 2, 6, 2, 1397985000),
+(38, 1, 5, 7, 1398751193),
+(39, 1, 44, 5, 1398751463),
+(40, 1, 33, 0, 1399721648),
+(41, 2, 0, 2, 1398768034),
+(42, 1, 6, 7, 1399190829),
+(43, 1, 8, 6, 1399191118),
+(44, 1, 6, 0, 1399693805);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
