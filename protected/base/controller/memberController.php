@@ -73,7 +73,6 @@ class memberController extends baseController{
     	}
 	}
 	
-	
 	//返回无限分类数组
 	protected  function  sortArray($type=0,$deep=0,$path='')
 	{
@@ -118,7 +117,7 @@ class memberController extends baseController{
 		return $newList;
 	}
 	
-	
+	//文件上传方法
    protected function _upload($upload_dir)
     {
                         
@@ -159,4 +158,27 @@ class memberController extends baseController{
 			}
 	}
 
+	//图片上传方法
+	protected function _uploadpic($upload_dir)
+	{
+		$upload = new UploadFile();
+		//设置上传文件大小
+		$upload->maxSize=1024*1024*2;//最大2M
+		//设置上传文件类型
+		$upload->allowExts  = explode(',','jpg,gif,png,bmp');
+		//设置附件上传目录
+		$upload->savePath ='../images/'.$upload_dir."/";
+		//没有自动创建
+		$upload->saveRule = cp_uniqid;
+		if(!$upload->upload())
+		{
+			//捕获上传异常
+			$this->error($upload->getErrorMsg());
+		}
+		else
+		{
+			//取得成功上传的文件信息
+			return $upload->getUploadFileInfo();
+		}
+	}
 }

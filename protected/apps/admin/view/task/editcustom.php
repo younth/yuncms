@@ -45,6 +45,9 @@
                </td>
             </tr>
             <tr>
+               <td align="right" width="10%">发布者:</td>
+               <td align="left"><input type="text" name="score"  value="{$result['author']}"></td>
+            </tr>            
             <tr>
                <td align="right" width="10%">需耗91币值:</td>
                <td align="left"><input type="text" name="gold" value="{$result['gold']}"></td>

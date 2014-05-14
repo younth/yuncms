@@ -23,6 +23,7 @@ class taskController extends commonController{
     public function add(){
         if(!$this->isPost()){
             $this->h_name="添加任务";
+            $this->author=$_SESSION['admin_username'];
             $this->display();
         }
         else{
@@ -42,7 +43,7 @@ class taskController extends commonController{
             $data['score']=in($_POST['score']);
             $data['way']=$_POST['way'];
             $data['ctime']=  time();
-            $data['author']=$_SESSION['admin_username'];
+            $data['author']=$_POST['author'];
             if(model('task_base')->insert($data)){
                 $this->success('添加任务成功！',  url('task/index'));
             }else{
@@ -77,10 +78,10 @@ class taskController extends commonController{
 			$data['consume_gold']=intval($_POST['consume_gold']);
 			$data['certification_way']=in($_POST['certification_way']);
             $data['reminder']=$_POST['reminder'];
+            $data['author']=$_POST['author'];
             $data['score']=in($_POST['score']);
             $data['way']=$_POST['way'];
             $data['ctime']=  time();
-            $data['author']=$_SESSION['admin_username'];
             if(model('task_base')->update('id ='.$tid,$data)){
                 $this->success('编辑任务成功！',  url('task/index'));
             }else{

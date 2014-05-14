@@ -19,14 +19,14 @@
     <table width="100%" border="0" cellpadding="0" cellspacing="1"   class="all_cont" style="text-align: center">
         <form action="{url('task/del')}" method="post" id="dos"  onSubmit="return confirm('执行后不可以恢复~确定要执行吗？');">
           <tr>
-              <th><input style="color:#E2E2E2" type="checkbox" name="chkAll" value="checkbox" onClick="CheckAll(this.form)"/></th>
-              <th>任务目标</th>
-              <th>任务名称</th>
-              <th>需耗91币</th>
-              <th>获得91币</th>
-              <th>获得学分值</th>
-              <th>添加时间</th>
-              <th>发布者</th>
+              <th width="119"><input style="color:#E2E2E2" type="checkbox" name="chkAll" value="checkbox" onClick="CheckAll(this.form)"/></th>
+              <th width="268">任务目标</th>
+              <th width="237">任务名称</th>
+              <th width="99">需耗91币</th>
+              <th width="103">获得91币</th>
+              <th width="87">获得学分值</th>
+              <th width="148">添加时间</th>
+              <th width="120">发布者</th>
               <th width="150">管理选项</th>
           </tr>
           

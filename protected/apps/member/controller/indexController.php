@@ -4,10 +4,13 @@
  * */
 class indexController extends commonController
 {
+		static protected $uploadpath='';//封面图路径
+		static protected $test='';//test
 	    public function __construct()
 		{
 			parent::__construct();
 			$this->uploadpath=ROOT_PATH.'upload/member/feed/';//封面图路径
+			$this->test=ROOT_PATH.'upload/member/test/';//封面图路径
 			$hover="class=\"current\"";//设置当前的导航状态
 			$this->hover_index=$hover;
 		}
@@ -272,7 +275,9 @@ class indexController extends commonController
 
         //显示图片上传
         public function showPic() {
+        	//有文件上传，则上传
                 if($_FILES){
+                	//上传的处理
                      $picture=$this->_upload(ROOT_PATH."upload/member/feed/");
                      echo $picture[0]['savename'];
                 } 
@@ -343,7 +348,7 @@ class indexController extends commonController
        		$mid=intval($_POST['mid']);//心情的发布者
        		$content=$_POST['content'];
        		if(empty($id)) return;//用这个修复自己提供bug
-       		//echo "<script>alert(1);</script>";return;
+       		
        		$this->_repost($id, $mid, $oid, $content);
        		echo 1;
        	}
@@ -412,6 +417,7 @@ class indexController extends commonController
       		//增加到记录
       		if(model("feedback")->insert($data)) echo 1;
       	}
-      	
       }
+      
+
 }

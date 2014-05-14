@@ -67,6 +67,12 @@
                <td class="inputhelp">完成该任务一些技巧</td>
             </tr>
             <tr>
+               <td align="right" width="10%">发布者:</td>
+               <td align="left"><input type="text" name="author"  value="{if $result['author']==''}{$author}{else}{$result['author']}{/if}"></td>
+               <td class="inputhelp">任务的创作者</td>
+            </tr>            
+            
+            <tr>
                <td align="right" width="10%">需耗91币:</td>
                <td align="left"><input type="text" name="consume_gold" value="{$result['consume_gold']}"></td>
                <td class="inputhelp">学生领取任务需要消耗的91币</td>

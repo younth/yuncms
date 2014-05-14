@@ -25,4 +25,10 @@ class commonController extends memberController {
 		$this->unread=$totle;
 	}
 
+	//文件上传
+	protected  function  upload($savePath='',$maxSize='',$allowExts='',$allowTypes='',$saveRule='')
+	{
+		$upload=new UploadFile($savePath,$maxSize,$allowExts,$allowTypes,$saveRule);
+		return $upload;
+	}
 }
