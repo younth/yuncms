@@ -31,8 +31,9 @@ $(function () {
 	$("#fileupload").wrap("<form id='myupload' action='{$url_showpic}' method='post' enctype='multipart/form-data'></form>");
     $("#fileupload").change(function(){
 		$("#myupload").ajaxSubmit({
+			dataType:  'json',
 			beforeSend: function() {
-                            showimg.empty();
+                  showimg.empty();
 				progress.show();
         		var percentVal = '0%';
         		bar.width(percentVal);
@@ -45,9 +46,9 @@ $(function () {
         		percent.html(percentVal);
     		},
 			success: function(data) {
-//                                files.html(data);
-				files.html("<span class='delimg' rel='"+data+"' onclick='deletePic()'>删除</span>");
-				showimg.html("<img id='feed_post_picture' data-picture='"+data+"' postval='__UPLOAD__/member/feed/"+data+"'  src='__UPLOAD__/member/feed/thumb_"+data+"'/>");
+				//files.html("<span class='delimg' rel='"+data.savepath+data.savename+"' onclick='deletePic()'>删除</span>");
+				files.html("<span class='delimg' rel='"+data.newname+"' onclick='deletePic()'>删除</span>");
+				showimg.html("<img id='feed_post_picture' data-picture='"+data.newname+"'  src='{$path}"+data.thumb+"' />");
 				btn.html("添加附件");
 			},
 			error:function(xhr){
@@ -60,6 +61,7 @@ $(function () {
 	
 	
         deletePic=function(){
+			//删除，同时删除缩略图
            var imgCon  =$('#showimg').html();
             if(imgCon!==""){
                 var pic = $(".delimg").attr("rel");

@@ -17,7 +17,7 @@
          <table width="100%" border="0" cellpadding="0" cellspacing="1"   class="all_cont">
           <tr>
             <th width="70"><input type="checkbox" name="chkAll" value="checkbox" onClick="CheckAll(this.form)"/></th>
-            <th>标题</th>
+            <th>状态</th>
             <th>邮箱</th>
             <th>留言时间</th>
             <th>操作</th>
@@ -25,10 +25,11 @@
           <?php 
                 if(!empty($list)){
                      foreach($list as $vo){
+						 $is_read=($vo['is_read']==0)?"<span class='red'>未读</span>":"已读";
                          $cont.= '<tr id="'.$vo['id'].'"><td align="center"><input type="checkbox" name="delid[]" value="'.$vo['id'].'" /></td>';
-                         $cont.='<td align="center">'.$vo['title'].'</td>';
+                         $cont.='<td align="center">'.$is_read.'</td>';
                          $cont.= '<td align="center">'.$vo['email'].'</td>';
-                         $cont.= '<td align="center">'.date("Y-m-d H:i:s",$vo['addtime']).'</td>'; 
+                         $cont.= '<td align="center">'.date("Y-m-d H:i:s",$vo['ctime']).'</td>'; 
                          $cont.='<td align="center"><a href="'.url('feedback/read',array('id'=>$vo['id'])).'" class="edt">查看</a><div class="del">删除</div><a href="'.url('feedback/sendemail',array('email'=>$vo['email'],'id'=>$vo['id'])).'" class="edt">邮件回复</a></td></tr>';
                       }
                     echo $cont;

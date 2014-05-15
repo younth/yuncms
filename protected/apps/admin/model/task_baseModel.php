@@ -7,4 +7,11 @@
  */
 class task_baseModel extends baseModel{
     protected $table='task_base';
+    
+    //符合条件的任务数
+    public function taskcount($name="")
+    {
+     	$where=(empty($name)?"":"name like '%$name%'");
+    	return $this->count($where);
+    }
 }

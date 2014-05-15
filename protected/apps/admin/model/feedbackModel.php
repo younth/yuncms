@@ -1,10 +1,14 @@
 <?php
-/*
- * feed表的模型方法
- * */
+
 class feedbackModel extends baseModel{
-    //baseModel  extends  model  model  $table是model里面的属性
     protected $table = 'feedback';
     
+    //标记已读
+    public function readfeedback($id)
+    {
+    	$sql="update {$this->prefix}feedback set is_read=1 where id='{$id}'";
+    	return $this->model->query($sql);
+    }
+    
+
 }
-?>

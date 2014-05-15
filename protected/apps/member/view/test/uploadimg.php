@@ -62,7 +62,7 @@ $(function () {
     		},
 			success: function(data) {
 				files.append("<span class='showup'><b>"+data.name+"("+data.size+"k)</b> <span class='delimg' data-path='"+data.savepath+data.savename+"'>删除</span></span><br/>");
-				//showimg.append("<img src='{$path}"+data.newname+"'>");
+				showimg.append("<img src='{$path}"+data.newname+"'>");
 				
 				btn.html("添加附件");
 			},

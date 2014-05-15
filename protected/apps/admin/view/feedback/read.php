@@ -13,8 +13,18 @@
     </div>
     <table class="all_cont" width="60%" border="0" cellpadding="5" cellspacing="1">
     <tr>
-       <td align="right" width="16%">标题：</td>
-       <td width="84%" align="left">{$info['title']}</td>
+       <td align="right" width="16%">图片：</td>
+       <td width="84%" align="left">
+          <?php 
+                if(!empty($pic)){
+                     foreach($pic as $vo){
+						 ?>
+                         <img src="{$path}{$vo['picture']}">
+                         <?php
+					 }
+				}
+				?>
+       </td>
      </tr>
      <tr>
        <td align="right" width="16%">留言内容：</td>

@@ -1,7 +1,7 @@
 {include file="header"}
 <link href="__PUBLIC__/member/css/profile_common.css" media="screen" rel="stylesheet" type="text/css" />
 <link href="__PUBLIC__/member/css/feedback.css" media="screen" rel="stylesheet" type="text/css" />
-
+<script type="text/javascript" src="__PUBLIC__/js/jquery.form.js"></script>
 <div id="jy-content-wrap" class="jy-content-wrap jy-profile-mini">
     <div class="jy-content-inner">
                 <div class="jy-sub-title">
@@ -16,7 +16,7 @@
             </span> <em></em> <i class="yahei">意见反馈</i>
         </h2>
         <div class="about-me-wrap">
-        <p class="title">感谢使用91频道，你的反馈是对我们最大的鼓励和支持!</p>
+        <p class="title">感谢使用91频道，您的反馈是对我们最大的鼓励和支持!</p>
         		<div class="faq-table">
                 <form method="post" action="#" id="J_faqForm">
                     <input type="hidden" value="#" name="referer">
@@ -33,10 +33,13 @@
                             <th>上传图片：</th>
                             <td>
                                 <div class="btn-box">
-                                    <a href="" class="dj-btn" id="J_upload">选择文件</a>
-                                    <span class="tip">可上传3个文件，每个文件大小不超过2M。</span>
+                                   <a id="J_upload" class="dj-btn" href="">选择文件</a>
+                                   <span class="tip">上传图片，以便我们更好的理解，每个文件大小不超过2M。</span>
+                                    <input id="fileupload" type="file" name="picture">
+                                    
                                 </div>
-                                <ul class="up-list" id="J_uploadList"></ul>
+                                <ul class="up-list" id="J_uploadList">
+                                </ul>
                                 <input type="hidden" name="photoUrl" id="J_uploadHidden">
                             </td>
                         </tr>
@@ -50,7 +53,7 @@
                         <tr>
                             <th>&nbsp;</th>
                             <td>
-                                <a href="#" class="dj-btn dj-btn-main J_enterForm">提交</a>
+                                <a href="javascript:;" class="dj-btn dj-btn-main J_enterForm">提交</a>
                             </td>
                         </tr>
                         </tbody>
@@ -64,17 +67,26 @@
     </div>
 </div>
 <script>
-//ajax删除私信
+//ajax反馈
 $(document).on('click','.J_enterForm',function(){
 	var content=$(".faq-word").val();
 	var email=$(".faq-mail").val();
-	//上传图片先不处理	
+	//上传图片处理
+	if(!content){
+		$(".faq-word").parent().find("p").show();
+		$(".faq-word").focus();
+		return;
+	}
+	var str = "";
+	$("#J_uploadList li").each(function(){str+=$('a',this).data('name')+','});
+	imgstr=str.substring(0,str.length-1);//去掉最后一个逗号
 		  $.ajax({
 		  type: "POST",
 		  url: "{url('index/feedback')}",
 		  data: {
 			content: content,
 			email:email,
+			img:imgstr,
 		  },
 			 success: function (data) {
 				layer.msg('已收到您的反馈，我们会及时处理~',2,-1);
@@ -90,5 +102,59 @@ $(document).on('click','.J_enterForm',function(){
 
 	
 })
+</script>
+<script>
+$(function () {
+	var percent = $('#J_upload');//进度数字
+	var files = $('#J_uploadList');//显示ul
+	var url="{url('index/uploadimg')}";
+	//wrap是包裹函数，给input包裹form表单，怎么不直接写html里面
+	$("#fileupload").wrap("<form id='myupload' action='"+url+"' method='post' enctype='multipart/form-data'></form>");
+	$("#fileupload").change(function(){
+		//上传文件框触发事件，ajaxSubmit 异步提交
+		$("#myupload").ajaxSubmit({
+			dataType:  'json',
+			beforeSend: function() {
+        		var percentVal = '0%';
+        		percent.html(percentVal);//显示初始的数字
+    		},
+    		uploadProgress: function(event, position, total, percentComplete) {
+        		var percentVal = percentComplete + '%';
+        		percent.html(percentVal);
+    		},
+			success: function(data) {
+				files.append("<li>"+data.name+"("+data.size+"k)<a data-name='"+data.newname+"' href='javascript:;' class='delimg'>删除</a> </li>");
+				percent.html("添加附件");
+			},
+			error:function(xhr){
+				percent.html("上传失败");
+				files.html(xhr.responseText);
+			}
+		});
+		
+	});
+	
+});
+
+$(document).on("click",'.delimg',function(){
+	//删除图片
+	var name=$(this).data("name");
+	var url="{url('index/delfeedPic')}";
+	var delnode=$(this).parent();
+	$.ajax({
+		  url: url,
+		  data: {
+			imagename: name,
+		  },
+			 success: function (data) {
+				 //移除节点
+				 delnode.remove();
+			 },
+			  error: function (msg) {
+					alert(msg);
+			  }
+		});
+})
+
 </script>
 {include file="footer"}

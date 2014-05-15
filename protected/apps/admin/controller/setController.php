@@ -131,6 +131,7 @@ class setController extends commonController
 		}else{
 			//接收表单数据，直接接收post,不是数组提交，需要保证name与config里面的名字一样
 			$newconfig = $_POST;
+			//dump($newconfig);return;
 			//对提交的数据进行处理
 			foreach ($newconfig as $key => $value) {
 				if(is_array($value)){

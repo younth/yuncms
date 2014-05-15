@@ -5,12 +5,13 @@
 class indexController extends commonController
 {
 		static protected $uploadpath='';//封面图路径
-		static protected $test='';//test
+		static protected $uploadfeedback='';//用于上传，不用于显示
 	    public function __construct()
 		{
 			parent::__construct();
 			$this->uploadpath=ROOT_PATH.'upload/member/feed/';//封面图路径
-			$this->test=ROOT_PATH.'upload/member/test/';//封面图路径
+			$this->uploadfeedback=ROOT_PATH.'/upload/feedback/';//图片路径,相对系统的路径
+			$this->path=__ROOT__.'/upload/member/feed/';//图片路径,相对系统的路径，用于显示
 			$hover="class=\"current\"";//设置当前的导航状态
 			$this->hover_index=$hover;
 		}
@@ -132,11 +133,12 @@ class indexController extends commonController
                     $au=new AvatarUploader();
                     $data_org=model('feed')->withBelongOne('member','mid','id','ctime = '.$data['ctime'],'','ctime desc');
                     $data_org['avatar']=$au->getAvatar($data_org['member']['id'],'small');
-                    if(!empty($_POST['pic_url']) && !empty($_POST['thumb_pic_url'])){
+                    if(!empty($_POST['pic_url'])){
                         $data_pic=array();
                         $data_pic['fid']=$data_org['id'];
                         $data_pic['url']=$_POST['pic_url'];
-                        $data_pic['thumb_url']=$_POST['thumb_pic_url'];
+                        $imgarr=explode('/', $data_pic['url']);
+                        $data_pic['thumb_url']=$imgarr[0].'/thumb_'.$imgarr[1];
                         $data_pic['ctime']=  time();
                         if(model('feed_pic')->insert($data_pic)){
                             $this->picture=$data_pic;
@@ -278,22 +280,23 @@ class indexController extends commonController
         	//有文件上传，则上传
                 if($_FILES){
                 	//上传的处理
-                     $picture=$this->_upload(ROOT_PATH."upload/member/feed/");
-                     echo $picture[0]['savename'];
+                	 echo $this->_uploadpic($this->uploadpath,true);
+                     //echo $this->_uploadpic(ROOT_PATH."upload/member/feed/",true);
                 } 
                 else{
                     $this->getUrls();
-                     $this->display(); 
+                    $this->display(); 
                 }   
         }
 
         //删除图片上传
         public function delPic() {
                 $filename = $_POST['imagename'];
+                $imgarr=explode('/', $filename);
                 if(!empty($filename)){
-                        unlink(ROOT_PATH."upload/member/feed/".$filename);
-                        unlink(ROOT_PATH."upload/member/feed/"."thumb_".$filename);
-                        echo '1';
+                        unlink($this->uploadpath.$filename);
+                        if($imgarr)unlink($this->uploadpath.$imgarr[0].'/thumb_'.$imgarr[1]);//删除缩略图
+                        echo 1;
                 }else{
                         echo '删除失败.';
                 }
@@ -413,11 +416,45 @@ class indexController extends commonController
       		$data['content']=in($_POST['content']);
       		$data['ctime']=time();
       		$data['is_reply']=0;
+      		$fid=model("feedback")->insert($data);
       		if(empty($data['email'])||empty($data['content'])) return;
       		//增加到记录
-      		if(model("feedback")->insert($data)) echo 1;
+      		$imgarr=explode(',', $_POST['img']);
+      		if($imgarr)
+      		{
+      			$pic=array();
+      			foreach ($imgarr as $v)
+      			{
+      				$pic['fid']=$fid;
+      				$pic['picture']=$v;
+      				//遍历插入图片
+      				 model("feedback_pic")->insert($pic);//插入图片记录
+      			}
+      			echo 1;
+      		}else echo 0;
+      		
       	}
       }
       
-
+      //上传图片的另一种方式
+      public function uploadimg()
+      {
+      		//有文件上传，则上传
+      		if (empty($_FILES['picture']['name']) === false){
+      			//上传的处理,是否开启缩略图，默认为false
+      			echo $this->_uploadpic($this->uploadfeedback);
+      		}
+      }
+      
+      //删除反馈上传文件
+      public function delfeedPic() {
+      	$filename = $_GET['imagename'];
+      	if(!empty($filename)){
+      		unlink($this->uploadfeedback.$filename);//删除
+      	}else{
+      		echo '删除失败.';
+      	}
+      }
+      
+	 
 }

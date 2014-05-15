@@ -6,13 +6,23 @@
  * 2014.3.29
  */
 class taskController extends commonController{
-    public function index(){
+    
+	public function index(){
        $listrow=10;
        $url=  url('task/index',array('page'=>'{page}'));
+       //关键字搜索
+       $name=in(urldecode(trim($_GET['name'])));
+       //$author=in(urldecode(trim($_GET['author'])));
+       
+       if(!empty($name)){
+       	//实现分页，分页处理在下边
+       	$url=url('task/index',array('name'=>urlencode($name),'page'=>'{page}'));
+       }
+       /**关键字检索处理结束***/
        $limit=$this->pageLimit($url,$listrow);
        
-       $count=  model('task_base')->count();
-       $result=  model('task_base')->select('','','ctime desc',$limit);
+       $count=  model('task_base')->count("name like '%$name%' or author like '%$name%'");
+       $result=  model('task_base')->select("name like '%$name%' or author like '%$name%'",'','ctime desc',$limit);
        $this->h_name="任务列表";
        $this->result=$result;
        $this->count=$count;

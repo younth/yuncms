@@ -4,14 +4,21 @@
  * */
 class feedbackController extends commonController
 {
+	static protected $path='';
     //留言列表
+	public function __construct()
+	{
+		parent::__construct();
+		$this->path=__ROOT__.'/upload/feedback/';//图片路径,相对系统的路径
+	}
+	
     public function index()
     {
         $listRows=10;//每页显示的信息条数
         $url=url('feedback/index',array('page'=>'{page}'));
         $limit=$this->pageLimit($url,$listRows); 
         
-        $sortlist=model('feedback')->select('','id,email,ctime','ctime DESC',$limit);
+        $sortlist=model('feedback')->select('','id,email,ctime,is_read','ctime DESC',$limit);
         $count=model('feedback')->count(); 
         $this->list=$sortlist;
         $this->t_name='留言';
@@ -44,9 +51,13 @@ class feedbackController extends commonController
     public function read()
     {
         $id=intval($_GET['id']);
+        //标记已读
+        model("feedback")->readfeedback($id);
         if(empty($id)) $this->error('参数错误');
-            $info=model('feedback')->find("id='$id'");//当前新闻的相关信息
+        $info=model('feedback')->find("id='$id'");//当前新闻的相关信息
+        $pic=model("feedback_pic")->select("fid='$id'",'picture');
         $this->info=$info;
+        $this->pic=$pic;
         $this->display();
     }
     

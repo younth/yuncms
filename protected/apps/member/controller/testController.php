@@ -10,12 +10,12 @@ class testController extends commonController
 		{
 			parent::__construct();
 			$this->test=ROOT_PATH.'upload/member/test/';//封面图路径
-			$this->path=__ROOT__.'/upload/member/test/';//图片路径
+			$this->path=__ROOT__.'/upload/member/test/';//图片路径,相对系统的路径
 			//$this->yun='yun';//封面图路径
 		}
 
-      //ajax图片上传,需要写入数据库
-      public function uploadimg()
+      //ajax图片上传,需要写入数据库，同时上传原图和缩略图
+      public function uploadimgs()
       {
       	if(!$this->isPost()){
       		$this->display();
@@ -28,8 +28,15 @@ class testController extends commonController
       			//upload函数
       			$imgupload= $this->upload($this->test.$tfile.'/',config('imgupSize'),'jpg,bmp,gif,png');
       			//$imgupload->saveRule='thumb_'.time();//上传文件命名规则
+      			
+      			/*上传同时生成缩略图*/
+      			$imgupload->thumb  =TRUE;
+      			$imgupload->thumbMaxWidth=240;
+      			$imgupload->thumbMaxHeight=2000;
+      			$imgupload->thumbPrefix = 'thumb_';
+      			$imgupload->thumbSuffix = '';
       			$imgupload->saveRule=time();
-      			//上传缩略图
+      			
       			$imgupload->upload();//上传
       			$fileinfo=$imgupload->getUploadFileInfo();//取得上传文件的信息,可以直接echo出来
       			$errorinfo=$imgupload->getErrorMsg();//取得上传文件的出错信息
@@ -37,7 +44,7 @@ class testController extends commonController
       			if(!empty($errorinfo)){
       				//出错处理
       				//$data['picture']=$this->nopic;
-      				$this->alert($errorinfo);
+      				$this->error($errorinfo);
       			}
       			else{
       				//成功返回上传的信息，并写入数据库
@@ -59,7 +66,7 @@ class testController extends commonController
       public function delpic()
       {
       	$path=$_GET['path'];
-      	if(unlink($path)) echo 1;
+      	if(unlink($path)) echo 1;//删除缩略图
       }
       
       //对数组进行增加或者修改
@@ -76,4 +83,19 @@ class testController extends commonController
       	}
       	dump($test);
       }
+	
+      //上传图片的另一种方式
+      public function uploadimg()
+      {
+      	if(!$this->isPost()){
+      		$this->display();
+      	}else{
+      		//有文件上传，则上传
+      		if (empty($_FILES['picture']['name']) === false){
+      			//上传的处理,是否开启缩略图，默认为false
+      			echo $this->_uploadpic($this->test);
+      		}
+      	}
+      }
+
 }

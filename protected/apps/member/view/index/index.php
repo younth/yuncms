@@ -43,7 +43,7 @@
     <textarea class="textarea emotion_0" cols="58" rows="4" id='post_feed'  onkeydown='keyMsg(event)' data-content="向朋友分享你的新动态"></textarea>
     <div class="mem_post_feed_icon">
         <span>
-            <span class="mem_feed_face"><a href="javascript:void(0);" id="face_0" ></a>
+            <span class="mem_feed_face"><a href="javascript:;" id="face_0" ></a>
             </span>
             <span class="mem_feed_pic">
             <a href="javascript:void(0);" id="pic_show_link" onclick="showPic('{$url_showpic}')" ></a>

@@ -149,7 +149,6 @@ $(document).ready(function(){
 	postFeed=function(){
                 var content=$('#post_feed').val();
                 var pic_url=$('#feed_post_picture').data('picture');
-                var thumb_pic_url='thumb_'+pic_url;
 				var subbtn=$('.mem_feed_submit');
                 var n=content.replace(/[^\x00-\xff]/g, "xx").length;
                 if(n>140){
@@ -168,7 +167,7 @@ $(document).ready(function(){
                             if(isEmotion!=null){
                                 var content=AnalyticEmotion(content);
                             }
-                            $.post(posturl,{content:content,pic_url:pic_url,thumb_pic_url:thumb_pic_url},function(result){
+                            $.post(posturl,{content:content,pic_url:pic_url},function(result){
                                 if(result){
                                              $('#show_pic_frame').remove();
                                              $('#show_new_feed').after(result);

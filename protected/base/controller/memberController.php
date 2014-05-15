@@ -129,22 +129,21 @@ class memberController extends baseController{
 			//设置附件上传目录
 			$upload->savePath ='../images/'.$upload_dir."/";
 			$upload->saveRule = cp_uniqid;
-                        // 使用对上传图片进行缩略图处理     
-                       $upload->thumb   =  TRUE;     
-                        // 缩略图最大宽度  
-                        $upload->thumbMaxWidth=240;    
-                        // 缩略图最大高度   
-                         $upload->thumbMaxHeight=2000;     
-                        // 缩略图前缀     
-                        $upload->thumbPrefix   =  'thumb_';     
-                        $upload->thumbSuffix  =  '';    
-                        // 缩略图保存路径     
-                        $upload->thumbPath = '';     
-                        // 缩略图文件名 
+             // 使用对上传图片进行缩略图处理     
+            $upload->thumb  = TRUE;     
+             // 缩略图最大宽度  
+            $upload->thumbMaxWidth=240;    
+            // 缩略图最大高度   
+             $upload->thumbMaxHeight=2000;     
+              // 缩略图前缀     
+              $upload->thumbPrefix   =  'thumb_';
+              $upload->thumbSuffix  =  '';    
+              // 缩略图保存路径     
+               $upload->thumbPath = '';     
+             	// 缩略图文件名 
+               $upload->savePath=$upload_dir;
                         
-                        $upload->savePath=$upload_dir;
-                        
-                        $upload->saveRule=rand(100, 999).time();
+               $upload->saveRule=rand(100, 999).time();
 	
 			if(!$upload->upload())
 			 {
@@ -158,27 +157,44 @@ class memberController extends baseController{
 			}
 	}
 
-	//图片上传方法
-	protected function _uploadpic($upload_dir)
+	//文件，图片上传的方法，参数为上传的目录（不包括时间）及是否开启缩略图
+	protected function _uploadpic($upload_dir,$isthumb=false)
 	{
+		if(!is_dir($upload_dir)) mkdir($upload_dir);//没有则创建文件夹
 		$upload = new UploadFile();
+		$tfile=date("Ymd");//时间作为文件夹
 		//设置上传文件大小
-		$upload->maxSize=1024*1024*2;//最大2M
+		$upload->maxSize=config("imgupSize");//最大2M
 		//设置上传文件类型
 		$upload->allowExts  = explode(',','jpg,gif,png,bmp');
 		//设置附件上传目录
-		$upload->savePath ='../images/'.$upload_dir."/";
-		//没有自动创建
-		$upload->saveRule = cp_uniqid;
+		$upload->savePath =$upload_dir.$tfile.'/';
+		
+		//处理缩略图
+		$upload->thumb  = $isthumb;
+		$upload->thumbMaxWidth=240;
+		$upload->thumbMaxHeight=2000;
+		$upload->thumbPrefix   =  'thumb_';
+		$upload->thumbSuffix  =  '';
+		
+		$upload->saveRule=time();
 		if(!$upload->upload())
 		{
 			//捕获上传异常
-			$this->error($upload->getErrorMsg());
+			$this->alert($upload->getErrorMsg());
 		}
 		else
 		{
 			//取得成功上传的文件信息
-			return $upload->getUploadFileInfo();
+			$fileinfo= $upload->getUploadFileInfo();
+			foreach ($fileinfo as $row=>$v)
+			{
+				$fileinfo[$row]['newname']=$tfile.'/'.$v['savename'];//时间文件夹+文件名,用户存入数据库
+				$fileinfo[$row]['size']=round($v['size']/1024,2);//转化为k
+				if($isthumb) $fileinfo[$row]['thumb']=$tfile.'/thumb_'.$v['savename'];//缩略图
+			}
+			return json_encode($fileinfo[0]);//返回json数组信息，以便以后加入其他信息
 		}
 	}
+	
 }

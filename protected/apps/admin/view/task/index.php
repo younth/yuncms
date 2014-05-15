@@ -17,17 +17,29 @@
 </div>
 
     <table width="100%" border="0" cellpadding="0" cellspacing="1"   class="all_cont" style="text-align: center">
+         <tr>
+            <td colspan="9" align="left">
+               <form action="{url('task/index')}" method="GET" >
+               <!-----为什么提交之后的之后是转到首页呢------->
+                <input name="yun" type="hidden" value="{$_GET['yun']}" /><!--get[yun]就是当前的页面方法，不可少，保证页面不跳转-->
+                 <div style="float:left; margin-left:10px;"> 
+                  	关键字： <input type="text" name="name" size="20" placeholder="输入任务名称或者作者"> 
+                 </div>
+                 
+                  <div style="float:left"><input class="btn btn-success  btn-small" type="submit" value="搜索"></div>
+               </form> 
+          </tr>
         <form action="{url('task/del')}" method="post" id="dos"  onSubmit="return confirm('执行后不可以恢复~确定要执行吗？');">
           <tr>
               <th width="119"><input style="color:#E2E2E2" type="checkbox" name="chkAll" value="checkbox" onClick="CheckAll(this.form)"/></th>
-              <th width="268">任务目标</th>
-              <th width="237">任务名称</th>
-              <th width="99">需耗91币</th>
-              <th width="103">获得91币</th>
-              <th width="87">获得学分值</th>
-              <th width="148">添加时间</th>
-              <th width="120">发布者</th>
-              <th width="150">管理选项</th>
+              <th width="349">任务目标</th>
+              <th width="238">任务名称</th>
+              <th width="76">需耗91币</th>
+              <th width="74">获得91币</th>
+              <th width="85">获得学分值</th>
+              <th width="139">添加时间</th>
+              <th width="119">发布者</th>
+              <th width="132">管理选项</th>
           </tr>
           
           <?php 
