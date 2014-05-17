@@ -55,7 +55,7 @@
                 <div class="more_panel" style="overflow: hidden; height: 132px; display: none; margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 10px;">
                 </div>
                 </li>
-                <li> <a  href="{url('company/index/index')}" {$hover_company}>公司</a> </li>
+                <li> <a  href="{url('member/company/index')}" {$hover_company}>公司</a> </li>
                 <!--<li class="ce-new-li"> <a class="" href="http://www.tianji.com/ce">职业测评</a> <span class="ce-new png_ie6"></span></li>-->
                 </ul>
              

@@ -9,7 +9,6 @@
                 </div>
             <div class="dj-content-shadow">
 <div id="content">
-<div id="maincolumn">
         <div class="card-change-count" id="wrap">
     <div class="nav2-box">
         <ul class="nav2">
@@ -22,14 +21,9 @@
             <input type="hidden" value="0" id="searchType">
             <input type="hidden" max="2000" value="35" id="myBuddyCnt">
             <input type="hidden" max="500" value="7" id="inviteBuddyCnt">
-            <!-- 搜索方式切换 -->
             <div class="search-chose" id="search_type_composite">
                 <span>综合搜索</span>
-            </div>
- 			<div style="display:none" id="search_type_exact" class="search-chose">
-                <a href="javascript:void(0)" id="toggle_composite">综合搜索</a>
-            </div>
-            
+            </div>            
             <!-- 搜索框 -->
             <div class="search-box" id="search-box">
                 <input type="text" value="输入姓名、学校、标签等关键词搜索，各条件间请用空格区分" id="searchText" class="search-txt">
@@ -38,21 +32,20 @@
                 </a>
             </div>
 
-<!-- 精确搜索选择 -->
     
 </div>
 
 
 
 
-            <!-- 热门搜索词 -->
+            <!-- 可能认识的人 -->
 
             <div id="word-box" class="word-box">
 
 
 <div class="mayknow-list">
                     <div class="list-tab clearfix">
-                        <a class="selected" href="javascript:void(0)">可能认识的人</a>
+                        <span class="selected">可能认识的人</span>
                     </div>
                     <div id="J-mayknowCardWall">
                     	<div class="list-content">
@@ -61,11 +54,11 @@
                             <div class="mayknow-card"><div class="user-content"><a class="head" target="_blank" href="{url('profile/user',array('id'=>$vo['id']))}"><img alt="" src="{$vo['small']}" ></a><div class="user-info"><p class="title"><a class="name" target="_blank" href="{url('profile/user',array('id'=>$vo['id']))}">{$vo['uname']}</a><em title="二度人脉" class="degree-type degree-type2"></em></p><p class="position"><span title="{$vo['school']} · {$vo['major']}">{$vo['school']} · {$vo['major']}</span></p></div></div><div class="ft"><span class="relationship">共有{$vo['allcart']}个联系人</span><a  class="dj-btn-xs dj-btn-icon J_addBtn add-clicklog" href="javascript:void(0)" onclick="addfriend({$vo['id']})"  id="friend{$vo['id']}"><i class="icon-add"></i>加联系人</a></div></div>
                      {/loop}
                       {else}    
-                     <div id="search-null" class="search-null"> <p>没有找到符合条件的结果,感觉去<a href="{url('profile/index')}">完善资料</a>吧~</p></div>
+                     <div id="search-null" class="search-null"> <p>没有找到符合条件的结果,再试试其他标签吧~</p></div>
                       {/if}            
                                         	 </div>
                     </div>
-                    <a class="more" href="#">查看更多</a>
+                    
                 </div>
 
 
@@ -75,10 +68,6 @@
                 <div id="icardm-add" class="icardm icardm-plus-tips" style="display: none;">
                     <div id="icardm-con" class="icardm-con">
 <div class="icardm-con-tit">
-    <div class="new_cont floatright" style="display:none;">
-        <input type="checkbox" name="list-check-all" id="delall" checked="false">
-        <label for="delall" class="checkbox">全选</label>
-    </div>
     <div id="allnumber" class="num" style="display:block;">共找到<span>0</span>条符合条件的结果：</div>
 </div>
 
@@ -86,25 +75,14 @@
     <p>没有找到符合条件的结果...更换条件重新搜索吧。</p>
 </div>
                     </div>
-                    <div id="relevant-tags">
-                    </div>
                 </div>
 
                 <!-- 搜索结果结束 -->
                 <div id="loadingAction" class="loading" style="display:none">
                     <img alt="" src="__PUBLIC__/images/loading.gif">
                 </div>
-            </div>
-            <div style="left: 897.5px; top: 740.6px; display: none;" class="prompt-box lay-change-card top onecol" id="lay-change-card">
-                <div class="shadow">
-                    <div class="prompt-main">
-                        <span class="pointer" style="left: 177px;"></span>
 
-                        
-                        
-                    </div>
-                </div>
-            </div>
+            
 <!-- 给words添加class -->
 
 <script>
@@ -128,84 +106,49 @@ $(function(){
 $(document).on( "keypress","#searchText", function (e) {
 //e是事件对象
     if (e.keyCode == 13) {
-            compositeSearch();
+            compositeSearch();//综合搜索
         }
     });
 
-var searchAjax = null;
-var $searchText = $("#searchText");
-var $searchBtn_composite = $("#searchBtn_composite");
-var $resultBox = $("#icardm-con");//搜索结果
- var $tagBox = $("#relevant-tags");
- 
- 
-  $(document).on("click","#toggle_composite",  function () {
-        if (searchAjax != null) {
-            searchAjax.abort();//提交ajax
-        }
-        $("#search_type_exact").hide();
-        $("#search_type_composite").show();
-        $("#search-box").show();
-        $("#word-box").show();
-        $("#accurate-box").hide();
+	var searchAjax = null;//定义空的对象
+	var $searchText = $("#searchText");
+	var $searchBtn_composite = $("#searchBtn_composite");
+	var $resultBox = $("#icardm-con");//搜索结果 
 
-        $("#icardm-add").hide();
-        $("#searchType").val("0");
-        $resultBox.empty();
-        $searchText.val('输入姓名、学校、标签等关键词搜索，各条件间请用空格区分');
-        $searchText.removeAttr("style");
-        // 隐藏 加载图片
-        $("#loadingAction").hide();
-    });
-	
 	  $(document).on("click","#searchBtn_composite",  compositeSearch);//绑定事件
 	  
 	  function compositeSearch() {
         if (searchAjax != null) {
-            searchAjax.abort();
+            searchAjax.abort();//提交ajax
         }
-        var _val = $.trim($searchText.val());
+        var _val = $.trim($searchText.val());//去掉字符串首尾空格
         $searchText.val(_val);
-		//alert(_val);
         if (!!!_val || _val == '输入姓名、学校、标签等关键词搜索，各条件间请用空格区分') {
 			//相当于未搜索
             $("#loadingAction").hide();
             // 更新界面组件
-            $resultBox.empty();//隐藏搜索结果区域
+            $resultBox.empty();//清空搜索结果区域
             $resultBox.hide();
-            // 隐藏搜索后的相关标签
-            $tagBox.empty();
-            $tagBox.hide();
-            // 显示各个标签
-            $("#word-box").show()
             return false;
-        } else {
-            $("#searchText").css({'color':'#333', 'font-size':'14px'});
-			
-            //搜索数据列表
+        } else {	
             // 更改界面组件
             $resultBox.empty();//隐藏搜索结果区域
             $resultBox.hide();
             // 隐藏标签
-            $("#word-box").hide();//隐藏初始化标签
-            $tagBox.hide();//隐藏搜索后的标签
-            $("#loadingAction").show();// 显示加载图标
+            $("#word-box").hide();//隐藏可能认识的人
+            $("#loadingAction").show();//显示加载图标
 			
             searchAjax = $.ajax({
                 type:'POST',
-                url:"{url('card/dosearch')}",
+                url:"{url('card/search_result')}",
                 dataType:"html",
-				//compositeSearchWord 提交搜索的关键字
                 data:({'compositeSearchWord':_val}),
                 success:function (callbackData) {
-					//alert(callbackData);
                     $("#loadingAction").hide();//成功之后隐藏加载图标
                     $("#icardm-add").show();//显示搜索结果div
                     $resultBox.empty();
-                    $resultBox.append(callbackData);//将返回的数据加载到结果县市区
+                    $resultBox.append(callbackData);//将返回的数据加载到结果区
                     $resultBox.show();//显示结果
-                    // 防止tag加载过快,导致tag div先呈现以致界面有短时间样式错乱,故加载数据区后在呈现tag区域
-                    $tagBox.show();
 
                     //控制锚点滚动,滚动动画效果
                     var _top = $(".search-box").offset().top;

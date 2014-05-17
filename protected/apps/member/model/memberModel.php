@@ -97,12 +97,13 @@ class memberModel extends baseModel{
 	}
 	
 	//根据关键字模糊查询匹配用户，姓名、专业、标签、学校，涉及的表member  member_profile  member_tag
-	public function findmember($key)
+	public function findmember($key,$limit='')
 	{
 		// and m.id!='.$id  自己也可以找到
 		$where='where (m.uname like "%'.$key.'%" or p.school like "%'.$key.'%" or p.major like "%'.$key.'%" or t.name like "%'.$key.'%")';
 		//用distinct 去除重复记录
-		$sql="SELECT distinct m.id FROM {$this->prefix}member as m left outer join ({$this->prefix}member_tag as t,{$this->prefix}member_profile as p) on (m.id=t.mid AND m.id=p.mid) {$where} order by m.id asc";
+		if($limit)	$sql="SELECT distinct m.id FROM {$this->prefix}member as m left outer join ({$this->prefix}member_tag as t,{$this->prefix}member_profile as p) on (m.id=t.mid AND m.id=p.mid) {$where} order by m.id asc LIMIT {$limit}";
+		else 	$sql="SELECT distinct m.id FROM {$this->prefix}member as m left outer join ({$this->prefix}member_tag as t,{$this->prefix}member_profile as p) on (m.id=t.mid AND m.id=p.mid) {$where} order by m.id asc";
 		$user= $this->model->query($sql);
 		if(!empty($user)){
 			foreach ($user as  $row=>$v)

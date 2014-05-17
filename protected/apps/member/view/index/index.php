@@ -112,7 +112,7 @@
       <span class="title" title="{$my['school']}">{$my['school']}</span>
       <span class="title">个人资料完整度</span>
       <span class="schedule_panel">67%</span>
-      <a href="/p/edit" title="继续完善" class="impove_btn">继续完善</a>
+      <a href="" title="继续完善" class="impove_btn">继续完善</a>
       <ul class="icon_panel" id="medal">
     <li class="pt01 png_ie6">
       <span class="jian png_ie6" style="display: none;"></span>

@@ -1,5 +1,5 @@
  {include file="header"}
- {include file="index/nav"}
+ {include file="company/nav"}
 <!--内容-->
 <div class="container_content clearfix"> 
   <!--雇员认证-->

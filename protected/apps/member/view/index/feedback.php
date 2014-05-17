@@ -34,7 +34,7 @@
                             <td>
                                 <div class="btn-box">
                                    <a id="J_upload" class="dj-btn" href="">选择文件</a>
-                                   <span class="tip">上传图片，以便我们更好的理解，每个文件大小不超过2M。</span>
+                                   <span class="tip">上传图片（最多5张），以便我们更好的理解，每个文件大小不超过2M。</span>
                                     <input id="fileupload" type="file" name="picture">
                                     
                                 </div>
@@ -73,8 +73,13 @@ $(document).on('click','.J_enterForm',function(){
 	var email=$(".faq-mail").val();
 	//上传图片处理
 	if(!content){
-		$(".faq-word").parent().find("p").show();
+		$(".faq-word").parent().find("p").show();//选择提示的class
 		$(".faq-word").focus();
+		return;
+	}
+	if(!email){
+		$(".faq-mail").parent().find("p").show();
+		$(".faq-mail").focus();
 		return;
 	}
 	var str = "";
@@ -105,13 +110,18 @@ $(document).on('click','.J_enterForm',function(){
 </script>
 <script>
 $(function () {
+	//上传图片
 	var percent = $('#J_upload');//进度数字
 	var files = $('#J_uploadList');//显示ul
 	var url="{url('index/uploadimg')}";
 	//wrap是包裹函数，给input包裹form表单，怎么不直接写html里面
 	$("#fileupload").wrap("<form id='myupload' action='"+url+"' method='post' enctype='multipart/form-data'></form>");
+	var imgnum=0;
 	$("#fileupload").change(function(){
 		//上传文件框触发事件，ajaxSubmit 异步提交
+		if(imgnum>1){
+			alert('最多上传5张图片');return;	
+		}
 		$("#myupload").ajaxSubmit({
 			dataType:  'json',
 			beforeSend: function() {
@@ -123,6 +133,7 @@ $(function () {
         		percent.html(percentVal);
     		},
 			success: function(data) {
+				imgnum++;//图片数量+1
 				files.append("<li>"+data.name+"("+data.size+"k)<a data-name='"+data.newname+"' href='javascript:;' class='delimg'>删除</a> </li>");
 				percent.html("添加附件");
 			},

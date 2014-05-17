@@ -2,7 +2,7 @@
 /*
  * 企业模块前台  控制器,对应的是学生用户了
  * */
-class indexController extends commonController
+class companyController extends commonController
 {
 	static protected $company_sort;//公司性质
 	static protected $company_scale;//公司规模

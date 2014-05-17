@@ -329,6 +329,7 @@ input.search-txt {
 }
 .icardm-list-c .sms a {
     font-size: 14px;
+	outline: none;
 }
 .icardm-list-c .sms img {
     display: inline-block;
@@ -393,14 +394,6 @@ input.search-txt {
     padding: 0 15px 0 10px;
 }
 .icardm-plus-tips .icardm-list li {
-    position: relative;
-}
-#relevant-tags {
-    border-left: 1px solid #E5E5E5;
-    left: -1px;
-    margin-top: 30px;
-    overflow: hidden;
-    padding-left: 15px;
     position: relative;
 }
 .icardm-tips li.b {
@@ -1080,4 +1073,68 @@ input.ms-add:focus {
 }
 .dialog-content .ms-pick-school-scroll {
     padding: 8px;
+}
+
+/**翻页**/
+.paging {
+    padding: 20px 0;
+    text-align: center;
+}
+.paging a, .paging span {
+    color: #4C4C4C;
+    display: inline-block;
+    font-family: 'Tahoma';
+    height: 23px;
+    line-height: 23px;
+    margin: 0 1px;
+    min-width: 12px;
+    padding: 0 5px;
+    vertical-align: middle;
+}
+.paging a {
+    background: url("../images/pages.png") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid #DCDCDC;
+}
+.paging a:hover {
+    background: none repeat scroll 0 0 #D9D9D9;
+    border: 1px solid #BDBFC2;
+    color: #4C4C4C;
+    text-decoration: none;
+}
+.paging span {
+    background: url("../images/pages.png") repeat-x scroll 0 -24px rgba(0, 0, 0, 0);
+    border: medium none;
+    color: #FFFFFF;
+    padding: 1px 6px;
+    text-decoration: none;
+}
+.paging a.dot {
+    background: url("../images/pages.png") no-repeat scroll 0 -155px rgba(0, 0, 0, 0);
+    border: medium none;
+    padding: 1px 6px;
+}
+.paging a.prev, .paging a.next {
+    border: medium none;
+    height: 25px;
+    padding: 0;
+    width: 34px;
+}
+.paging a.prev {
+    background: url("../images/pages.png") no-repeat scroll 0 -50px rgba(0, 0, 0, 0);
+}
+.paging a.next {
+    background: url("../images/pages.png") no-repeat scroll 0 -76px rgba(0, 0, 0, 0);
+}
+.paging a.prev:hover {
+    background: url("../images/pages.png") no-repeat scroll 0 -102px rgba(0, 0, 0, 0);
+    border: medium none;
+    padding: 0;
+}
+.paging a.next:hover {
+    background: url("../images/pages.png") no-repeat scroll 0 -128px rgba(0, 0, 0, 0);
+    border: medium none;
+    padding: 0;
+}
+.paging a.dot, .paging a.prev, .paging a.next {
+    overflow: hidden;
 }

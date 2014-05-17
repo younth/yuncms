@@ -161,46 +161,27 @@ class cardController extends commonController
 	}
 	
 	//ajax响应搜索用户
-	public function dosearch()
+	public function search_result()
 	{
-		$auth=$this->auth;//本地登录的cookie信息
-		$id=$auth['id'];
+		$id=$this->auth['id'];
 		$keyword=in(trim($_POST['compositeSearchWord']));
+		//多个关键字查询
 		//根据keyword查询用户
 		$info=model("member")->findmember($keyword);
-		$html='';
-		if(empty($info)){
-			$html.='<div class="icardm-con-tit"> <div style="display:block;" class="num" id="allnumber">共找到<span>0</span>条符合条件的结果：</div></div>';
-			$html.='<div id="search-null" class="search-null"> <p>没有找到符合条件的结果...更换条件重新搜索吧。</p></div>';
-			echo $html;
-		}else {
-			//要考虑分页。。
-			$count=count($info);
-			$html.='<div class="icardm-con-tit"><div style="display:block;" class="num" id="allnumber">共找到<span>'.$count.'</span>条符合条件的结果：</div></div><div id="card-list-fragment"><ul class="icardm-list">';
-			for($i=0;$i<$count;$i++)
+		if($info)
+		{
+			foreach ($info as $row=>$v)
 			{
-			$url=url('profile/user',array('id'=>$info[$i]['id']));
-			$edu=$this->_edu($info[$i]['education']);
-			//判断某人是否是自己的联系人,然后显示不同
-			$re=model("member_card")->find("(send_id='{$id}' and rece_id='{$info[$i]['id']}') or (rece_id='{$id}' and send_id='{$info[$i]['id']}')");
-			if($re){
-				if($re['status']==2) $msg='<a href="javascript:void(0)" id="single_mail" class="send-msg" username="'.$info[$i]['uname'].'" uid="'.$info[$i]['id'].'" title="发私信"></a>';
-				else $msg='<a href="javascript:;" class="addfriend" >加联系人</a>';
-			}else {
-				$msg='<a href="javascript:;" class="addfriend" >加联系人</a>';
+				$info[$row]['education']=$this->_edu($v['education']);//查询出学历
+				//判断是否是联系人
+				$info[$row]['isfriend']=model("member_card")->find("(send_id='{$id}' and rece_id='{$v['id']}') or (rece_id='{$id}' and send_id='{$v['id']}')");
 			}
-			if($info[$i]['id']==$id) $msg="";//对自己的处理
-			$html.='<li uid="'.$info[$i]['id'].'"><div class="head-pic"><a target="_blank" href="'.$url.'">';
-			$html.=' <img src="'.$info[$i]['avatar'].'" ></a></div><div class="icardm-mail">'.$msg;
-			$html.='</div> <div class="icardm-list-c"><p class="sms"><a target="_blank" class="b search-cardtips"';
-			$html.='href="'.$url.'">'.$info[$i]['uname'].'</a></p><p class="company"> '.$info[$i]['major'].' &nbsp;&nbsp;<span class="highlight"></span>'.$info[$i]['city'].'</p>';
-			$html.='<dl><dt>教育背景</dt><dd><span> '.$info[$i]['school'].'&nbsp;'.$edu.'  </span> </dd></dl> </div> </li>';
-			}
-			$html.='</ul><div class="paging"></div></div>';
-			echo $html;
-			//构造返回的html
-					
 		}
+		//直接模板输出
+		$this->count=count($info);
+		$this->info=$info;
+		$this->display();
+
 	}
 	
 	//邀请好友注册，增加我的积分

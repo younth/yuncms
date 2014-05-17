@@ -38,5 +38,11 @@ class member_cardModel extends baseModel{
 		$sql="select send_id as mid from {$this->prefix}member_card where rece_id='{$id}' union all select rece_id as mid from {$this->prefix}member_card where send_id='{$id}'";
 		return $this->model->query($sql);
 	}
+	
+	//判断两人是否是联系人
+	public function idmyfriend($id,$fid)
+	{
+		
+	}
 }
 ?>

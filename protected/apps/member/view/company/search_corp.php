@@ -1,5 +1,5 @@
  {include file="header"}
- {include file="index/nav"}
+ {include file="company/nav"}
 
 <!--内容-->
 <div class="container_content clearfix">
@@ -75,7 +75,7 @@
   <div class="contentRight" id="contentRight">
     <!--广告位-->
     <div class="adverimg ad_id" >
-    	<img src="__PUBLICAPP__/images/ad.jpg" />
+    	<img src="__PUBLICAPP__/images/company/ad.jpg" />
     </div>
     <div class="blank_15px"></div>
     <!--四种维度推荐-->

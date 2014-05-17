@@ -742,8 +742,8 @@ input.search-text {
     display: none;
 }
 .loading {
-    margin: 100px auto;
-    width: 48px;
+    margin: 100px 0;
+	text-align:center;
 }
 .lay-change-card .con input.text {
     -moz-border-bottom-colors: none;
@@ -1590,7 +1590,7 @@ input.ms-add:focus {
     height: 34px;
     line-height: 34px;
 }
-.mayknow-list .list-tab a {
+.mayknow-list .list-tab a,.mayknow-list .list-tab span {
     float: left;
     padding: 0 15px;
 }
@@ -1622,15 +1622,14 @@ input.ms-add:focus {
 }
 .list-content {
     clear: both;
-    margin-right: -10px;
     margin-top: 15px;
     overflow: hidden;
-    width: 980px;
+	padding-left:10px;
 }
 .list-content .mayknow-card, .search-box {
     float: left;
     margin-bottom: 18px;
-    margin-right: 18px;
+    margin-right: 6px;
 }
 .error-tips {
     color: #FF0000;
@@ -1722,11 +1721,11 @@ input.ms-add:focus {
     line-height: 26px;
 }
 .mayknow-card .user-info .title a {
-    display: inline-block;
     height: 26px;
     overflow: hidden;
     vertical-align: top;
-    width: 150px;
+    width: auto;
+	outline: none;
 }
 .mayknow-card .user-info .position {
     color: #666666;
