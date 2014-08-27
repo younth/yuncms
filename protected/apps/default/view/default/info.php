@@ -1,5 +1,5 @@
 <?php return array (
-  'name' => '首页',
+  'name' => '91频道',
   'author' => '王洋',
 ); 
 ?>

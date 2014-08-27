@@ -571,8 +571,6 @@ function getFirstCharter($str){
 	return '#';//未查找到 的
 }
 
-//根据用户id获取用户各种大小的头像
-
 
 function timeshow($sTime) {
 	//sTime=源时间，cTime=当前时间，dTime=时间差

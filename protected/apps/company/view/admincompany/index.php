@@ -120,6 +120,7 @@ $(function ($) {
 <div class="contener">
 <div class="list_head_m">
            <div class="list_head_ml">你当前的位置：【企业列表】</div>
+            <div class="list_head_mr"><a href="{url('admincompany/add')}" class="add">新增</a></div>
            <div class="list_head_mr">
            </div>
         </div>

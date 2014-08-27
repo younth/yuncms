@@ -16,7 +16,7 @@ Mysql 5.0.x 及以上<br>
 
     1、版权所有 (c) Yuncms保留所有权利。 <br>
     2、感谢您选择 Yuncms 产品。希望我们的努力能为您提供一个小巧易用，高效快速的网站解决方案。 <br> 
-    3、Yuncms网站管理系统的官方网http://www.yunstudio.net，是 Yuncms 产品的开发商，依法独立拥有 Yuncms 产品著作权。<br>
+    3、Yuncms网站管理系统的官网http://cms.yunstudio.net，是 Yuncms 产品的开发商，依法独立拥有 Yuncms 产品著作权。<br>
     4、Yuncms著作权受到法律和国际公约保护。使用者：无论个人或组织、盈利与否、用途如何（包括以学习和研究为目的），均需仔细阅读本协议，在理解、同意、并遵守本协议的全部条款后，方可开始使用 Yuncms 软件。 
 
 

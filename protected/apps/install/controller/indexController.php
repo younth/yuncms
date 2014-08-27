@@ -3,7 +3,7 @@ class indexController extends baseController{
 	protected $layout = 'layout';
 	protected $lockFile = '';
 	
-	//init也是初始化？？用__construct函数
+	//init是框架定义的初始化，PHP本身用__construct函数
 	public function __construct(){
 		$this->lockFile = BASE_PATH . 'apps/' . APP_NAME .'/install.lock';
 		if(ACTION_NAME !='ok' && file_exists($this->lockFile) ){
@@ -12,6 +12,7 @@ class indexController extends baseController{
 		}
 		$this->title = config('title');
 		$this->menu = array(
+				//指定下标的二维数组
 				'index'=>'1.软件协议',
 				'env'=>'2.系统检查',
 				'db'=>'3.数据库安装',
@@ -49,7 +50,7 @@ class indexController extends baseController{
 		}else{
 			if(empty($_POST['DB_HOST'])||empty($_POST['DB_USER'])||empty($_POST['DB_NAME'])||empty($_POST['DB_PORT'])||empty($_POST['DB_PREFIX']))
 			$this->error('安装信息没有填写完整~');
-			config('DB', $_POST);
+			config('DB', $_POST);//写入到config里面的DB数组
 			
 			//安装数据库文件
 			model('install')->installSql( BASE_PATH . 'apps/' . APP_NAME .'/db.sql' );

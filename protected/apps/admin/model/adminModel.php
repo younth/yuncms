@@ -46,5 +46,6 @@ class adminModel extends baseModel{
 		 //echo $sql;
 		return $this->model->query($sql);
 	}
+	
 }
 ?>

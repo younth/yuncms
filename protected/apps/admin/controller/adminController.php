@@ -54,8 +54,15 @@ class adminController extends commonController
 	{
 		$id=intval($_GET['id']);
 		if(empty($id)) $this->error('参数错误');
-		$num=model('admin')->count("groupid='1'");//超级管理员总数
-		if($num<2) $this->error('必须保留至少一个超级管理员~');//防止后台没用超级管理员
+		//查询当前删除管理员的groupid
+		$info=model('admin')->find("id='{$id}'",'id,groupid');
+		if($info['groupid']==1){
+			//如果删除的是超管
+			$num=model('admin')->count("groupid='1'");//超级管理员总数
+			if($num<2) $this->error('必须保留至少一个超级管理员~');//防止后台没用超级管理员
+		}
+		
+		
 		if(model('admin')->delete("id='{$id}'"))
 		$this->success('管理员已删除',url('admin/index'));
 		else $this->error('没有该管理员');

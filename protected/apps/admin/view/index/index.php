@@ -136,7 +136,7 @@ $(function($){
 <!--头部开始-->
 <tr class="top_t">
  <td>  
-  <div class="logo"><a href="{url('index/index')}"><img src="__PUBLICAPP__/images/logo.jpg" /></a></div>
+  <div class="logo"><a href="{url('index/index')}"><img src="__PUBLICAPP__/images/logo.png" /></a></div>
   <div id="topmenu"><!--js动态获得--></div> 
   <div class="func">
      <div class="link_info">当前用户：{$username}</div>

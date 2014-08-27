@@ -91,7 +91,7 @@ hs.showCredits = false;
 <body>
 <div class="contener">
 <div class="list_head_m">
-		<div class="list_head_ml">你当前的位置：【编辑企业】</div>
+		<div class="list_head_ml">你当前的位置：【{$t_name}企业】</div>
 		<div class="list_head_mr"></div>
 		</div>
 

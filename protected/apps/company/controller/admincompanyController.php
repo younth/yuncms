@@ -70,6 +70,66 @@ class admincompanyController extends appadminController{
 		$this->display();
 	}
 
+	//增加企业
+   public function add(){
+            if(!$this->isPost()){
+                $this->t_name="添加";
+                //企业性质
+                $where="type=5 AND RIGHT(path,6)=".$this->company_sort;
+                $sortlist=model('sort')->select($where,'id,name,path');
+                if(!empty($sortlist)){
+                	foreach($sortlist as $vo){
+                		$sortnow=$vo['path'].','.$vo['id'];//构造的栏目导航定位
+                		$quality_option.= '<option value="'.$sortnow.'">'.$vo ['name'].'</option>';
+                	}
+                	$this->quality_option=$quality_option;
+                }                
+                //循环构造公司规模select option
+                $where="type=5 AND RIGHT(path,6)=".$this->company_scale;
+                $sortlist=model('sort')->select($where,'id,name,path');
+                if(!empty($sortlist)){
+                	foreach($sortlist as $vo){
+                		$sortnow=$vo['path'].','.$vo['id'];//构造的栏目导航定位
+                		$company_scale.= '<option value="'.$sortnow.'">'.$vo ['name'].'</option>';
+                	}
+                	$this->company_scale=$company_scale;
+                }
+                
+                $this->display('admincompany/edit');
+            }else{
+            	$data=array();
+            	//更新企业信息
+            	$data['name']=$_POST['name'];
+            	//行业
+            	$data['on_industry']=in($_POST['on_industry']);
+            	$data['industry']=in($_POST['industry']);
+            		
+            	$data['scale']=$_POST['scale'];
+            	$data['quality']=$_POST['quality'];
+            	$data['address']=$_POST['address'];
+            	$data['websites']=$_POST['websites'];
+            	$data['introduce']=text_in($_POST['introduce']);
+            	$data['is_active']=intval($_POST['is_active']);
+            		
+            	//logo上传，这里借助Kindeditor的上传功能，换成强大的ajax上传插件
+            	if(empty($_POST['logo']))$data['logo']=$this->nopic;
+            	else{
+            		$firstpath=in($_POST['logo']);
+            		if(!empty($firstpath)){
+            			$lastlocation=strrpos($firstpath,'/');
+            			$timefile=substr($firstpath,$lastlocation-8,8);
+            			$covername=substr($firstpath,$lastlocation+1);
+            			if(file_exists($this->uploadpath.$timefile.'/'.$covername)){
+            				$data['logo']= $timefile.'/'.$covername;  //自动生成一个图片用于希望的封面图
+            			}else   $data['logo']=$this->nopic;
+            		}else   $data['logo']=$this->nopic;
+            	}
+            	if(model('company')->insert($data))
+            		$this->success('增加企业成功~');
+            	else $this->error('出错了~');
+            	            	
+            }
+        }
 	//企业修改
 	public function edit()
 	{
@@ -146,7 +206,7 @@ class admincompanyController extends appadminController{
 		}
 	}
 
-	//删除会员
+	//删除企业
 	public function del()
 	{
 		if(!$this->isPost()){

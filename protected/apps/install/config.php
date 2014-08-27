@@ -6,7 +6,7 @@ return array (
   'APP_AUTHOR' => '王洋',
   'APP_ORIGINAL_PREFIX' => 'yun_',
   'APP_TABLES' => '',
-  'title' => '安装向导',
+  'title' => 'Yuncms安装向导',
   'rw_files' => 
   array (
     0 => 'protected/config.php',

@@ -88,8 +88,7 @@ $(function ($) {
 						  //<td align="center"><img src="'.$logo.'" border="0"></td>
                           $cont.= '<td align="center">';
 						  if($vo['type']==1) $name='友情链接';
-						  elseif($vo['type']==2) $name='加盟企业';
-						  elseif($vo['type']==3) $name='入驻高校';
+						  elseif($vo['type']==2) $name='合作伙伴';
                           $cont.= $name;
                           $cont.= '</td><td align="center"><a target="_blank" href="'.$vo['url'].'">'.$vo['name'].'</a></td>';
                           $cont.='<td align="center">'.$vo['norder'].'</td><td  width="130">';

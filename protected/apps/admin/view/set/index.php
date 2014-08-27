@@ -195,7 +195,7 @@ index.html=default/index/index
             1、您的规则格式是否正确。<br>
             2、您的主机是否支持URL重写。<br>
             3、Apache下.htaccess或是IIS下httpd.ini中的规则是否设置正确。<br>
-            4、如果是nginx环境请<a href="http://www.yxcms.net/news/content_20.html" target="_blank">查看说明</a>。<br>
+            4、如果是nginx环境请<a href="#" target="_blank">查看说明</a>。<br>
             5、系统放在二级目录下规则不会起效。
           </td>
         </tr>

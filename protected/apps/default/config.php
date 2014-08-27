@@ -9,6 +9,6 @@ return array (
   'TPL' => 
   array (
     'TPL_TEMPLATE_PATH' => 'default',
-    'TPL_TEMPLATE_PATH_MOBILE' => 'daojishi',
+    'TPL_TEMPLATE_PATH_MOBILE' => 'default',
   ),
 );

@@ -18,7 +18,7 @@ class feedbackController extends commonController
         $url=url('feedback/index',array('page'=>'{page}'));
         $limit=$this->pageLimit($url,$listRows); 
         
-        $sortlist=model('feedback')->select('','id,email,ctime,is_read','ctime DESC',$limit);
+        $sortlist=model('feedback')->select('','id,email,ctime,is_reply','ctime DESC',$limit);
         $count=model('feedback')->count(); 
         $this->list=$sortlist;
         $this->t_name='留言';
@@ -55,7 +55,7 @@ class feedbackController extends commonController
         model("feedback")->readfeedback($id);
         if(empty($id)) $this->error('参数错误');
         $info=model('feedback')->find("id='$id'");//当前新闻的相关信息
-        $pic=model("feedback_pic")->select("fid='$id'",'picture');
+        $pic=model("feedback_pic")->select("id='$id'",'picture');
         $this->info=$info;
         $this->pic=$pic;
         $this->display();

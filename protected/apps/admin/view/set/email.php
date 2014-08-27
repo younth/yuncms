@@ -30,7 +30,7 @@
                 <td align="right" width="150">smtp服务器帐号：</td>
 				<td><input type='text' value="{$config['EMAIL']['SMTP_USERNAME']}" name="EMAIL[SMTP_USERNAME]" size="36"/></td>
                 <td align="right" width="150">smtp服务器帐号密码：</td>
-				<td><input type='text' value="{$config['EMAIL']['SMTP_PASSWORD']}" name="EMAIL[SMTP_PASSWORD]" size="36"/></td>
+				<td><input type='password' value="{$config['EMAIL']['SMTP_PASSWORD']}" name="EMAIL[SMTP_PASSWORD]" size="36"/></td>
 			</tr>
              <tr>
                 <td align="right" width="150">是否启用SSL安全连接：</td>

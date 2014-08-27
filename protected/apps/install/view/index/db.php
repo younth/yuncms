@@ -32,7 +32,7 @@
           </tr>
           <tr>
             <td><LABEL for=prefix>表名前缀</LABEL></td>
-            <td><input name="DB_PREFIX" type="text" value="yun_" class="install_input"></td>
+            <td><input name="DB_PREFIX" type="text" value="cms_" class="install_input"></td>
             <td>区分其他数据表，提高安全性，必填</td>
           </tr>
         </tbody>

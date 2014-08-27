@@ -1,6 +1,6 @@
 <?php
 /*
- * 测试功能类，开发的，大家测试
+ * 测试功能类，开发的，供大家测试
  * */
 class testController extends commonController
 {

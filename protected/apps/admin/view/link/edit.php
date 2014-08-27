@@ -65,9 +65,8 @@ hs.showCredits = false;
           <tr>
             <td align="right"  width="100">链接类型：</td>
             <td align="left">
-               <input name="type" type="radio" value="1" <?php echo $info['type']==1?"checked='checked'":NULL ?> />网站链接 &nbsp;
-               <input name="type" type="radio" value="2" <?php echo $info['type']==2?"checked='checked'":NULL ?> />加盟企业 &nbsp;
-               <input name="type" type="radio" value="3" <?php echo $info['type']==3?"checked='checked'":NULL ?> />入驻高校 
+               <input name="type" type="radio" value="1" <?php echo $info['type']==1?"checked='checked'":NULL ?> />友情链接 &nbsp;
+               <input name="type" type="radio" value="2" <?php echo $info['type']==2?"checked='checked'":NULL ?> />合作伙伴
             </td>
             <td class="inputhelp"></td>
           </tr>

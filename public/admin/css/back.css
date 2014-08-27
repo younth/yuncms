@@ -138,7 +138,7 @@ a.top_menu{display:block; float:left; margin-left:10px}
 	font-size:14px;
 	line-height:36px;
 	padding-left:10px;
-	cursor:hand;
+	cursor:pointer;
 	background:url(../images/lmenu_bg.gif) repeat-x;
   }
 .menumid_list {list-style:none;}
@@ -212,15 +212,6 @@ ul.tabs{ margin:0 auto; width:400px; height:35px}
 /***********文章************/
 .arcover{display:none; padding-top:10px}
 #cut{ height:31px;width:31px;background:url(../images/cut.gif) no-repeat center; text-align:right; cursor:pointer; border:0}
-/*******图片剪切********/
-.imgareaselect-border1 {background: url(../images/border-v.gif) repeat-y left top;}
-.imgareaselect-border2 {background: url(../images/border-h.gif) repeat-x left top;}
-.imgareaselect-border3 {background: url(../images/border-v.gif) repeat-y right top;}
-.imgareaselect-border4 {background: url(../images/border-h.gif) repeat-x left bottom;}
-.imgareaselect-border1, .imgareaselect-border2, .imgareaselect-border3, .imgareaselect-border4 {filter: alpha(opacity=50);opacity: 0.5;}
-.imgareaselect-handle {background-color: #fff;border: solid 1px #000;filter: alpha(opacity=50);opacity: 0.5;}
-.imgareaselect-outer {background-color: #000;filter: alpha(opacity=50);opacity: 0.5;}
-.imgareaselect-selection { }
 
 /**********小按钮***************/
 .button_small { line-height: 25px; font-size: 12px; height: 25px; padding-left: 10px; padding-right: 10px; background-image: url(../images/button_small.png); background-repeat: repeat-x; border: 1px solid #cccccc; color: #666; display: inline-block; margin-right: 10px; cursor: pointer; vertical-align: middle; }
