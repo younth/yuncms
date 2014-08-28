@@ -8,6 +8,7 @@ class setController extends commonController
 	public function index()
 	{
 		$config=require(BASE_PATH.'/config.php');//后台部分配置固定，需要重加载配置
+		//dump($config);
 		if(!$this->isPost()){
 			//未提交，显示
 			$this->config=$config;

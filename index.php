@@ -11,4 +11,3 @@ define('ROOT_PATH', dirname(__FILE__).DIRECTORY_SEPARATOR); //根目录物理地
 require( 'protected/core.php' );//这里面调用的run
 
 /******下面测试调试***/
-
