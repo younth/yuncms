@@ -43,7 +43,6 @@ class adminModel extends baseModel{
 	public function adminANDgroup($limit=''){
 		//组合查询，自定义sql语句
 		$sql="SELECT A.id,A.groupid,A.username,A.lastlogin_time,A.lastlogin_ip,A.iflock,B.name FROM {$this->prefix}admin A,{$this->prefix}group B WHERE A.groupid=B.id ORDER BY A.groupid,A.id LIMIT {$limit}";
-		 //echo $sql;
 		return $this->model->query($sql);
 	}
 	

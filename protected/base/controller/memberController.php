@@ -1,6 +1,6 @@
 <?php
 /*
- * 会员模块的基类，因为系统的前台需要调用，所以作为base基类
+ * 会员模块的基类，因为系统的前台模块都需要调用，所以作为base基类
  * */
 class memberController extends baseController{
   protected $auth=array();//auth是用户信息的数组
