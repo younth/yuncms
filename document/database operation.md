@@ -97,10 +97,26 @@ $sql="SELECT m.id,m.uname,m.login_email,p.school,p.major,h.ctime,h.fid FROM {$th
 return $this->model->query($sql);
 ```
  - 麻烦的模糊查询，语句长的话注意拆分单独构造where
- - example:查询符合条件的会员数(条件：starttime endtime keyword)
+  example:查询符合条件的会员数(条件：starttime endtime keyword)
 ```
 		if(empty($starttime)||empty($endtime)) $where=(empty($keyword)?'':'where m.uname like "%'.$keyword.'%"');
 else $where='where m.ctime<='.$endtime.' AND m.ctime>='.$starttime.' AND m.uname like "%'.$keyword.'%"';
 $sql="SELECT m.id,l.user_group_id,m.uname,m.login_email,m.lastip,m.ctime,m.lasttime,m.is_active,g.group_name FROM {$this->prefix}member as m left outer join ({$this->prefix}member_group as g,{$this->prefix}member_group_link as l) on (l.uid=m.id AND l.user_group_id=g.id)  {$where} ORDER BY m.id LIMIT {$limit}";
 return $this->model->query($sql);
+```
+
+ - right() 截取
+
+```
+$where="type=5 AND RIGHT(path,6)=".$this->tag_1;//第一组
+      	$list=model('sort')->select($where,'id,name,deep,path,norder,type');
+      	if(!empty($list))
+      	{
+      		foreach ($list as  $row=>$vo)
+      		{
+      			$list[$row]['id']=$vo['path'].','.$vo['id'];//构造的value值
+      		}
+      	}
+      	$this->tag_1=$list;
+      	unset($list);
 ```
