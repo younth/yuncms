@@ -1,6 +1,6 @@
 ## 关于Yuncms ##
 
-Yuncms是一套内容管理系统，主要特点见官网:[cms.yunstudio.net](http://cms.yunsudio.net)
+Yuncms是一套内容管理系统，主要特点见官网:[cms.yunstudio.net](http://cms.yunstudio.net)
 
 我希望使用Yuncms的是一个开发人员，而不是一个不懂程序的“站长”~~
 
