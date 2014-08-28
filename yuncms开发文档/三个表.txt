@@ -1,0 +1,21 @@
+	//最近来访,参数是被访问者,联系member,member_profile读取访问者的信息
+	public function visitme($bid)
+	{
+		//$sql="SELECT m.id,m.uname,m.login_email FROM {$this->prefix}member as m,{$this->prefix}visit_history as h WHERE m.id=h.fid AND h.bid='{$bid}' order by h.ctime desc";
+		$sql="SELECT m.id,m.uname,m.login_email,p.school,p.major,h.ctime,h.fid FROM {$this->prefix}member as m left outer join ({$this->prefix}visit_history as h,{$this->prefix}member_profile as p) on (m.id=h.fid AND h.fid=p.mid) where h.bid='{$bid}'  ORDER BY h.ctime LIMIT 6";
+		return $this->model->query($sql);
+	}
+
+
+
+
+
+两个表：
+
+public function user_profile($id)
+	{
+		//$sql="SELECT m.id,m.uname,m.login_email,p(*) FROM {$this->prefix}member as m left outer join ({$this->prefix}member_group as g,{$this->prefix}member_profile as p) on (l.uid=m.id AND l.user_group_id=g.id)  WHERE  m.id={$id} ";
+		$sql="SELECT m.id,m.uname,m.login_email,p.* FROM {$this->prefix}member as m,{$this->prefix}member_profile as p WHERE m.id=p.mid AND m.id='{$id}'";
+		$user= $this->model->query($sql);
+		return $user[0];//$user是二维数组，应该返回一维数组显示会员信息
+	}

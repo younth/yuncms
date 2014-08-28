@@ -79,7 +79,7 @@ return array (
     'TPL_CACHE_PATH' => BASE_PATH . 'cache/tpl_cache/',
     'TPL_CACHE_SUFFIX' => '.php',
   ),
-  'ver_name' => 'V2.0',
+  'ver_name' => 'V2.3.1',
   'ht_name' => 'Yuncms内容管理系统',
   'ver_date' => '20130704',
   'copyright' => ' Copyright © 2014　长沙云影网络科技有限公司',

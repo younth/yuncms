@@ -1,0 +1,42 @@
+
+$.ajax({
+            type: "GET",
+            url: "Services/EFService.svc/Members",
+            data: "{}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                // Play with returned data in JSON format
+            },
+            error: function (msg) {
+                alert(msg);
+            }
+        });
+
+
+
+
+
+
+//取消企业关注
+  function corp_remove_follow(cid,mid){
+	var delobj=$(this).parent().parent();//li块
+    $.ajax({
+      url: "{url('company/index/cancel_follow')}",
+      data: {
+        id: cid,
+		mid:mid,
+	  },
+        //except_ids: $("#except_ids").val()
+		 success: function (data) {
+			//成功返回数据，删除该公司
+			delobj.remove();
+			//alert(delobj);
+			  
+		 },
+		  error: function (msg) {
+                alert(msg);
+		  }
+    });
+  }
+

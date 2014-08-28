@@ -133,7 +133,7 @@ function getApps(){
 	return $appsArray;
 }
 
-//读取模块confing文件，返回数组
+//读取模块config文件，返回数组
 function appConfig($app){
 	static $appConfig = array();
 	if( !isset( $appConfig[$app]) ){

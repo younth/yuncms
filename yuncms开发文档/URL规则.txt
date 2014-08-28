@@ -1,0 +1,6 @@
+index/search-<keywords>-<type>-<page>.html=default/index/search
+index/search-<keywords>-<type>.html=default/index/search
+<c>/<a>-<id>-<page>-<exsort>.html=default/<c>/<a>
+<c>/<a>.html=member/<c>/<a>
+<c>/<a>=default/<c>/<a>
+index.html=default/index/index

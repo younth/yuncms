@@ -42,7 +42,7 @@ td{ height:45px;}
         </div>
         
        <div style="float:left; width:83px; padding-top:9px"><input type="image" src="__PUBLICAPP__/images/dl.gif" width="83" height="75"></div>
-       <p style="display:block; clear:both; padding-top:60px; color: #999">Yuncms {$ver} Copyright  @2013-2014</p>
+       <p style="display:block; clear:both; padding-top:60px; color: #999">Yuncms {$ver} Copyright  @2012-2014</p>
     </form>
   </div>
 </div>
