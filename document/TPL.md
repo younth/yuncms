@@ -37,11 +37,12 @@ Yuncms模板
 ### ***layout*是什么？**
 
 
-> Layout是模板的基本布局，或者说公共的布局，可以放网站的公用的header,footer等。
+> Layout是模板的基本布局，或者说公共的布局，可以放网站的公用的header,footer等。在实际应用中如果每个模板都有共用的部分我们可以采用layout布局方式。
 
  - layout如何用
  >{include file="$__template_file"} 
  >__template_file：controller.php里面定义
+
 
  - 如何关闭layout?
 
@@ -112,7 +113,7 @@ Yuncms采用`自定义的模板引擎`，其实就是一些标签的正则匹配
 //publicapp表示当前模块的css,js文件,public表示公共的
 ```
 
- - 如何调其他公用文件
+ - 如何调其他公用文件,模板文件包含
 `{include file="模版名称"}`     *需要注意路径*
 ###Yuncms模板标签的调用
 
@@ -130,4 +131,123 @@ config文件里面的变量可以直接使用。
 PHP中使用的是Unix时间戳：以1970 年 1 月 1 日 00:00:00到某一时刻经过的秒数来计时
 {date($t,Y-m-d H:i:s)} ：将$t时间戳转换为 Y-m-d H:i:s 格式即：年-月-日 小时:分钟:秒。例：1985-11-15 12:00:00
 {date(Y-m-d H:i:s)} : 将当前时间戳转换为 Y-m-d H:i:s 格式即：年-月-日 小时:分钟:秒。例：2013-4-1 12:00:00
+```
+
+####支持PHP标签
+```
+当我们需要在模板中调用php代码时，一般会采用<?php 代码  ?>，现在你也可以使用这种方式调用：{php 代码 }
+```
+
+####函数标签
+```
+模板中我们用这种方式来调用函数：{函数名（参数1，参数2，....）}
+以最常见的网址格式化函数url()在模板中调用为例：
+输出网站首页URL地址：{url('default/index/index')}
+输出ID为100001的资讯文章URL地址：{url('default/news/content',array('id'=>100001))}
+```
+
+####if 标签
+```
+{if 条件1}
+	.....
+{elseif 条件2}
+	.....
+{else}
+	....
+{/if}
+例如在前台模板news_content.php中有这样一个判断：
+{if !empty($upnews)}
+<a href="{url($upnews['method'],array('id'=>$upnews['id']))}">{$upnews['title']}</a>
+{else} 
+	没有了....
+{/if}
+以上判断是否还有上一篇文章，有的话输出上一篇文章链接，没有的话输出'没有了'
+```
+
+#### for 标签
+```
+{for 三元条件}
+	循环体..
+{/for}
+例:
+{for $i=0;$i<3;$i++}
+	这是第{$i}个元素<br>
+{/for}
+以上输出结果为：
+	这是第0个元素
+	这是第1个元素
+	这是第2个元素
+```
+
+####loop 标签
+```
+loop是php中foreach函数的应用
+{loop 数组 数组键值 数组值}
+	循环体..
+{/loop}
+例：
+有这样一个数组变量：$arr=array('张三'=>'20岁','李四'=>'24岁','王二小'=>'28岁') ;
+在模板中使用loop输出：
+{loop $arr $key $vo}
+	{$key}的年龄是{$vo} <br>
+{/loop}
+输出结果为：
+    张三的年龄是20岁
+    李四的年龄是24岁
+    王二小的年龄是28岁
+```
+
+####查表输出
+```
+模板中直接查询数据库表输出数据：
+	{自定义数组名:{table=(数据库表名) field(查询字段) where=(查询条件) limit=(查询条数) order=(排序方式)}} 
+	{/自定义数组名}
+```
+example:
+```
+<span class="margin">友情链接：</span>
+{link:{table=(link) field=(name,url,type,picture,logourl) order=(norder desc,id desc) where=(ispass='1')}}
+	{if $link['type']==1} <a href="[link:url]" target="_blank">[link:name]</a>
+	{elseif $link['type']==2} <a href="[link:url]" target="_blank"><img src="[link:picturepath]" alt="[link:name]"></a>
+	{/if}
+{/link}
+```
+
+```
+例：调用资讯栏目ID为100001下3条数据内容
+{news:{table=(news) field=(title,color,addtime) order= (recmd DESC,norder desc,id desc)where=(ispass='1'AND like '%100001%') limit=(3)}}
+	这是第[news:i]条 - 标题颜色：[news:color] - 标题：[news:title] - 截取3字符后标题：[news:title $len=3] - 时间：[news:addtime] <br>
+{/news}
+```
+
+####资讯内容调用标签
+```
+{循环标识:{table=(news) field=(字段) place=(定位ID) column=(栏目ID) where=(条件) order=(排序) limit=(条数)}}
+	循环主体
+{/循环标识}
+/*
+	1.column 指定栏目ID
+	2.place 指定定位ID
+	3.
+*/
+```
+example:
+```
+{news:{table=(news) field=(id,title,color,addtime,method,picture,description) column=(100001) order=(norder desc,id desc) where=(ispass='1') limit=(8)}}
+    <a style="color:[news:color]" title="[news:title]" target="_blank" href="[news:url]">[news:title $len=16]</a><span>{date($news['addtime'],Y-m-d)}</span>
+    
+    {$NewImgPath}[news:picture] 封面图 （此标签适用于1.1.8与之前版本）
+    {$NewImgPath}thumb_[news:picture] 封面缩略图 (此标签适用于1.1.8与之前版本)
+    [循环标识:picturepath] 封面图 
+	
+    [news:title $len=16]中"$len=16" 截取中文字符串
+    {msubstr($news['title'], 0, 16)} 中文字符串截取函数，与上条效果一致，可灵活用至其它地方
+    [news:title $elen=16]中"$elen=16" 截取英文字符串
+    {substr($news['title'], 0, 16)} 英文字符串截取函数，与上条效果一致，可灵活用至其它地方
+    {date($news['addtime'],Y-m-d H:i:s)} 格式化时间，Y-m-d H:i:s 格式即：年-月-日 小时:分钟:秒，例：1985-11-15 12:00:00
+    {date($news['addtime'],Y-m-d)} 格式化时间，Y-m-d 格式即：年-月-日，例：1985-11-15
+    $news_i 循环计数 （1，2，3，4，5，6，7，8） 
+
+{/news}
+注：以上调用出8条栏目ID为"100001"的审核通过的内容的标题颜色、标题、链接、添加时间，并按内容排序ID和文章ID从大到小降序排列，和一些常用标签范例。
 ```
