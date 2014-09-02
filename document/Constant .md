@@ -37,6 +37,9 @@
 
  16. NewImgPath：新闻的图片
   
+ 17.ACTION_NAME 方法名
+
+18.CONTROLLER_NAME 控制器名
 
  
 

@@ -9,15 +9,16 @@ class commonController extends baseController{
 	{
 		parent::__construct();
 		$this->ht_name=config('ht_name');//系统名称
-        if(!empty($_GET['phpsessid'])) session_id($_GET['phpsessid']);//通过GET方法传递sessionid,firefox
+		$sid=session_id();
+        if(empty($sid) && !empty($_GET['phpsessid'])) session_id($_GET['phpsessid']);//通过GET方法传递sessionid
        // @session_start();//开启session
-       session_starts();
-        
+       	session_starts();
 		//登录与权限验证
 		$config['AUTH_LOGIN_URL']=url('admin/index/login');//没有登录的时候调用
 		$config['AUTH_LOGIN_NO']=array('index'=> array('login','logout','verify'),'common'=>'*');//不需要认证的模块，则放行
 		$config['AUTH_POWER_CACHE']=false;
-		Auth::check($config);//登陆和权限检查，非常重要！！
+		Auth::check($config);//登陆和权限检查
+		//dump($_SESSION);
 	}
 
 	//密码加密，高度md5加密

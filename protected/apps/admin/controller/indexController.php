@@ -7,7 +7,7 @@ class indexController extends commonController
 	public function __construct()
 	{
 		parent::__construct();
-		//print_r(Auth::getModule());//遍历所有模型和方法初始method表中数据
+		//dump(Auth::getModule());//遍历所有模型和方法初始method表中数据
 	}
 	
 	//显示管理后台首页
@@ -113,7 +113,7 @@ class indexController extends commonController
 		if(!$this->isPost())
 		{
 			//没有提交，就显示登陆的页面
-			$this->ver=config('ver_name');//设置模板变量ver 值为config.php里面的ver_name
+			$this->ver=config('ver_name');//版本号
 			$this->display();
 		}else{
 		//提交了，说明点击登陆了，进行登陆验证处理

@@ -1,0 +1,76 @@
+@charset "utf-8";
+body{ background-color:#f7f7f7}
+*{ margin:0; padding:0; font-size:12px;font-family:'微软雅黑'}
+input{
+	outline: none;
+	background:none;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+input:focus{
+	border: 1px solid #008CD7;
+}
+.STYLE1 {
+	color: #333;
+	font-size: 12px;
+	
+}
+.con{
+	width:489px; height:341px; 
+	position:absolute; left:50%; top:50%; 
+	margin:-170px 0 0 -244px;
+	/*css3效果*/
+	box-shadow:0 0 8px 6px rgba(0, 0, 0, 0.2);
+	border-radius: 10px;
+	background: -webkit-linear-gradient(top,rgba(255,255,255,255),rgba(236,236,236,.8));
+}
+.con h1{
+	color:#008CD7;
+	position:absolute;
+	top:38px;
+	font-size:21px;
+	width:100%;
+	text-align:center;
+}
+.for{ padding:100px 0 0 100px}
+td{ height:45px;}
+.intext {
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+	font-size: 12px;
+	color: #333;
+	padding: 0 5px;
+}
+.code{ float:left; height:30px;}
+.code img{
+	margin-top: 4px;
+	margin-left: 10px;
+}
+.con p{
+	display: block;
+	clear: both;
+	padding-top: 60px;
+	color: #999;
+	text-align: center;
+}
+.login{
+	float: left;
+	width:83px;
+	padding-top:9px;
+}
+.login input{
+	width: 83px;
+	height: 75px;
+	outline: none;
+	border: 1px solid #CCCCCC;
+	border-radius: 3px;
+	background: -webkit-linear-gradient(top,rgba(255,255,255,255),rgba(200,200,200,.6));
+	cursor: pointer;
+	font-size: 16px;
+}
+.login input:hover{
+	background: -webkit-linear-gradient(top,rgba(255,255,255,255),rgba(222,222,222,.6));
+}

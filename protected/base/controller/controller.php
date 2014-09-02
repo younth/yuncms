@@ -60,6 +60,10 @@ class controller{
 	//输出模板
 	protected function display($tpl = '', $return = false, $is_tpl = true ){
 		if( $is_tpl ){
+			/*
+			 * CONTROLLER_NAME 控制器名
+			 * ACTION_NAME 方法名
+			 */
 			$tpl = empty($tpl) ? CONTROLLER_NAME . '/'. ACTION_NAME : $tpl;
 			if( $is_tpl && $this->layout ){
 				$this->__template_file = $tpl;

@@ -13,3 +13,6 @@
 ####*系统后台的登陆采用auth的方式 *
 >过程：进入页面时候设置在commonController.php里面的__construct
 验证时候设置在adminModel.php里面的login方法的groupid
+```
+Auth::check($config);//登陆和权限检查
+```
