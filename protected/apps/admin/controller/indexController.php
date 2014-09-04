@@ -14,9 +14,8 @@ class indexController extends commonController
 	public function index()
 	{
 		/*
-		 * 后台通过auth类进行验证，完美结合！
-		 * 经过auth处理后的groupid
-		 * Auth::$config['AUTH_SESSION_PREFIX'].'groupid'; 为auth_groupid
+		 * 后台通过auth类进行验证
+		 * Auth::$config['AUTH_SESSION_PREFIX'].'groupid'; 为auth_groupid，是经过auth处理后的groupid
 		 * $_SESSION['auth_groupid']是通过auth保存
 		 * */
 		$groupid=$_SESSION[Auth::$config['AUTH_SESSION_PREFIX'].'groupid'];
@@ -25,7 +24,6 @@ class indexController extends commonController
 		/***不同权限的管理员检索对应的权限***/
 		if($power['power']==-1) $where="ifmenu = '1'";
 		else $where="ifmenu = '1' AND id IN(".$power['power'].")";
-		
 		//显示所拥有权限的栏目
 		$methods=model('method')->select($where,'','rootid,id');
 		
