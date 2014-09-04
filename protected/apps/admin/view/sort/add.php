@@ -12,7 +12,7 @@
 	//默认加载资讯栏目
 	$("#colsort").focus();//自动聚焦
 	$('#sortcon').html('<div id="loading"></div>');//加载
-	$.get("{url('sort/add')}", {sortaction : 'linkadd'},
+	$.get("{url('sort/add')}", {sortaction : 'newsadd'},
    		 function(data){
 		   $('#sortcon').html(data);
    	    });
@@ -52,10 +52,9 @@
           <tr>
             <td align="center">
              <select id="colsort" onChange="getcon()" style="color:#137cd8">
-               <option  value="newsadd" >资讯栏目</option>
-               <option value="pageadd" >单页栏目</option>
-              <!-- <option value="pluginadd" >应用栏目</option>-->
-               <option value="linkadd" selected="selected" >自定义栏目</option>
+               <option  value="newsadd" selected="selected">资讯栏目</option>
+               <option value="pageadd">单页栏目</option>
+               <option value="linkadd">自定义栏目</option>
         </select>
             </td>
           </tr>

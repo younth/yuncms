@@ -10,6 +10,7 @@ input:-webkit-autofill {
 }
 input:focus{
 	border: 1px solid #008CD7;
+	outline: none;
 }
 .STYLE1 {
 	color: #333;

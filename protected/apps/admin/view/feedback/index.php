@@ -25,7 +25,7 @@
           <?php 
                 if(!empty($list)){
                      foreach($list as $vo){
-						 $is_read=($vo['is_read']==0)?"<span class='red'>未读</span>":"已读";
+						 $is_read=($vo['is_read']==0)?"<span class='red'>未处理</span>":"已读";
                          $cont.= '<tr id="'.$vo['id'].'"><td align="center"><input type="checkbox" name="delid[]" value="'.$vo['id'].'" /></td>';
                          $cont.='<td align="center">'.$is_read.'</td>';
                          $cont.= '<td align="center">'.$vo['email'].'</td>';
