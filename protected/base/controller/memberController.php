@@ -66,7 +66,7 @@ class memberController extends baseController{
       	//$this->error('您没有登陆或是权限不够进入~',$_SERVER['HTTP_REFERER']);
         break;
       default://会员信息数组,会员有权限访问
-        $this->auth=$power;//auth是用户信息的数组,
+        $this->auth=$power;//auth是用户信息的数组
         //print_r($power);
         $this->assign('auth',$power);//auth的默认值是3,auth传到模板
         break;

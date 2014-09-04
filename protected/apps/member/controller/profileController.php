@@ -190,15 +190,13 @@ class profileController extends commonController
      	$this->display();
      }
 
-     //修改技能信息
+     //修改tags
      public function editskills()
      {
      	$auth=$this->auth;//本地登录的cookie信息
      	$id=$auth['id'];//学生用户的id
-      	//读取用户标签,联系member_tag表与sort表
-      	$list= model('member_tag')->select("mid='{$id}'",'id,name','id asc');//两表关联查询
+      	$list= model('member_tag')->select("mid='{$id}'",'id,name','id asc');
       	$this->mytag=$list;
-      	
       	$this->display();
       	
      }

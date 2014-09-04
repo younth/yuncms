@@ -21,7 +21,6 @@ class newsController extends commonController
 		$where="type=".$this->sorttype;
 		$sortlist=model('sort')->select($where,'id,name,deep,path,norder,type');
 		$sort=in(urldecode($_GET['sort']));//当前类别定位
-		
 		if(!empty($sortlist)){
 			$sortlist=re_sort($sortlist);//无限分类重排序
 			$sortname=array();
@@ -49,18 +48,18 @@ class newsController extends commonController
 			//echo $url;
 			$this->sort=$sort;
 		}
-	
 		//关键字搜索
 		$keyword=in(urldecode(trim($_GET['keyword'])));
+		$starttime=strtotime(in($_GET['starttime']));
+		$endtime=strtotime(in($_GET['endtime']));
 		if(!empty($keyword)){
 			//实现分页，分页处理在下边
 			$url=url('news/index',array('keyword'=>urlencode($keyword),'page'=>'{page}'));
 			$this->keyword=$keyword;
 		}
-		
 		$limit=$this->pageLimit($url,$listRows);
-		$count=model('news')->newscount($sort,$keyword);//总条数要结合sort及keyword查询
-        $list=model('news')->newsANDadmin($sort,$keyword,$limit);//news联合admin查询
+		$count=model('news')->newscount($sort,$keyword,$starttime,$endtime);//总条数要结合sort及keyword查询
+        $list=model('news')->newsANDadmin($sort,$keyword,$starttime,$endtime,$limit);//news联合admin查询
 
 		$this->list=$list;//分类的检索结果
 		$this->count=$count;

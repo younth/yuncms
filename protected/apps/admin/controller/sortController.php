@@ -479,9 +479,9 @@ class sortController extends commonController
 		if(empty($id)) return '错误的ID参数~';
 		//if(!$this->checkConPower('sort',$id)) return "当前账户没有权限删除{$id}~"; 
 		$condition['id']=$id;
-		$target=model('sort')->find($condition,'path,type');
+		$target=model('sort')->find($condition,'path,type,name');
 		$where='path = \''.$target['path'].','.$id.'\'';
-		if(model('sort')->find($where)) return "请先删除{$id}下的栏目~";
+		if(model('sort')->find($where)) return "请先删除 {$target['name']} 下的栏目~";
 		//判断类下有无内容
 		$table=self::$sort[$target['type']]['mark'];
 		if(empty($table)) return "{$id}未知类别";
@@ -501,8 +501,8 @@ class sortController extends commonController
 	public function del()
 	{
 		if($this->isPost()){
-			if('del'!=$_POST['dotype']) $this->error('操作类型错误~',url('sort/index'));
-			if(empty($_POST['delid'])) $this->error('还没有选择栏目~',url('sort/index'));
+			if($_POST['dotype']!='del') $this->error('操作类型错误~',url('sort/index'));
+			if(empty($_POST['delid'])) $this->error('未选择栏目~',url('sort/index'));
 			$delid=array_reverse($_POST['delid']);
 			$er='';
 			foreach ($delid as $vo) {
@@ -515,10 +515,11 @@ class sortController extends commonController
 			}
 			if($er) $this->error($er,url('sort/index'));
 			else $this->success('栏目删除成功~',url('sort/index'));
-		}else{//ajax方式
+		}else{
+			//ajax方式删除单个栏目
 			$id=intval($_GET['id']);
 			$back=$this->_del($id);
-			if('done'==$back) echo 1;
+			if($back=='done') echo 1;
 			else echo $back;
 		}
 	}

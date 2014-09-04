@@ -58,7 +58,6 @@ KindEditor.ready(function(K) {
 
   $(function ($) { 
   //标题颜色
-  $('#picker').farbtastic('#color');
   $('#PickCoShow').click(function(){
       $('#picker').toggle();
 	  if(''==$('#color').val()) $('#color').val("#FFFFFF");

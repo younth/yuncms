@@ -36,7 +36,7 @@
 	 $('.del').click(function(){
 			if(confirm('删除将不可恢复~')){
 			var delobj=$(this).parent().parent();
-			var id=delobj.attr('id');
+			var id=delobj.attr('id');//待删除栏目的id
 			$.get("{url('sort/del')}", {id:id},
    				function(data){
 					if(data==1){

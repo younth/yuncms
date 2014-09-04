@@ -3,13 +3,12 @@ $(function ($) {
 	//行颜色效果
 	$('.all_cont tr').hover(
 	function () {
-        $(this).children().css('background-color', '#f9f9f9');
+        $(this).children().css('background-color', '#E6F1D8');
 	},
 	function () {
         $(this).children().css('background-color', '#fff');
 	}
 	);
-
 });
 
 function CheckAll(form) { //复选框全选/取消

@@ -1,0 +1,8 @@
+@charset "utf-8";
+
+.news-search{
+	float: left;
+}
+.news-search input{
+	margin-bottom: 0;
+}

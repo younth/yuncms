@@ -8,6 +8,14 @@
 <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
 <script type="text/javascript" src="__PUBLICAPP__/js/common.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/highslide.js"></script>
+<script type="text/javascript" src="__PUBLIC__/lhgcalendar/lhgcore.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/lhgcalendar/lhgcalendar.min.js"></script>
+<script type="text/javascript">
+J(function(){
+    J('#starttime').calendar();
+	J('#endtime').calendar();
+});
+</script>
 <script language="javascript">
 //封面图效果
 hs.graphicsDir = "__PUBLIC__/images/graphics/";
@@ -144,9 +152,12 @@ $(function ($) {
             </td>
             <td colspan="4" align="right">
                <form action="{url('news/index')}" method="GET" >
-                  <div style="float:right"> <input class="btn btn-success btn-small" type="submit" value="搜索"></div>
-                  <div style="float:right">新闻标题：<input type="text" name="keyword" size="20"> </div>
-                  <input name="yun" type="hidden" value="{$_GET['yun']}" />    
+                  <div class="news-search">新闻标题：<input type="text" name="keyword" size="20">
+					&nbsp;&nbsp;时间： <input type="text" name="starttime" size="20" placeholder="起止时间" id="starttime" readonly />  — 
+                    <input type="text" name="endtime" size="20" placeholder="结束时间" id="endtime" readonly />
+                    <input class="btn btn-success btn-small" type="submit" value="搜索">                              	
+                    <input name="yun" type="hidden" value="{$_GET['yun']}" />    
+                  </div>
                </form> 
             </td>
           </tr>

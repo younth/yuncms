@@ -26,9 +26,9 @@
 			 <h3 class="special-title">已添加：</h3>
             
             	<div class="plus-tag tagbtn clearfix" id="myTags">
-           	{loop $mytag $key $vo}
-				<a value="{$vo['id']}" title="{$vo['name']}" href="javascript:void(0);"><span>{$vo['name']}</span><em></em></a>
-             {/loop}    
+	           	{loop $mytag $key $vo}
+					<a value="{$vo['id']}" title="{$vo['name']}" href="javascript:void(0);"><span>{$vo['name']}</span><em></em></a>
+	            {/loop}    
     			</div>
 
 	<div class="plus-tag-add">
@@ -54,17 +54,17 @@
                         <div id="mycard-plus">
 		<div class="default-tag tagbtn">
 			<div class="clearfix">
-           	{tag:{table=(sort) field=(id,name,url,type) order=(norder desc) where=(type=5)  sort=(100038)}}
+           	{tag:{table=(sort) field=(id,name,url,type) order=(norder desc) where=(type=5)  sort=(100037)}}
 				<a value="[tag:id]" title="[tag:name]" href="javascript:void(0);"><span>[tag:name]</span><em></em></a>
-             {/tag}    
+            {/tag}    
 			</div>
 			<div class="clearfix" style="display:none;">
-            {tag:{table=(sort) field=(id,name,url,type) order=(norder desc) where=(type=5)  sort=(100074)}}
+            {tag:{table=(sort) field=(id,name,url,type) order=(norder desc) where=(type=5)  sort=(100037)}}
 				<a value="[tag:id]" title="[tag:name]" href="javascript:void(0);"><span>[tag:name]</span><em></em></a>
-              {/tag}     
+            {/tag}     
             </div>
 			<div class="clearfix" style="display:none;">
-              {tag:{table=(sort) field=(id,name,url,type) order=(norder desc) where=(type=5)  sort=(100075)}}
+              {tag:{table=(sort) field=(id,name,url,type) order=(norder desc) where=(type=5)  sort=(100037)}}
 				<a value="[tag:id]" title="[tag:name]" href="javascript:void(0);"><span>[tag:name]</span><em></em></a>
               {/tag}     
             </div>
