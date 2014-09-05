@@ -4,6 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="__PUBLICAPP__/css/back.css" type=text/css rel=stylesheet>
+<link href="__PUBLICAPP__/css/new.css" type=text/css rel=stylesheet>
 <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/highslide.css" />
 <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
 <script type="text/javascript" src="__PUBLICAPP__/js/common.js"></script>
@@ -150,6 +151,12 @@ $(function ($) {
                </select>
             </form>
             </td>
+            <td align="center">
+                <select name="places" id="places">
+                  <option value="">=不限定位=</option>
+                  {$poption}
+               </select>
+            </td>            
             <td colspan="4" align="right">
                <form action="{url('news/index')}" method="GET" >
                   <div class="news-search">新闻标题：<input type="text" name="keyword" size="20">

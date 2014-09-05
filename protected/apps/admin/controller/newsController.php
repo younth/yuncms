@@ -50,13 +50,10 @@ class newsController extends commonController
 		}
 		//关键字搜索
 		$keyword=in(urldecode(trim($_GET['keyword'])));
+		if(!empty($keyword)) $this->keyword=$keyword;
 		$starttime=strtotime(in($_GET['starttime']));
 		$endtime=strtotime(in($_GET['endtime']));
-		if(!empty($keyword)){
-			//实现分页，分页处理在下边
-			$url=url('news/index',array('keyword'=>urlencode($keyword),'page'=>'{page}'));
-			$this->keyword=$keyword;
-		}
+		
 		$limit=$this->pageLimit($url,$listRows);
 		$count=model('news')->newscount($sort,$keyword,$starttime,$endtime);//总条数要结合sort及keyword查询
         $list=model('news')->newsANDadmin($sort,$keyword,$starttime,$endtime,$limit);//news联合admin查询

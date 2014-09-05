@@ -14,14 +14,14 @@ class adminmemberController extends appadminController{
 		$keyword=in(urldecode(trim($_GET['keyword'])));
 		$starttime=strtotime(in($_GET['starttime']));
 		$endtime=strtotime(in($_GET['endtime']));
-		
-		if(!empty($keyword)){
-			//实现分页，分页处理在下边
-			$url=url('adminmember/index',array('keyword'=>urlencode($keyword),'page'=>'{page}'));
-			//$this->keyword=$keyword;//赋值关键字
+		if(!empty($keyword)) $this->keyword=$keyword;
+		if($starttime||$endtime){
+			//注意时间不能格式化
+			$this->starttime=in($_GET['starttime']);
+			$this->endtime=in($_GET['endtime']);
 		}
+		$url=url('adminmember/index',array('starttime'=>in($_GET['starttime']),'endtime'=>in($_GET['endtime']),'keyword'=>urlencode($keyword),'page'=>'{page}'));
 		/**关键字检索处理结束***/
-		//echo $url;
 		$limit=$this->pageLimit($url,$listRows);
 		$count=model('member')->membercount($keyword,$starttime,$endtime);//总条数要结合keyword查询
 		$list=model('member')->member_group_link($keyword,$starttime,$endtime,$limit);//连表查询，显示会员级别及会员信息

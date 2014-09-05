@@ -80,12 +80,11 @@ $(function ($) {
          <tr>
             <td colspan="9" align="left">
                <form action="{url('adminmember/index')}" method="GET" >
-               <!-----为什么提交之后的之后是转到首页呢------->
                 <input name="yun" type="hidden" value="{$_GET['yun']}" /><!--get[yun]就是当前的页面方法，不可少，保证页面不跳转-->
                  <div style="float:left; margin-left:10px;"> 
-                  	用户名： <input type="text" name="keyword" size="20" placeholder="输入用户名"> 
-                 	&nbsp;&nbsp;注册时间： <input type="text" name="starttime" size="20" placeholder="起止时间"   id="starttime" readonly />  — 
-                    <input type="text" name="endtime" size="20" placeholder="结束时间" id="endtime" readonly /> 
+                  	用户名： <input type="text" name="keyword" size="20" placeholder="输入用户名" value={$keyword}> 
+                 	&nbsp;&nbsp;注册时间： <input type="text" name="starttime" size="20" placeholder="起止时间" id="starttime" readonly value="{$starttime}" />  — 
+                    <input type="text" name="endtime" size="20" placeholder="结束时间" id="endtime" readonly value="{$endtime}" /> 
                  </div>
                  
                   <div style="float:left"><input class="btn btn-success  btn-small" type="submit" value="搜索"></div>
