@@ -70,3 +70,21 @@ http://www.tuicool.com/topics/11120019?st=0&lang=1
 
 
 http://solf.me/debug-php-with-xdebug-in-phpstorm/
+
+
+使用技巧：
+http://blog.csdn.net/fenglailea/article/details/12166617
+
+http://www.wwwquan.com/show-66-121-1.html
+
+http://www.tuicool.com/topics/11120019?st=0&lang=1
+
+
+debug:
+http://www.chenxuanyi.cn/xampp-phpstorm-xdebug.html
+
+http://blog.csdn.net/dc_726/article/details/9905517
+
+
+检测是否安装了xdebug:
+D:/xampp/php/php.exe -m
