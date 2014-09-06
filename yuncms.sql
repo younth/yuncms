@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.4
+-- version 4.2.7.1
 -- http://www.phpmyadmin.net
 --
--- 主机: localhost
--- 生成日期: 2014 年 08 月 27 日 16:17
--- 服务器版本: 5.1.41
--- PHP 版本: 5.3.1
+-- Host: 127.0.0.1
+-- Generation Time: 2014-09-06 13:20:16
+-- 服务器版本： 5.6.20
+-- PHP Version: 5.5.15
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -16,7 +17,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- 数据库: `yuncms`
+-- Database: `yuncms`
 --
 
 -- --------------------------------------------------------
@@ -26,25 +27,23 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 
 CREATE TABLE IF NOT EXISTS `cms_admin` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`id` int(10) unsigned NOT NULL,
   `groupid` tinyint(4) NOT NULL DEFAULT '1',
   `username` char(10) NOT NULL,
   `password` char(32) NOT NULL,
   `realname` char(10) NOT NULL,
   `lastlogin_time` int(10) unsigned NOT NULL,
   `lastlogin_ip` char(15) NOT NULL,
-  `iflock` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `usename` (`username`),
-  KEY `groupid` (`groupid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='管理员信息表' AUTO_INCREMENT=16 ;
+  `iflock` tinyint(1) unsigned NOT NULL DEFAULT '0'
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='管理员信息表' AUTO_INCREMENT=17 ;
 
 --
 -- 转存表中的数据 `cms_admin`
 --
 
 INSERT INTO `cms_admin` (`id`, `groupid`, `username`, `password`, `realname`, `lastlogin_time`, `lastlogin_ip`, `iflock`) VALUES
-(1, 1, 'admin', '168a73655bfecefdb15b14984dd2ad60', '王洋', 1409149689, 'unknown', 0);
+(1, 1, 'admin', '168a73655bfecefdb15b14984dd2ad60', '王洋', 1409983987, 'unknown', 0),
+(16, 2, 'younth', '168a73655bfecefdb15b14984dd2ad60', 'younth', 1409995759, 'unknown', 0);
 
 -- --------------------------------------------------------
 
@@ -53,7 +52,7 @@ INSERT INTO `cms_admin` (`id`, `groupid`, `username`, `password`, `realname`, `l
 --
 
 CREATE TABLE IF NOT EXISTS `cms_company` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `login_email` varchar(50) NOT NULL COMMENT '公司邮箱',
   `password` varchar(50) NOT NULL,
   `name` varchar(100) NOT NULL COMMENT '公司名称',
@@ -74,8 +73,7 @@ CREATE TABLE IF NOT EXISTS `cms_company` (
   `is_active` tinyint(2) NOT NULL DEFAULT '0' COMMENT '是否激活',
   `is_init` tinyint(2) NOT NULL COMMENT '是否完善资料',
   `is_auth` tinyint(2) NOT NULL COMMENT '是否认证',
-  `recmd` tinyint(2) NOT NULL COMMENT '推荐',
-  PRIMARY KEY (`id`)
+  `recmd` tinyint(2) NOT NULL COMMENT '推荐'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
@@ -83,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `cms_company` (
 --
 
 INSERT INTO `cms_company` (`id`, `login_email`, `password`, `name`, `logo`, `quality`, `scale`, `phone`, `industry`, `on_industry`, `address`, `websites`, `introduce`, `ctime`, `regip`, `lasttime`, `lastip`, `license`, `is_active`, `is_init`, `is_auth`, `recmd`) VALUES
-(1, '862820606@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '云作坊', '20140404/thumb_1396624421.png', ',000000,100054,100057', ',000000,100060,100063', '0731-89676708', 's638,s40,s42,s20', '计算机软件+互联网+通信+保险', '长沙理工大学', 'http://wy.yunstudio.net/', '    大学生科技交流平台是一个科技学术交友的平台，并兼有科技交流、名师检索、资料下载、赛事预览、在线报名等功能。 立足于服务学生，以增强在校大学生科技创新与学术交流的氛围为宗旨，以提高大学生的科技创新素质为目标。在线组队，在线交友，在竞争中锻炼自我， 在合作中提升能力。同时加强对科技学术类赛事的管理，提高研究工作实效，推动在校大学生的科技创新活动的开展。 沟通是进步的桥梁，合作是发展的阶梯， 全校的科技学术爱好者齐聚一堂。资料下载、发帖、组队、求名师一气呵成，为我们的科技创新拓宽了视野、提供了空间、觅得了挚友、奠定了基础， 在我们的成功之路上迈出了关键的一步！关注大学生科技交流平台，带给你不一样的精彩。\r\n<br>\r\n<br>\r\n<br>好吧', 0, '', 1399970668, '', '20140404/thumb_1396625120.png', 1, 1, 0, 1),
+(1, '862820606@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '云作坊', '20140404/thumb_1396624421.png', ',000000,100054,100057', ',000000,100060,100063', '0731-89676708', 's638,s40,s42,s20', '计算机软件+互联网+通信+保险', '长沙理工大学', 'http://wy.yunstudio.net/', '    大学生科技交流平台是一个科技学术交友的平台，并兼有科技交流、名师检索、资料下载、赛事预览、在线报名等功能。 立足于服务学生，以增强在校大学生科技创新与学术交流的氛围为宗旨，以提高大学生的科技创新素质为目标。在线组队，在线交友，在竞争中锻炼自我， 在合作中提升能力。同时加强对科技学术类赛事的管理，提高研究工作实效，推动在校大学生的科技创新活动的开展。 沟通是进步的桥梁，合作是发展的阶梯， 全校的科技学术爱好者齐聚一堂。资料下载、发帖、组队、求名师一气呵成，为我们的科技创新拓宽了视野、提供了空间、觅得了挚友、奠定了基础， 在我们的成功之路上迈出了关键的一步！关注大学生科技交流平台，带给你不一样的精彩。\r\n<br>\r\n<br>\r\n<br>好吧', 0, '', 1409192962, '', '20140404/thumb_1396625120.png', 1, 1, 0, 1),
 (2, '4464@qq.com', '6f670965787abc2569acf4317e164117', '百度', 'NoPic.png', ',000000,100054,100057', ',000000,100060,100063', '', 's779,s776,s782,s783', '游戏设备维修+游戏策划+游戏单片机编程+三维动画制作+', '', '', '大百度', 1396581151, 'unknown', 1396581151, 'unknown', '', 1, 0, 0, 1),
 (5, '1@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '腾讯', '20140403/20140403212752_42453.jpg', ',000000,100054,100058', ',000000,100060,100065', '', 's332,s701,s216,s4,s464', '网络营销顾问+电子商务/网店/商城+计算机培训教师+电脑美工+硬件测试+', '长沙理工大学创业园305', 'www.yunstudio.net', '        你好', 1396525138, 'unknown', 1396525138, 'unknown', 'NoPic.gif', 1, 0, 0, 1),
 (9, '8@145.com', 'c5328c77ea43ab0bca5d9382b6a32b28', '阿里', 'NoPic.png', ',000000,100054,100056', ',000000,100060,100062', '', 's395,s112,s109', '铸造工+磨工+钳工+', '腾讯', '', '   大公司', 1396581425, 'unknown', 1396581425, 'unknown', '', 1, 0, 0, 0),
@@ -97,12 +95,11 @@ INSERT INTO `cms_company` (`id`, `login_email`, `password`, `name`, `logo`, `qua
 --
 
 CREATE TABLE IF NOT EXISTS `cms_company_fans` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `mid` int(11) NOT NULL COMMENT '会员id',
   `cid` int(11) NOT NULL COMMENT '企业id',
   `score` float NOT NULL COMMENT '会员在该企业下学分值',
-  `ctime` int(11) NOT NULL COMMENT '关注时间',
-  PRIMARY KEY (`id`)
+  `ctime` int(11) NOT NULL COMMENT '关注时间'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
 
 --
@@ -130,7 +127,7 @@ INSERT INTO `cms_company_fans` (`id`, `mid`, `cid`, `score`, `ctime`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cms_company_recruit` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `cid` int(11) NOT NULL COMMENT '企业id',
   `name` varchar(50) NOT NULL COMMENT '岗位名称',
   `city` varchar(100) NOT NULL COMMENT '工作城市',
@@ -138,14 +135,8 @@ CREATE TABLE IF NOT EXISTS `cms_company_recruit` (
   `money` varchar(100) NOT NULL COMMENT '每月薪水',
   `content` text NOT NULL COMMENT '工作内容和要求:',
   `validity` int(5) NOT NULL COMMENT '有效期',
-  `ctime` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `ctime` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `cms_company_recruit`
---
-
 
 -- --------------------------------------------------------
 
@@ -154,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `cms_company_recruit` (
 --
 
 CREATE TABLE IF NOT EXISTS `cms_feed` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `mid` int(11) NOT NULL COMMENT '会员id',
   `fid` int(11) DEFAULT NULL COMMENT '原心情id',
   `fmid` int(11) DEFAULT NULL COMMENT '原心情发布者id',
@@ -165,8 +156,7 @@ CREATE TABLE IF NOT EXISTS `cms_feed` (
   `comment_count` int(11) NOT NULL DEFAULT '0' COMMENT '评论数',
   `repost_count` int(11) NOT NULL DEFAULT '0' COMMENT '转发数',
   `praise_count` int(11) NOT NULL DEFAULT '0' COMMENT '赞数',
-  `ctime` int(11) NOT NULL COMMENT '发布时间',
-  PRIMARY KEY (`id`)
+  `ctime` int(11) NOT NULL COMMENT '发布时间'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=59 ;
 
 --
@@ -208,12 +198,11 @@ INSERT INTO `cms_feed` (`id`, `mid`, `fid`, `fmid`, `oid`, `is_audit`, `feed_con
 --
 
 CREATE TABLE IF NOT EXISTS `cms_feedback` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `content` text NOT NULL,
   `email` varchar(100) NOT NULL,
   `ctime` int(11) NOT NULL,
-  `is_reply` tinyint(2) NOT NULL COMMENT '是否回复',
-  PRIMARY KEY (`id`)
+  `is_reply` tinyint(2) NOT NULL COMMENT '是否回复'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
@@ -235,16 +224,10 @@ INSERT INTO `cms_feedback` (`id`, `content`, `email`, `ctime`, `is_reply`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `cms_feedback_pic` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `f_id` int(11) NOT NULL COMMENT '反馈的id',
-  `picture` varchar(200) NOT NULL COMMENT '图片',
-  PRIMARY KEY (`id`)
+  `picture` varchar(200) NOT NULL COMMENT '图片'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `cms_feedback_pic`
---
-
 
 -- --------------------------------------------------------
 
@@ -253,11 +236,10 @@ CREATE TABLE IF NOT EXISTS `cms_feedback_pic` (
 --
 
 CREATE TABLE IF NOT EXISTS `cms_feed_digg` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `mid` int(11) NOT NULL COMMENT '用户uid',
   `feed_id` int(11) NOT NULL COMMENT '心情id',
-  `ctime` int(11) NOT NULL COMMENT '时间',
-  PRIMARY KEY (`id`)
+  `ctime` int(11) NOT NULL COMMENT '时间'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
@@ -275,11 +257,10 @@ INSERT INTO `cms_feed_digg` (`id`, `mid`, `feed_id`, `ctime`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cms_feed_notify` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+`id` int(11) NOT NULL COMMENT 'ID',
   `mid` int(11) NOT NULL COMMENT '用户ID',
   `fid` int(11) NOT NULL COMMENT '心情ID',
-  `type` tinyint(2) NOT NULL COMMENT '1,赞.2评论.3,转发',
-  PRIMARY KEY (`id`)
+  `type` tinyint(2) NOT NULL COMMENT '1,赞.2评论.3,转发'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
@@ -298,12 +279,11 @@ INSERT INTO `cms_feed_notify` (`id`, `mid`, `fid`, `type`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cms_feed_pic` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+`id` int(11) NOT NULL COMMENT 'ID',
   `fid` int(11) NOT NULL COMMENT '心情ID',
   `url` varchar(200) NOT NULL COMMENT '地址',
   `thumb_url` varchar(200) NOT NULL COMMENT '缩略图地址',
-  `ctime` int(11) NOT NULL COMMENT '创建时间',
-  PRIMARY KEY (`id`)
+  `ctime` int(11) NOT NULL COMMENT '创建时间'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
@@ -324,11 +304,10 @@ INSERT INTO `cms_feed_pic` (`id`, `fid`, `url`, `thumb_url`, `ctime`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cms_fragment` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+`id` int(10) NOT NULL,
   `title` varchar(255) NOT NULL,
   `sign` varchar(255) NOT NULL COMMENT '前台调用标记',
-  `content` text NOT NULL,
-  PRIMARY KEY (`id`)
+  `content` text NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
@@ -348,10 +327,9 @@ INSERT INTO `cms_fragment` (`id`, `title`, `sign`, `content`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cms_group` (
-  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+`id` tinyint(3) unsigned NOT NULL,
   `name` varchar(255) NOT NULL,
-  `power` varchar(1000) NOT NULL,
-  PRIMARY KEY (`id`)
+  `power` varchar(1000) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
@@ -360,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `cms_group` (
 
 INSERT INTO `cms_group` (`id`, `name`, `power`) VALUES
 (1, '超级管理员', '-1'),
-(2, '普通管理员', '277,283,1,2,4,5,6,7,8,9,228,10,11,12,13,14,15,16,157,158,174,268,288');
+(2, '普通管理员', '277,335,1,2,4,5,6,7,8,9,228,328,304,10,11,12,13,14,15,16,157,158,174,288,18,23,24,25,26,27,28,29,85,31,189,190,191,192,229,239,283,330,331,332,333,334,315,337,338');
 
 -- --------------------------------------------------------
 
@@ -369,7 +347,7 @@ INSERT INTO `cms_group` (`id`, `name`, `power`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cms_link` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+`id` int(10) NOT NULL,
   `type` tinyint(1) NOT NULL COMMENT '类型',
   `norder` int(5) NOT NULL COMMENT '排序',
   `name` varchar(30) NOT NULL COMMENT '站点名',
@@ -378,8 +356,7 @@ CREATE TABLE IF NOT EXISTS `cms_link` (
   `logourl` varchar(50) NOT NULL COMMENT '远程logo',
   `siteowner` varchar(30) NOT NULL COMMENT '站点所有者',
   `info` varchar(300) NOT NULL COMMENT '介绍',
-  `ispass` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
+  `ispass` tinyint(1) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
@@ -401,13 +378,12 @@ INSERT INTO `cms_link` (`id`, `type`, `norder`, `name`, `url`, `picture`, `logou
 --
 
 CREATE TABLE IF NOT EXISTS `cms_login_logs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `type` tinyint(2) NOT NULL COMMENT '1：会员2：企业',
   `uid` int(11) NOT NULL COMMENT '登陆者id,包括会员和企业',
   `ip` varchar(15) NOT NULL COMMENT '登陆ip',
-  `ctime` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=364 ;
+  `ctime` int(11) NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=376 ;
 
 --
 -- 转存表中的数据 `cms_login_logs`
@@ -775,7 +751,19 @@ INSERT INTO `cms_login_logs` (`id`, `type`, `uid`, `ip`, `ctime`) VALUES
 (360, 1, 33, 'unknown', 1403795977),
 (361, 1, 33, 'unknown', 1403828476),
 (362, 1, 33, 'unknown', 1409149726),
-(363, 1, 33, 'unknown', 1409155896);
+(363, 1, 33, 'unknown', 1409155896),
+(364, 1, 33, 'unknown', 1409190349),
+(365, 1, 33, 'unknown', 1409192875),
+(366, 2, 1, 'unknown', 1409192912),
+(367, 2, 1, 'unknown', 1409192962),
+(368, 1, 33, 'unknown', 1409281545),
+(369, 1, 33, 'unknown', 1409281852),
+(370, 1, 33, 'unknown', 1409283143),
+(371, 1, 33, 'unknown', 1409577729),
+(372, 1, 33, 'unknown', 1409627162),
+(373, 1, 33, 'unknown', 1409640350),
+(374, 1, 33, 'unknown', 1409802714),
+(375, 1, 33, 'unknown', 1409819284);
 
 -- --------------------------------------------------------
 
@@ -784,7 +772,7 @@ INSERT INTO `cms_login_logs` (`id`, `type`, `uid`, `ip`, `ctime`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cms_member` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
+`id` int(20) NOT NULL,
   `login_email` varchar(30) NOT NULL COMMENT '登陆邮箱',
   `password` varchar(60) NOT NULL,
   `uname` varchar(30) NOT NULL COMMENT '用户名',
@@ -796,9 +784,8 @@ CREATE TABLE IF NOT EXISTS `cms_member` (
   `is_active` tinyint(1) NOT NULL COMMENT '是否激活',
   `is_init` tinyint(1) NOT NULL COMMENT '是否初始化用户资料',
   `last_feed_id` int(11) NOT NULL COMMENT '最后发表心情id',
-  `last_feed_time` int(11) NOT NULL COMMENT '最后发表心情时间',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=49 ;
+  `last_feed_time` int(11) NOT NULL COMMENT '最后发表心情时间'
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
 
 --
 -- 转存表中的数据 `cms_member`
@@ -806,14 +793,16 @@ CREATE TABLE IF NOT EXISTS `cms_member` (
 
 INSERT INTO `cms_member` (`id`, `login_email`, `password`, `uname`, `first_letter`, `ctime`, `regip`, `lasttime`, `lastip`, `is_active`, `is_init`, `last_feed_id`, `last_feed_time`) VALUES
 (1, 'yunstudio2012@qq.com', 'd707c24bd27660ca7d65870027fb9218', 'admin', 'a', 1372135503, '', 1397230586, '', 1, 0, 0, 0),
-(33, '825075713@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '王洋', 'W', 1396279141, '', 1409155896, '', 1, 0, 0, 0),
+(33, '825075713@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '王洋', 'W', 1396279141, '', 1409819284, '', 1, 0, 0, 0),
 (5, '1161499602@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '蒲精', 'P', 1395580185, '', 1399621585, '', 1, 0, 0, 0),
 (6, '1095620719@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '唐娜', 'T', 1395581194, '', 1399721506, '', 1, 0, 0, 0),
 (7, '1103349641@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '赵杰', 'Z', 1395581233, '', 1399534794, '', 1, 0, 0, 0),
 (8, '113771910@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '田向阳', 'T', 1395581267, '', 1399988447, '', 1, 0, 0, 0),
 (43, 'tianyufang@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '田玉方', 'T', 1397473278, '', 1399536305, '', 1, 0, 0, 0),
 (44, '1085195131@qq.com', 'df85a226d7e42ef723f21c4c48352b1a', '易武', 'Y', 1397473574, '', 1399191222, '', 1, 0, 0, 0),
-(46, 'jiayouxuning@126.com', '1151d6a7c36588031a69dbd6dec10686', '徐宁', 'X', 1399626848, '192.168.0.122', 1399627714, '192.168.0.122', 1, 0, 0, 0);
+(46, 'jiayouxuning@126.com', '1151d6a7c36588031a69dbd6dec10686', '徐宁', 'X', 1399626848, '192.168.0.122', 1399627714, '192.168.0.122', 1, 0, 0, 0),
+(49, '112233@qq.com', '8be36f8d30450f934739d5515d52d114', 'app', 'A', 1409884550, '', 0, '', 1, 0, 0, 0),
+(50, '112233@qq.com', '8be36f8d30450f934739d5515d52d114', 'apple', 'A', 1409885642, '', 0, '', 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -822,13 +811,12 @@ INSERT INTO `cms_member` (`id`, `login_email`, `password`, `uname`, `first_lette
 --
 
 CREATE TABLE IF NOT EXISTS `cms_member_card` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `send_id` int(11) NOT NULL COMMENT '发送申请人id',
   `rece_id` int(11) NOT NULL COMMENT '接受者id',
   `status` tinyint(2) NOT NULL COMMENT '1：等待确认2：成功',
   `remark` varchar(15) NOT NULL COMMENT '备注信息',
-  `ctime` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `ctime` int(11) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=101 ;
 
 --
@@ -869,17 +857,11 @@ INSERT INTO `cms_member_card` (`id`, `send_id`, `rece_id`, `status`, `remark`, `
 --
 
 CREATE TABLE IF NOT EXISTS `cms_member_card_group` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `uid` int(11) NOT NULL COMMENT '创建者id',
   `name` varchar(15) NOT NULL COMMENT '组名',
-  `ctime` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `ctime` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `cms_member_card_group`
---
-
 
 -- --------------------------------------------------------
 
@@ -888,17 +870,11 @@ CREATE TABLE IF NOT EXISTS `cms_member_card_group` (
 --
 
 CREATE TABLE IF NOT EXISTS `cms_member_card_group_link` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `follow_group_id` int(11) NOT NULL COMMENT '关注组id',
   `fid` int(11) NOT NULL COMMENT '被关注者id',
-  `mid` int(11) NOT NULL COMMENT '关注者id',
-  PRIMARY KEY (`id`)
+  `mid` int(11) NOT NULL COMMENT '关注者id'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `cms_member_card_group_link`
---
-
 
 -- --------------------------------------------------------
 
@@ -907,17 +883,11 @@ CREATE TABLE IF NOT EXISTS `cms_member_card_group_link` (
 --
 
 CREATE TABLE IF NOT EXISTS `cms_member_check` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `con_num` int(11) NOT NULL COMMENT '连续签到次数',
   `total_num` int(11) NOT NULL COMMENT '总签到次数',
-  `ctime` int(11) NOT NULL COMMENT '签到时间',
-  PRIMARY KEY (`id`)
+  `ctime` int(11) NOT NULL COMMENT '签到时间'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- 转存表中的数据 `cms_member_check`
---
-
 
 -- --------------------------------------------------------
 
@@ -926,11 +896,10 @@ CREATE TABLE IF NOT EXISTS `cms_member_check` (
 --
 
 CREATE TABLE IF NOT EXISTS `cms_member_group` (
-  `id` int(3) NOT NULL AUTO_INCREMENT,
+`id` int(3) NOT NULL,
   `group_name` varchar(30) NOT NULL,
   `notallow` text NOT NULL,
-  `user_group_icon` varchar(120) NOT NULL COMMENT ' 用户组图标名称',
-  PRIMARY KEY (`id`)
+  `user_group_icon` varchar(120) NOT NULL COMMENT ' 用户组图标名称'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
@@ -951,11 +920,10 @@ INSERT INTO `cms_member_group` (`id`, `group_name`, `notallow`, `user_group_icon
 --
 
 CREATE TABLE IF NOT EXISTS `cms_member_group_link` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `uid` int(11) NOT NULL COMMENT '会员id',
-  `user_group_id` int(11) NOT NULL COMMENT '会员组id',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+  `user_group_id` int(11) NOT NULL COMMENT '会员组id'
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
 
 --
 -- 转存表中的数据 `cms_member_group_link`
@@ -970,7 +938,9 @@ INSERT INTO `cms_member_group_link` (`id`, `uid`, `user_group_id`) VALUES
 (7, 8, 2),
 (20, 44, 2),
 (19, 43, 2),
-(22, 46, 2);
+(22, 46, 2),
+(25, 49, 2),
+(26, 50, 2);
 
 -- --------------------------------------------------------
 
@@ -979,12 +949,11 @@ INSERT INTO `cms_member_group_link` (`id`, `uid`, `user_group_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cms_member_login` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `type` tinyint(2) NOT NULL COMMENT '1是学生2是企业',
   `mid` int(11) NOT NULL COMMENT '会员id',
   `weibo_key` varchar(100) NOT NULL COMMENT '微博key',
-  `token` varchar(50) NOT NULL COMMENT '账号激活码',
-  PRIMARY KEY (`id`)
+  `token` varchar(50) NOT NULL COMMENT '账号激活码'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
 
 --
@@ -1033,8 +1002,7 @@ CREATE TABLE IF NOT EXISTS `cms_member_profile` (
   `interest` text COMMENT '兴趣',
   `skill` text COMMENT '专长',
   `honour` text COMMENT '所获荣誉',
-  `introduce` text NOT NULL COMMENT '关于我',
-  FULLTEXT KEY `skill` (`skill`)
+  `introduce` text NOT NULL COMMENT '关于我'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='档案表';
 
 --
@@ -1052,7 +1020,9 @@ INSERT INTO `cms_member_profile` (`mid`, `sex`, `location`, `school`, `qq`, `tel
 (45, 0, '', '', '', '', NULL, '', NULL, NULL, 0, 0, NULL, NULL, NULL, ''),
 (46, 1, '黑龙江,黑河', '长沙理工大学', '619572606', '13667377194', '湖南,长沙', '港口航道与海岸工程', '工学,水利相关类', '3', 1283270400, 1404144000, NULL, NULL, NULL, '大学期间参加云作坊网络开发团队'),
 (47, 0, '', '', '', '', NULL, '', NULL, NULL, 0, 0, NULL, NULL, NULL, ''),
-(48, 0, '', '', '', '', NULL, '', NULL, NULL, 0, 0, NULL, NULL, NULL, '');
+(48, 0, '', '', '', '', NULL, '', NULL, NULL, 0, 0, NULL, NULL, NULL, ''),
+(49, 0, '', '', '', '', NULL, '', NULL, NULL, 0, 0, NULL, NULL, NULL, ''),
+(50, 0, '', '', '', '', NULL, '', NULL, NULL, 0, 0, NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -1061,19 +1031,18 @@ INSERT INTO `cms_member_profile` (`mid`, `sex`, `location`, `school`, `qq`, `tel
 --
 
 CREATE TABLE IF NOT EXISTS `cms_member_tag` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `mid` int(11) NOT NULL COMMENT '用户id',
   `tid` varchar(100) NOT NULL COMMENT '标签id，-1是自定义',
-  `name` varchar(20) NOT NULL COMMENT '标签名称',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=116 ;
+  `name` varchar(20) NOT NULL COMMENT '标签名称'
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=122 ;
 
 --
 -- 转存表中的数据 `cms_member_tag`
 --
 
 INSERT INTO `cms_member_tag` (`id`, `mid`, `tid`, `name`) VALUES
-(82, 33, '-1', 'php'),
+(118, 33, '100076', 'word'),
 (94, 43, '100101', '领导力'),
 (93, 43, '100097', '精通互联网'),
 (83, 33, '-1', 'asp'),
@@ -1103,7 +1072,6 @@ INSERT INTO `cms_member_tag` (`id`, `mid`, `tid`, `name`) VALUES
 (70, 43, '100091', 'photoshop'),
 (71, 43, '100100', '执行力'),
 (72, 43, '-1', '运动'),
-(95, 33, '100086', '沟通协调'),
 (96, 46, '100083', '英语'),
 (97, 46, '100093', '团队合作'),
 (98, 6, '100078', 'powerpoint'),
@@ -1119,8 +1087,11 @@ INSERT INTO `cms_member_tag` (`id`, `mid`, `tid`, `name`) VALUES
 (108, 6, '100096', '文件管理'),
 (109, 6, '100104', 'flash'),
 (111, 6, '100080', 'outlook'),
-(114, 33, '100077', 'excel'),
-(115, 33, '100110', '法律咨询');
+(116, 33, '-1', '恩恩'),
+(117, 33, '-1', 'haob'),
+(119, 33, '-1', 'enen'),
+(120, 33, '-1', 'hehe'),
+(121, 33, '-1', 'dasd');
 
 -- --------------------------------------------------------
 
@@ -1129,13 +1100,12 @@ INSERT INTO `cms_member_tag` (`id`, `mid`, `tid`, `name`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cms_message_content` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `list_id` int(11) NOT NULL COMMENT '私信id',
   `from_uid` int(11) NOT NULL COMMENT '发信人id',
   `content` text NOT NULL COMMENT '内容',
   `ctime` int(11) NOT NULL COMMENT '时间',
-  `is_read` tinyint(2) NOT NULL COMMENT '是否已读',
-  PRIMARY KEY (`id`)
+  `is_read` tinyint(2) NOT NULL COMMENT '是否已读'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
 
 --
@@ -1161,12 +1131,11 @@ INSERT INTO `cms_message_content` (`id`, `list_id`, `from_uid`, `content`, `ctim
 --
 
 CREATE TABLE IF NOT EXISTS `cms_message_list` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '私信id',
+`id` int(11) NOT NULL COMMENT '私信id',
   `from_mid` int(11) NOT NULL COMMENT '私信发起者ID',
   `rece_mid` int(11) NOT NULL COMMENT '接收者id',
   `ctime` int(11) NOT NULL COMMENT '时间',
-  `last_message` text NOT NULL COMMENT '最新的一条会话',
-  PRIMARY KEY (`id`)
+  `last_message` text NOT NULL COMMENT '最新的一条会话'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
 
 --
@@ -1217,14 +1186,12 @@ INSERT INTO `cms_message_member` (`list_id`, `member_id`, `new`, `message_num`, 
 --
 
 CREATE TABLE IF NOT EXISTS `cms_method` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+`id` int(10) unsigned NOT NULL,
   `rootid` int(10) unsigned NOT NULL,
   `pid` float unsigned NOT NULL,
   `operate` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `ifmenu` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否菜单显示',
-  PRIMARY KEY (`id`),
-  KEY `pid` (`pid`)
+  `ifmenu` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否菜单显示'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=345 ;
 
 --
@@ -1330,7 +1297,7 @@ INSERT INTO `cms_method` (`id`, `rootid`, `pid`, `operate`, `name`, `ifmenu`) VA
 --
 
 CREATE TABLE IF NOT EXISTS `cms_news` (
-  `id` int(20) NOT NULL AUTO_INCREMENT,
+`id` int(20) NOT NULL,
   `sort` varchar(350) NOT NULL COMMENT '类别',
   `account` char(15) NOT NULL COMMENT '发布者账户',
   `title` varchar(60) NOT NULL COMMENT '标题',
@@ -1347,10 +1314,8 @@ CREATE TABLE IF NOT EXISTS `cms_news` (
   `hits` int(10) NOT NULL COMMENT '点击量',
   `ispass` tinyint(1) NOT NULL,
   `origin` varchar(30) NOT NULL COMMENT '来源',
-  `addtime` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  FULLTEXT KEY `sort` (`sort`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=35 ;
+  `addtime` int(11) NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=37 ;
 
 --
 -- 转存表中的数据 `cms_news`
@@ -1360,7 +1325,9 @@ INSERT INTO `cms_news` (`id`, `sort`, `account`, `title`, `places`, `color`, `pi
 (23, ',000000,100028,100036', 'admin', '激情', '100', '#E53333', '20140309/thumb_20140309144706_30440.jpg', '哈哈', '哈哈', '哈', 'news/content', 'news_content', 0, 0, 30, 1, '原创', 1394346935),
 (24, ',000000,100028,100036', 'admin', '果敢', '100', '#00D5FF', '20140309/thumb_thumb_thumb_20140309144918_26526.jpg', '果敢', '果敢', '果敢<img src="http://localhost/Yuncms/public/kindeditor/plugins/emoticons/images/31.gif" border="0" alt="" />', 'news/content', 'news_content', 0, 0, 30, 1, '果敢', 1394347730),
 (25, ',000000,100028,100036', 'admin', '执着', '100', '', '20140309/thumb_thumb_20140309183130_90592.jpg', '执着', '执着', '执着', 'news/content', 'news_content', 0, 0, 34, 1, '原创', 1394361075),
-(26, ',000000,100028,100036', 'admin', '超越', '100', '#B8D100', '20140309/thumb_thumb_thumb_thumb_20140309183155_88695.jpg', '超越', '超越', '超越梦想<img src="http://localhost/Yuncms/public/kindeditor/plugins/emoticons/images/0.gif" border="0" alt="" />', 'news/content', 'news_content', 0, 0, 31, 1, '原创', 1394361101);
+(26, ',000000,100028,100036', 'admin', '超越', '100', '#B8D100', '20140309/thumb_thumb_thumb_thumb_20140309183155_88695.jpg', '超越', '超越', '超越梦想<img src="http://localhost/Yuncms/public/kindeditor/plugins/emoticons/images/0.gif" border="0" alt="" />', 'news/content', 'news_content', 0, 0, 31, 1, '原创', 1394361101),
+(35, ',000000,100028,100036', 'admin', 'yuncms V2.3.2即将发布', '', '', 'NoPic.gif', 'yuncms,V2.3.2即将发布', 'yuncms V2.3.2即将发布', '<span style="white-space:normal;">yuncms V2.3.2即将发布</span>', 'news/content', '', 0, 0, 30, 1, '原创', 1409998991),
+(36, ',000000,100028,100034', 'younth', 'yuncms全新改版', '', '', 'NoPic.gif', 'yuncms全新改版', 'yuncms全新改版', 'yuncms全新改版', 'news/content', '', 0, 0, 30, 0, '原创', 1409999049);
 
 -- --------------------------------------------------------
 
@@ -1369,14 +1336,13 @@ INSERT INTO `cms_news` (`id`, `sort`, `account`, `title`, `places`, `color`, `pi
 --
 
 CREATE TABLE IF NOT EXISTS `cms_notify_email` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+`id` int(10) NOT NULL,
   `type` tinyint(4) NOT NULL COMMENT '1会员2企业-1系统',
   `uid` int(10) NOT NULL,
   `email` varchar(250) NOT NULL,
   `title` varchar(250) NOT NULL,
   `body` text NOT NULL,
-  `ctime` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `ctime` int(11) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
@@ -1416,14 +1382,13 @@ INSERT INTO `cms_notify_email` (`id`, `type`, `uid`, `email`, `title`, `body`, `
 --
 
 CREATE TABLE IF NOT EXISTS `cms_notify_message` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `type` varchar(20) NOT NULL COMMENT '通知类型',
   `uid` int(11) NOT NULL COMMENT '接收者id',
   `title` varchar(250) NOT NULL,
   `body` text NOT NULL,
   `ctime` int(11) NOT NULL,
-  `is_read` tinyint(2) NOT NULL DEFAULT '0' COMMENT '是否已读',
-  PRIMARY KEY (`id`)
+  `is_read` tinyint(2) NOT NULL DEFAULT '0' COMMENT '是否已读'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
@@ -1443,11 +1408,10 @@ INSERT INTO `cms_notify_message` (`id`, `type`, `uid`, `title`, `body`, `ctime`,
 --
 
 CREATE TABLE IF NOT EXISTS `cms_page` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+`id` int(10) NOT NULL,
   `sort` varchar(350) NOT NULL,
   `content` text NOT NULL,
-  `edittime` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
+  `edittime` varchar(20) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
@@ -1464,10 +1428,9 @@ INSERT INTO `cms_page` (`id`, `sort`, `content`, `edittime`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cms_place` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
+`id` int(10) NOT NULL,
   `name` varchar(60) NOT NULL,
-  `norder` int(5) NOT NULL,
-  PRIMARY KEY (`id`)
+  `norder` int(5) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=103 ;
 
 --
@@ -1485,7 +1448,7 @@ INSERT INTO `cms_place` (`id`, `name`, `norder`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `cms_sort` (
-  `id` int(6) unsigned NOT NULL AUTO_INCREMENT,
+`id` int(6) unsigned NOT NULL,
   `type` tinyint(2) unsigned NOT NULL DEFAULT '0' COMMENT '模型类别',
   `path` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
@@ -1496,9 +1459,7 @@ CREATE TABLE IF NOT EXISTS `cms_sort` (
   `tplist` varchar(100) NOT NULL COMMENT '列表模板',
   `keywords` varchar(255) NOT NULL COMMENT '描述',
   `description` varchar(300) NOT NULL COMMENT '描述',
-  `url` varchar(100) NOT NULL COMMENT '外部链接',
-  PRIMARY KEY (`id`),
-  FULLTEXT KEY `path` (`path`)
+  `url` varchar(100) NOT NULL COMMENT '外部链接'
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=100117 ;
 
 --
@@ -1513,8 +1474,6 @@ INSERT INTO `cms_sort` (`id`, `type`, `path`, `name`, `deep`, `norder`, `ifmenu`
 (100036, 1, ',000000,100028', '作坊文化', 2, 0, 0, 'news/index', 'news_index,news_content', '作坊文化', '作坊文化', '10'),
 (100037, 5, ',000000', '个人标签', 1, 0, 0, '', '', '', '', ''),
 (100038, 5, ',000000,100037', '第一组', 2, 0, 0, '', '', '', '', ''),
-(100074, 5, ',000000,100037', '第二组', 2, 0, 0, '', '', '', '', ''),
-(100075, 5, ',000000,100037', '第三组', 2, 0, 0, '', '', '', '', ''),
 (100076, 5, ',000000,100037,100038', 'word', 3, 0, 0, '', '', '', '', ''),
 (100077, 5, ',000000,100037,100038', 'excel', 3, 0, 0, '', '', '', '', ''),
 (100078, 5, ',000000,100037,100038', 'powerpoint', 3, 0, 0, '', '', '', '', ''),
@@ -1537,32 +1496,7 @@ INSERT INTO `cms_sort` (`id`, `type`, `path`, `name`, `deep`, `norder`, `ifmenu`
 (100087, 5, ',000000,100037,100038', '逻辑分析', 3, 0, 0, '', '', '', '', ''),
 (100088, 5, ',000000,100037,100038', '表达能力', 3, 0, 0, '', '', '', '', ''),
 (100089, 5, ',000000,100037,100038', '创新能力', 3, 0, 0, '', '', '', '', ''),
-(100090, 5, ',000000,100037,100038', '目标管理', 3, 0, 0, '', '', '', '', ''),
-(100092, 5, ',000000,100037,100074', '时间管理', 3, 0, 0, '', '', '', '', ''),
-(100093, 5, ',000000,100037,100074', '团队合作', 3, 0, 0, '', '', '', '', ''),
-(100094, 5, ',000000,100037,100074', '学习能力', 3, 0, 0, '', '', '', '', ''),
-(100095, 5, ',000000,100037,100074', '压力管理', 3, 0, 0, '', '', '', '', ''),
-(100096, 5, ',000000,100037,100074', '文件管理', 3, 0, 0, '', '', '', '', ''),
-(100097, 5, ',000000,100037,100074', '精通互联网', 3, 0, 0, '', '', '', '', ''),
-(100098, 5, ',000000,100037,100074', '电话接待', 3, 0, 0, '', '', '', '', ''),
-(100099, 5, ',000000,100037,100074', '人际关系维护', 3, 0, 0, '', '', '', '', ''),
-(100100, 5, ',000000,100037,100074', '执行力', 3, 0, 0, '', '', '', '', ''),
-(100101, 5, ',000000,100037,100074', '领导力', 3, 0, 0, '', '', '', '', ''),
-(100102, 5, ',000000,100037,100074', 'wps', 3, 0, 0, '', '', '', '', ''),
-(100103, 5, ',000000,100037,100074', 'visio', 3, 0, 0, '', '', '', '', ''),
-(100104, 5, ',000000,100037,100074', 'flash', 3, 0, 0, '', '', '', '', ''),
-(100105, 5, ',000000,100037,100074', 'mindmap', 3, 0, 0, '', '', '', '', ''),
-(100106, 5, ',000000,100037,100074', 'access', 3, 0, 0, '', '', '', '', ''),
-(100107, 5, ',000000,100037,100074', 'dreamwaver', 3, 0, 0, '', '', '', '', ''),
-(100108, 5, ',000000,100037,100075', 'spss', 3, 0, 0, '', '', '', '', ''),
-(100109, 5, ',000000,100037,100075', '心理咨询', 3, 0, 0, '', '', '', '', ''),
-(100110, 5, ',000000,100037,100075', '法律咨询', 3, 0, 0, '', '', '', '', ''),
-(100111, 5, ',000000,100037,100075', '工程预算', 3, 0, 0, '', '', '', '', ''),
-(100112, 5, ',000000,100037,100075', '行政文秘', 3, 0, 0, '', '', '', '', ''),
-(100113, 5, ',000000,100037,100075', '市场营销', 3, 0, 0, '', '', '', '', ''),
-(100114, 5, ',000000,100037,100075', '网络营销', 3, 0, 0, '', '', '', '', ''),
-(100115, 5, ',000000,100037,100075', '项目管理', 3, 0, 0, '', '', '', '', ''),
-(100116, 5, ',000000,100037,100075', '国际商务', 3, 0, 0, '', '', '', '', '');
+(100090, 5, ',000000,100037,100038', '目标管理', 3, 0, 0, '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1571,12 +1505,11 @@ INSERT INTO `cms_sort` (`id`, `type`, `path`, `name`, `deep`, `norder`, `ifmenu`
 --
 
 CREATE TABLE IF NOT EXISTS `cms_visit_history` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+`id` int(11) NOT NULL,
   `type` tinyint(2) NOT NULL COMMENT '1：会员2：企业',
   `fid` int(11) NOT NULL COMMENT '访问者id',
   `bid` int(11) NOT NULL COMMENT '被访问者id',
-  `ctime` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  `ctime` int(11) NOT NULL
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=45 ;
 
 --
@@ -1628,6 +1561,383 @@ INSERT INTO `cms_visit_history` (`id`, `type`, `fid`, `bid`, `ctime`) VALUES
 (43, 1, 8, 6, 1399191118),
 (44, 1, 6, 0, 1399693805);
 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `cms_admin`
+--
+ALTER TABLE `cms_admin`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `usename` (`username`), ADD KEY `groupid` (`groupid`);
+
+--
+-- Indexes for table `cms_company`
+--
+ALTER TABLE `cms_company`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_company_fans`
+--
+ALTER TABLE `cms_company_fans`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_company_recruit`
+--
+ALTER TABLE `cms_company_recruit`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_feed`
+--
+ALTER TABLE `cms_feed`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_feedback`
+--
+ALTER TABLE `cms_feedback`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_feedback_pic`
+--
+ALTER TABLE `cms_feedback_pic`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_feed_digg`
+--
+ALTER TABLE `cms_feed_digg`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_feed_notify`
+--
+ALTER TABLE `cms_feed_notify`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_feed_pic`
+--
+ALTER TABLE `cms_feed_pic`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_fragment`
+--
+ALTER TABLE `cms_fragment`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_group`
+--
+ALTER TABLE `cms_group`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_link`
+--
+ALTER TABLE `cms_link`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_login_logs`
+--
+ALTER TABLE `cms_login_logs`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_member`
+--
+ALTER TABLE `cms_member`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_member_card`
+--
+ALTER TABLE `cms_member_card`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_member_card_group`
+--
+ALTER TABLE `cms_member_card_group`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_member_card_group_link`
+--
+ALTER TABLE `cms_member_card_group_link`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_member_check`
+--
+ALTER TABLE `cms_member_check`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_member_group`
+--
+ALTER TABLE `cms_member_group`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_member_group_link`
+--
+ALTER TABLE `cms_member_group_link`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_member_login`
+--
+ALTER TABLE `cms_member_login`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_member_profile`
+--
+ALTER TABLE `cms_member_profile`
+ ADD FULLTEXT KEY `skill` (`skill`);
+
+--
+-- Indexes for table `cms_member_tag`
+--
+ALTER TABLE `cms_member_tag`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_message_content`
+--
+ALTER TABLE `cms_message_content`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_message_list`
+--
+ALTER TABLE `cms_message_list`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_method`
+--
+ALTER TABLE `cms_method`
+ ADD PRIMARY KEY (`id`), ADD KEY `pid` (`pid`);
+
+--
+-- Indexes for table `cms_news`
+--
+ALTER TABLE `cms_news`
+ ADD PRIMARY KEY (`id`), ADD FULLTEXT KEY `sort` (`sort`);
+
+--
+-- Indexes for table `cms_notify_email`
+--
+ALTER TABLE `cms_notify_email`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_notify_message`
+--
+ALTER TABLE `cms_notify_message`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_page`
+--
+ALTER TABLE `cms_page`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_place`
+--
+ALTER TABLE `cms_place`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cms_sort`
+--
+ALTER TABLE `cms_sort`
+ ADD PRIMARY KEY (`id`), ADD FULLTEXT KEY `path` (`path`);
+
+--
+-- Indexes for table `cms_visit_history`
+--
+ALTER TABLE `cms_visit_history`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `cms_admin`
+--
+ALTER TABLE `cms_admin`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT for table `cms_company`
+--
+ALTER TABLE `cms_company`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT for table `cms_company_fans`
+--
+ALTER TABLE `cms_company_fans`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=78;
+--
+-- AUTO_INCREMENT for table `cms_company_recruit`
+--
+ALTER TABLE `cms_company_recruit`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `cms_feed`
+--
+ALTER TABLE `cms_feed`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=59;
+--
+-- AUTO_INCREMENT for table `cms_feedback`
+--
+ALTER TABLE `cms_feedback`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `cms_feedback_pic`
+--
+ALTER TABLE `cms_feedback_pic`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `cms_feed_digg`
+--
+ALTER TABLE `cms_feed_digg`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `cms_feed_notify`
+--
+ALTER TABLE `cms_feed_notify`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `cms_feed_pic`
+--
+ALTER TABLE `cms_feed_pic`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `cms_fragment`
+--
+ALTER TABLE `cms_fragment`
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT for table `cms_group`
+--
+ALTER TABLE `cms_group`
+MODIFY `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `cms_link`
+--
+ALTER TABLE `cms_link`
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT for table `cms_login_logs`
+--
+ALTER TABLE `cms_login_logs`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=376;
+--
+-- AUTO_INCREMENT for table `cms_member`
+--
+ALTER TABLE `cms_member`
+MODIFY `id` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=51;
+--
+-- AUTO_INCREMENT for table `cms_member_card`
+--
+ALTER TABLE `cms_member_card`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=101;
+--
+-- AUTO_INCREMENT for table `cms_member_card_group`
+--
+ALTER TABLE `cms_member_card_group`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `cms_member_card_group_link`
+--
+ALTER TABLE `cms_member_card_group_link`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `cms_member_check`
+--
+ALTER TABLE `cms_member_check`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `cms_member_group`
+--
+ALTER TABLE `cms_member_group`
+MODIFY `id` int(3) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `cms_member_group_link`
+--
+ALTER TABLE `cms_member_group_link`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+--
+-- AUTO_INCREMENT for table `cms_member_login`
+--
+ALTER TABLE `cms_member_login`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
+--
+-- AUTO_INCREMENT for table `cms_member_tag`
+--
+ALTER TABLE `cms_member_tag`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=122;
+--
+-- AUTO_INCREMENT for table `cms_message_content`
+--
+ALTER TABLE `cms_message_content`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
+--
+-- AUTO_INCREMENT for table `cms_message_list`
+--
+ALTER TABLE `cms_message_list`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '私信id',AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `cms_method`
+--
+ALTER TABLE `cms_method`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=345;
+--
+-- AUTO_INCREMENT for table `cms_news`
+--
+ALTER TABLE `cms_news`
+MODIFY `id` int(20) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
+--
+-- AUTO_INCREMENT for table `cms_notify_email`
+--
+ALTER TABLE `cms_notify_email`
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
+--
+-- AUTO_INCREMENT for table `cms_notify_message`
+--
+ALTER TABLE `cms_notify_message`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `cms_page`
+--
+ALTER TABLE `cms_page`
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `cms_place`
+--
+ALTER TABLE `cms_place`
+MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=103;
+--
+-- AUTO_INCREMENT for table `cms_sort`
+--
+ALTER TABLE `cms_sort`
+MODIFY `id` int(6) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=100117;
+--
+-- AUTO_INCREMENT for table `cms_visit_history`
+--
+ALTER TABLE `cms_visit_history`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

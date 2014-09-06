@@ -71,8 +71,8 @@ KindEditor.ready(function(K) {
 	var items_array = [
 	    { name:"sort",min:6,simple:"类别",focusMsg:'选择类别'},
 		{ name:"title",min:2,simple:"标题",focusMsg:'3-30个字符'},
-		{ name:"method",simple:"模型/方法",focusMsg:'填写模型/方法'},
-		{ name:"tpcontent",simple:"模板",focusMsg:'选择模板'}
+		{ name:"method",simple:"模型/方法",focusMsg:'填写模型/方法'}
+//		{ name:"tpcontent",simple:"模板",focusMsg:'选择模板'}
 	];
 
 	$("#info").skygqCheckAjaxForm({
@@ -196,7 +196,7 @@ KindEditor.ready(function(K) {
             <td align="left"><input type="text" value="<?php echo $info['method']?$info['method']:"news/content" ?>" name="method" id="method" size="20"></td>
             <td class="inputhelp">默认为news模型中content方法</td>
           </tr>
-          <tr>
+ <!--         <tr>
             <td align="right">前台显示模板：</td>
             <td align="left">
              <select name="tpcontent" id="tpcontent">
@@ -204,7 +204,7 @@ KindEditor.ready(function(K) {
               </select>
              </td>
             <td class="inputhelp">默认为模板路径下news_content.php<br><a style="color:green" href="{url('set/tpchange')}"> 管理模板 </a></td>
-          </tr> 
+          </tr> -->
            
            <tr>
             <td align="right">排序：</td>

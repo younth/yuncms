@@ -139,36 +139,33 @@ $(function ($) {
         </div>
 
          <table width="100%" border="0" cellpadding="0" cellspacing="1"   class="all_cont">
-          <tr>
-            <td></td>
-            <td></td>
-            <td align="center">
-            <form action="{url('news/index')}" method="GET" id="colum" >
-            <input name="yun" type="hidden" value="{$_GET['yun']}" /><!--get[yun]就是当前的页面news/index/-->
-                <select name="sort" id="sort">
-                  <option value="">=所有资讯栏目=</option>
-                  {$option}
-               </select>
-            </form>
-            </td>
-            <td align="center">
-                <select name="places" id="places">
-                  <option value="">=不限定位=</option>
-                  {$poption}
-               </select>
-            </td>            
-            <td colspan="4" align="right">
-               <form action="{url('news/index')}" method="GET" >
-                  <div class="news-search">新闻标题：<input type="text" name="keyword" size="20">
-					&nbsp;&nbsp;时间： <input type="text" name="starttime" size="20" placeholder="起止时间" id="starttime" readonly />  — 
-                    <input type="text" name="endtime" size="20" placeholder="结束时间" id="endtime" readonly />
-                    <input class="btn btn-success btn-small" type="submit" value="搜索">                              	
-                    <input name="yun" type="hidden" value="{$_GET['yun']}" />    
+             <form action="{url('news/index')}" method="GET" id="colum" >
+               <tr>
+                <td></td>
+                <td></td>
+                <td align="center">
+                    <input name="yun" type="hidden" value="{$_GET['yun']}" />
+                        <select name="sort" id="sort">
+                          <option value="">=所有资讯栏目=</option>
+                          {$option}
+                        </select>
+                       <!-- <select name="places" id="places">
+                           <option value="">=不限定位=</option>
+                           {$poption}
+                        </select>-->
+                </td>
+                <td align="right" colspan="4">
+                  <div class="news-search">新闻标题：<input type="text" name="keyword" size="20" value="{$keyword}" />
+                    &nbsp;&nbsp;时间： <input type="text" name="starttime" size="20" placeholder="起止时间" id="starttime" readonly value="{$starttime}" />  —
+                    <input type="text" name="endtime" size="20" placeholder="结束时间" id="endtime" readonly value="{$endtime}" />
+                    <input class="btn btn-success btn-small" type="submit" value="搜索">
+                    <input name="yun" type="hidden" value="{$_GET['yun']}" />
                   </div>
-               </form> 
-            </td>
-          </tr>
-         <form action="{url('news/del')}" method="post" id="dos"  onSubmit="return confirm('执行后不可以恢复~确定要执行吗？');"> 
+                </td>
+
+              </tr>
+             </form>
+             <form action="{url('news/del')}" method="post" id="dos"  onSubmit="return confirm('执行后不可以恢复~确定要执行吗？');">
           <tr>
             <th align="center" width="85"><input style="color:#E2E2E2" type="checkbox" name="chkAll" value="checkbox" onClick="CheckAll(this.form)"/></th>
             <th>ID</th>

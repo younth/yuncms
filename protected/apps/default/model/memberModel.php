@@ -28,7 +28,7 @@ class memberModel extends baseModel{
 		//echo $sql;
 		return $this->model->query($sql);
 	}
-	
+
 	//符合条件的会员数
 	public function membercount($keyword="",$starttime,$endtime)
 	{

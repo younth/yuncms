@@ -15,12 +15,22 @@ class newsController extends commonController
 	//列表
 	public function index()
 	{
-		$listRows=10;//每页显示的信息条数
+		$listRows=2;//每页显示的信息条数
 		$url=url('news/index',array('page'=>'{page}'));
-		//检索时候添加条件，只检索新闻栏目
-		$where="type=".$this->sorttype;
+		$where="type=".$this->sorttype;//检索时候添加条件，只检索资讯栏目
 		$sortlist=model('sort')->select($where,'id,name,deep,path,norder,type');
-		$sort=in(urldecode($_GET['sort']));//当前类别定位
+		$sort=in(urldecode($_GET['sort']));//当前类别
+        $keyword=in(urldecode(trim($_GET['keyword'])));//关键字
+        if(!empty($keyword)) $this->keyword=$keyword;
+        $starttime=strtotime(in($_GET['starttime']));//开始时间
+        $endtime=strtotime(in($_GET['endtime']));//结束时间
+        if($starttime||$endtime){
+            $this->starttime=in($_GET['starttime']);
+            $this->endtime=in($_GET['endtime']);
+        }
+        //检索分页的url
+        $url=url('news/index',array('sort'=>$sort,'starttime'=>in($_GET['starttime']),'endtime'=>in($_GET['endtime']),'keyword'=>urlencode($keyword),'page'=>'{page}'));
+
 		if(!empty($sortlist)){
 			$sortlist=re_sort($sortlist);//无限分类重排序
 			$sortname=array();
@@ -36,27 +46,13 @@ class newsController extends commonController
                 $option.= '<option '.$selected.' value="'.$sortnow.'">'.$space.$vo ['name'].'</option>';
                 $sortname[$vo['id']]=$vo['name'];//分类的id=>分类名
             }
-          	//print_r($sortname);
             $this->option=$option;
             $this->sortname=$sortname;
 		}
 		
-		//下面是select下拉检索显示
-		if($sort){
-			//分页显示当前栏目下,分页处理在下边
-			$url=url('news/index',array('sort'=>$sort,'page'=>'{page}'));
-			//echo $url;
-			$this->sort=$sort;
-		}
-		//关键字搜索
-		$keyword=in(urldecode(trim($_GET['keyword'])));
-		if(!empty($keyword)) $this->keyword=$keyword;
-		$starttime=strtotime(in($_GET['starttime']));
-		$endtime=strtotime(in($_GET['endtime']));
-		
 		$limit=$this->pageLimit($url,$listRows);
 		$count=model('news')->newscount($sort,$keyword,$starttime,$endtime);//总条数要结合sort及keyword查询
-        $list=model('news')->newsANDadmin($sort,$keyword,$starttime,$endtime,$limit);//news联合admin查询
+        $list=model('news')->newsANDadmin($sort,$keyword,$starttime,$endtime,$limit);//news联合admin查询,只显示用户自己发布的新闻列表
 
 		$this->list=$list;//分类的检索结果
 		$this->count=$count;
@@ -99,7 +95,7 @@ class newsController extends commonController
 			}
 			//print_r($tpco);
 			$this->tpc=json_encode($tpco);//默认模板处理
-			$choose=$this->tempchoose('news','content');
+			$choose=$this->tempchoose('contenttpl','content');//资讯内容的模板
             if(!empty($choose)) $this->choose=$choose;
 			
 			$places=model('place')->select('','','norder DESC');//内容定位
@@ -128,7 +124,7 @@ class newsController extends commonController
 			}
 			
 			$data['method']=in($_POST['method']);
-			$data['tpcontent']=in($_POST['tpcontent']);
+			//$data['tpcontent']=in($_POST['tpcontent']);
 			$data['ispass']=empty($_POST['ispass'])?0:1;
 			$data['recmd']=empty($_POST['recmd'])?0:1;
 			$data['hits']=intval(in($_POST['hits']));
@@ -201,7 +197,7 @@ class newsController extends commonController
 			}			
 	
 			$info['addtime']=date("Y-m-d H:i:s",$info['addtime']);
-			$tpdef=explode('_',$info['tpcontent']);//模板分隔
+			//$tpdef=explode('_',$info['tpcontent']);//模板分隔
 			//echo $tpdef[1];  content
 			if(!isset($tpdef[1])) $this->error('非法的模板参数~');
 			$choose=$this->tempchoose('news',$tpdef[1]);//选择前天模板
@@ -233,7 +229,7 @@ class newsController extends commonController
 				$data['content'] = $_POST['content'];
 			}
 			$data['method']=in($_POST['method']);
-			$data['tpcontent']=in($_POST['tpcontent']);
+			//$data['tpcontent']=in($_POST['tpcontent']);
 			$data['ispass']=empty($_POST['ispass'])?0:1;
 			$data['recmd']=empty($_POST['recmd'])?0:1;
 			$data['hits']=intval(in($_POST['hits']));

@@ -108,11 +108,19 @@ return $this->model->query($sql);
 
 	2.sql用双引号包住，里面涉及变量使用{}创造变量环境
 
+
 */
+```
 
-
+**两表查询不能用where连接的情况**
+如果联合查询中有where条件，则不可以用where连接两个表，只能使用left join,where连表适合没有其他where条件
+```
+$sql="SELECT {$this->prefix}member.id,{$this->prefix}member.groupid,{$this->prefix}member.uname,{$this->prefix}member.regip,{$this->prefix}member.lastip,{$this->prefix}member.ctime,{$this->prefix}member.lasttime,{$this->prefix}member.is_active,{$this->prefix}member_group.name FROM {$this->prefix}member left outer join {$this->prefix}member_group on {$this->prefix}member.groupid={$this->prefix}member_group.id  {$where} ORDER BY {$this->prefix}member.groupid,{$this->prefix}member.id LIMIT {$limit}";
 
 ```
+
+
+
 
 2.三个表联合查询
 

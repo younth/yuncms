@@ -25,7 +25,6 @@ class adminmemberController extends appadminController{
 		$limit=$this->pageLimit($url,$listRows);
 		$count=model('member')->membercount($keyword,$starttime,$endtime);//总条数要结合keyword查询
 		$list=model('member')->member_group_link($keyword,$starttime,$endtime,$limit);//连表查询，显示会员级别及会员信息
-		//dump($list);
 		$this->list=$list;
 		$this->page=$this->pageShow($count);
 		$this->display();

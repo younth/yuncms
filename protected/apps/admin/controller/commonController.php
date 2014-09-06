@@ -37,23 +37,31 @@ class commonController extends baseController{
 	//获取app模版下全部模版
     protected function temps($appname='default'){
         $config=require(BASE_PATH.'apps/'.$appname.'/config.php');
-		if(empty($config['TPL']['TPL_TEMPLATE_PATH'])) $templepath=BASE_PATH.'apps/'.$appname.'/view';
-		else $templepath=BASE_PATH.'apps/'.$appname.'/view/'.$config['TPL']['TPL_TEMPLATE_PATH'];
+		if(empty($config['TPL']['TPL_TEMPLATE_PATH'])) $templepath=BASE_PATH.'apps/'.$appname.'/view/news';
+		else $templepath=BASE_PATH.'apps/'.$appname.'/view/'.$config['TPL']['TPL_TEMPLATE_PATH'].'/news';
 		if(is_dir($templepath)){
 				$temps=getFileName($templepath.'/');//前台模板列表
                 if(empty($temps)) $this->error('前台模板文件夹为空~');
-                $temple=array();
+               $temple=array();
 				foreach ($temps as $vo){
 					  $tp=substr($vo['name'],0,strrpos($vo['name'],config('TPL_TEMPLATE_SUFFIX')));
-					  if(!empty($tp)){
+    				  if(!empty($tp)){
 					  	$tps=explode('_',$tp);
 					  if(isset($tps[1])) $temple[$tps[0]][]=$tps[1];
-					  }	     
+					  }
 				}
 		}else $this->error('前台模板文件夹不存在~');
 		return $temple;
 	}
-   
+    //自定义资讯模板选择,待完成
+    protected function choosetpl($appname='default'){
+        $config=require(BASE_PATH.'apps/'.$appname.'/config.php');
+        $templepath=BASE_PATH.'apps/'.$appname.'/view/'.$config['TPL']['TPL_TEMPLATE_PATH'].'/news';
+        if(is_dir($templepath)){
+            $temps=getFileName($templepath.'/showtpl');//前台模板列表
+        }
+
+    }
 	//信息添加，编辑时获得模板选项
     protected function tempchoose($mark='index',$default='index'){
          $temparray=$this->temps();//获取app模版下全部模版
@@ -67,6 +75,8 @@ class commonController extends baseController{
          	}
          return $choose;
     }
+
+
 
     //获取keywords
     protected function getkeyword($content='')
