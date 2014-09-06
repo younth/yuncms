@@ -198,8 +198,8 @@ a.top_menu{display:block; float:left; margin-left:10px}
 .pgroup { border:1px #ddd solid; padding:10px; margin-bottom:10px}
 .group_tit{ font-weight:600;color: #333; }
 .group_tit .gname{ font-weight:600;width:80px; text-align:center}
-.group_con{ float:left; width:170px; }
-.group_con .cname{  width:75px;border:0; }
+.group_con{ float:left;height: 34px;position: relative; }
+.group_con .cname{  width:75px;border:0;text-align: center; }
  /**********图集***********/
 .photolist{float:left; padding:5px}
 .pcon{clear:both;}

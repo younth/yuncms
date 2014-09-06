@@ -118,7 +118,12 @@ class setController extends commonController
 		}
 	}
 	
-	//删除后台方法，暂时不做，太危险
+	//删除后台方法,2014.9.7
+    public function menudel(){
+        $id=intval($_POST['id']);
+        if(empty($id)) $this->error('您没有选择~');
+        if(model('method')->delete("id='$id'")) echo 1;
+    }
 	
 	
 	//邮件配置，写入配置文件
