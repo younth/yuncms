@@ -12,9 +12,8 @@
 	$('.set').click(function(){	
 			if(confirm('切换模板将会清空模板缓存~')){
 			var nowobj=$(this);
-			var tpfile=nowobj.attr('title');	//模板名称
-			var id=nowobj.attr('id');//模板的id
-			//jquery ajax方法，通过post提交,提交函数处理，比较好
+			var tpfile=nowobj.attr('title');//模板名称
+			var id=nowobj.attr('id');//模板的类型,pc 移动
 			$.post("{url('set/tpchange')}", {tpfile:tpfile,type:id},
    				function(data){
 				if(data==1){

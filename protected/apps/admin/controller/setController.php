@@ -202,50 +202,41 @@ class setController extends commonController
 	 * 模板管理，管理前台模板，实质操作为读取文件
 	 * */
 	private $tpath='apps/default/view/';//前台模板路径
-	
-	//前台选择
+    private $tplpath='apps\\default\\view\\';//前台模板路径
+	//前台模板切换
 	public function tpchange($appname='default')
 	{
-		$config=appConfig($appname);//获取default的config信息,后面要修改
-		//print_r($config);
-		//echo $config['TPL']['TPL_TEMPLATE_PATH'];
+		$config=appConfig($appname);//获取default的config信息,后面修改模板要更新$config
 		if(empty($config['TPL']['TPL_TEMPLATE_PATH'])) $this->error('该应用不支持多模版');
 		if(!$this->isPost()){
 			//未提交数据，则显示
 			$templepath=BASE_PATH . $this->tpath;//前台模板路径
-			//echo $templepath;
 			$tps=getDir($templepath);//获取文件夹列表
-			//print_r($tps);
 			foreach ($tps as $vo){
 				$infofile=$templepath.$vo.'/info.php';//获取每个模板文件夹里面的info.php
-				//echo $infofile."<br>";
 				if(file_exists($infofile))
-				   $tpinfo[$vo]=require($infofile);//载入info.php作为$tpinfo的二维数组
+				   $tpinfo[$vo]=require($infofile);//载入每个模板的info.php构造二维数组,tps为键名，值为info的信息
 				else $tpinfo[$vo]=array();
 			}
 			
-			//print_r($tpinfo);
-			$this->tpinfo=$tpinfo;//每个模板的信息数组赋值给tpinfo，可以考虑通过模板引擎的数组传值到前台模板
+			$this->tpinfo=$tpinfo;//每个模板的信息数组赋值给tpinfo
 			//default的config信息
-			$this->fileNow=$config['TPL']['TPL_TEMPLATE_PATH'];//当前模板文件名
+			$this->fileNow=$config['TPL']['TPL_TEMPLATE_PATH'];//当前PC端模板文件名
 			$this->fileNowMobile=$config['TPL']['TPL_TEMPLATE_PATH_MOBILE'];//当前移动端模板文件名
 			$this->display();
 		}else{
-			//ajax接收post提交的数据,ajax里面输出的内容的信息被接收为data，js里面会alert
+			//ajax处理模板切换
 			$tpfile = $_POST['tpfile'];//模板名称
 			$type = intval($_POST['type']);
-			//echo $tpfile."~".$type;
 			if(empty($tpfile)) $this->error('参数错误~');
-			$tpname=$type?'TPL_TEMPLATE_PATH_MOBILE':'TPL_TEMPLATE_PATH';//判断模板类型,电脑或移动端
+			$tpname=$type?'TPL_TEMPLATE_PATH_MOBILE':'TPL_TEMPLATE_PATH';//判断模板类型,PC或移动端
 			
 			if($tpfile!=$config['TPL'][$tpname]){
-				//切换模板时
+				//切换模板
 				$tpcachepath=substr(config('TPL_CACHE_PATH'), 0, -1);
 				if(is_dir($tpcachepath)) del_dir($tpcachepath);//清除模板缓存
 				
-				$config['TPL'][$tpname]=$tpfile;
-				//保存配置信息到default config.php里面，这里面保存选择模板的配置信息
-				//print_r($config);
+				$config['TPL'][$tpname]=$tpfile;//更新default config.php,保存选择模板的配置信息
 				if (save_config($appname,$config)){
 					echo 1;
 					return;
@@ -264,13 +255,49 @@ class setController extends commonController
 	{
 	   $tpfile=$_GET['Mname'];//get获取
 	   if(empty($tpfile)) $this->error('非法操作~');
-       $templepath=BASE_PATH . $this->tpath.$tpfile.'/';//模板的地址
-       //echo $templepath;
-       $list=getFileName($templepath);//获取文件列表，包括文件名，大小，修改时间
+       //$templepath=BASE_PATH . $this->tpath.$tpfile.'/';//模板的地址
+/*       $list=getFileName($templepath);//获取文件列表，包括文件名，大小，修改时间
        //print_r($list);
        $this->tpfile=$tpfile;//赋值变量给模板, 模板名称
-       $this->flist=$list;//模板目录文件数组
-       $this->display();
+       $this->flist=$list;//模板目录文件数组*/
+
+
+        $dirget=in($_GET['dirget']);//文件目录名
+        $dirs=str_replace(',','/',$dirget);
+        //若为空则是upload目录下面的子目录，不为空则显示当前目录下的文件，显示为物理地址
+        $dirs=empty($dirs)?BASE_PATH.$this->tplpath.$tpfile:BASE_PATH.$this->tplpath.$tpfile.$dirs;
+        if(is_dir($dirs)){
+            $dir = opendir($dirs);//打开目录
+            $i=0;
+            //循环读取当前目录下的文件或者文件夹
+            while(false!=$file=readdir($dir)){
+                if($file!='.' && $file!='..'){
+                    $arr_file1[$i]['name']=$file;
+                    $path=$dirs."/".$file;
+                    if(is_dir($path)) $arr_file1[$i]['type']=1;//type=1文件夹
+                    else{
+                        //是文件
+                        $arr_file1[$i]['size']=ceil(filesize($path)/1024);//计算文件的大小
+                        $arr_file1[$i]['time']=date("Y-m-d H:i:s",fileatime($path));//文件的时间
+
+                        $names=explode('.',$file);
+                        $names[1]=strtolower($names[1]);
+                        $allowType=explode(',',strtolower('php,html,shtml'));
+                        if(in_array($names[1],$allowType)){
+                            //type=2是模板后缀
+                            if($names[1]='html' || $names[1]='php' || $names[1]='shtml' ||$names[1]='png') $arr_file1[$i]['type']=2;
+                            else $arr_file1[$i]['type']=3;
+                        }else $arr_file1[$i]['type']=4;
+                    }
+                    $i++;
+                }
+            }
+        }
+        closedir($dir);
+        $this->tpfile=$tpfile;
+        $this->dirget=$dirget;//文件路径
+        $this->tlist=array_sort($arr_file1,'type');
+        $this->display();
 	}
 
 	//添加模板

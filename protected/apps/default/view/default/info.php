@@ -1,5 +1,5 @@
 <?php return array (
-  'name' => '91频道',
+  'name' => 'V2.3demo',
   'author' => '王洋',
 ); 
 ?>

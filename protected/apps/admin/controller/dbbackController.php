@@ -7,8 +7,9 @@ class dbbackController extends commonController
 	static protected  $db='';//所有的数据表
 	public function __construct()
 	{
+        error_reporting(0);//关闭报错
 		parent::__construct();
-		//Dbbak是CP里面的数据库类库
+		//Dbbak是CP里面的数据库类库,根据sql文件查找db相关连接参数连接
 		self::$db=new Dbbak(config('DB_HOST'),config('DB_USER'),config('DB_PWD'),config('DB_NAME'),'utf8',ROOT_PATH.'data/db_back/');
 	}
 

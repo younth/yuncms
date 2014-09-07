@@ -8,7 +8,7 @@
 <script type="text/javascript" src="__PUBLIC__/js/jquery.js"></script>
 <script type="text/javascript" src="__PUBLICAPP__/js/common.js"></script>
 <script type="text/javascript" src="__PUBLIC__/js/highslide.js"></script>
-<script language="javascript">
+<script>
   $(function ($) { 
 	//下拉分类跳转，下拉分类改变了则提交表单
 	$('#sort').change(function(){$('#colum').submit()});
@@ -126,7 +126,6 @@ function unlock(obj){
    			});
 		});
 }
-</script>
 </script>
 <title>栏目管理</title>
 </head>

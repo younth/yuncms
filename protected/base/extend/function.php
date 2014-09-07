@@ -610,3 +610,21 @@ function timeshow($sTime) {
         }
 	return $dTime;
 }
+
+//对一个给定的二维数组按照指定的键值进行排序
+function array_sort($arr,$keys,$type='asc'){
+    $keysvalue = $new_array = array();
+    foreach ($arr as $k=>$v){
+        $keysvalue[$k] = $v[$keys];
+    }
+    if($type == 'asc'){
+        asort($keysvalue);
+    }else{
+        arsort($keysvalue);
+    }
+    reset($keysvalue);
+    foreach ($keysvalue as $k=>$v){
+        $new_array[$k] = $arr[$k];
+    }
+    return $new_array;
+}

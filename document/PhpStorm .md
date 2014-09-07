@@ -241,4 +241,6 @@ CTRL+F4   非常重要 下班都用
 ####ctrl+shift+j:合并下一行
 ####F5   拷贝文件快捷方式，不是刷新，phpstorm没有刷新的概念
 ####ctrl+shift+enter:下一行
+####ctrl+shift+]往下选中代码块
+####ctrl+shift+[往上选中代码块
 ####在列表中直接打字搜索，即可！！！
