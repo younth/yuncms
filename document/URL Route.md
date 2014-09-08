@@ -51,3 +51,12 @@ admin/<c>/<a>.xxx=admin/<c>/<a>
 > 路径为：yuncms/index.php?Yun=admin/set/tpdel&Mname=
 
 
+
+###当前使用的路由
+```
+index.html=default/index/index
+in/<c>/<a>.html=default/<c>/<a>
+admin/<c>/<a>.html=admin/<c>/<a>
+<c>/<a>.html=member/<c>/<a>
+
+```

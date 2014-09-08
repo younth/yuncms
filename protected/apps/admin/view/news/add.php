@@ -158,7 +158,6 @@ KindEditor.ready(function(K) {
           <tr>
             <td align="right">状态：</td>
             <td align="left">
-            {$info['recmd']}
                 <input type="checkbox" name="ispass" value="1" <?php echo ($info['ispass']==1)?'checked':''; ?>> 审核
                 <input type="checkbox" name="recmd" value="1" <?php echo ($info['recmd']==1)?'checked':''; ?> >推荐
             </td>
@@ -166,7 +165,7 @@ KindEditor.ready(function(K) {
           </tr> 
           <tr>
             <td align="right">封面图：</td>
-            <td align="left"><input type="text" name="picture" readonly  size="20"  class="text_value url" value="{$info['picture']}">
+            <td align="left"><input type="text" name="picture" readonly  size="20"  class="text_value url" value="{$info['picture']}" style="margin-bottom: 6px;">
             &nbsp;<?php echo $info['picture']=='NoPic.gif'||$info['picture']==""?'':'<a title="点击查看封面" href="'.$path.$info['picture'].'" onClick="return hs.expand(this)"><img src="'.$public.'/images/pic.png"></a>';?>
            &nbsp; <input type="button" id="image" value="选择图片" class="button_small" /></td>
             <td class="inputhelp">若不手动添加，则自动提取内容中第一张图片</td>

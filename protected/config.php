@@ -2,10 +2,6 @@
 return array (
   'REWRITE' => 
   array (
-    'index.html' => 'default/index/index',
-    'in/<c>/<a>.html' => 'default/<c>/<a>',
-    'admin/<c>/<a>.html' => 'admin/<c>/<a>',
-    '<c>/<a>.html' => 'member/<c>/<a>',
   ),
   'APP' => 
   array (

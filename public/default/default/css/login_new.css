@@ -13,9 +13,9 @@ h1,h2,h3,h4,h5,h6{ margin: 0px; padding: 0px; font-weight: normal;}
 #login2{_display:none; }
 .mianbody{width: 100%;height: 100%;}
 #login2{_display: none;}
-.mianbody .bg_panel{width:  100%;height: 540px;background:url(../images/banner_gb.jpg) no-repeat;position: fixed; *position: relative;}
+.mianbody .bg_panel{width:  100%;height: 540px;background:url(../images/banner_gb.jpg) repeat-x center top;position: fixed; *position: relative;}
 .mianbody .top_panel{width: 1200px;margin: 0 auto;position: relative;height: 540px;}
-.mianbody .top_panel .logo{width: 200px;height: 88px;float: left; margin-top: 10px;background:url(../images/logo.png) no-repeat;}
+.mianbody .top_panel .logo{width: 200px;height: 88px;float: left; margin-top: 10px;background:-url(../images/logo.png) no-repeat;}
 .mianbody .top_panel .poster_one{width: 372px;height: 521px;position: absolute;left: 0px;top: 75px;}
 .mianbody .top_panel .font_one{width: 478px;height: 161px;position: absolute;left: 315px;top: 180px;}
 .mianbody .top_panel .font_one img{width: 100%;height: 100%;}
@@ -122,8 +122,8 @@ z-index: 2;_width:expression((document.documentElement.clientWidth||document.bod
 .home .lessons-learned .companies .block h3 {font-size: 15px;font-weight: 500;padding-bottom: 15px;text-transform: uppercase;}
 .home .lessons-learned .companies .block p {font-size: 15px;line-height: 19px;margin: 0;opacity: 0;padding-right: 30px;position: absolute;}
 .home .lessons-learned {color: #FFFFFF;position: relative;z-index: 7;float: left;width: 100%!important;}
-#login1(z-index: 2;)
-#login2(z-index: 1;)
+#login1(z-index:2;)
+#login2(z-index:1;)
 .mianbody .home{float: left;}
 .border_red{border-top: 5px solid #ec7064;background: #fff;}
 .border_blue{border-top: 5px solid #5dade2;background: #f4f4f4;}
@@ -135,7 +135,7 @@ z-index: 2;_width:expression((document.documentElement.clientWidth||document.bod
 .services-con.style2 img {margin-bottom: 12px;transition: all 0.17s linear 0s;}
 .services-con.style2 .p_cont {width: 245px;height: 140px;left: 0; position: absolute;top: 100%;transition: all 0.17s linear 0s;}
 .services-con.style2 .p_cont h3 {width:245px;float: left;font-size: 20px;font-family: '微软雅黑';text-align: center;color: #fff;margin: 5px 0px 10px 0px;display: inline;text-transform: uppercase;*margin: 10px 0px 10px 0px;}
-.services-con.style2 .p_cont p {width: 190px;height: 70px;font-size: 16px;color: #F6EFEF;font-family: '微软雅黑';text-align: center;float:left;margin: 0px 0px 0px 32px;display: inline; line-height: 22px;}
+.services-con.style2 .p_cont p {width: 190px;height: 70px;font-size: 13px;color: #F6EFEF;font-family: '微软雅黑';text-align: center;float:left;margin: 0px 0px 0px 32px;display: inline; line-height: 22px;}
 .mianbody .center_panel ul li:hover {background: #EB6F63;}
 .mianbody .center_panel ul li:hover .why_go, .mianbody .center_panel ul li:hover h2 { margin-top: -150px;}
 .mianbody .center_panel ul li:hover .p_cont {top: 12px;}
@@ -207,6 +207,8 @@ z-index: 2;_width:expression((document.documentElement.clientWidth||document.bod
 #tianji-pop-login-form{margin: 0px 0px 0px 23px;display: inline;float: left;}
 #index_big_pic {position:absolute;left:0;top:0;}
 #index_big_pic li {float:left;width:1800px;height:540px;position: relative;}
-#index_big_pic li span.ren_hxb {background: url(../images/ren_hxb.png?20140328) 0 0 no-repeat;}
- 
- 
+#index_big_pic li span.ren_hxb {background: url(../images/ren_hxb.png) 0 0 no-repeat;}
+
+input:-webkit-autofill {
+     -webkit-box-shadow: 0 0 0px 1000px white inset;
+ }

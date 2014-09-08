@@ -110,7 +110,7 @@ h1,h2,h3,h4,h5,h6{ margin: 0px; padding: 0px; font-weight: normal;}
 #header .header_menu .logo {
 	width: 134px;
 	height: 37px;
-	background: url(../images/header_bg_2014.png) no-repeat -63px -116px;
+	/*background: url(../images/header_bg_2014.png) no-repeat -63px -116px;*/
 	text-indent: -999px;
 	float: left;
 	margin: 12px 0 0;

@@ -15,7 +15,7 @@ class newsController extends commonController
 	//列表
 	public function index()
 	{
-		$listRows=2;//每页显示的信息条数
+		$listRows=10;//每页显示的信息条数
 		$url=url('news/index',array('page'=>'{page}'));
 		$where="type=".$this->sorttype;//检索时候添加条件，只检索资讯栏目
 		$sortlist=model('sort')->select($where,'id,name,deep,path,norder,type');
@@ -181,8 +181,9 @@ class newsController extends commonController
 			$sort=$info['sort'];
 			if(!empty($sortlist)){
 				$sortlist=re_sort($sortlist);//无限分类重排序
-				$sortname=array();
+				//$sortname=array();
 				//循环生成栏目选项
+                $option='';
 				foreach($sortlist as $vo){
 					$space = str_repeat('├┈', $vo['deep']-1);//str_repeat指定字符串重复的次数，重复deep-1次，二级栏目就一个，三级两个
 			
@@ -197,10 +198,9 @@ class newsController extends commonController
 			}			
 	
 			$info['addtime']=date("Y-m-d H:i:s",$info['addtime']);
-			//$tpdef=explode('_',$info['tpcontent']);//模板分隔
-			//echo $tpdef[1];  content
-			if(!isset($tpdef[1])) $this->error('非法的模板参数~');
-			$choose=$this->tempchoose('news',$tpdef[1]);//选择前天模板
+			$tpdef=explode('_',$info['tpcontent']);//模板分隔
+			//if(!isset($tpdef[1])) $this->error('非法的模板参数~');
+			$choose=$this->tempchoose('news',$tpdef[1]);//选择前台模板
             if(!empty($choose)) $this->choose=$choose;	
 
             $places=model('place')->select('','','norder DESC');//定位

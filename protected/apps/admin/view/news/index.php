@@ -143,7 +143,7 @@ $(function ($) {
                <tr>
                 <td></td>
                 <td></td>
-                <td align="center">
+                <td align="left" width="16%">
                     <input name="yun" type="hidden" value="{$_GET['yun']}" />
                         <select name="sort" id="sort">
                           <option value="">=所有资讯栏目=</option>
