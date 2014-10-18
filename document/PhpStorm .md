@@ -244,3 +244,15 @@ CTRL+F4   非常重要 下班都用
 ####ctrl+shift+]往下选中代码块
 ####ctrl+shift+[往上选中代码块
 ####在列表中直接打字搜索，即可！！！
+
+
+
+###安装插件
+setting Plugins  
+
+
+###多个项目
+Directories
+
+###git设置
+设置好git之后可以直接打开文件然后open on github
